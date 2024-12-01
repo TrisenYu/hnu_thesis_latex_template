@@ -1,0 +1,45 @@
+\documentclass[12pt,a4paper]{article}
+\input{format/package}
+\input{format/setup}
+\graphicspath{{figures/}}
+
+
+\begin{document}
+    \begin{CJK*}{UTF8}{song}
+        % 论文信息
+        \frontmatter
+        \input{format/cover}
+        % 前几页必要内容
+        \makeheaders
+        % 目录
+        \tableofcontents
+        \clearpage
+        % 插图索引
+        \addcontentsline{toc}{chapter}{插图索引}
+        \listoffigures
+        \clearpage
+        % 表格索引
+        \addcontentsline{toc}{chapter}{附表索引}
+        \listoftables
+        \clearpage
+        % 正文
+        \mainmatter
+        \pagenumbering{arabic}
+        \setcounter{page}{1}
+        \include{chapters/1intro}
+        \include{chapters/2relatedwork}
+        \include{chapters/3ourwork}
+        \include{chapters/4experiment}
+        \include{chapters/5discussion}
+        \include{chapters/6conclusion}
+        % 参考文献
+        \defaultfont\bibliographystyle{style}
+        \addcontentsline{toc}{section}{参考文献} {
+            \nocite{*}
+            \bibliography{refer}
+        }
+        % 致谢
+        \include{chapters/acknowledge}
+        % 附录
+    \end{CJK*}
+\end{document}

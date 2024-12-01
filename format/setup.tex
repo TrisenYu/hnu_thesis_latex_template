@@ -1,0 +1,349 @@
+% !Mode:: "TeX:UTF-8"
+%%% 定义字体和字号
+\newcommand{\song}{\CJKfamily{song}}    % 宋体
+\newcommand{\hei}{\CJKfamily{hei}}      % 黑体
+\newcommand{\fs}{\CJKfamily{fs}}        % 仿宋体
+\newcommand{\kai}{\CJKfamily{kai}}      % 楷体
+\newcommand{\li}{\CJKfamily{li}}        % 隶书
+%%%% 字号换算规范
+%%%% 中文常用字号来代替国际用点数/磅/英寸/pt。
+%% 参考 https://www.runoob.com/w3cnote/px-pt-em-convert-table.html
+% 初号      42pt
+% 小初号    36pt
+% 一号      28pt
+% 小一
+% 二号      21pt
+% 小二号    18pt
+% 三号      15.75pt
+% 四号      14pt
+% 小四号    12pt
+% 五号      10.5pt
+% 小五号    9pt
+% 六号      7.875pt
+% 七号      5.25pt
+\newcommand{\biaoti}{\fontsize{45pt}{45pt}\selectfont}      % 一号, 1.倍行距
+\newcommand{\yihao}{\fontsize{28pt}{28pt}\selectfont}       % 一号, 1.倍行距
+\newcommand{\xiaoyi}{\fontsize{24pt}{24pt}\selectfont}      % 小一, 1.倍行距
+\newcommand{\erhao}{\fontsize{22pt}{22pt}\selectfont}       % 二号, 1.倍行距
+\newcommand{\xiaoer}{\fontsize{17pt}{17pt}\selectfont}      % 小二, 单倍行距
+\newcommand{\sanhao}{\fontsize{16pt}{16pt}\selectfont}      % 三号, 1.倍行距
+\newcommand{\xiaosan}{\fontsize{15pt}{15pt}\selectfont}     % 小三, 1.倍行距
+\newcommand{\sihao}{\fontsize{14pt}{14pt}\selectfont}       % 四号, 1.0倍行距
+\newcommand{\xiaosi}{\fontsize{12.5pt}{12.5pt}\selectfont}  % 小四, 1.倍行距
+\newcommand{\wuhao}{\fontsize{10.5pt}{10.5pt}\selectfont}   % 五号, 单倍行距
+\newcommand{\xiaowu}{\fontsize{9pt}{9pt}\selectfont}        % 小五, 单倍行距
+\setlength{\headheight}{20pt}
+\CJKtilde
+
+\setitemize{leftmargin=3em,itemsep=0em,partopsep=0em,parsep=0em,topsep=-0em}
+\setenumerate{leftmargin=3em,itemsep=0em,partopsep=0em,parsep=0em,topsep=0em}
+
+
+\makeatletter
+    \renewcommand\normalsize{
+        \@setfontsize\normalsize{12pt}{12pt}
+        \setlength\abovedisplayskip{4pt}
+        \setlength\abovedisplayshortskip{4pt}
+        \setlength\belowdisplayskip{\abovedisplayskip}
+        \setlength\belowdisplayshortskip{\abovedisplayshortskip}
+        \let\@listi\@listI}
+    \def\defaultfont{\renewcommand{\baselinestretch}{1.65}\normalsize\selectfont}
+    \setlength{\baselineskip}{20pt}
+    \renewcommand{\CJKglue}{\hskip 0.5pt plus \baselineskip}
+\makeatother
+
+\def\functor{\relax}
+\let\functor\addcontentsline
+\gdef\addcontentsline{\phantomsection\functor} % 这样就能修改addcontentsline的功能，使其额外插入。
+
+%%% 配置目录
+\renewcommand*{\contentsname}{\hfill 目\qquad 录 \hfill}
+\setcounter{secnumdepth}{3} % 编号深度 3
+\setcounter{tocdepth}{3}   %　目录项深度为 3
+
+\titlecontents{chapter}[0em]{\xiaosi\hei}%
+{\thecontentslabel\quad}{} %
+{\titlerule*[5pt]{$\cdot$}\xiaosi\contentspage}
+
+% 让 section 从 1 开始计数。
+\renewcommand\thesection{\arabic{section}}
+\titlecontents{section}[]{\xiaosi\hei} %
+{\thecontentslabel\quad}{} % \hspace{.25em}
+{\titlerule*[5pt]{$\cdot$}\xiaosi\contentspage}
+
+\titlecontents{subsection}[2em]{\xiaosi\song} %
+{\thecontentslabel\quad}{} %
+{\hspace{.25em}\titlerule*[5pt]{$\cdot$}\xiaosi\contentspage}
+
+\renewcommand{\cftdotsep}{1.1}
+\renewcommand*{\listfigurename}{\hfill 插图索引 \hfill}
+\setcounter{lofdepth}{1}
+\renewcommand*{\listtablename}{\hfill 附表索引 \hfill}
+\setcounter{secnumdepth}{4}
+\setlength{\parindent}{2em}
+
+
+
+%% 正文前罗马字体编号
+\newcommand{\frontmatter}{
+    % \clearpage{\cleardoublepage}
+    \pagenumbering{Roman}
+} 
+\newcommand\mainmatter{%
+    \clearpage{\cleardoublepage}
+    \pagenumbering{arabic}
+}
+
+%%% 配置节
+% 节
+\titleformat{\section}{\xiaosan\hei}{\thesection}{1em}{}
+\titlespacing{\section}{0pt}{0pt}{12pt}
+% 子节
+\titleformat{\subsection}{\sihao\hei}{\thesubsection}{0.5em}{}
+\titlespacing{\subsection}{0pt}{6pt}{6pt}
+% 孙子节
+\titleformat{\subsubsection}{\xiaosi\hei}{\thesubsubsection}{0.5em}{}
+\titlespacing{\subsubsection}{0pt}{6pt}{6pt}
+
+
+%%% 制作前几页
+\renewcommand{\headrulewidth}{0pt}
+
+
+%%% 定义特有字段以及特殊的变量和命令
+\makeatletter
+%% 封面配置
+    % 论文类型
+    \def\thesistype#1{\def\@thesistype{#1}}\def\@thesistype{}
+    % 中文标题
+    \def\title#1{\def\@title{#1}}\def\@title{}
+    % 英文标题
+    \def\etitle#1{\def\@etitle{#1}}\def\@etitle{}
+    % 文章作者
+    \def\author#1{\def\@author{#1}}\def\@author{}
+    % 学号
+    \def\studentid#1{\def\@studentid{#1}}\def\@studentid{}
+    % 专业
+    \def\subject#1{\def\@subject{#1}}\def\@subject{}
+    % 院系
+    \def\faculty#1{\def\@faculty{#1}}\def\@faculty{}
+    % 指导老师
+    \def\teacher#1{\def\@teacher{#1}}\def\@teacher{}
+    % 文章日期
+    \def\date#1{\def\@date{#1}}\def\@date{}
+
+    %%% 配置授权与声明页
+    % 声明标题
+    \def\declaredtitle#1{\def\@declaredtitle{#1}}\def\@declaredtitle{}
+    % 声明内容
+    \def\declaration#1{\def\@declaration{#1}}\def\@declaration{}
+    % 授权书名称
+    \def\authorizedtitle#1{\def\@authorizedtitle{#1}}\def\@authorizedtitle{}
+    % 授权内容
+    \def\authorization#1{\def\@authorization{#1}}\def\@authorization{}
+    %% 配置签名
+    \def\studentsign#1{\def\@studentsign{#1}}\def\@studentsign{}
+    \def\teachersign#1{\def\@teachersign{#1}}\def\@teachersign{}
+    % 即日期
+    \def\cdatename#1{\def\@cdatename{#1}}\def\@cdatename{}
+
+    %% 页眉配置
+    % 页眉说明
+    \def\heading#1{\def\@heading{#1}}\def\@heading{}
+
+    %% 摘要配置
+    % 中文摘要
+    \long\def\cabstract#1{\long\def\@cabstract{#1}}\long\def\@cabstract{}
+    % 英文摘要
+    \long\def\eabstract#1{\long\def\@eabstract{#1}}\long\def\@eabstract{}
+    
+    %% 关键词配置
+    % 中文关键词
+    \def\ckeywords#1{\def\@ckeywords{#1}}\def\@ckeywords{}
+    % 英文关键词
+    \def\ekeywords#1{\def\@ekeywords{#1}}\def\@ekeywords{}
+
+    % 必须存在此句。
+    \newlength{\@title@width}
+    
+    \newcommand{\makeheaders}{
+        %% 写完以后测试一下这一句的效果 \phantomsection
+        % 封面
+        % \addcontentsline{toc}{chpater}{\@title} 
+        \begin{titlepage}
+            \centering
+            % 湖南大学 毛主席题字
+            \begin{figure}[h]
+                \centering
+                \includegraphics[width=0.5\textwidth]{figures/hnu}
+            \end{figure}
+            % 高清校徽
+            \begin{overpic}{figures/HSVGPDF}
+                \put(5,75){\li\yihao \textbf{\texttt{HUNAN UNIVERSITY}}}
+                \put(-35,40){\song\biaoti \@thesistype}
+            \end{overpic}
+            \vspace*{1cm}
+            \vspace{\baselineskip}
+            \setlength{\@title@width}{6.5cm}
+            \begin{spacing}{2.1}
+                % 这里需要自己来分。
+                \put(47,60){\xiaoer\hei{论文(设计)题目:} \xiaoer\hei\underline{\makebox[\@title@width][l]{WebAssembly和eBPF}}} \\
+                \put(98,80){\xiaoer\hei{\qquad\qquad } \xiaoer\hei\underline{\makebox[\@title@width][l]{的安全机制优化研究}}} \\
+                
+                \xiaosi\hei{学~生~姓~名:} \xiaosi\song\underline{\makebox[\@title@width][c]{\@author}} \\
+                \xiaosi\hei{学~生~学~号:} \xiaosi\song\underline{\makebox[\@title@width][c]{\@studentid}} \\
+                \xiaosi\hei{专~业~班~级:} \xiaosi\song\underline{\makebox[\@title@width][c]{\@subject}} \\
+                \xiaosi\hei{学~院~名~称:} \xiaosi\song\underline{\makebox[\@title@width][c]{\@faculty}} \\
+                \xiaosi\hei{指~导~老~师:} \xiaosi\song\underline{\makebox[\@title@width][c]{\@teacher}}\\
+                \xiaoer\hei{\qquad\qquad\quad}&\\ 
+                \xiaosi\hei{\makebox[\@title@width][l]{\qquad \qquad \qquad 2025 年 6 月}} \\
+            \end{spacing}
+            
+            \end{titlepage}
+        
+        
+        \clearpage
+    
+        %% 从此往后页眉的格式基本固定。
+        \def\headrule { 
+            {
+                \if@fancyplain\let\headrulewidth\plainheadrulewidth\fi
+                \hrule\@height 1.0pt \@width\headwidth\vskip1pt %上面线为1pt粗
+                \hrule\@height 0.5pt\@width\headwidth  	%下面0.5pt粗
+                \vskip-2\headrulewidth\vskip-1pt 		%两条线的距离1pt
+            }      
+            \vspace{7mm} %双线与下面正文之间的垂直间距
+        }     
+        \pagestyle{fancy}
+        \fancyhf{} % 清空所有fancy样式，方便使页眉左部和右部置空
+        \chead{\song\xiaowu \@heading}
+        \cfoot{\song\xiaowu \thepage}
+
+        %% 插入目录之中
+        % 授权书
+        \addcontentsline{toc}{section}{\@declaredtitle和\@authorizedtitle} { 
+            \vspace{0.5\baselineskip}
+            \begin{center}
+                \hei\xiaoer{湖南大学}
+            \end{center}\par
+
+            \vspace{0.5\baselineskip}
+            \begin{center}
+                \hei\xiaoer{\@declaredtitle}
+            \end{center}\par
+
+            \vspace{0.5\baselineskip}
+            \song\defaultfont{\@declaration}\par
+            \vspace{0.4\baselineskip}
+            
+            \song\xiaosi
+            \@studentsign \makebox[3cm][s]{} \qquad\qquad
+            \@cdatename 20\makebox[0.5cm][s]{} 年 \makebox[0.5cm][s]{} 月 \makebox[0.5cm][s]{} 日
+            
+            \vspace*{1cm}
+            \begin{center}\hei\xiaoer{\@authorizedtitle}\end{center}\par
+            \vspace{1.2\baselineskip}
+            \song\defaultfont{\@authorization}\par
+            \song\defaultfont{本论文（设计）属于}\par
+            % 用表格来放置保密签订协议。
+            \begin{tabular}{lll}
+                \qquad\qquad& \qquad\quad\qquad&\ \ \ \ 1、保　密□，在\underline{\qquad\qquad}年解密后适用于本授权书。 \\
+                \qquad\qquad& \qquad\quad\qquad&\ \ \ \ 2、不保密□。                                       \\
+                \qquad\qquad& \qquad\quad\qquad&\ \ \ \ (请在以上相应方框内打``$\surd$'')
+            \end{tabular}
+            \par
+            \vspace{2\baselineskip}
+            \song\xiaosi
+            \@studentsign \makebox[3cm][s]{} \qquad\qquad  
+            \@cdatename 20\makebox[0.5cm][s]{} 年 \makebox[0.5cm][s]{} 月 \makebox[0.5cm][s]{} 日 \\
+            \indent
+            \@teachersign \makebox[3cm][s]{} \qquad\qquad  
+            \@cdatename 20\makebox[0.5cm][s]{} 年 \makebox[0.5cm][s]{} 月 \makebox[0.5cm][s]{} 日
+        }
+        \clearpage
+
+        % 中文摘要  
+        \addcontentsline{toc}{section}{摘~~要} {
+            \begin{center}
+                \hei\xiaoer{\@title}
+            \end{center}\par
+            \vspace{0.5\baselineskip}
+            \begin{center}
+                \hei\xiaoer\ 摘\qquad 要
+            \end{center}\par
+            \vspace{0.5\baselineskip}
+            \song\defaultfont\@cabstract
+            \vspace{\baselineskip}
+            \hangafter=1\hangindent=52.3pt\noindent
+            \newline\noindent
+            {\hei\sihao{关键词：} \hei\xiaosi\@ckeywords}
+        }
+        \clearpage
+        
+        % 英文摘要
+        \addcontentsline{toc}{section}{Abstract} {
+            \begin{center}
+                \xiaoer{\textbf{\@etitle}}
+            \end{center}\par
+            \vspace{0.5\baselineskip}
+            \begin{center}
+                \xiaoer\textbf{Abstract}
+            \end{center}\par
+            % \vspace{\baselineskip}
+            \@eabstract
+            \vspace{\baselineskip}
+            \hangafter=1\hangindent=60pt\noindent
+            \newline\noindent
+            {\xiaosi\textbf{Key Words:} \@ekeywords}
+        }
+        \clearpage
+        % 图表以及目录
+    }
+
+    \fancyhf{} % 清空所有fancy样式，方便使页眉左部和右部置空
+    \pagestyle{fancy}
+    \fancypagestyle{plain}{
+        \fancyhead[C]{\song\xiaowu \@heading}
+        \fancyfoot[C]{\song\xiaowu \thepage}
+    }
+\makeatother
+
+\renewcommand{\bibname}{参考文献}
+
+\makeatletter
+\renewenvironment{thebibliography}[1] { 
+	\begin{center} \hei\xiaoer{\bibname} \end{center}\par
+	\xiaosi\list{\@biblabel{\@arabic\c@enumiv}}%
+	{\renewcommand{\makelabel}[1]{##1\hfill}
+		\setlength{\baselineskip}{21pt}
+		\settowidth\labelwidth{0.5cm}
+		\setlength{\labelsep}{0pt}
+		\setlength{\itemindent}{0pt}
+		\setlength{\leftmargin}{\labelwidth+\labelsep}
+		\addtolength{\itemsep}{-0.7em}
+		\usecounter{enumiv}%
+		\let\p@enumiv\@empty
+		\renewcommand\theenumiv{\@arabic\c@enumiv}}%
+	\sloppy\frenchspacing
+	\clubpenalty4000%
+	\@clubpenalty \clubpenalty
+	\widowpenalty4000%
+	\interlinepenalty4000%
+	\sfcode`\.\@m
+    } {
+        \def\@noitemerr
+        {\@latex@warning{Empty `thebibliography' environment}}%
+        \endlist\frenchspacing
+    }
+\makeatother
+
+\addtolength{\bibsep}{5pt}
+\setlength{\bibhang}{2em}
+
+\newcommand{\mycite}[1]{\scalebox{1.3}[1.3]{\raisebox{-0.65ex}{\cite{#1}}}}
+\renewcommand{\headrulewidth}{0pt}
+\bibpunct{[}{]}{,}{s}{}{,}
+
+
+
+
