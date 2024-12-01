@@ -7,4 +7,6 @@
 *.lof
 *.thm
 *.pdf
+*.bbl
+*.blg
 cover.tex

@@ -3,6 +3,42 @@
 \section{相关工作}
 \label{section:relatedWork}
 \subsection{eBPF}
-eBPF
+扩展的伯克利包过滤器(extended Berkeley Packet Filter，eBPF)最初被设计用于Linux内核中基于寄存器的虚拟机。
+\subsubsection{eBPF运行流程}
+一个BPF程序首先会经过编译工具链(如clang)编译为BPF字节码，而后经由BPF系统调用加载到内核态等待通过eBPF验证器的静态验证\cite{zhengBpftimeUserspaceEBPF2023}。\nolinebreak
+通过验证后，会经由BPF Just-In-Time(JIT)编译器编译为可执行的机器码并将其加载到虚拟机中执行。
 \subsection{WebAssembly}
-WebAssembly(wasm)被设计为运行在浏览器沙箱中\cite{WebAssemblySummaryOnSecurity, WasmbpfStreamliningEBPF2024}
+Web Assembly(wasm)是一种为Web而设计的新型通用跨平台且可移植的字节码\nolinebreak
+\cite{lehmannEverythingOldNew,lehmannWasabiFrameworkDynamically2019}。\nolinebreak
+其最关键的设计就是引入了沙盒环境以供运行时检查、基于栈虚拟机的抽象指令集\nolinebreak
+\cite{johnsonWaVeVerifiablySecure2023, WebAssemblySummaryOnSecurity, WasmbpfStreamliningEBPF2024, lehmannEverythingOldNew}\nolinebreak
+
+%%%% 引用原文
+%% lehmannEverythingOldNew
+% WebAssembly is an increasingly popular bytecode language 
+% that offers a compact and portable representation, fast execution, and a low-level memory model [32]. 
+% Announced in 2015 [19] and implemented by all major browsers in 2017 [65], 
+% WebAssembly is supported by 92% of all global browser installations as of June 2020.
+%
+%% lehmannWasabiFrameworkDynamically2019:
+% WebAssembly [2, 25] is a new, low-level binary instruction format for the web. 
+% Its core use case is as a compilation target for systems programming languages like C, C++, or Rust. 
+% By providing low-level control over the memory layout and by closely mapping to hardware instructions, 
+%  WebAssembly provides near-native and predictable performance
+%
+%% johnsonWaVeVerifiablySecure2023
+% WebAssembly (Wasm) is a portable bytecode designed to run everywhere at near-native speeds [1], [2]. 
+% Unlike most other bytecodes, Wasm was designed with safety in mind from the start: Wasm code runs in a sandboxed environment, 
+% because the compiler (or interpreter) inserts runtime checks that restrict the code to its own region of memory.
+%
+%% 安全综述
+% 首先,Wasm 通过在设计中引入强类型系统 [10]、软件故障隔离 [11]、安全控制流 [12]、线性内存 [13] 等多种安全语言特性,
+% 保证了程序运行的安全性。其次,Wasm 采用基于栈式虚拟机的抽象指令集,
+% 并在设计中兼顾了空间占用与执行效率,使其能够充分利用各种平台上硬件功能,实现了接近原生代码的高执行效率。
+%
+%% WasmbpfStreamliningEBPF2024
+% Its key advantages include platform independence, security through sandboxing, 
+% and near-native performance. By compiling programs into a portable binary format, 
+% Wasm ensures that they can run consistently across diverse architectures and operating systems 
+% without requiring source code modifications.
+%

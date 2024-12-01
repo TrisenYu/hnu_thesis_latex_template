@@ -1,8 +1,9 @@
 \documentclass[12pt,a4paper]{article}
+
 \input{format/package}
 \input{format/setup}
 \graphicspath{{figures/}}
-
+\ctexset{bibname=\centerline{参考文献}}
 
 \begin{document}
     \begin{CJK*}{UTF8}{song}
@@ -33,10 +34,12 @@
         \include{chapters/5discussion}
         \include{chapters/6conclusion}
         % 参考文献
-        \defaultfont\bibliographystyle{style}
         \addcontentsline{toc}{section}{参考文献} {
+            \bibliographystyle{gbt7714-numerical}
             \nocite{*}
-            \bibliography{refer}
+            \begin{spacing}{1.5}
+                \bibliography{refer}
+            \end{spacing}
         }
         % 致谢
         \include{chapters/acknowledge}

@@ -8,6 +8,7 @@ citation_aux:=bibtex
 
 all:
 	-$(compiler) $(ld_flag) $(src)
-	-$(citation_aux) $(src)
-	-$(compiler) $(ld_flag) $(src)
-	-dvipdfm $(mid_obj)
+	-@$(citation_aux) "thesis"
+	-@$(compiler) $(ld_flag) $(src)
+	-$(citation_aux) "thesis"
+	-@dvipdfm $(mid_obj)
