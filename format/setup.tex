@@ -61,18 +61,22 @@
 \setcounter{secnumdepth}{3} % 编号深度 3
 \setcounter{tocdepth}{3}   %　目录项深度为 3
 
-\titlecontents{chapter}[0em]{\xiaosi\hei}%
-{\thecontentslabel\quad}{} %
-{\titlerule*[5pt]{$\cdot$}\xiaosi\contentspage}
+% \titlecontents{chapter}[0em]{\xiaosi\hei}%
+% {\thecontentslabel\quad}{} %
+% {\titlerule*[5pt]{$\cdot$}\xiaosi\contentspage}
 
 % 让 section 从 1 开始计数。
 \renewcommand\thesection{\arabic{section}}
 \titlecontents{section}[]{\xiaosi\hei} %
-{\thecontentslabel\quad}{} % \hspace{.25em}
+{\thecontentslabel\ \ }{} % \hspace{.25em}
 {\titlerule*[5pt]{$\cdot$}\xiaosi\contentspage}
 
 \titlecontents{subsection}[2em]{\xiaosi\song} %
-{\thecontentslabel\quad}{} %
+{\thecontentslabel\ }{} %
+{\hspace{.25em}\titlerule*[5pt]{$\cdot$}\xiaosi\contentspage}
+
+\titlecontents{subsubsection}[4em]{\xiaosi\song} %
+{\thecontentslabel\ }{} %
 {\hspace{.25em}\titlerule*[5pt]{$\cdot$}\xiaosi\contentspage}
 
 \renewcommand{\cftdotsep}{1.1}
@@ -82,7 +86,8 @@
 \setcounter{secnumdepth}{4}
 \setlength{\parindent}{2em}
 
-
+\renewcommand{\figurename}{图}
+\renewcommand{\tablename}{表}
 
 %% 正文前罗马字体编号
 \newcommand{\frontmatter}{
@@ -96,10 +101,10 @@
 
 %%% 配置节
 % 节
-\titleformat{\section}{\xiaosan\hei}{\thesection}{1em}{}
+\titleformat{\section}{\sanhao\hei}{\thesection}{1em}{}
 \titlespacing{\section}{0pt}{0pt}{12pt}
 % 子节
-\titleformat{\subsection}{\sihao\hei}{\thesubsection}{0.5em}{}
+\titleformat{\subsection}{\xiaosi\hei}{\thesubsection}{0.5em}{}
 \titlespacing{\subsection}{0pt}{6pt}{6pt}
 % 孙子节
 \titleformat{\subsubsection}{\xiaosi\hei}{\thesubsubsection}{0.5em}{}
@@ -182,7 +187,7 @@
                 \put(5,75){\li\yihao \textbf{\texttt{HUNAN UNIVERSITY}}}
                 \put(-35,40){\song\biaoti \@thesistype}
             \end{overpic}
-            \vspace*{1cm}
+            \vspace{1cm}
             \vspace{\baselineskip}
             \setlength{\@title@width}{6.5cm}
             \begin{spacing}{2.1}
@@ -198,22 +203,20 @@
                 \xiaoer\hei{\qquad\qquad\quad}&\\ 
                 \xiaosi\hei{\makebox[\@title@width][l]{\qquad \qquad \qquad 2025 年 6 月}} \\
             \end{spacing}
-            
             \end{titlepage}
-        
         
         \clearpage
     
         %% 从此往后页眉的格式基本固定。
         \def\headrule { 
-            {
-                \if@fancyplain
-                    \let\headrulewidth\plainheadrulewidth
-                \fi
-                \hrule\@height 1.0pt \@width\headwidth\vskip1pt %上面线为1pt粗
-                \hrule\@height 0.5pt\@width\headwidth  	%下面0.5pt粗
-                \vskip-2\headrulewidth\vskip-1pt 		%两条线的距离1pt
-            }      
+            
+            \if@fancyplain
+                \let\headrulewidth\plainheadrulewidth
+            \fi
+            \hrule\@height 1.0pt \@width\headwidth\vskip1pt %上面线为1pt粗
+            \hrule\@height 0.5pt\@width\headwidth  	%下面0.5pt粗
+            \vskip-2\headrulewidth\vskip-1pt 		%两条线的距离1pt
+                
             \vspace{7mm} %双线与下面正文之间的垂直间距
         }     
         \pagestyle{fancy}
@@ -239,7 +242,7 @@
             \vspace{0.4\baselineskip}
             
             \song\xiaosi
-            \@studentsign \makebox[3cm][s]{} \qquad\qquad
+            \@studentsign \makebox[3cm][s]{} \qquad\qquad\qquad
             \@cdatename 20\makebox[0.5cm][s]{} 年 \makebox[0.5cm][s]{} 月 \makebox[0.5cm][s]{} 日
             
             \vspace*{1cm}
@@ -256,10 +259,10 @@
             \par
             \vspace{2\baselineskip}
             \song\xiaosi
-            \@studentsign \makebox[3cm][s]{} \qquad\qquad  
+            \@studentsign \makebox[3cm][s]{} \qquad\qquad\qquad  
             \@cdatename 20\makebox[0.5cm][s]{} 年 \makebox[0.5cm][s]{} 月 \makebox[0.5cm][s]{} 日 \\
             \indent
-            \@teachersign \makebox[3cm][s]{} \qquad\qquad  
+            \@teachersign \makebox[3cm][s]{} \qquad\qquad\qquad  
             \@cdatename 20\makebox[0.5cm][s]{} 年 \makebox[0.5cm][s]{} 月 \makebox[0.5cm][s]{} 日
         }
         \clearpage
@@ -309,8 +312,10 @@
         \fancyfoot[C]{\song\xiaowu \thepage}
     }
 \makeatother
+
+% \renewcommand{\bibname}{\centering\hei\sanhao 参考文献}
 \setlength{\bibsep}{0em} % 参考文献项目间距
-\setlength{\bibhang}{2em} % 
+\setlength{\bibhang}{1em} % 
 \bibpunct{[}{]}{,}{s}{}{,} % 角标设置
 
 

@@ -10,5 +10,4 @@ all:
 	-$(compiler) $(ld_flag) $(src)
 	-@$(citation_aux) "thesis"
 	-@$(compiler) $(ld_flag) $(src)
-	-$(citation_aux) "thesis"
 	-@dvipdfm $(mid_obj)

@@ -1,5 +1,7 @@
 *.aux
 *.dvi
+*.bcf
+*.xml
 *.lot
 *.log
 *.out
