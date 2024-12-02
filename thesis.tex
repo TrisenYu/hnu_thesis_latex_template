@@ -3,8 +3,8 @@
 \input{format/package}
 \input{format/setup}
 \graphicspath{{figures/}}
-\ctexset{bibname=\centerline{参考文献}}
-
+\ctexset{bibname=\centering\hei\sanhao参考文献\\ \vspace{-1em}
+}
 \begin{document}
     \begin{CJK*}{UTF8}{song}
         % 论文信息
@@ -16,33 +16,32 @@
         \tableofcontents
         \clearpage
         % 插图索引
-        \addcontentsline{toc}{chapter}{插图索引}
+        \addcontentsline{toc}{section}{插图索引}
         \listoffigures
         \clearpage
         % 表格索引
-        \addcontentsline{toc}{chapter}{附表索引}
+        \addcontentsline{toc}{section}{附表索引}
         \listoftables
         \clearpage
         % 正文
         \mainmatter
-        \pagenumbering{arabic}
         \setcounter{page}{1}
-        \include{chapters/1intro}
-        \include{chapters/2relatedwork}
-        \include{chapters/3ourwork}
-        \include{chapters/4experiment}
-        \include{chapters/5discussion}
-        \include{chapters/6conclusion}
+        \include{sections/1intro}
+        \include{sections/2relatedwork}
+        \include{sections/3ourwork}
+        \include{sections/4experiment}
+        \include{sections/5discussion}
+        \include{sections/6conclusion}
         % 参考文献
         \addcontentsline{toc}{section}{参考文献} {
-            \bibliographystyle{gbt7714-numerical}
             \nocite{*}
             \begin{spacing}{1.5}
+                \wuhao
                 \bibliography{refer}
             \end{spacing}
         }
         % 致谢
-        \include{chapters/acknowledge}
+        \include{sections/acknowledge}
         % 附录
     \end{CJK*}
 \end{document}
