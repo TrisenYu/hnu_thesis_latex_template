@@ -36,6 +36,7 @@
 \newcommand{\wuhao}{\fontsize{10.5pt}{10.5pt}\selectfont}   % 五号, 单倍行距
 \newcommand{\xiaowu}{\fontsize{9pt}{9pt}\selectfont}        % 小五, 单倍行距
 % \setlength{\headheight}{20pt} 
+% \setlength{\headheight}{20pt} 
 \CJKtilde
 
 \setitemize{leftmargin=3em,itemsep=0em,partopsep=0em,parsep=0em,topsep=-0em}
@@ -51,6 +52,7 @@
         \setlength\belowdisplayshortskip{\abovedisplayshortskip}
         \let\@listi\@listI}
     \def\defaultfont{\renewcommand{\baselinestretch}{2}\normalsize\selectfont}
+    \def\defaultfont{\renewcommand{\baselinestretch}{2}\normalsize\selectfont}
     \setlength{\baselineskip}{20pt}
     \renewcommand{\CJKglue}{\hskip 0.5pt plus \baselineskip}
 \makeatother
@@ -63,12 +65,14 @@
 \renewcommand*{\contentsname}{\hfill 目\qquad 录 \hfill}
 \setcounter{secnumdepth}{3} % 编号深度 3
 \setcounter{tocdepth}{3}   % 目录项深度为 3
+\setcounter{tocdepth}{3}   % 目录项深度为 3
 
 % 让 section 从 1 开始计数。
 \renewcommand{\cftdot}{$...$} % 点的样式。
 \renewcommand{\cftdotsep}{1.5}
 \renewcommand\thesection{\arabic{section}}
 \titlecontents{section}[0em]{\xiaosi\hei\vspace{0.5em}} %
+{\textbf{\thecontentslabel}\ \ }{} 
 {\textbf{\thecontentslabel}\ \ }{} 
 {\titlerule*[10pt]{\cftdot}\xiaosi\contentspage}
 
@@ -144,7 +148,13 @@
     % 封面页标题栏的第二行
     \def\titleOnTheSecondLine#1{\def\@titleOnTheSecondLine{#1}}\def\@titleOnTheSecondLine{}
     % 中文标题，用于摘要页
+    % 封面页标题栏的第一行
+    \def\titleOnTheFirstLine#1{\def\@titleOnTheFirstLine{#1}}\def\@titleOnTheFirstLine{}
+    % 封面页标题栏的第二行
+    \def\titleOnTheSecondLine#1{\def\@titleOnTheSecondLine{#1}}\def\@titleOnTheSecondLine{}
+    % 中文标题，用于摘要页
     \def\title#1{\def\@title{#1}}\def\@title{}
+    % 英文标题，用于英文摘要页
     % 英文标题，用于英文摘要页
     \def\etitle#1{\def\@etitle{#1}}\def\@etitle{}
     % 文章作者
@@ -216,11 +226,16 @@
                 % 这里需要自己来分自己的题目。
                 \put(37,60){\xiaoer\hei{论文(设计)题目:} \xiaoer\hei\underline{\makebox[\@title@width][l]{\@titleOnTheFirstLine}}} \\
                 \put(91,80){\xiaoer\hei{\qquad\qquad } \xiaoer\hei\underline{\makebox[\@title@width][l]{\@titleOnTheSecondLine}}} \\
+                % 这里需要自己来分自己的题目。
+                \put(37,60){\xiaoer\hei{论文(设计)题目:} \xiaoer\hei\underline{\makebox[\@title@width][l]{\@titleOnTheFirstLine}}} \\
+                \put(91,80){\xiaoer\hei{\qquad\qquad } \xiaoer\hei\underline{\makebox[\@title@width][l]{\@titleOnTheSecondLine}}} \\
                 \xiaosi\hei{学~生~姓~名 :} \xiaosi\song\underline{\makebox[\@title@width][c]{\@author}} \\
                 \xiaosi\hei{学~生~学~号 :} \xiaosi\song\underline{\makebox[\@title@width][c]{\@studentid}} \\
                 \xiaosi\hei{专~业~班~级 :} \xiaosi\song\underline{\makebox[\@title@width][c]{\@subject}} \\
                 \xiaosi\hei{学~院~名~称 :} \xiaosi\song\underline{\makebox[\@title@width][c]{\@faculty}} \\
                 \xiaosi\hei{指~导~老~师 :} \xiaosi\song\underline{\makebox[\@title@width][c]{\@teacher}}\\
+                \xiaoer\hei{\qquad\qquad\quad}\\ 
+                \xiaosi\hei{\makebox[\@title@width][l]{\qquad \qquad \qquad 2025 年 6 月}}
                 \xiaoer\hei{\qquad\qquad\quad}\\ 
                 \xiaosi\hei{\makebox[\@title@width][l]{\qquad \qquad \qquad 2025 年 6 月}}
             \end{spacing}
@@ -235,6 +250,7 @@
                 \let\headrulewidth\plainheadrulewidth
             \fi
             \hrule\@height 1.0pt \@width\headwidth\vskip1pt %上面线为1pt粗
+            \hrule\@height 0.5pt \@width\headwidth  %下面0.5pt粗
             \hrule\@height 0.5pt \@width\headwidth  %下面0.5pt粗
             \vskip-2\headrulewidth\vskip-1pt 		%两条线的距离1pt
                 
@@ -252,17 +268,23 @@
             \begin{center}
                 \hei\xiaoer{湖\ 南\ 大\ 学}
             \end{center}\par\vspace{0.25\baselineskip}
+            \end{center}\par\vspace{0.25\baselineskip}
             \begin{center}
                 \hei\xiaoer{\@declaredtitle}
             \end{center}
             \par\vspace{0.5\baselineskip}
+            \end{center}
+            \par\vspace{0.5\baselineskip}
             \song\defaultfont{\@declaration}\par
+            \vspace{0.5\baselineskip}
+
             \vspace{0.5\baselineskip}
 
             \song\xiaosi
             \@studentsign \makebox[3cm][s]{} \qquad\qquad\qquad
             \@cdatename 20\makebox[0.5cm][s]{} 年 \makebox[0.5cm][s]{} 月 \makebox[0.5cm][s]{} 日
             
+            \vspace{0.5cm}
             \vspace{0.5cm}
             \begin{center}\hei\xiaoer{\@authorizedtitle}\end{center}\par
             \vspace{1.2\baselineskip}
@@ -276,8 +298,11 @@
             \end{tabular}
             \par
             \vspace{1\baselineskip}
+            \vspace{1\baselineskip}
             \song\xiaosi
             \@studentsign \makebox[3cm][s]{} \qquad\qquad\qquad  
+            \@cdatename 20\makebox[0.5cm][s]{} 年 \makebox[0.5cm][s]{} 月 \makebox[0.5cm][s]{} 日\par
+            \vspace{0.25\baselineskip}
             \@cdatename 20\makebox[0.5cm][s]{} 年 \makebox[0.5cm][s]{} 月 \makebox[0.5cm][s]{} 日\par
             \vspace{0.25\baselineskip}
             \@teachersign \makebox[3cm][s]{} \qquad\qquad\qquad  
