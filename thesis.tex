@@ -3,8 +3,8 @@
 \input{format/package}
 \input{format/setup}
 \graphicspath{{figures/}}
-\ctexset{bibname=\centering\hei\sanhao参考文献\\ \vspace{-1em}
-}
+
+\addbibresource[location=local]{refer.bib}
 \begin{document}
     \begin{CJK*}{UTF8}{song}
         % 论文信息
@@ -16,32 +16,38 @@
         \tableofcontents
         \clearpage
         % 插图索引
+        \renewcommand{\numberline}[1]{图~#1~~}
         \addcontentsline{toc}{section}{插图索引}
         \listoffigures
         \clearpage
-        % 表格索引
+        % 附表索引
+        \renewcommand{\numberline}[1]{表~#1~~}
         \addcontentsline{toc}{section}{附表索引}
         \listoftables
         \clearpage
         % 正文
         \mainmatter
-        \setcounter{page}{1}
-        \include{sections/1intro}
-        \include{sections/2relatedwork}
-        \include{sections/3ourwork}
-        \include{sections/4experiment}
-        \include{sections/5discussion}
-        \include{sections/6conclusion}
-        % 参考文献
-        \addcontentsline{toc}{section}{参考文献} {
-            \nocite{*}
-            \begin{spacing}{1.5}
+        \begin{sloppypar}
+            \setcounter{page}{1}
+            \include{sections/1intro}
+            \include{sections/2relatedwork}
+            \include{sections/3ourwork}
+            \include{sections/4experiment}
+            \include{sections/5discussion}
+            \include{sections/6conclusion}
+            % 参考文献
+            \addcontentsline{toc}{section}{参考文献} {
+                \nocite{*}
                 \wuhao
-                \bibliography{refer}
-            \end{spacing}
-        }
-        % 致谢
-        \include{sections/acknowledge}
-        % 附录
+                \printbibliography[
+                    heading=bibliography,
+                    title={\sanhao\hei\centerline{参考文献}\vspace{-1em}},
+                ]
+            }
+            % 致谢和附录
+            \include{sections/acknowledge}
+        \end{sloppypar}
+        
     \end{CJK*}
+    
 \end{document}

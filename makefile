@@ -4,7 +4,7 @@ src:=thesis.tex
 mid_obj:=thesis.dvi
 compiler:=latex
 ld_flag:= -src -interaction=nonstopmode
-citation_aux:=bibtex
+citation_aux:=biber
 
 all:
 	-$(compiler) $(ld_flag) $(src)
