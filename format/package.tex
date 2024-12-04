@@ -1,18 +1,23 @@
 % !Mode:: "TeX:UTF-8"
 
 \usepackage{graphicx}                       % 支持插图处理
-\usepackage{geometry}
-\geometry{left=2.5cm,right=2.5cm,top=2cm,bottom=2.5cm,footskip=1.1cm,headsep=0.7cm,head=0.4cm}
+\usepackage[includeheadfoot]{geometry}      % 调节页边距。
+%     left=3cm,
+%     right=2cm,
+\geometry{
+    left=3cm,
+    right=2cm
+}
+\usepackage{float}
                                             % 支持版面尺寸设置
 \usepackage{titlesec}                       % 控制标题的宏包
 \usepackage{titletoc}                       % 控制目录的宏包
 \usepackage{fancyhdr}                       % fancyhdr宏包 支持页眉和页脚的相关定义
-\usepackage[UTF8]{ctex}                  % 支持中文显示
-\usepackage{cite}
+\usepackage[UTF8]{ctex}                     % 支持中文显示
 \usepackage{color}                          % 支持彩色
 \usepackage{amsmath}                        % AMSLaTeX宏包 用来排出更加漂亮的公式
 \usepackage{amssymb}                        % 数学符号生成命令
-\usepackage[below]{placeins}                %允许上一个section的浮动图形出现在下一个section的开始部分,还提供\FloatBarrier命令,使所有未处理的浮动图形立即被处理
+\usepackage[below]{placeins}                % 允许上一个section的浮动图形出现在下一个section的开始部分,还提供\FloatBarrier命令,使所有未处理的浮动图形立即被处理
 \usepackage{flafter}                        % 使得所有浮动体不能被放置在其浮动环境之前，以免浮动体在引述它的文本之前出现.
 \usepackage{multirow}                       % 使用Multirow宏包，使得表格可以合并多个row格
 \usepackage{booktabs}                       % 表格，横的粗线；\specialrule{1pt}{0pt}{0pt}
@@ -21,7 +26,7 @@
 \usepackage{setspace}
 \usepackage{subfigure}                      % 支持子图 %centerlast 设置最后一行是否居中
 \usepackage[subfigure]{ccaption}            % 支持子图的中文标题
-% \usepackage[sort&compress,numbers]{natbib}  % 支持引用缩写的宏包
+\usepackage{float}                          % 浮动体控制
 \usepackage{balance}
 \usepackage{enumitem}                       % 使用enumitem宏包,改变列表项的格式
 \usepackage{calc}                           % 长度可以用+ - * / 进行计算
@@ -37,16 +42,16 @@
 \usepackage{layout}
 \usepackage{overpic}
 \usepackage[titles,subfigure]{tocloft}                   
-% \usepackage[sort&compress, numbers]{gbt7714}
 \usepackage[
-    backend=biber, 
+    backend=biber,       % 这个处理后端才能显示文献类型符如 [OL]
     style=gb7714-2015, 
-    gbnamefmt=lowercase, 
+    gbnamefmt=lowercase, % 外国人名小写 
     gbpub=false,
-    gbalign=gb7714-2015,
-    gbnoauthor=true,
-    gbtype=true, 
-    gbpunctin=false] {biblatex}
+    gbalign=gb7714-2015, % 良好的左对齐
+    gbnoauthor=true,     % 佚名作者用
+    gbtype=true,         % 显式说明使用文献类型。
+    gbpunctin=false
+] {biblatex}
 \usepackage[
     dvipdfm, unicode,
     pdfstartview=FitH,
@@ -58,6 +63,7 @@
     linkcolor=black,
     anchorcolor=black,
     urlcolor=black,
-    breaklinks=true]{hyperref}
+    breaklinks=true
+]{hyperref}
 % \usepackage{minted}
 % \usemintedstyle{lovelace}
