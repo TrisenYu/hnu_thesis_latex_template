@@ -8,28 +8,15 @@
 %%%% 字号换算规范
 %%%% 中文常用字号来代替国际用点数/磅/英寸/pt。
 %% 参考 https://www.runoob.com/w3cnote/px-pt-em-convert-table.html
-% 初号      42pt
-% 小初号    36pt
-% 一号      28pt
-% 小一
-% 二号      21pt
-% 小二号    18pt
-% 三号      15.75pt
-% 四号      14pt
-% 小四号    12pt
-% 五号      10.5pt
-% 小五号    9pt
-% 六号      7.875pt
-% 七号      5.25pt
-\newcommand{\biaoti}{\fontsize{45pt}{45pt}\selectfont}      % 一号, 1.倍行距
-\newcommand{\yihao}{\fontsize{28pt}{28pt}\selectfont}       % 一号, 1.倍行距
+\newcommand{\biaoti}{\fontsize{42pt}{42pt}\selectfont}      % 初号号, 1.倍行距
+\newcommand{\yihao}{\fontsize{26pt}{26pt}\selectfont}       % 一号, 1.倍行距
 \newcommand{\xiaoyi}{\fontsize{24pt}{24pt}\selectfont}      % 小一, 1.倍行距
 \newcommand{\erhao}{\fontsize{22pt}{22pt}\selectfont}       % 二号, 1.倍行距
-\newcommand{\xiaoer}{\fontsize{17pt}{17pt}\selectfont}      % 小二, 单倍行距
+\newcommand{\xiaoer}{\fontsize{18pt}{18pt}\selectfont}      % 小二, 单倍行距
 \newcommand{\sanhao}{\fontsize{16pt}{16pt}\selectfont}      % 三号, 1.倍行距
 \newcommand{\xiaosan}{\fontsize{15pt}{15pt}\selectfont}     % 小三, 1.倍行距
 \newcommand{\sihao}{\fontsize{14pt}{14pt}\selectfont}       % 四号, 1.0倍行距
-\newcommand{\xiaosi}{\fontsize{12.5pt}{12.5pt}\selectfont}  % 小四, 1.倍行距
+\newcommand{\xiaosi}{\fontsize{12pt}{12pt}\selectfont}      % 小四, 1.倍行距
 \newcommand{\wuhao}{\fontsize{10.5pt}{10.5pt}\selectfont}   % 五号, 单倍行距
 \newcommand{\xiaowu}{\fontsize{9pt}{9pt}\selectfont}        % 小五, 单倍行距
 \setlength{\headheight}{20pt}
@@ -66,18 +53,34 @@
 % {\titlerule*[5pt]{$\cdot$}\xiaosi\contentspage}
 
 % 让 section 从 1 开始计数。
+\renewcommand{\cftdot}{$...$} % 点的样式。
+\renewcommand{\cftdotsep}{1.5}
 \renewcommand\thesection{\arabic{section}}
-\titlecontents{section}[]{\xiaosi\hei} %
-{\thecontentslabel\ \ }{} % \hspace{.25em}
-{\titlerule*[5pt]{$\cdot$}\xiaosi\contentspage}
+\titlecontents{section}[0em]{\xiaosi\hei\vspace{0.5em}} %
+{\thecontentslabel\ \ }{} 
+{\titlerule*[10pt]{\cftdot}\xiaosi\contentspage}
 
-\titlecontents{subsection}[2em]{\xiaosi\song} %
-{\thecontentslabel\ }{} %
-{\hspace{.25em}\titlerule*[5pt]{$\cdot$}\xiaosi\contentspage}
+% \titlecontents{section}[4em]{\bfseries \zihao{5} \vspace{10pt}}{\contentslabel{4em}}{\hspace*{-4em}}{~\titlerule*[0.6pc]{$.$}~\contentspage}
+% ---------------------------------------------------------------------------------
+% 1.{section}:标题级别
+% 2.[4em]:标题位置 (左间距，理解为缩进)
+% 3.{\bfseries \zihao{5} \vspace{10pt}}:
+%     标题格式 (设置标题的整体格式，如字体尺寸、粗细、与上一个标题的垂直距离等，可空置)
+% 4.{\contentslabel{4em}}:
+%     标题标志 (设置标题标志的格式，如序号格式、序号宽度、序号与标题内容之间的间距等，不可空置)
+% 5.{\hspace*{-4em}}:
+%     无序号标题 (设置无序号标题的格式，如字体、字体尺寸、位置等。该参数可以空置)
+% 6.{~\titlerule*[0.6pc]{$.$}~\contentspage}:
+%     指引线与页码 (设置标题与页码之间的指引线样式以及页码的格式，该参数如果空置，标题将无指引线和页码)
 
-\titlecontents{subsubsection}[4em]{\xiaosi\song} %
+
+\titlecontents{subsection}[2em]{\xiaosi\song\vspace{0.5em}} %
 {\thecontentslabel\ }{} %
-{\hspace{.25em}\titlerule*[5pt]{$\cdot$}\xiaosi\contentspage}
+{\titlerule*[10pt]{\cftdot}\xiaosi\contentspage}
+
+\titlecontents{subsubsection}[4em]{\xiaosi\song\vspace{0.5em}} %
+{\thecontentslabel\ }{} %
+{\titlerule*[10pt]{\cftdot}\xiaosi\contentspage}
 
 \renewcommand{\cftdotsep}{1.1}
 \renewcommand*{\listfigurename}{\hfill 插图索引 \hfill}
@@ -85,6 +88,10 @@
 \renewcommand*{\listtablename}{\hfill 附表索引 \hfill}
 \setcounter{secnumdepth}{4}
 \setlength{\parindent}{2em}
+
+\renewcommand{\cftfigleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cfttableader}{\cftdotfill{\cftdotsep}}
+
 
 \renewcommand{\figurename}{图}
 \renewcommand{\tablename}{表}
@@ -192,14 +199,13 @@
             \setlength{\@title@width}{6.5cm}
             \begin{spacing}{2.1}
                 % 这里需要自己来分。
-                \put(47,60){\xiaoer\hei{论文(设计)题目:} \xiaoer\hei\underline{\makebox[\@title@width][l]{WebAssembly和eBPF}}} \\
-                \put(98,80){\xiaoer\hei{\qquad\qquad } \xiaoer\hei\underline{\makebox[\@title@width][l]{的安全机制优化研究}}} \\
-                
-                \xiaosi\hei{学~生~姓~名:} \xiaosi\song\underline{\makebox[\@title@width][c]{\@author}} \\
-                \xiaosi\hei{学~生~学~号:} \xiaosi\song\underline{\makebox[\@title@width][c]{\@studentid}} \\
-                \xiaosi\hei{专~业~班~级:} \xiaosi\song\underline{\makebox[\@title@width][c]{\@subject}} \\
-                \xiaosi\hei{学~院~名~称:} \xiaosi\song\underline{\makebox[\@title@width][c]{\@faculty}} \\
-                \xiaosi\hei{指~导~老~师:} \xiaosi\song\underline{\makebox[\@title@width][c]{\@teacher}}\\
+                \put(37,60){\xiaoer\hei{论文(设计)题目:} \xiaoer\hei\underline{\makebox[\@title@width][l]{WebAssembly和eBPF}}} \\
+                \put(91,80){\xiaoer\hei{\qquad\qquad } \xiaoer\hei\underline{\makebox[\@title@width][l]{的安全机制优化研究}}} \\
+                \xiaosi\hei{学~生~姓~名 :} \xiaosi\song\underline{\makebox[\@title@width][c]{\@author}} \\
+                \xiaosi\hei{学~生~学~号 :} \xiaosi\song\underline{\makebox[\@title@width][c]{\@studentid}} \\
+                \xiaosi\hei{专~业~班~级 :} \xiaosi\song\underline{\makebox[\@title@width][c]{\@subject}} \\
+                \xiaosi\hei{学~院~名~称 :} \xiaosi\song\underline{\makebox[\@title@width][c]{\@faculty}} \\
+                \xiaosi\hei{指~导~老~师 :} \xiaosi\song\underline{\makebox[\@title@width][c]{\@teacher}}\\
                 \xiaoer\hei{\qquad\qquad\quad}&\\ 
                 \xiaosi\hei{\makebox[\@title@width][l]{\qquad \qquad \qquad 2025 年 6 月}} \\
             \end{spacing}
@@ -229,15 +235,14 @@
         \addcontentsline{toc}{section}{\@declaredtitle和\@authorizedtitle} { 
             \vspace{0.5\baselineskip}
             \begin{center}
-                \hei\xiaoer{湖南大学}
+                \hei\xiaoer{湖\ 南\ 大\ 学}
             \end{center}\par
 
             \vspace{0.5\baselineskip}
             \begin{center}
                 \hei\xiaoer{\@declaredtitle}
             \end{center}\par
-
-            \vspace{0.5\baselineskip}
+            \vspace{1.5\baselineskip}
             \song\defaultfont{\@declaration}\par
             \vspace{0.4\baselineskip}
             
@@ -313,10 +318,9 @@
     }
 \makeatother
 
-% \renewcommand{\bibname}{\centering\hei\sanhao 参考文献}
 \setlength{\bibsep}{0em} % 参考文献项目间距
-\setlength{\bibhang}{1em} % 
-\bibpunct{[}{]}{,}{s}{}{,} % 角标设置
+\setlength{\bibhang}{2em} % 
+% \bibpunct{[}{]}{,}{s}{}{,} % 角标设置
 
 
 

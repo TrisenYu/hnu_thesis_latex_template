@@ -21,7 +21,8 @@
 \usepackage{setspace}
 \usepackage{subfigure}                      % 支持子图 %centerlast 设置最后一行是否居中
 \usepackage[subfigure]{ccaption}            % 支持子图的中文标题
-\usepackage[sort&compress,numbers]{natbib}  % 支持引用缩写的宏包
+% \usepackage[sort&compress,numbers]{natbib}  % 支持引用缩写的宏包
+\usepackage{balance}
 \usepackage{enumitem}                       % 使用enumitem宏包,改变列表项的格式
 \usepackage{calc}                           % 长度可以用+ - * / 进行计算
 \usepackage{txfonts}                        % 字体宏包
@@ -36,16 +37,27 @@
 \usepackage{layout}
 \usepackage{overpic}
 \usepackage[titles,subfigure]{tocloft}                   
-\usepackage[sort&compress, numbers]{gbt7714}
-\usepackage[dvipdfm, unicode,
-            pdfstartview=FitH,
-            bookmarksnumbered=true,
-            bookmarksopen=true,
-            colorlinks=true,
-            pdfborder={0 0 1},
-            citecolor=black,
-            linkcolor=black,
-            anchorcolor=black,
-            urlcolor=black,
-            breaklinks=true
-            ]{hyperref}
+% \usepackage[sort&compress, numbers]{gbt7714}
+\usepackage[
+    backend=biber, 
+    style=gb7714-2015, 
+    gbnamefmt=lowercase, 
+    gbpub=false,
+    gbalign=gb7714-2015,
+    gbnoauthor=true,
+    gbtype=true, 
+    gbpunctin=false] {biblatex}
+\usepackage[
+    dvipdfm, unicode,
+    pdfstartview=FitH,
+    bookmarksnumbered=true,
+    bookmarksopen=true,
+    colorlinks=true,
+    pdfborder={0 0 1},
+    citecolor=black,
+    linkcolor=black,
+    anchorcolor=black,
+    urlcolor=black,
+    breaklinks=true]{hyperref}
+% \usepackage{minted}
+% \usemintedstyle{lovelace}

@@ -1,11 +1,13 @@
 \section{相关工作}
 \label{section:relatedWork}
 \subsection{eBPF}
-扩展的伯克利包过滤器（extended Berkeley Packet Filter，eBPF）是一项Linux内核拓展技术，支持动态地将用户编写的逻辑通过eBPF虚拟机加载使其运行于内核态上\nolinebreak
+扩展的伯克利包过滤器（extended Berkeley Packet Filter，eBPF）是一项基于事件驱动的Linux内核拓展技术，\nolinebreak
+支持动态地将用户编写的逻辑通过eBPF虚拟机加载使其运行于内核态上，而无需修改内核代码或者插入内核模块\nolinebreak
 \cite{sunFindingCorrectnessBugs2024, YIHeCrossContainer}。\nolinebreak
 这一直接运行于内核态而无需通过切换用户态和内核态之间的能力，既减少了数据复制次数提高了内核执行性能，又充分扩展了内核的功能\nolinebreak
 \cite{YIHeCrossContainer, ZhangZiJunLinuxXiTonge}；\nolinebreak
-eBPF的这种灵活性被用于多种特定的任务\cite{HaoValidating}，如网络包过滤\cite{10.1145/3371038}、安全监控\cite{9110434}以及其它方面\cite{280870, 258973}。\nolinebreak
+eBPF的这种灵活性被用于多种特定的任务\cite{HaoValidating}，如网络包过滤\cite{10.1145/3371038, TCPdump}、\nolinebreak
+网络流量监控\cite{9110434}以及其它方面\cite{280870, 258973}。\nolinebreak
 
 \subsubsection{eBPF运行流程}
 用户首先需要编写包含BPF指令的程序段，通过BPF的系统调用加载BPF程序。程序运行时只能操控11个寄存器（为R0至R10），只能在一个固定大小的栈上支持四种基本运算（加载、存储、算术运算和分支判断）\nolinebreak
@@ -13,61 +15,39 @@ eBPF的这种灵活性被用于多种特定的任务\cite{HaoValidating}，如�
 BPF程序经过加载时会经过编译工具链（如clang）编译为BPF字节码，而后经由BPF系统调用加载到内核态等待通过eBPF验证器的静态验证\nolinebreak
 \cite{zhengBpftimeUserspaceEBPF2023}。\nolinebreak
 通过验证后，会经由BPF Just-In-Time(JIT)编译器编译为可执行的机器码并将其加载到虚拟机中执行。
-\subsubsection{eBPF安全性问题}
-仅eBPF的验证器的处理逻辑，就贡献了eBPF本身超过半数的CVE\cite{hive}。
-\subsection{Web Assembly}
-Web Assembly（wasm）是一种为增强Web浏览器性能和拓展性而设计的专为高级编程语言（如C，C++，rust和Go）的中间编译目标\nolinebreak
+
+\subsubsection{eBPF存在的问题}
+为了确保从用户态加载进来的逻辑不会影响甚至威胁到内核的正常运行，eBPF会
+仅eBPF的验证器的处理逻辑，就贡献了eBPF本身超过半数的CVE\cite{hive}。\nolinebreak
+而且，当前的eBPF在性能上有所局限，eBPF的调用栈最大深度只允许为512，且经JIT编译后的指令数最多不能超过100万条；\nolinebreak
+eBPF的验证器存在假阳性\cite{hive}和假阴性问题。假阳性即实现逻辑复杂但是不会影响其它程序正常运行的程序可能不会被验证通过，假阴性是指有的程序可能会
+% citation required.
+
+\subsection{Web Assembly概况}
+Web Assembly（wasm）是一种为增强Web浏览器性能和拓展性而面向C，C++，rust 和Golang等高级编程语言设计的中间编译目标\nolinebreak
 \cite{lehmannWasabiFrameworkDynamically2019, lehmannEverythingOldNew, bhansaliFirstLookCode2022, waseemIssuesTheirCauses2024}。\nolinebreak
-因其编译器提供了对底层内存布局的控制以及运行时跨硬件指令集的转换，wasm提供了接近原生的执行性能和跨平台的可扩展性\nolinebreak
+因这种中间编译目标并不能直接交由处理器译码执行，还需经过跨硬件指令集的转换，wasm有接近原生机器码的执行性能和跨平台的可扩展性\nolinebreak
 \cite{lehmannEverythingOldNew, waseemIssuesTheirCauses2024, lehmannWasabiFrameworkDynamically2019, JayProvablySafe}。\nolinebreak
-此外，在设计上 wasm 代码被限制在沙盒环境下运行\nolinebreak
-\cite{johnsonWaVeVerifiablySecure2023,WasmbpfStreamliningEBPF2024}，\nolinebreak
-这确保了其运行时安全，并成功地让其充当浏览器之外运行不可信程序的沙盒\cite{narayanSwivelHardeningWebAssembly, WebAssemblySummaryOnSecurity}。
+\subsubsection{wasm运行环境}
+在设计上 wasm 代码被限制在沙盒环境下运行\cite{johnsonWaVeVerifiablySecure2023,WasmbpfStreamliningEBPF2024}，\nolinebreak
+这确保了其运行时安全，并让其成功地于浏览器之外为非网页程序提供沙盒环境\cite{narayanSwivelHardeningWebAssembly, WebAssemblySummaryOnSecurity, 9156135}。
 
-然而 wasm
-\subsubsection{wasm运行流程}
+% wasm虽然是字节码表示的中间编译目标，但有人类可读的、基于 S-表达式的文本表示形式wat\cite{watMozilla, lehmannEverythingOldNew}，如图 \ref{fig1} 所示，
+% \begin{center}
+% \begin{figure*}[t]
+%     \includegraphics[width=0.1\linewidth]{fig1Codes.png}
+%     \caption{wasm对应的人类可读表示wat示意图}
+%     \label{fig1}
+% \end{figure*}
+% \end{center}
+\subsubsection{wasm内存模型}
+除此通过沙盒环境来隔离程序的安全机制以外，wasm还通过线性连续的栈内存来限制程序的访存操作。\nolinebreak
+这一线性内存并不存储全局变量或者局部变量。全局变量保存在一张固定大小的、名为全局索引空间(Global index space)的表上；\nolinebreak
+局部变量存储于一个受到保护的调用栈上，调用栈保存有函数的返回地址。
 
-%%%% 引用原文
-%% lehmannEverythingOldNew
-% WebAssembly is an increasingly popular bytecode language 
-% that offers a compact and portable representation, fast execution, and a low-level memory model [32]. 
-% Announced in 2015 [19] and implemented by all major browsers in 2017 [65], 
-% WebAssembly is supported by 92% of all global browser installations as of June 2020.
-%
-%% lehmannWasabiFrameworkDynamically2019:
-% WebAssembly [2, 25] is a new, low-level binary instruction format for the web. 
-% Its core use case is as a compilation target for systems programming languages like C, C++, or Rust. 
-% By providing low-level control over the memory layout and by closely mapping to hardware instructions, 
-%  WebAssembly provides near-native and predictable performance
-%
-%% johnsonWaVeVerifiablySecure2023
-% WebAssembly (Wasm) is a portable bytecode designed to run everywhere at near-native speeds [1], [2]. 
-% Unlike most other bytecodes, Wasm was designed with safety in mind from the start: 
-% Wasm code runs in a sandboxed environment, because the compiler (or interpreter) inserts 
-% runtime checks that restrict the code to its own region of memory.
-%
-%% 安全综述
-% 首先,Wasm 通过在设计中引入强类型系统 [10]、软件故障隔离 [11]、安全控制流 [12]、线性内存 [13] 等多种安全语言特性,
-% 保证了程序运行的安全性。其次,Wasm 采用基于栈式虚拟机的抽象指令集,
-% 并在设计中兼顾了空间占用与执行效率,使其能够充分利用各种平台上硬件功能,实现了接近原生代码的高执行效率。
-%
-%% WasmbpfStreamliningEBPF2024
-% Its key advantages include platform independence, security through sandboxing, 
-% and near-native performance. By compiling programs into a portable binary format, 
-% Wasm ensures that they can run consistently across diverse architectures and operating systems 
-% without requiring source code modifications.
-%
-%% Issues and Their Causes in WebAssembly Applications: An Empirical Study
-% WebAssembly (Wasm) as a binary instruction format enhances the performance and 
-% security of applications in web-based execution  environments [1]. 
-% It serves as a potential compilation target for a variety of programming languages 
-% including C, C++, and Rust, marking a significant milestone in web development [2].
-%
-%% Swivel: Hardening WebAssembly against Spectre
-% WebAssembly (Wasm) is a portable bytecode originally designed to safely run native code (e.g., C/C++ and Rust) in the browser [27]. 
-% Since its initial design, though, Wasm has been increasingly used to sandbox untrusted code outside the browser.
-%
-%% bhansaliFirstLookCode2022 # A First Look at Code Obfuscation for WebAssembly
-% WebAssembly (Wasm) is a compilation target for high-level languages located within browsers 
-% that facilitates the creation of highperformance web applications 
-% (e.g., games, portable languages, cryptographic computation) that run at near native speed [20].
+但由于栈上不存在类似于金丝雀的栈溢出检查标记，wasm有栈溢出风险。
+
+\subsubsection{wasm控制流完整性}
+wasm的函数并不能执行任意地址跳转。函数地址被记录在一张表上，调用函数需要通过取出表上的索引才能完成跳转。
+
+而当函数需要在执行时动态确定（如C++的多态或函数指针赋值后调用的形式），此时调用函数这一行为被定义为间接函数跳转\cite{Daniel2019DiscoveringVI}。
