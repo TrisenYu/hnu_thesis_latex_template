@@ -73,7 +73,6 @@
 \renewcommand\thesection{\arabic{section}}
 \titlecontents{section}[0em]{\xiaosi\hei\vspace{0.5em}} %
 {\textbf{\thecontentslabel}\ \ }{} 
-{\textbf{\thecontentslabel}\ \ }{} 
 {\titlerule*[10pt]{\cftdot}\xiaosi\contentspage}
 
 % \titlecontents{section}[4em]{\bfseries \zihao{5} \vspace{10pt}}{\contentslabel{4em}}{\hspace*{-4em}}{~\titlerule*[0.6pc]{$.$}~\contentspage}
@@ -227,15 +226,11 @@
                 \put(37,60){\xiaoer\hei{论文(设计)题目:} \xiaoer\hei\underline{\makebox[\@title@width][l]{\@titleOnTheFirstLine}}} \\
                 \put(91,80){\xiaoer\hei{\qquad\qquad } \xiaoer\hei\underline{\makebox[\@title@width][l]{\@titleOnTheSecondLine}}} \\
                 % 这里需要自己来分自己的题目。
-                \put(37,60){\xiaoer\hei{论文(设计)题目:} \xiaoer\hei\underline{\makebox[\@title@width][l]{\@titleOnTheFirstLine}}} \\
-                \put(91,80){\xiaoer\hei{\qquad\qquad } \xiaoer\hei\underline{\makebox[\@title@width][l]{\@titleOnTheSecondLine}}} \\
                 \xiaosi\hei{学~生~姓~名 :} \xiaosi\song\underline{\makebox[\@title@width][c]{\@author}} \\
                 \xiaosi\hei{学~生~学~号 :} \xiaosi\song\underline{\makebox[\@title@width][c]{\@studentid}} \\
                 \xiaosi\hei{专~业~班~级 :} \xiaosi\song\underline{\makebox[\@title@width][c]{\@subject}} \\
                 \xiaosi\hei{学~院~名~称 :} \xiaosi\song\underline{\makebox[\@title@width][c]{\@faculty}} \\
                 \xiaosi\hei{指~导~老~师 :} \xiaosi\song\underline{\makebox[\@title@width][c]{\@teacher}}\\
-                \xiaoer\hei{\qquad\qquad\quad}\\ 
-                \xiaosi\hei{\makebox[\@title@width][l]{\qquad \qquad \qquad 2025 年 6 月}}
                 \xiaoer\hei{\qquad\qquad\quad}\\ 
                 \xiaosi\hei{\makebox[\@title@width][l]{\qquad \qquad \qquad 2025 年 6 月}}
             \end{spacing}
@@ -268,23 +263,17 @@
             \begin{center}
                 \hei\xiaoer{湖\ 南\ 大\ 学}
             \end{center}\par\vspace{0.25\baselineskip}
-            \end{center}\par\vspace{0.25\baselineskip}
             \begin{center}
                 \hei\xiaoer{\@declaredtitle}
             \end{center}
             \par\vspace{0.5\baselineskip}
-            \end{center}
-            \par\vspace{0.5\baselineskip}
             \song\defaultfont{\@declaration}\par
-            \vspace{0.5\baselineskip}
-
             \vspace{0.5\baselineskip}
 
             \song\xiaosi
             \@studentsign \makebox[3cm][s]{} \qquad\qquad\qquad
             \@cdatename 20\makebox[0.5cm][s]{} 年 \makebox[0.5cm][s]{} 月 \makebox[0.5cm][s]{} 日
             
-            \vspace{0.5cm}
             \vspace{0.5cm}
             \begin{center}\hei\xiaoer{\@authorizedtitle}\end{center}\par
             \vspace{1.2\baselineskip}
@@ -298,11 +287,8 @@
             \end{tabular}
             \par
             \vspace{1\baselineskip}
-            \vspace{1\baselineskip}
             \song\xiaosi
             \@studentsign \makebox[3cm][s]{} \qquad\qquad\qquad  
-            \@cdatename 20\makebox[0.5cm][s]{} 年 \makebox[0.5cm][s]{} 月 \makebox[0.5cm][s]{} 日\par
-            \vspace{0.25\baselineskip}
             \@cdatename 20\makebox[0.5cm][s]{} 年 \makebox[0.5cm][s]{} 月 \makebox[0.5cm][s]{} 日\par
             \vspace{0.25\baselineskip}
             \@teachersign \makebox[3cm][s]{} \qquad\qquad\qquad  
