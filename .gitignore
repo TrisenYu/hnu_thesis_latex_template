@@ -8,10 +8,11 @@
 *.toc
 *.lof
 *.thm
-thesis.pdf
 *.bbl
 *.blg
 cover.tex
+acknowledge.tex
+thesis.pdf
 thesis-blx.bib
 recite.txt
 draft.txt
