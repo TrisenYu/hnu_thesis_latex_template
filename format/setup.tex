@@ -6,9 +6,9 @@
 \setlength{\voffset}{0cm}
 \setlength{\topmargin}{1.5cm-1in}
 \setlength{\headheight}{9pt}
-\setlength{\headsep}{3cm-1.5cm-9pt}
+\setlength{\headsep}{1.5cm-9pt}
 \setlength{\textheight}{\paperheight-5.5cm}
-\setlength{\foorskip}{0.75cm}
+\setlength{\footskip}{0.75cm}
 
 %%% 控制行距
 % \setlength{\parindent}{4em} % 段落缩进
@@ -62,7 +62,7 @@
 \gdef\addcontentsline{\phantomsection\functor} % 这样就能修改addcontentsline的功能，使其额外插入。
 
 %%% 配置目录
-\renewcommand*{\contentsname}{\hfill 目\qquad 录 \hfill}
+\renewcommand*{\contentsname}{\hfill 目\qquad\quad录 \hfill}
 \setcounter{secnumdepth}{3} % 编号深度 3
 \setcounter{tocdepth}{3}   % 目录项深度为 3
 \setcounter{tocdepth}{3}   % 目录项深度为 3
@@ -253,8 +253,8 @@
         }     
         \pagestyle{fancy}
         \fancyhf{} % 清空所有fancy样式，方便使页眉左部和右部置空
-        \chead{\song\xiaowu \@heading}
-        \cfoot{\song\xiaowu \thepage}
+        \chead{\song\xiaowu \@heading} % 页眉上的字体大小
+        \cfoot{\song\wuhao{\thepage}} % 页码大小
 
         %% 插入目录之中
         % 授权书
@@ -265,8 +265,7 @@
             \end{center}\par\vspace{0.25\baselineskip}
             \begin{center}
                 \hei\xiaoer{\@declaredtitle}
-            \end{center}
-            \par\vspace{0.5\baselineskip}
+            \end{center}\par
             \song\defaultfont{\@declaration}\par
             \vspace{0.5\baselineskip}
 
@@ -276,7 +275,7 @@
             
             \vspace{0.5cm}
             \begin{center}\hei\xiaoer{\@authorizedtitle}\end{center}\par
-            \vspace{1.2\baselineskip}
+            \vspace{0.5\baselineskip}
             \song\defaultfont{\@authorization}\par
             \song\defaultfont{本论文（设计）属于}\par
             % 用表格来放置保密签订协议。
