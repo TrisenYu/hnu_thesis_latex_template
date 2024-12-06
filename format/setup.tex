@@ -5,8 +5,8 @@
 % 页脚到下边缘的距离 1.75cm
 \setlength{\voffset}{0cm}
 \setlength{\topmargin}{1.5cm-1in}
-\setlength{\headheight}{9pt}
-\setlength{\headsep}{1.5cm-9pt}
+\setlength{\headheight}{12pt} % 页眉可以放得大一点
+\setlength{\headsep}{1.5cm-12pt}
 \setlength{\textheight}{\paperheight-5.5cm}
 \setlength{\footskip}{0.75cm}
 
@@ -52,7 +52,6 @@
         \setlength\belowdisplayshortskip{\abovedisplayshortskip}
         \let\@listi\@listI}
     \def\defaultfont{\renewcommand{\baselinestretch}{2}\normalsize\selectfont}
-    \def\defaultfont{\renewcommand{\baselinestretch}{2}\normalsize\selectfont}
     \setlength{\baselineskip}{20pt}
     \renewcommand{\CJKglue}{\hskip 0.5pt plus \baselineskip}
 \makeatother
@@ -65,29 +64,16 @@
 \renewcommand*{\contentsname}{\hfill 目\qquad\quad录 \hfill}
 \setcounter{secnumdepth}{3} % 编号深度 3
 \setcounter{tocdepth}{3}   % 目录项深度为 3
-\setcounter{tocdepth}{3}   % 目录项深度为 3
 
 % 让 section 从 1 开始计数。
 \renewcommand{\cftdot}{$...$} % 点的样式。
 \renewcommand{\cftdotsep}{1.5}
 \renewcommand\thesection{\arabic{section}}
-\titlecontents{section}[0em]{\xiaosi\hei\vspace{0.5em}} %
-{\textbf{\thecontentslabel}\ \ }{} 
-{\titlerule*[10pt]{\cftdot}\xiaosi\contentspage}
-
-% \titlecontents{section}[4em]{\bfseries \zihao{5} \vspace{10pt}}{\contentslabel{4em}}{\hspace*{-4em}}{~\titlerule*[0.6pc]{$.$}~\contentspage}
-% ---------------------------------------------------------------------------------
-% 1.{section}:标题级别
-% 2.[4em]:标题位置 (左间距，理解为缩进)
-% 3.{\bfseries \zihao{5} \vspace{10pt}}:
-%     标题格式 (设置标题的整体格式，如字体尺寸、粗细、与上一个标题的垂直距离等，可空置)
-% 4.{\contentslabel{4em}}:
-%     标题标志 (设置标题标志的格式，如序号格式、序号宽度、序号与标题内容之间的间距等，不可空置)
-% 5.{\hspace*{-4em}}:
-%     无序号标题 (设置无序号标题的格式，如字体、字体尺寸、位置等。该参数可以空置)
-% 6.{~\titlerule*[0.6pc]{$.$}~\contentspage}:
-%     指引线与页码 (设置标题与页码之间的指引线样式以及页码的格式，该参数如果空置，标题将无指引线和页码)
-
+\titlecontents{section}[0em] % 标题级别 标题位置 (左间距，理解为缩进)
+{\xiaosi\hei\vspace{0.5em}}  % % 标题样式
+{\textbf{\thecontentslabel}\ \ } % 标题格式 (设置标题的整体格式，如字体尺寸、粗细、与上一个标题的垂直距离等，可空置)
+{} 
+{\titlerule*[10pt]{\cftdot}\xiaosi\contentspage} % 指引线与页码 (设置标题与页码之间的指引线样式以及页码的格式，该参数如果空置，标题将无指引线和页码)
 
 \titlecontents{subsection}[2em]{\xiaosi\song\vspace{0.5em}} %
 {\thecontentslabel\ }{} %
@@ -132,11 +118,9 @@
 \titleformat{\subsubsection}{\xiaosi\hei}{\thesubsubsection}{0.5em}{}
 \titlespacing{\subsubsection}{0pt}{6pt}{6pt}
 
-
-%%% 制作前几页
 \renewcommand{\headrulewidth}{0pt}
 
-
+%%% 制作前几页
 %%% 定义特有字段以及特殊的变量和命令
 \makeatletter
 %% 封面配置
@@ -223,16 +207,16 @@
             \setlength{\@title@width}{6.5cm}
             \begin{spacing}{2.1}
                 % 这里需要自己来分自己的题目。
-                \put(37,60){\xiaoer\hei{论文(设计)题目:} \xiaoer\hei\underline{\makebox[\@title@width][l]{\@titleOnTheFirstLine}}} \\
-                \put(91,80){\xiaoer\hei{\qquad\qquad } \xiaoer\hei\underline{\makebox[\@title@width][l]{\@titleOnTheSecondLine}}} \\
+                \put(37,60){\xiaoer\hei{论文(设计)题目:} \xiaoer\hei\underline{\makebox[\@title@width][l]{\@titleOnTheFirstLine}}} \par
+                \put(91,80){\xiaoer\hei{\qquad\qquad } \xiaoer\hei\underline{\makebox[\@title@width][l]{\@titleOnTheSecondLine}}} \par
                 % 这里需要自己来分自己的题目。
-                \xiaosi\hei{学~生~姓~名 :} \xiaosi\song\underline{\makebox[\@title@width][c]{\@author}} \\
-                \xiaosi\hei{学~生~学~号 :} \xiaosi\song\underline{\makebox[\@title@width][c]{\@studentid}} \\
-                \xiaosi\hei{专~业~班~级 :} \xiaosi\song\underline{\makebox[\@title@width][c]{\@subject}} \\
-                \xiaosi\hei{学~院~名~称 :} \xiaosi\song\underline{\makebox[\@title@width][c]{\@faculty}} \\
-                \xiaosi\hei{指~导~老~师 :} \xiaosi\song\underline{\makebox[\@title@width][c]{\@teacher}}\\
-                \xiaoer\hei{\qquad\qquad\quad}\\ 
-                \xiaosi\hei{\makebox[\@title@width][l]{\qquad \qquad \qquad 2025 年 6 月}}
+                \xiaosi\hei{学~生~姓~名 :} \xiaosi\song\underline{\makebox[\@title@width][c]{\@author}} \par
+                \xiaosi\hei{学~生~学~号 :} \xiaosi\song\underline{\makebox[\@title@width][c]{\@studentid}} \par
+                \xiaosi\hei{专~业~班~级 :} \xiaosi\song\underline{\makebox[\@title@width][c]{\@subject}} \par
+                \xiaosi\hei{学~院~名~称 :} \xiaosi\song\underline{\makebox[\@title@width][c]{\@faculty}} \par
+                \xiaosi\hei{指~导~老~师 :} \xiaosi\song\underline{\makebox[\@title@width][c]{\@teacher}}\par
+                \xiaoer\hei{\qquad\qquad\quad} \par
+                \xiaosi\hei{\makebox[\@title@width][l]{\qquad \qquad \qquad \the\year{} 年 \the\month{} 月}}
             \end{spacing}
             \end{titlepage}
         
@@ -245,7 +229,6 @@
                 \let\headrulewidth\plainheadrulewidth
             \fi
             \hrule\@height 1.0pt \@width\headwidth\vskip1pt %上面线为1pt粗
-            \hrule\@height 0.5pt \@width\headwidth  %下面0.5pt粗
             \hrule\@height 0.5pt \@width\headwidth  %下面0.5pt粗
             \vskip-2\headrulewidth\vskip-1pt 		%两条线的距离1pt
                 
@@ -261,8 +244,8 @@
         \addcontentsline{toc}{section}{\@declaredtitle和\@authorizedtitle} { 
             \vspace{0.5\baselineskip}
             \begin{center}
-                \hei\xiaoer{湖\ 南\ 大\ 学}
-            \end{center}\par\vspace{0.25\baselineskip}
+                \hei\xiaoer{湖\hspace{0.5em}南\hspace{0.5em}大\hspace{0.5em}学}
+            \end{center}\par
             \begin{center}
                 \hei\xiaoer{\@declaredtitle}
             \end{center}\par
@@ -271,7 +254,7 @@
 
             \song\xiaosi
             \@studentsign \makebox[3cm][s]{} \qquad\qquad\qquad
-            \@cdatename 20\makebox[0.5cm][s]{} 年 \makebox[0.5cm][s]{} 月 \makebox[0.5cm][s]{} 日
+            \@cdatename \the\year{} 年 \makebox[0.5cm][s]{} 月 \makebox[0.5cm][s]{} 日
             
             \vspace{0.5cm}
             \begin{center}\hei\xiaoer{\@authorizedtitle}\end{center}\par
@@ -288,10 +271,10 @@
             \vspace{1\baselineskip}
             \song\xiaosi
             \@studentsign \makebox[3cm][s]{} \qquad\qquad\qquad  
-            \@cdatename 20\makebox[0.5cm][s]{} 年 \makebox[0.5cm][s]{} 月 \makebox[0.5cm][s]{} 日\par
+            \@cdatename \the\year{} 年 \makebox[0.5cm][s]{} 月 \makebox[0.5cm][s]{} 日\par
             \vspace{0.25\baselineskip}
             \@teachersign \makebox[3cm][s]{} \qquad\qquad\qquad  
-            \@cdatename 20\makebox[0.5cm][s]{} 年 \makebox[0.5cm][s]{} 月 \makebox[0.5cm][s]{} 日
+            \@cdatename \the\year{} 年 \makebox[0.5cm][s]{} 月 \makebox[0.5cm][s]{} 日
         }
         \clearpage
 
