@@ -1,4 +1,5 @@
 \usepackage{graphicx}                       % 支持插图处理
+\usepackage{subcaption}
 \usepackage[includeheadfoot]{geometry}      % 调节页边距。
 % 左边距 3cm
 % 右边距 2cm
@@ -8,7 +9,7 @@
     left=3cm,
     right=2cm
 }
-\usepackage{float}
+\usepackage{enumerate}                      % 罗列编号用的宏包
                                             % 支持版面尺寸设置
 \usepackage{titlesec}                       % 控制标题的宏包
 \usepackage{titletoc}                       % 控制目录的宏包
@@ -24,8 +25,7 @@
 \usepackage{longtable}                      % 支持跨页的表格。
 \usepackage{tabularx}                       % 自动设置表格的列宽
 \usepackage{setspace}
-\usepackage{subfigure}                      % 支持子图 %centerlast 设置最后一行是否居中
-\usepackage[subfigure]{ccaption}            % 支持子图的中文标题
+% \usepackage[subfigure]{ccaption}            % 支持子图的中文标题
 \usepackage{float}                          % 浮动体控制
 \usepackage{balance}
 \usepackage{enumitem}                       % 使用enumitem宏包,改变列表项的格式
@@ -41,7 +41,7 @@
 \usepackage{lastpage}
 \usepackage{layout}
 \usepackage{overpic}
-\usepackage[titles,subfigure]{tocloft}                   
+\usepackage[titles]{tocloft}                   
 \usepackage[
     backend=biber,       % 这个处理后端才能显示文献类型符如 [OL]
     style=gb7714-2015, 
@@ -52,6 +52,7 @@
     gbtype=true,         % 显式说明使用文献类型。
     gbpunctin=false
 ] {biblatex}
+
 \usepackage[
     dvipdfm, unicode,
     pdfstartview=FitH,
@@ -64,6 +65,4 @@
     anchorcolor=black,
     urlcolor=black,
     breaklinks=true
-]{hyperref}
-% \usepackage{minted}
-% \usemintedstyle{lovelace}
+] {hyperref}

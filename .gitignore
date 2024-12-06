@@ -17,3 +17,6 @@ thesis-blx.bib
 recite.txt
 draft.txt
 ~$*
+.dist
+*.fdb_latexmk
+*.fls
