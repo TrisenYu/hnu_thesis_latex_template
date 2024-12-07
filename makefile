@@ -1,13 +1,16 @@
 # HNU 本科毕业论文。
-target:=thesis.pdf
-src:=thesis.tex
-mid_obj:=thesis.dvi
-compiler:=latex
-ld_flag:= -src -interaction=nonstopmode
-citation_aux:=biber
+FILENAME:=thesis
+COMPLIER:=latex 
+LD_FLAG:= -src -interaction=nonstopmode -shell-escape -file-line-error
+CITATION_GEN:=biber
 
-all:
-	-$(compiler) $(ld_flag) $(src)
-	-@$(citation_aux) "thesis"
-	-@$(compiler) $(ld_flag) $(src)
-	-@dvipdfm $(mid_obj)
+all: 
+	-$(COMPLIER) $(LD_FLAG) $(FILENAME).tex
+	-$(CITATION_GEN) "$(FILENAME)"
+	-$(COMPLIER) $(LD_FLAG) $(FILENAME).tex
+	-dvipdfmx $(FILENAME).dvi
+
+clean:
+	latexmk -c
+
+.PHONY: clean

@@ -1,14 +1,74 @@
-\section*{\hfill \xiaoer\hei 致~~谢\hfill}
+\section*{\hfill \xiaoer\hei{致~~谢} \hfill}
     时光荏苒岁月如梭，转眼自己在HNU的本科生涯就此画上了句号。
     回想过往的憧憬，愈发发觉有涯的人生实在无法穷尽渴望研习讨论的知识，愈发感受到愿景落空后的久萦心间的遗憾。
-
-
-
-\clearpage
+    \clearpage
 
 \addcontentsline{toc}{section}{附录}
 \addcontentsline{toc}{section}{\song\xiaosi附录 A}
 \section*{附录 A}
-\clearpage
+    公式推导如下所示。
+    \begin{equation}
+        \begin{aligned}
+            \int \frac{x+\sin x}{1 + \cos x} \mathrm{d} x &= \int \frac{x}{2\cos^2 \frac{x}{2}} + \tan \frac{x}{2} \mathrm{d} x \\
+                &= \int x\mathrm{d}\tan \frac{x}{2} + \tan \frac{x}{2} \mathrm{d} x \\
+                &= \frac{x}{2}\tan \frac{x}{2} - \int \tan \frac{x}{2} \mathrm{d} x + \int \tan \frac{x}{2} \mathrm{d} x \\
+                &= x\tan \frac{x}{2} + C 
+        \end{aligned}
+    \end{equation}
+    
+    所形成的交换图如图\ref{fig1}和图\ref{fig2}所示：
+    \begin{figure}[htp]
+        \centering
+        \begin{tikzcd}
+            A \arrow[r, "\phi"] \arrow[d, red]
+            & B \arrow[d, "\psi" red] \\
+            C \arrow[r, red, "\eta" blue]
+            & |[blue, rotate=-15]| D
+        \end{tikzcd}
+        % 注意标签一定要放在提供给 ref 的 label 之前否则会出现??.
+        \caption{\textbf{\wuhao\songti{交换图例一}}}
+        \label{fig1}
+    \end{figure}
+    \begin{figure}[htp]
+        \centering
+        \begin{tikzcd}[column sep=tiny]
+            & \pi_1(U_1) \ar[dr]\ar[drr, "j_1", bend left=20] &&[1.5em] \\
+            \pi_1(U_1\cap U_2) \ar[ur,"i_1"] \ar[dr, "i_2"swap] && \pi_1(U_1) \ast_{\pi_1(U_1\cap U_2)}
+            \pi_1(U_2) \ar[r, dashed, "\simeq"] & \pi_1(X) \\
+            & \pi_1(U_2) \ar[ur]\ar[urr, "j_2"swap, bend right=20]
+            &&
+        \end{tikzcd}
+        \caption{\textbf{\wuhao\songti{交换图例二}}}
+        \label{fig2}
+    \end{figure}
+    \clearpage
 \addcontentsline{toc}{section}{\song\xiaosi附录 B}
 \section*{附录 B}
+    所用表格为表 \ref{tbl1}。
+    \begin{table}[htp]
+        \centering
+        \caption{\textbf{数学字体对照表}}
+        \label{tbl1}
+        % resizebox 使表格适应文档的宽度。
+        \resizebox{\columnwidth}{!}{ 
+            \begin{tabular}{*{18}{l}}
+                \toprule
+                \multicolumn{2}{c}{\texttt{mathrm}} & \multicolumn{2}{c}{\texttt{mathbf}} & \multicolumn{2}{c}{\texttt{mathit}} & \multicolumn{2}{c}{\texttt{mathsf}} & \multicolumn{2}{c}{\texttt{mathtt}} & \multicolumn{2}{c}{\texttt{mathcal}} & \multicolumn{2}{c}{\texttt{mathbb}} & \multicolumn{2}{c}{\texttt{mathfrak}} & \multicolumn{2}{c}{\texttt{mathscr}} \\ 
+                \midrule
+                $\mathrm{Aa}$ & $\mathrm{Nn}$ & $\mathbf{Aa}$ & $\mathbf{Nn}$ & $\mathit{Aa}$ & $\mathit{Nn}$ & $\mathsf{Aa}$ & $\mathsf{Nn}$ & $\mathtt{Aa}$ & $\mathtt{Nn}$ & $\mathcal{Aa}$ & $\mathcal{Nn}$ & $\mathbb{A}$ & $\mathbb{N}$ & $\mathfrak{Aa}$ & $\mathfrak{Nn}$ & $\mathscr{Aa}$ & $\mathscr{Nn}$ \\
+                $\mathrm{Bb}$ & $\mathrm{Oo}$ & $\mathbf{Bb}$ & $\mathbf{Oo}$ & $\mathit{Bb}$ & $\mathit{Oo}$ & $\mathsf{Bb}$ & $\mathsf{Oo}$ & $\mathtt{Bb}$ & $\mathtt{Oo}$ & $\mathcal{Bb}$ & $\mathcal{Oo}$ & $\mathbb{B}$ & $\mathbb{O}$ & $\mathfrak{Bb}$ & $\mathfrak{Oo}$ & $\mathscr{Bb}$ & $\mathscr{Oo}$ \\
+                $\mathrm{Cc}$ & $\mathrm{Pp}$ & $\mathbf{Cc}$ & $\mathbf{Pp}$ & $\mathit{Cc}$ & $\mathit{Pp}$ & $\mathsf{Cc}$ & $\mathsf{Pp}$ & $\mathtt{Cc}$ & $\mathtt{Pp}$ & $\mathcal{Cc}$ & $\mathcal{Pp}$ & $\mathbb{C}$ & $\mathbb{P}$ & $\mathfrak{Cc}$ & $\mathfrak{Pp}$ & $\mathscr{Cc}$ & $\mathscr{Pp}$ \\
+                $\mathrm{Dd}$ & $\mathrm{Qq}$ & $\mathbf{Dd}$ & $\mathbf{Qq}$ & $\mathit{Dd}$ & $\mathit{Qq}$ & $\mathsf{Dd}$ & $\mathsf{Qq}$ & $\mathtt{Dd}$ & $\mathtt{Qq}$ & $\mathcal{Dd}$ & $\mathcal{Qq}$ & $\mathbb{D}$ & $\mathbb{Q}$ & $\mathfrak{Dd}$ & $\mathfrak{Qq}$ & $\mathscr{Dd}$ & $\mathscr{Qq}$ \\
+                $\mathrm{Ee}$ & $\mathrm{Rr}$ & $\mathbf{Ee}$ & $\mathbf{Rr}$ & $\mathit{Ee}$ & $\mathit{Rr}$ & $\mathsf{Ee}$ & $\mathsf{Rr}$ & $\mathtt{Ee}$ & $\mathtt{Rr}$ & $\mathcal{Ee}$ & $\mathcal{Rr}$ & $\mathbb{E}$ & $\mathbb{R}$ & $\mathfrak{Ee}$ & $\mathfrak{Rr}$ & $\mathscr{Ee}$ & $\mathscr{Rr}$ \\
+                $\mathrm{Ff}$ & $\mathrm{Ss}$ & $\mathbf{Ff}$ & $\mathbf{Ss}$ & $\mathit{Ff}$ & $\mathit{Ss}$ & $\mathsf{Ff}$ & $\mathsf{Ss}$ & $\mathtt{Ff}$ & $\mathtt{Ss}$ & $\mathcal{Ff}$ & $\mathcal{Ss}$ & $\mathbb{F}$ & $\mathbb{S}$ & $\mathfrak{Ff}$ & $\mathfrak{Ss}$ & $\mathscr{Ff}$ & $\mathscr{Ss}$ \\
+                $\mathrm{Gg}$ & $\mathrm{Tt}$ & $\mathbf{Gg}$ & $\mathbf{Tt}$ & $\mathit{Gg}$ & $\mathit{Tt}$ & $\mathsf{Gg}$ & $\mathsf{Tt}$ & $\mathtt{Gg}$ & $\mathtt{Tt}$ & $\mathcal{Gg}$ & $\mathcal{Tt}$ & $\mathbb{G}$ & $\mathbb{T}$ & $\mathfrak{Gg}$ & $\mathfrak{Tt}$ & $\mathscr{Gg}$ & $\mathscr{Tt}$ \\
+                $\mathrm{Hh}$ & $\mathrm{Uu}$ & $\mathbf{Hh}$ & $\mathbf{Uu}$ & $\mathit{Hh}$ & $\mathit{Uu}$ & $\mathsf{Hh}$ & $\mathsf{Uu}$ & $\mathtt{Hh}$ & $\mathtt{Uu}$ & $\mathcal{Hh}$ & $\mathcal{Uu}$ & $\mathbb{H}$ & $\mathbb{U}$ & $\mathfrak{Hh}$ & $\mathfrak{Uu}$ & $\mathscr{Hh}$ & $\mathscr{Uu}$ \\
+                $\mathrm{Ii}$ & $\mathrm{Vv}$ & $\mathbf{Ii}$ & $\mathbf{Vv}$ & $\mathit{Ii}$ & $\mathit{Vv}$ & $\mathsf{Ii}$ & $\mathsf{Vv}$ & $\mathtt{Ii}$ & $\mathtt{Vv}$ & $\mathcal{Ii}$ & $\mathcal{Vv}$ & $\mathbb{I}$ & $\mathbb{V}$ & $\mathfrak{Ii}$ & $\mathfrak{Vv}$ & $\mathscr{Ii}$ & $\mathscr{Vv}$ \\
+                $\mathrm{Jj}$ & $\mathrm{Ww}$ & $\mathbf{Jj}$ & $\mathbf{Ww}$ & $\mathit{Jj}$ & $\mathit{Ww}$ & $\mathsf{Jj}$ & $\mathsf{Ww}$ & $\mathtt{Jj}$ & $\mathtt{Ww}$ & $\mathcal{Jj}$ & $\mathcal{Ww}$ & $\mathbb{J}$ & $\mathbb{W}$ & $\mathfrak{Jj}$ & $\mathfrak{Ww}$ & $\mathscr{Jj}$ & $\mathscr{Ww}$ \\
+                $\mathrm{Kk}$ & $\mathrm{Xx}$ & $\mathbf{Kk}$ & $\mathbf{Xx}$ & $\mathit{Kk}$ & $\mathit{Xx}$ & $\mathsf{Kk}$ & $\mathsf{Xx}$ & $\mathtt{Kk}$ & $\mathtt{Xx}$ & $\mathcal{Kk}$ & $\mathcal{Xx}$ & $\mathbb{K}$ & $\mathbb{X}$ & $\mathfrak{Kk}$ & $\mathfrak{Xx}$ & $\mathscr{Kk}$ & $\mathscr{Xx}$ \\
+                $\mathrm{Ll}$ & $\mathrm{Yy}$ & $\mathbf{Ll}$ & $\mathbf{Yy}$ & $\mathit{Ll}$ & $\mathit{Yy}$ & $\mathsf{Ll}$ & $\mathsf{Yy}$ & $\mathtt{Ll}$ & $\mathtt{Yy}$ & $\mathcal{Ll}$ & $\mathcal{Yy}$ & $\mathbb{L}$ & $\mathbb{Y}$ & $\mathfrak{Ll}$ & $\mathfrak{Yy}$ & $\mathscr{Ll}$ & $\mathscr{Yy}$ \\
+                $\mathrm{Mm}$ & $\mathrm{Zz}$ & $\mathbf{Mm}$ & $\mathbf{Zz}$ & $\mathit{Mm}$ & $\mathit{Zz}$ & $\mathsf{Mm}$ & $\mathsf{Zz}$ & $\mathtt{Mm}$ & $\mathtt{Zz}$ & $\mathcal{Mm}$ & $\mathcal{Zz}$ & $\mathbb{M}$ & $\mathbb{Z}$ & $\mathfrak{Mm}$ & $\mathfrak{Zz}$ & $\mathscr{Mm}$ & $\mathscr{Zz}$ \\
+                \bottomrule
+            \end{tabular}
+        }
+    \end{table}
