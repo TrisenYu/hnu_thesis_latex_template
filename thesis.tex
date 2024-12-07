@@ -26,7 +26,7 @@
         \clearpage
         % 正文
         \mainmatter
-        \begin{sloppypar}
+        \begin{sloppypar} % 防止文字出界。
             \setcounter{page}{1}
             \include{sections/1intro}
             \include{sections/2relatedwork}
@@ -40,7 +40,7 @@
                 \wuhao
                 \printbibliography[
                     heading=bibliography,
-                    title={\sanhao\hei\centerline{参考文献}\vspace{-1em}},
+                    title={\centerline{\sanhao\hei{参考文献}}\vspace{-1em}},
                 ]
             }
             % 致谢和附录
