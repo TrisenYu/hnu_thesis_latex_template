@@ -9,6 +9,7 @@
 *.lof
 *.thm
 *.bbl
+*.xdv
 *.blg
 cover.tex
 acknowledge.tex
