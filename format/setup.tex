@@ -1,3 +1,4 @@
+%%%% contact via <kisfg@hotmail.com, haikureimu@hnu.edu.cn>
 %%% 页边距定义
 % 上边距 3cm
 % 下边距 2.5cm
@@ -18,11 +19,11 @@
 \renewcommand{\baselinestretch}{1.5}
 
 %%% 定义字体
-\newcommand{\song}{\CJKfamily{song}}    % 宋体 rm
-\newcommand{\hei}{\CJKfamily{hei}}      % 黑体 bf 
-\newcommand{\fs}{\CJKfamily{fs}}        % 仿宋体 tt
-\newcommand{\kai}{\CJKfamily{kai}}      % 楷体 it
-\newcommand{\li}{\CJKfamily{li}}        % 隶书
+\newcommand{\song}{\songti}    % 宋体 rm
+\newcommand{\hei}{\heiti}      % 黑体 bf 
+\newcommand{\fs}{\fangsong}        % 仿宋体 tt
+\newcommand{\kai}{\kaishu}      % 楷体 it
+\newcommand{\li}{\lishu}        % 隶书
 
 
 %%%% 字号换算规范
@@ -39,17 +40,10 @@
 \newcommand{\xiaosi}{\fontsize{12pt}{12pt}\selectfont}      % 小四, 1.倍行距
 \newcommand{\wuhao}{\fontsize{11pt}{11pt}\selectfont}       % 五号, 单倍行距
 \newcommand{\xiaowu}{\fontsize{9pt}{9pt}\selectfont}        % 小五, 单倍行距
-% \setlength{\headheight}{20pt} 
 \CJKtilde
 
 \setitemize{leftmargin=3em,itemsep=0em,partopsep=0em,parsep=0em,topsep=-0em}
 \setenumerate{leftmargin=3em,itemsep=0em,partopsep=0em,parsep=0em,topsep=0em}
-\captionsetup[table] {
-    labelfont={bf, small, stretch=1.25}
-}
-\captionsetup[figure] {
-    labelfont={bf, small, stretch=1.25}
-}
 
 
 \makeatletter
@@ -65,6 +59,7 @@
     \renewcommand{\CJKglue}{\hskip 0.5pt plus \baselineskip}
 \makeatother
 
+%% 这个块不要动，否则会引起 hyperref 的跳转错误。
 \def\functor{\relax}
 \let\functor\addcontentsline
 \gdef\addcontentsline{\phantomsection\functor} % 这样就能修改addcontentsline的功能，使其额外插入。
@@ -73,25 +68,28 @@
 \renewcommand*{\contentsname}{\hfill 目\qquad\quad录 \hfill}
 \setcounter{secnumdepth}{3} % 编号深度 3
 \setcounter{tocdepth}{3}    % 目录项深度为 3
+\renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\thetable}{\arabic{table}}
 
 % 让 section 从 1 开始计数。
 \renewcommand{\cftdot}{$...$} % 点的样式。
 \renewcommand{\cftdotsep}{1.5}
-\renewcommand\thesection{\arabic{section}}
+\renewcommand{\thesection}{\arabic{section}}
 \titlecontents{section}[0em] % 标题级别 标题位置 (左间距，理解为缩进)
-{\xiaosi\hei\vspace{0.5em}}  % % 标题样式
+{\xiaosi\hei\vspace{0.5em}}  % 标题样式
 {\textbf{\thecontentslabel}\hspace{0.5em}} % 标题格式 (设置标题的整体格式，如字体尺寸、粗细、与上一个标题的垂直距离等，可空置)
 {} 
 {\titlerule*[10pt]{\cftdot}\xiaosi\contentspage} % 指引线与页码 (设置标题与页码之间的指引线样式以及页码的格式，该参数如果空置，标题将无指引线和页码)
 
-\titlecontents{subsection}[2em]{\xiaosi\song\vspace{0.5em}} %
-{\thecontentslabel\hspace{0.5em}}{} %
+\titlecontents{subsection}[2em]{\xiaosi\song\vspace{0.5em}}
+{\thecontentslabel\hspace{0.5em}}{}
 {\titlerule*[10pt]{\cftdot}\xiaosi\contentspage}
 
-\titlecontents{subsubsection}[4em]{\xiaosi\song\vspace{0.5em}} %
-{\thecontentslabel\hspace{0.5em}}{} %
+\titlecontents{subsubsection}[4em]{\xiaosi\song\vspace{0.5em}}
+{\thecontentslabel\hspace{0.5em}}{}
 {\titlerule*[10pt]{\cftdot}\xiaosi\contentspage}
 
+%%% 图表目录以及格式定义。
 \renewcommand{\cftdotsep}{1.1}
 \renewcommand*{\listfigurename}{\hfill 插图索引 \hfill}
 \setcounter{lofdepth}{1}
@@ -99,12 +97,39 @@
 \setcounter{secnumdepth}{4}
 \setlength{\parindent}{2em}
 
-\renewcommand{\cftfigleader}{\cftdotfill{\cftdotsep}}
-\renewcommand{\cfttableader}{\cftdotfill{\cftdotsep}}
+\titlecontents{figure}[0em]{\xiaosi\song\vspace{0.5em}} %
+{图\hspace{0.5em}\textnormal{\thecontentslabel}\hspace{0.5em}}{} %
+{\titlerule*[10pt]{\cftdot}\xiaosi\contentspage}
 
+\titlecontents{table}[0em]{\xiaosi\song\vspace{0.5em}} %
+{表\hspace{0.5em}\textnormal{\thecontentslabel}\hspace{0.5em}}{} %
+{\titlerule*[10pt]{\cftdot}\xiaosi\contentspage}
 
-\renewcommand{\figurename}{\textbf{\wuhao\songti{图}}}
-\renewcommand{\tablename}{\textbf{\wuhao\heiti{表}}}
+%% 设置插图目录条目的字体格式
+% 直接重定义字体即可。
+% https://tex.stackexchange.com/a/372825
+\DeclareCaptionFont{chineseSongti}{\bfseries\songti\wuhao}
+\DeclareCaptionFont{chineseHeiti}{\bfseries\heiti\wuhao}
+\captionsetup[figure]{
+    name={\textbf{\songti\wuhao{图}}},
+    labelsep=space, % 去掉冒号
+    font={small},          
+    labelfont={bf},         
+    textfont={chineseSongti},   
+    skip=1.51em 
+}
+\captionsetup[table]{
+    name={\textbf{\hei\wuhao{表}}},
+    labelsep=space, % 去掉冒号
+    font={small},
+    labelfont={bf},         
+    textfont={chineseHeiti}, 
+    skip=1.5em         
+}
+\renewcommand{\cfttabpresnum}{\songti\xiaosi}  
+\renewcommand{\cftfigpresnum}{\songti\xiaosi}
+\renewcommand{\cfttabaftersnum}{\songti\xiaosi}
+\renewcommand{\cftfigaftersnum}{\songti\xiaosi}
 
 %% 正文前罗马字体编号
 \newcommand{\frontmatter}{
@@ -116,7 +141,7 @@
     \pagenumbering{arabic}
 }
 
-%%% 配置节
+%%% 配置主目录中显示的节。
 % 节
 \titleformat{\section}{\sanhao\hei}{\thesection}{1em}{}
 \titlespacing{\section}{0pt}{0pt}{12pt}
@@ -186,9 +211,8 @@
     % 必须存在此句。
     \newlength{\@title@width}
     
-    \newcommand{\makeheaders}{
+    \newcommand{\makeheaders} {
         % 封面
-        % \addcontentsline{toc}{chpater}{\@title} 
         \begin{titlepage}
             \centering
             % 湖南大学 毛主席题字
@@ -308,7 +332,7 @@
             \newline\noindent
             {\xiaosi\textbf{Key Words:} \@ekeywords}
         }
-        \clearpage
+        \newpage
         % 图表以及目录
     }
 
