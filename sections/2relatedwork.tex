@@ -43,9 +43,12 @@
 \subsection{Web Assembly概况}
     Web Assembly（缩略为wasm）是一种为增强Web浏览器性能和拓展性而面向C，C++，rust
     和Golang等高级编程语言设计的中间编译目标（或称字节码）
-    \cite{wasmCommunityGroup, lehmannWasabiFrameworkDynamically2019, lehmannEverythingOldNew, bhansaliFirstLookCode2022, waseemIssuesTheirCauses2024}。
+    \cite{wasmCommunityGroup, lehmannWasabiFrameworkDynamically2019, 
+        lehmannEverythingOldNew, bhansaliFirstLookCode2022, waseemIssuesTheirCauses2024}。
     因这种字节码并不能直接交由处理器译码执行，还需经过跨硬件指令集的转译，wasm有着跨平台的可扩展性
-    \cite{lehmannEverythingOldNew, waseemIssuesTheirCauses2024, lehmannWasabiFrameworkDynamically2019, JayProvablySafe, WebAssemblySummaryOnSecurity, rayOverviewWebAssemblyIoT2023}。
+    \cite{lehmannEverythingOldNew, waseemIssuesTheirCauses2024, 
+        lehmannWasabiFrameworkDynamically2019, JayProvablySafe, 
+        WebAssemblySummaryOnSecurity, rayOverviewWebAssemblyIoT2023}。
 
     作为弥补JavaScript性能瓶颈的补充技术之一\cite{rayOverviewWebAssemblyIoT2023}，
     wasm生成的字节码经转译后有接近原生机器码（即直接通过编译器编译得到的机器码）的执行性能

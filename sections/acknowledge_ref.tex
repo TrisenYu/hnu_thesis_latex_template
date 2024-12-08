@@ -17,7 +17,7 @@
     \end{equation}
     
     所形成的交换图如图\ref{fig1}和图\ref{fig2}所示：
-    \begin{figure}[htp]
+    \begin{figure*}[htp]
         \centering
         \begin{tikzcd}
             A \arrow[r, "\phi"] \arrow[d, red]
@@ -26,10 +26,11 @@
             & |[blue, rotate=-15]| D
         \end{tikzcd}
         % 注意标签一定要放在提供给 ref 的 label 之前否则会出现??.
-        \caption{\textbf{\wuhao\songti{交换图例一}}}
+        \caption{{交换图例一}}
         \label{fig1}
-    \end{figure}
-    \begin{figure}[htp]
+    \end{figure*}
+
+    \begin{figure*}[htp]
         \centering
         \begin{tikzcd}[column sep=tiny]
             & \pi_1(U_1) \ar[dr]\ar[drr, "j_1", bend left=20] &&[1.5em] \\
@@ -38,16 +39,17 @@
             & \pi_1(U_2) \ar[ur]\ar[urr, "j_2"swap, bend right=20]
             &&
         \end{tikzcd}
-        \caption{\textbf{\wuhao\songti{交换图例二}}}
+        \caption{{交换图例二}}
         \label{fig2}
-    \end{figure}
+    \end{figure*}
     \clearpage
 \addcontentsline{toc}{section}{\song\xiaosi附录 B}
 \section*{附录 B}
     所用表格为表 \ref{tbl1}。
-    \begin{table}[htp]
+
+    \begin{table*}[htp]
         \centering
-        \caption{\textbf{数学字体对照表}}
+        \caption{数学字体对照表}
         \label{tbl1}
         % resizebox 使表格适应文档的宽度。
         \resizebox{\columnwidth}{!}{ 
@@ -71,4 +73,4 @@
                 \bottomrule
             \end{tabular}
         }
-    \end{table}
+    \end{table*}

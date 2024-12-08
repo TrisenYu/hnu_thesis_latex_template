@@ -3,6 +3,7 @@
     dvipdfmx            % 必要项，支持最终dvipdfmx对tikzcd插图处理
 ] {graphicx}             
 \usepackage{subcaption}
+\usepackage{caption}
 \usepackage[
     figuresright
 ] {rotating}            % 用于旋转某些东西，如长表格。
@@ -53,11 +54,12 @@
 \usepackage{enumitem}   % 使用enumitem宏包,改变列表项的格式
 \usepackage{calc}       % 长度可以用+ - * / 进行计算
 
-\usepackage[
-    amsmath, 
-    thmmarks, 
-    hyperref
-] {ntheorem}            % 定理类环境宏包，其中 amsmath 选项用来兼容 AMS LaTeX 的宏包
+% \usepackage[
+%     amsmath, 
+%     thmmarks, 
+%     hyperref
+% ] {ntheorem}            
+% 定理类环境宏包，其中 amsmath 选项用来兼容 AMS LaTeX 的宏包
 \usepackage{indentfirst}% 首行缩进宏包
 \usepackage{CJKutf8}    % 用在UTF8编码环境下，它可以自动调用CJK，同时针对UTF8编码作了设置。
 \usepackage{CJK}
@@ -66,7 +68,7 @@
 \usepackage{layout}
 \usepackage{overpic}
 \usepackage[
-    titles
+    titles              % 保证目录换行
 ] {tocloft}
 \usepackage{times}
 \usepackage[
@@ -93,6 +95,6 @@
     linkcolor=black,
     anchorcolor=black,
     urlcolor=black,
-    breaklinks=true
+    % breaklinks=true
 ] {hyperref}
 \usepackage{ifthen}     % 条件编译可能会用得到
