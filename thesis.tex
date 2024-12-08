@@ -2,18 +2,18 @@
 
 \input{format/package}
 \input{format/setup}
+\input{format/cover}
 \graphicspath{{figures/}}
 
 \addbibresource[location=local]{refer.bib}
 \begin{document}
     \begin{CJK*}{UTF8}{song}
         \frontmatter
-        \input{format/cover}
         % 前几页必要内容
         \makeheaders
         % 目录
         \tableofcontents
-        \clearpage
+        \newpage
         % 插图索引
         \renewcommand{\numberline}[1]{图~#1~~}
         \addcontentsline{toc}{section}{插图索引}
@@ -35,14 +35,14 @@
             \include{sections/5discussion}
             \include{sections/6conclusion}
             % 参考文献
-            \addcontentsline{toc}{section}{参考文献} {
-                \nocite{*}
-                \wuhao
-                \printbibliography[
-                    heading=bibliography,
-                    title={\centerline{\sanhao\hei{参考文献}}\vspace{-1em}},
-                ]
-            }
+            \newpage
+            \nocite{*}
+            \addcontentsline{toc}{section}{参考文献}
+            \wuhao
+            \printbibliography[
+                heading=bibliography,
+                title={\centerline{\sanhao\hei{参考文献}}\vspace{-1em}},
+            ]
             % 致谢和附录
             \include{sections/acknowledge}
         \end{sloppypar}
