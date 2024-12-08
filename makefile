@@ -1,7 +1,7 @@
 # HNU 本科毕业论文。
 FILENAME:=thesis
-COMPLIER:=latex 
-LD_FLAG:= -src -interaction=nonstopmode -shell-escape -file-line-error
+COMPLIER:=latex
+LD_FLAG:=-src -interaction=nonstopmode -shell-escape -file-line-error
 CITATION_GEN:=biber
 
 all: 

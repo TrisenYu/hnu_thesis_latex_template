@@ -1,7 +1,5 @@
 % 需要传入dvipfmx 参数使插图正常工作。
-\usepackage[
-    dvipdfmx            % 必要项，支持最终dvipdfmx对tikzcd插图处理
-] {graphicx}             
+\usepackage{graphicx}             
 \usepackage{subcaption}
 \usepackage{caption}
 \usepackage[
@@ -9,6 +7,7 @@
 ] {rotating}            % 用于旋转某些东西，如长表格。
 \usepackage[
     includeheadfoot
+    driver=dvipdfmx
 ] {geometry}            % 调节页边距。
 \usepackage{tikz-cd}
 \usepackage{tikz}
@@ -41,7 +40,7 @@
     amsfonts,
 }                       % 数学宏包
 \usepackage[
-    below               % 允许上一个section的浮动图形出现在下一个section的开始部分,还提供\FloatBarrier命令,使所有未处理的浮动图形立即被处理
+    below               
 ] {placeins}                
 \usepackage{flafter}    % 使得所有浮动体不能被放置在其浮动环境之前，以免浮动体在引述它的文本之前出现.
 \usepackage{multirow}   % 使用Multirow宏包，使得表格可以合并多个row格
@@ -61,7 +60,7 @@
 % ] {ntheorem}            
 % 定理类环境宏包，其中 amsmath 选项用来兼容 AMS LaTeX 的宏包
 \usepackage{indentfirst}% 首行缩进宏包
-\usepackage{CJKutf8}    % 用在UTF8编码环境下，它可以自动调用CJK，同时针对UTF8编码作了设置。
+\usepackage{CJKutf8}    % 用在UTF8编码环境下，它可以自动调用CJK，同时针对UTF8编码作了设置
 \usepackage{CJK}
 \usepackage{fancyhdr}   % 页眉页脚
 \usepackage{lastpage}
@@ -78,12 +77,12 @@
     gbpub=false,
     gbalign=gb7714-2015,% 良好的左对齐
     gbnoauthor=true,    % 佚名作者用
-    gbtype=true,        % 显式说明使用文献类型。
+    gbtype=true,        % 显式说明使用文献类型
     gbpunctin=false
 ] {biblatex}
 
 \usepackage[
-    dvipdfm,
+    dvipdfmx,
     unicode,
     pdfstartview=FitH,
     bookmarksnumbered=true,
@@ -95,8 +94,11 @@
     linkcolor=black,
     anchorcolor=black,
     urlcolor=black,
-    % breaklinks=true
+    breaklinks=true
 ] {hyperref}
 \usepackage{ifthen}     % 条件编译可能会用得到
-\usepackage[normalem]{ulem}
-\useunder{\uline}{\ul}{}
+\usepackage{threeparttable} % 编制复杂表格
+\usepackage{tabularray} % 这个没有的话，只能用 tabular 画表而已了
+\usepackage[
+    version=4
+] {mhchem}     % 化学式宏包

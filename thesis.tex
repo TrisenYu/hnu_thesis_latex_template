@@ -1,4 +1,6 @@
-\documentclass[12pt,a4paper]{article}
+
+% tikzcd 和 dvipdfmx 的处理方法：https://fohte.hateblo.jp/entry/2017/02/03/130829
+\documentclass[12pt,a4paper, dvipdfmx]{article}
 
 \input{format/package}
 \input{format/setup}
@@ -43,6 +45,7 @@
                 heading=bibliography,
                 title={\centerline{\sanhao\hei{参考文献}}\vspace{-1em}},
             ]
+            \xiaosi % 重新更改字体大小。
             % 致谢和附录
             \include{sections/acknowledge}
         \end{sloppypar}

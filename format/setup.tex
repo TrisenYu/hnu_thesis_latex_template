@@ -35,8 +35,8 @@
 \newcommand{\xiaosan}{\fontsize{15pt}{15pt}\selectfont}     % 小三, 1.倍行距
 \newcommand{\sihao}{\fontsize{14pt}{14pt}\selectfont}       % 四号, 1.0倍行距
 \newcommand{\xiaosi}{\fontsize{12pt}{12pt}\selectfont}      % 小四, 1.倍行距
-\newcommand{\wuhao}{\fontsize{11pt}{11pt}\selectfont}       % 五号, 单倍行距
-\newcommand{\xiaowu}{\fontsize{9pt}{9pt}\selectfont}        % 小五, 单倍行距
+\newcommand{\wuhao}{\fontsize{10pt}{10pt}\selectfont}       % 五号, 单倍行距
+\newcommand{\xiaowu}{\fontsize{8pt}{8pt}\selectfont}        % 小五, 单倍行距
 \CJKtilde
 
 \setitemize{leftmargin=3em,itemsep=0em,partopsep=0em,parsep=0em,topsep=-0em}
@@ -65,9 +65,13 @@
 \setcounter{tocdepth}{3}        % 目录项深度为 3
 \renewcommand{\thefigure}{\arabic{figure}}
 \renewcommand{\thetable}{\arabic{table}}
+\renewcommand{\theequation}{\arabic{equation}} % bold equation numbers
 %% 目录项中的基本配件。
 \renewcommand{\cftdot}{$...$}   % 点的样式。
-\renewcommand{\cftdotsep}{1.5}
+\renewcommand{\cftdotsep}{1.5}  % TODO: 这里的单位是什么？
+
+% 调整索引与文献名称之间的水平间距
+\renewcommand{\biblabelsep}{6pt}
 
 % section 从 1 开始计数
 \renewcommand{\thesection}{\arabic{section}}
@@ -112,27 +116,29 @@
 %% 设置插图目录条目的字体格式
 % 直接重定义字体即可。
 % https://tex.stackexchange.com/a/372825
+% https://tex.stackexchange.com/a/192450
 \DeclareCaptionFont{chineseSongti}{\bfseries\songti\wuhao}
 \DeclareCaptionFont{chineseHeiti}{\bfseries\heiti\wuhao}
-% https://tex.stackexchange.com/a/192450
-\DeclareCaptionLabelFormat{mylabel}{#1~#2\hspace{0.5em}}
+\DeclareCaptionFont{chineseWuhao}{\wuhao}
+\DeclareCaptionLabelFormat{figLabel}{#1~#2\hspace{0.5em}}
 \captionsetup[figure]{
-    name={\textbf{\songti\wuhao{图}}},
+    name={\textbf{\song\wuhao{图}}},
     labelsep=space, % 去掉冒号
-    labelformat=mylabel,
-    font={small},          
+    labelformat=figLabel,
+    font={chineseWuhao},          
     labelfont={bf},         
     textfont={chineseSongti},   
-    skip=1.51em 
+    skip=0.5em,
 }
+\DeclareCaptionLabelFormat{tabLabel}{#1~#2~}
 \captionsetup[table]{
     name={\textbf{\hei\wuhao{表}}},
     labelsep=space, % 去掉冒号
-    labelformat=mylabel,
-    font={small},
+    labelformat=tabLabel,
+    font={chineseWuhao},
     labelfont={bf},         
     textfont={chineseHeiti}, 
-    skip=1.5em         
+    skip=0.5em,       
 }
 
 %% 正文前罗马字体编号
@@ -231,23 +237,24 @@
                 \includegraphics[width=0.5\textwidth]{figures/hnu}
             \end{figure*}
             % 高清校徽
+            \vspace{-1em}
             \begin{overpic}{figures/HSVGPDF}
-                \put(5,75){\yihao \textbf{\texttt{HUNAN UNIVERSITY}}}
+                \put(4,75){\yihao \textbf{\texttt{HUNAN UNIVERSITY}}}
                 \put(-35,40){\song\chuhao{\@thesistype}}
             \end{overpic}
-            \vspace{2em}
+            \vspace{-2em}
             \begin{center}
-                \begin{tabular}{rrc}
-                    \rule{0pt}{1.05cm}\multicolumn{2}{r}{\xiaoer\hei{论文(设计)题目:}} & \underline{\parbox[c]{6.5cm}{\xiaoer\hei{\@titleOnTheFirstLine}}} \\
-                    \rule{0pt}{1.05cm}& \multicolumn{1}{l}{}                      & \underline{\parbox[c]{6.5cm}{\xiaoer\hei{\@titleOnTheSecondLine}}} \\
-                    \rule{0pt}{1.05cm}&\xiaosi\hei{学~生~姓~名 :}   & \underline{\parbox[c]{6.5cm}{\xiaosi\song{\@author}}} \\
-                    \rule{0pt}{1.05cm}&\xiaosi\hei{学~生~学~号 :}   & \underline{\parbox[c]{6.5cm}{\xiaosi\song{\@studentid}}} \\
-                    \rule{0pt}{1.05cm}&\xiaosi\hei{专~业~班~级 :}   & \underline{\parbox[c]{6.5cm}{\xiaosi\song{\@subject}}} \\
-                    \rule{0pt}{1.05cm}&\xiaosi\hei{学~院~名~称 :}   & \underline{\parbox[c]{6.5cm}{\xiaosi\song{\@faculty}}} \\
-                    \rule{0pt}{1.05cm}&\xiaosi\hei{指~导~老~师 :}   & \underline{\parbox[c]{6.5cm}{\xiaosi\song{\@teacher}}}\\
-                \end{tabular}\par
-                \vspace{3em}
-                \xiaosi\hei{\the\year{} 年 \the\month{} 月 \quad 日}
+            \begin{tabular}{rrc}
+                \rule{0pt}{1.05cm}\multicolumn{2}{r}{\xiaoer\hei{论文(设计)题目:}} & \underline{\parbox[c]{6cm}{\xiaoer\hei{\@titleOnTheFirstLine}}} \\
+                \rule{0pt}{1.05cm}&\multicolumn{1}{l}{}      & \underline{\parbox[c]{6cm}{\xiaoer\hei{\@titleOnTheSecondLine}}} \\
+                \rule{0pt}{1.05cm}&\xiaosi\hei{学~生~姓~名 :} & \underline{\parbox[c]{6cm}{\xiaosan\song{\@author}}} \\
+                \rule{0pt}{1.05cm}&\xiaosi\hei{学~生~学~号 :} & \underline{\parbox[c]{6cm}{\xiaosan\song{\@studentid}}} \\
+                \rule{0pt}{1.05cm}&\xiaosi\hei{专~业~班~级 :} & \underline{\parbox[c]{6cm}{\xiaosan\song{\@subject}}} \\
+                \rule{0pt}{1.05cm}&\xiaosi\hei{学~院~名~称 :} & \underline{\parbox[c]{6cm}{\xiaosan\song{\@faculty}}} \\
+                \rule{0pt}{1.05cm}&\xiaosi\hei{指~导~老~师 :} & \underline{\parbox[c]{6cm}{\xiaosan\song{\@teacher}}}\\
+            \end{tabular}\par
+            \vspace{3em}
+            \xiaosi\hei{\the\year{} 年 \the\month{} 月 \quad 日}
             \end{center}
         \end{titlepage}
         
@@ -312,12 +319,11 @@
         \addcontentsline{toc}{section}{摘~~要} {
             \begin{center}
                 \hei\xiaoer{\@title}
-            \end{center}\par
-            \vspace{0.5\baselineskip}
+            \end{center}
+            \vspace{-10pt}
             \begin{center}
                 \hei\xiaoer\ 摘\qquad 要
             \end{center}\par
-            \vspace{0.5\baselineskip}
             \song\defaultfont\@cabstract
             \vspace{\baselineskip}
             \hangafter=1\hangindent=52.3pt
@@ -331,11 +337,12 @@
             \begin{center}
                 \xiaoer{\textbf{\@etitle}}
             \end{center}\par
-            \vspace{0.5\baselineskip}
+            \vspace{-12pt}
             \begin{center}
                 \xiaoer\textbf{Abstract}
             \end{center}\par
-            \@eabstract
+            \vspace{-6pt}
+            \defaultfont{\@eabstract}
             \vspace{\baselineskip}
             \hangafter=1\hangindent=60pt
             \newline\noindent
