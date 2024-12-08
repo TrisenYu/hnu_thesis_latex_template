@@ -21,3 +21,4 @@ draft.txt
 .dist
 *.fdb_latexmk
 *.fls
+trials/
