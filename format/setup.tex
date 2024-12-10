@@ -101,24 +101,26 @@
 \renewcommand*{\listfigurename}{\hfill 插图索引 \hfill}
 \renewcommand*{\listtablename}{\hfill 附表索引 \hfill}
 \setcounter{lofdepth}{1}
-
-
 % figure index 的格式配置
-\titlecontents{figure}[0em]{\xiaosi\song\vspace{0.5em}} %
-{图\hspace{0.5em}\textnormal{\thecontentslabel}\hspace{0.5em}}{} %
-{\titlerule*[10pt]{\cftdot}\xiaosi\contentspage}
+\titlecontents{figure}[0em]
+    {\xiaosi\song\vspace{0.5em}} %
+    {图\hspace{0.5em}\textnormal{\thecontentslabel}\hspace{0.5em}}{} %
+    {\titlerule*[10pt]{\cftdot}\xiaosi\contentspage}
 
 % table index 的格式配置
-\titlecontents{table}[0em]{\xiaosi\song\vspace{0.5em}} %
-{表\hspace{0.5em}\textnormal{\thecontentslabel}\hspace{0.5em}}{} %
-{\titlerule*[10pt]{\cftdot}\xiaosi\contentspage}
+\titlecontents{table}[0em]
+    {\xiaosi\song\vspace{0.5em}} %
+    {表\hspace{0.5em}\textnormal{\thecontentslabel}\hspace{0.5em}}{} %
+    {\titlerule*[10pt]{\cftdot}\xiaosi\contentspage}
 
 %% 设置插图目录条目的字体格式
 % 直接重定义字体即可。
 % https://tex.stackexchange.com/a/372825
 % https://tex.stackexchange.com/a/192450
-\DeclareCaptionFont{chineseSongti}{\bfseries\songti\wuhao}
-\DeclareCaptionFont{chineseHeiti}{\bfseries\heiti\wuhao}
+\DeclareCaptionFont{chineseBoldSongti}{\bfseries\songti\wuhao}
+\DeclareCaptionFont{chineseWuHaoSongti}{\songti\wuhao}
+\DeclareCaptionFont{chinesexiaowuSongti}{\songti\xiaowu}
+\DeclareCaptionFont{chineseBoldHeiti}{\bfseries\heiti\wuhao}
 \DeclareCaptionFont{chineseWuhao}{\wuhao}
 \DeclareCaptionLabelFormat{figLabel}{#1~#2\hspace{0.5em}}
 \captionsetup[figure]{
@@ -127,8 +129,13 @@
     labelformat=figLabel,
     font={chineseWuhao},          
     labelfont={bf},         
-    textfont={chineseSongti},   
+    textfont={chineseBoldSongti},   
     skip=0.5em,
+}
+\captionsetup[subfigure]{
+    font={chineseWuhao},
+    labelfont={chineseWuHaoSongti},
+    textfont={chineseWuHaoSongti}
 }
 \DeclareCaptionLabelFormat{tabLabel}{#1~#2~}
 \captionsetup[table]{
@@ -137,10 +144,9 @@
     labelformat=tabLabel,
     font={chineseWuhao},
     labelfont={bf},         
-    textfont={chineseHeiti}, 
+    textfont={chineseBoldHeiti}, 
     skip=0.5em,       
 }
-
 %% 正文前罗马字体编号
 \newcommand{\frontmatter}{
     \pagenumbering{Roman}
@@ -227,6 +233,7 @@
     \newlength{\@title@width}
     
     \newcommand{\makeheaders} {
+        \tabcolsep = 0em % 做之前紧凑
         % 封面
         %% 目前检出有点问题
         \begin{titlepage}
@@ -241,23 +248,22 @@
             \begin{overpic}{figures/HSVGPDF}
                 \put(4,75){\yihao \textbf{\texttt{HUNAN UNIVERSITY}}}
                 \put(-35,40){\song\chuhao{\@thesistype}}
-            \end{overpic}
-            \vspace{-2em}
-            \begin{center}
+            \end{overpic}\par
+            \begin{table}[H]
+            \centering
             \begin{tabular}{rrc}
                 \rule{0pt}{1.05cm}\multicolumn{2}{r}{\xiaoer\hei{论文(设计)题目:}} & \underline{\parbox[c]{6cm}{\xiaoer\hei{\@titleOnTheFirstLine}}} \\
-                \rule{0pt}{1.05cm}&\multicolumn{1}{l}{}      & \underline{\parbox[c]{6cm}{\xiaoer\hei{\@titleOnTheSecondLine}}} \\
-                \rule{0pt}{1.05cm}&\xiaosi\hei{学~生~姓~名 :} & \underline{\parbox[c]{6cm}{\xiaosan\song{\@author}}} \\
-                \rule{0pt}{1.05cm}&\xiaosi\hei{学~生~学~号 :} & \underline{\parbox[c]{6cm}{\xiaosan\song{\@studentid}}} \\
-                \rule{0pt}{1.05cm}&\xiaosi\hei{专~业~班~级 :} & \underline{\parbox[c]{6cm}{\xiaosan\song{\@subject}}} \\
-                \rule{0pt}{1.05cm}&\xiaosi\hei{学~院~名~称 :} & \underline{\parbox[c]{6cm}{\xiaosan\song{\@faculty}}} \\
-                \rule{0pt}{1.05cm}&\xiaosi\hei{指~导~老~师 :} & \underline{\parbox[c]{6cm}{\xiaosan\song{\@teacher}}}\\
-            \end{tabular}\par
-            \vspace{3em}
-            \xiaosi\hei{\the\year{} 年 \the\month{} 月 \quad 日}
-            \end{center}
+                \rule{0pt}{1.05cm}&\multicolumn{1}{r}{}      & \underline{\parbox[c]{6cm}{\xiaoer\hei{\@titleOnTheSecondLine}}} \\
+                \rule{0pt}{1.05cm}&\xiaosi\hei{学~生~姓~名 :} & \underline{\parbox[c]{6cm}{\centerline{\xiaosan\song{\@author}}}} \\
+                \rule{0pt}{1.05cm}&\xiaosi\hei{学~生~学~号 :} & \underline{\parbox[c]{6cm}{\centerline{\xiaosan\song{\@studentid}}}} \\
+                \rule{0pt}{1.05cm}&\xiaosi\hei{专~业~班~级 :} & \underline{\parbox[c]{6cm}{\centerline{\xiaosan\song{\@subject}}}} \\
+                \rule{0pt}{1.05cm}&\xiaosi\hei{学~院~名~称 :} & \underline{\parbox[c]{6cm}{\centerline{\xiaosan\song{\@faculty}}}} \\
+                \rule{0pt}{1.05cm}&\xiaosi\hei{指~导~老~师 :} & \underline{\parbox[c]{6cm}{\centerline{\xiaosan\song{\@teacher}}}}\\
+            \end{tabular}
+            \end{table}\par
+            \vspace{2em}
+            \centering{\xiaosi\hei{\the\year{} 年 \the\month{} 月 \quad 日}}
         \end{titlepage}
-        
         \clearpage
     
         %% 从此往后页眉的格式基本固定。
@@ -299,18 +305,18 @@
             \song\defaultfont{\@authorization}\par
             \song\defaultfont{{本论文（设计）属于}}\par
             % 用表格来放置保密签订协议。
-            \begin{tabular}{lll}
-                \qquad\qquad&\qquad\quad\qquad&\hspace{0.5em} 1、保　密□，在\underline{\qquad\qquad}年解密后适用于本授权书。 \\
-                \qquad\qquad&\qquad\quad\qquad&\hspace{0.5em} 2、不保密□。                                       \\
-                \qquad\qquad&\qquad\quad\qquad&\hspace{0.5em} (请在以上相应方框内打``$\surd$'')
+            \begin{tabular}{l}
+                \makebox[8.5em][s]{}1、保　密□，在\underline{\qquad\qquad}年解密后适用于本授权书。 \\
+                \makebox[8.5em][s]{}2、不保密□。                                       \\
+                \makebox[8.5em][s]{}(请在以上相应方框内打``$\surd$'')
             \end{tabular}
             \par
             \vspace{1\baselineskip}
             \song\xiaosi
-            \@studentsign \makebox[3cm][s]{} \qquad\qquad\qquad  
+            \@studentsign \makebox[3cm+3em][s]{}
             \@cdatename \the\year{} 年 \makebox[0.5cm][s]{} 月 \makebox[0.5cm][s]{} 日\par
             \vspace{0.25\baselineskip}
-            \@teachersign \makebox[3cm][s]{} \qquad\qquad\qquad  
+            \@teachersign \makebox[3cm+3em][s]{}
             \@cdatename \the\year{} 年 \makebox[0.5cm][s]{} 月 \makebox[0.5cm][s]{} 日
         }
         \clearpage
@@ -350,6 +356,7 @@
         }
         \newpage
         % 图表以及目录
+        \setlength{\tabcolsep}{0.5em} % 做完上述部分后，表格默认每个格子 0.5em 宽
     }
 
     \fancyhf{} % 清空所有fancy样式，方便使页眉左部和右部置空
@@ -358,4 +365,5 @@
         \fancyhead[C]{\song\xiaowu \@heading}
         \fancyfoot[C]{\song\xiaowu \thepage}
     }
+    
 \makeatother

@@ -19,7 +19,7 @@
         \label{eq1}
     \end{equation}
     
-    所形成的交换图如图 \ref{fig1} 和图 \ref{fig2} 所示：
+    所形成的交换图如图 \ref{fig1} 和图 \ref{fig2} 所示。
     \begin{figure*}[htp]
         \centering
         \begin{tikzcd}
@@ -32,7 +32,6 @@
         \caption{{交换图例一}}
         \label{fig1}
     \end{figure*}
-
     \begin{figure*}[htp]
         \centering
         \begin{tikzcd}[column sep=tiny]
@@ -42,18 +41,28 @@
             & \pi_1(U_2) \ar[ur]\ar[urr, "j_2"swap, bend right=20]
             &&
         \end{tikzcd}
+        % 手工插入间距
+        \vspace{0.5em}\par{\xiaowu{注：关系与图\ref{fig1}类似，但不多.}}
         \caption{{交换图例二}}
         \label{fig2}
     \end{figure*}
     \clearpage
 \addcontentsline{toc}{section}{\song\xiaosi附录 B}
-\addcontentsline{toc}{section}{\song\xiaosi附录 B}
 \section*{附录 B}
     所用图片为图 \ref{fig3}。
-    \begin{figure}[htp]
+    \begin{figure}[htp!]
         \centering
-        \includegraphics[scale=0.5]{ebpfProgramExample.png} % 在导演去导入了图片以后，这里就不要再包含后缀名
-        \caption{测试代码}
+        \begin{subfigure}{0.3\linewidth}
+            \includegraphics[width=\linewidth]{ebpfProgramExample.png} % 在导演去导入了图片以后，这里就不要再包含后缀名
+            \caption{测试代码一}
+            \label{f3son1}
+        \end{subfigure} 
+        \begin{subfigure}{0.3\linewidth}
+            \includegraphics[width=\linewidth]{fig1Codes.png} % 在导演去导入了图片以后，这里就不要再包含后缀名
+            \caption{测试代码二}
+            \label{f3son2}
+        \end{subfigure}
+        \caption{所用代码集}
         \label{fig3}
     \end{figure}
 
@@ -63,7 +72,7 @@
         \caption{数学字体对照表}
         \begin{threeparttable}
         % resizebox 使表格适应文档的宽度。
-        % \resizebox{\columnwidth}{!}{  
+        \resizebox{\textwidth}{!}{  
         \xiaowu
         \begin{tabular}{*{18}{l}}
             \toprule
@@ -84,50 +93,41 @@
             $\mathrm{Mm}$ & $\mathrm{Zz}$ & $\mathbf{Mm}$ & $\mathbf{Zz}$ & $\mathit{Mm}$ & $\mathit{Zz}$ & $\mathsf{Mm}$ & $\mathsf{Zz}$ & $\mathtt{Mm}$ & $\mathtt{Zz}$ & $\mathcal{Mm}$ & $\mathcal{Zz}$ & $\mathbb{M}$ & $\mathbb{Z}$ & $\mathfrak{Mm}$ & $\mathfrak{Zz}$ & $\mathscr{Mm}$ & $\mathscr{Zz}$ \\
             \bottomrule
         \end{tabular}
-        % }
+        }
         \begin{tablenotes}
             \item \xiaowu\songti{注：此数据仅为示例，实际数据可能有所不同.}
         \end{tablenotes}
         \end{threeparttable}
         \label{tbl1}
     \end{table*}
-    \clearpage
-    % https://tex.stackexchange.com/a/722703
-    \begin{table}[ht]
+    \begin{table}[H]
         \centering
         \caption{各组分$\lg(B_i)$值}
         \wuhao
-        \begin{threeparttable}
-            \begin{tblr}{
-                row{1} = {c},
-                column{1} = {c},
-                cell{1}{2} = {c=2}{},
-                cell{1}{4} = {c=2}{},
-                hline{1,3,18} = {-}{0.08em},
-                hline{2} = {2-5}{0.08em},
-            }
-                \song{序号} & T=1500K &             & T=2000K    &           \\
-                & \song{组分}      & $\lg(B_i)$  & \song{组分}& $\lg(B_i)$ \\
-                1  & \ce{O2+}        & 5.26         & \ce{HO2}  & 6.43     \\
-                2  & \ce{HO2}        & 5.26         & \ce{O2+}  & 6.42     \\
-                3  & \ce{H2O+}       & 4.76         & \ce{H2O+} & 6.18     \\
-                4  & \ce{N2+}        & 3.97         & \ce{H}    & 6.12     \\
-                5  & \ce{H}          & 3.54         & \ce{H2+}  & 6.04     \\
-                6  & \ce{OH}         & 3.29         & \ce{OH}   & 5.91     \\
-                7  & \ce{CO+}        & 3.26         & \ce{O}    & 5.59     \\
-                8  & \ce{H2+}        & 2.54         & \ce{N2+}  & 4.87     \\
-                9  & \ce{O}          & 2.30         & \ce{CO+}  & 3.98     \\
-                10 & \ce{H2O2}       & 1.62         & \ce{CO2+} & 3.76     \\
-                11 & \ce{CO2+}       & 1.40         & \ce{H2O2} & 3.09     \\
-                12 & \ce{HCO}\tnote{*}& -0.47       & \ce{HCO}\tnote{*}& 0.24     \\
-                13 & \ce{N+}         & -4.85        & \ce{N+}   & -2.81    \\
-                14 & \ce{CH2O+}      & -6.91        & \ce{CH2O}\tnote{*}& -6.13    \\
-                15 & \ce{NO+}        & -16.60       & \ce{NO+}  & -11.76     
-            \end{tblr}
-            \obeylines\medskip
-            \xiaowu\songti{注：“+”表示重要组分，“*”表示冗余组分.}
-            % \obeylines
-            % \xiaowu\songti{注：“+”表示重要组分，“\item[*]”表示冗余组分.} wrap 在 footnote 里。
-        \end{threeparttable}
+        \begin{tabular}{ccccc} 
+            \hline
+            % 视需求套上斜体。
+            序号 & \multicolumn{2}{c}{T=1500K} & \multicolumn{2}{c}{T=2000K}  \\ 
+            \cline{2-5}
+            & 组分                   & $\lg B_i$   & 组分                  & $\lg B_i$ \\ 
+            \hline
+            1  & \ce{O2}\TblrNote{+}   &   5.26      & \ce{HO2}              &  6.43    \\
+            2  & \ce{HO2}              &   5.26      & \ce{O2}\TblrNote{+}   &  6.42    \\
+            3  & \ce{H2O}\TblrNote{+}  &   4.76      & \ce{H2O}\TblrNote{+}  &  6.18    \\
+            4  & \ce{N2}\TblrNote{+}   &   3.97      & \ce{H}                &  6.12    \\
+            5  & \ce{H}                &   3.54      & \ce{H2}\TblrNote{+}   &  6.04    \\
+            6  & \ce{OH}               &   3.29      & \ce{OH}               &  5.91    \\
+            7  & \ce{CO}\TblrNote{+}   &   3.26      & \ce{O}                &  5.59    \\
+            8  & \ce{H2}\TblrNote{+}   &   2.54      & \ce{N2}\TblrNote{+}   &  4.87    \\
+            9  & \ce{O}                &   2.30      & \ce{CO}\TblrNote{+}   &  3.98    \\
+            10 & \ce{H2O2}             &   1.62      & \ce{CO2}\TblrNote{+}  &  3.76    \\
+            11 & \ce{CO2}\TblrNote{+}  &   1.40      & \ce{H2O2}             &  3.09    \\
+            12 & \ce{HCO}\TblrNote{*}  &   -0.47     & \ce{HCO}\TblrNote{*}  &  0.24    \\
+            13 & \ce{N}\TblrNote{+}    &   -4.85     & \ce{N}\TblrNote{+}    &  -2.81   \\
+            14 & \ce{CH2O}\TblrNote{+} &   -6.91     & \ce{CH2O}\TblrNote{*} &  -6.13   \\
+            15 & \ce{NO}\TblrNote{+}   &   -16.60    & \ce{NO}\TblrNote{+}   &  -11.76  \\ 
+            \hline
+            \multicolumn{5}{l}{\xiaowu\songti{注：“+”表示重要成分，“*”表示冗余组分.}}                      
+        \end{tabular}
         \label{tbl2}
     \end{table}
