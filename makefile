@@ -3,12 +3,13 @@ FILENAME:=thesis
 COMPLIER:=latex
 LD_FLAG:=-src -interaction=nonstopmode -shell-escape -file-line-error
 CITATION_GEN:=biber
+DVI2PDF:=dvipdfmx
 
 all: 
 	-$(COMPLIER) $(LD_FLAG) $(FILENAME).tex
 	-$(CITATION_GEN) "$(FILENAME)"
 	-$(COMPLIER) $(LD_FLAG) $(FILENAME).tex
-	-dvipdfmx $(FILENAME).dvi
+	-$(DVI2PDF) "$(FILENAME)"
 
 clean:
 	latexmk -c
