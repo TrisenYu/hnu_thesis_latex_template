@@ -6,24 +6,28 @@
     \cite{sunFindingCorrectnessBugs2024, YIHeCrossContainer, riceLearningEBPFProgramming2023}。
     这一直接运行于内核态而无需通过切换用户态和内核态之间的能力，既减少了数据复制次数提高了内核执行性能，
     又充分扩展了内核的功能\cite{YIHeCrossContainer, ZhangZiJunLinuxXiTonge}；
-    eBPF的这种灵活性被用于多种特定的任务\cite{HaoValidating}，
+    eBPF的这种灵活性被用于 % 修改需要。
+    特定的任务\cite{HaoValidating}，
     如网络包过滤\cite{10.1145/3371038, TCPdump}、网络流量监控\cite{9110434}以及其它方面\cite{280870, 258973}。
 
     \subsubsection{eBPF运行流程}
+        % 先前的工作 √
+        % 过去十年的文章 x
+        % 不要写 许多 过去十年 ，放数据来论证。
         用户首先需要通过相应的eBPF框架来编写程序，通过\cite{riceLearningEBPFProgramming2023}
         eBPF程序运行时，只能操控11个寄存器（为R0至R10），其功能分别为：
         \begin{itemize}
             \item[(1)] R0：保存函数返回值和eBPF程序退出值；
-            \item[(2)] R1$\sim$ R5：保存函数调用参数；
-            \item[(3)] R6$\sim$ R9：保存调用函数的上下文；
+            \item[(2)] R1$\sim$R5：保存函数调用参数；
+            \item[(3)] R6$\sim$R9：保存调用函数的上下文；
             \item[(4)] R10： 只读的栈帧寄存器，用于访问栈。
         \end{itemize}
 
         同时，eBPF程序能在一个固定大小的栈上执行四种基本运算：加载、存储、算术运算和分支判断
-        \cite{HaoValidating}。\nolinebreak
+        \cite{HaoValidating}。
         运行BPF程序前，会经过编译工具链（如clang）编译为BPF字节码，
         而后由BPF系统调用加载到内核态等待通过eBPF验证器的静态验证
-        \cite{zhengBpftimeUserspaceEBPF2023}。\nolinebreak
+        \cite{zhengBpftimeUserspaceEBPF2023}。
         通过验证后，会经由BPF Just-In-Time(JIT)编译器编译为可执行的机器码并被加载到虚拟机中执行。
 
     \subsubsection{eBPF的限制}
@@ -45,7 +49,7 @@
     和Golang等高级编程语言设计的中间编译目标（或称字节码）
     \cite{wasmCommunityGroup, lehmannWasabiFrameworkDynamically2019, 
         lehmannEverythingOldNew, bhansaliFirstLookCode2022, waseemIssuesTheirCauses2024}。
-    因这种字节码并不能直接交由处理器译码执行，还需经过跨硬件指令集的转译，wasm有着跨平台的可扩展性
+    因这种字节码并不能直接交由处理器译码执行，还需经过跨硬件指令集runtime的转译，wasm有着跨平台的可扩展性
     \cite{lehmannEverythingOldNew, waseemIssuesTheirCauses2024, 
         lehmannWasabiFrameworkDynamically2019, JayProvablySafe, 
         WebAssemblySummaryOnSecurity, rayOverviewWebAssemblyIoT2023}。
@@ -53,7 +57,7 @@
     作为弥补JavaScript性能瓶颈的补充技术之一\cite{rayOverviewWebAssemblyIoT2023}，
     wasm生成的字节码经转译后有接近原生机器码（即直接通过编译器编译得到的机器码）的执行性能
     \cite{haasBringingWebSpeed2017,johnsonWaVeVerifiablySecure2023}。
-    即使如此，有研究\cite{JangdaNotsoFast}指出，由于这种转译增加了总体汇编指令的个数、
+    即使如此，有研究\parencite{JangdaNotsoFast}指出，由于这种转译增加了总体汇编指令的个数、
     访存加载数、分支数以及额外的安全检查（如栈溢出和间接执行检查），造成L1缓存不命中率的上升，
     wasm的性能相比原生编译的可执行程序明显下降。
 

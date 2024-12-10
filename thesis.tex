@@ -1,5 +1,7 @@
 
-% tikzcd 和 dvipdfmx 的处理方法：https://fohte.hateblo.jp/entry/2017/02/03/130829
+% tikzcd 和 dvipdfmx 冲突的处理方法：https://fohte.hateblo.jp/entry/2017/02/03/130829
+% 在documentclass处提供dvipdfmx的选项。
+% 必须要包含，否则无法处理。
 \documentclass[12pt,a4paper, dvipdfmx]{article}
 
 \input{format/package}

@@ -9,6 +9,7 @@
 *.lof
 *.thm
 *.bbl
+*.tmp
 *.xdv
 *.blg
 cover.tex
