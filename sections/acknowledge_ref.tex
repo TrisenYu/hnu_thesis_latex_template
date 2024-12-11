@@ -1,11 +1,12 @@
 \section*{\hfill \xiaoer\hei{致~~谢} \hfill}
+\addcontentsline{toc}{section}{\hei\xiaosi{致 谢}}
     时光荏苒岁月如梭，转眼自己在HNU的本科生涯就此画上了句号。
     回想过往的憧憬，愈发发觉有涯的人生实在无法穷尽渴望研习讨论的知识，愈发感受到愿景落空后的久萦心间的遗憾。
     \clearpage
 
 % 没有附录的，就不放。
 \addcontentsline{toc}{section}{附录}
-\addcontentsline{toc}{section}{\song\xiaosi附录 A}
+\addcontentsline{toc}{section}{\song\xiaosi{附录 A}}
 \section*{附录 A}
     % 需要用 \eqref 才会加圆括号。
     公式推导如 \eqref{eq1} 式所示。
@@ -19,7 +20,7 @@
         \label{eq1}
     \end{equation}
     
-    所形成的交换图如图 \ref{fig1} 和图 \ref{fig2} 所示。
+    所形成的交换图如图 \ref{fig1}，图 \ref{fig2} 和图 \ref{fig3} 所示。
     \begin{figure*}[htp]
         \centering
         \begin{tikzcd}
@@ -46,24 +47,42 @@
         \caption{{交换图例二}}
         \label{fig2}
     \end{figure*}
+    \begin{figure*}[htp]
+        \centering
+        \begin{tikzcd}
+            T
+            \arrow[drr, bend left, "x"]
+            \arrow[ddr, bend right, "y"]
+            \arrow[dr, dotted,background color=blue!20,
+            "{(x,y)}"description] & & \\
+            & X \times_Z Y \arrow[r, "p"] \arrow[d, "q"]
+            & X \arrow[d, "f"] \\
+            & Y \arrow[r, "g"]
+            & Z
+        \end{tikzcd}
+        % 手工插入间距
+        \vspace{0.5em}\par{\xiaowu{注：关系与图\ref{fig1}，图\ref{fig2}类似，但不多.}}
+        \caption{{交换图例三}}
+        \label{fig3}
+    \end{figure*}
     \clearpage
-\addcontentsline{toc}{section}{\song\xiaosi附录 B}
+\addcontentsline{toc}{section}{\song\xiaosi{附录 B}}
 \section*{附录 B}
-    所用图片为图 \ref{fig3}。
+    所用图片为图 \ref{fig4}。
     \begin{figure}[htp!]
         \centering
         \begin{subfigure}{0.3\linewidth}
-            \includegraphics[width=\linewidth]{ebpfProgramExample.png} % 在导言区导入了图片以后，这里就不要再包含后缀名
+            \includegraphics[width=\linewidth]{ebpfProgramExample.png} % 在导演去导入了图片以后，这里就不要再包含后缀名
             \caption{测试代码一}
             \label{f3son1}
         \end{subfigure} 
         \begin{subfigure}{0.3\linewidth}
-            \includegraphics[width=\linewidth]{fig1Codes.png} % 在导言区导入了图片以后，这里就不要再包含后缀名
+            \includegraphics[width=\linewidth]{fig1Codes.png} % 在导演去导入了图片以后，这里就不要再包含后缀名
             \caption{测试代码二}
             \label{f3son2}
         \end{subfigure}
         \caption{所用代码集}
-        \label{fig3}
+        \label{fig4}
     \end{figure}
 
     所用表格为表 \ref{tbl1} 和表 \ref{tbl2}。
@@ -106,10 +125,10 @@
         \wuhao
         \begin{tabular}{ccccc} 
             \hline
-            % 视需求套上斜体。如 $\mathit{T=1500K}$, $\mathit{T=2000K}$
+            % 视需求套上斜体。
             序号 & \multicolumn{2}{c}{T=1500K} & \multicolumn{2}{c}{T=2000K}  \\ 
             \cline{2-5}
-               & 组分                   & $\lg B_i$   & 组分                  & $\lg B_i$ \\ 
+            & 组分                   & $\lg B_i$   & 组分                  & $\lg B_i$ \\ 
             \hline
             1  & \ce{O2}\TblrNote{+}   &   5.26      & \ce{HO2}              &  6.43    \\
             2  & \ce{HO2}              &   5.26      & \ce{O2}\TblrNote{+}   &  6.42    \\

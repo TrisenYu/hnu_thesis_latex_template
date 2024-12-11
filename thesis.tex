@@ -1,7 +1,8 @@
 
+%%%% contact via <kisfg@hotmail.com, haikureimu@hnu.edu.cn>
 % tikzcd 和 dvipdfmx 冲突的处理方法：https://fohte.hateblo.jp/entry/2017/02/03/130829
 % 在documentclass处提供dvipdfmx的选项。
-% 必须要包含，否则无法处理。
+% 必须要包含，否则无法插入 png。
 \documentclass[12pt,a4paper, dvipdfmx]{article}
 
 \input{format/package}
@@ -13,24 +14,25 @@
 \begin{document}
     \begin{CJK*}{UTF8}{song}
         \frontmatter
-        % 前几页必要内容
+        %%% 前几页必要内容
         \makeheaders
-        % 目录
+        %%% 目录
         \tableofcontents
         \newpage
-        % 插图索引
-        \renewcommand{\numberline}[1]{图~#1~~}
-        \addcontentsline{toc}{section}{插图索引}
-        \listoffigures
-        \clearpage
-        % 附表索引
-        \renewcommand{\numberline}[1]{表~#1~~}
-        \addcontentsline{toc}{section}{附表索引}
-        \listoftables
-        \clearpage
-        % 正文
+        %%% 插图索引 可选项
+        % \renewcommand{\numberline}[1]{图~#1~~}
+        % \addcontentsline{toc}{section}{插图索引}
+        % \listoffigures
+        % \clearpage
+        %%% 附表索引 可选项
+        % \renewcommand{\numberline}[1]{表~#1~~}
+        % \addcontentsline{toc}{section}{附表索引}
+        % \listoftables
+        % \clearpage
+        %%% 正文
         \mainmatter
-        \begin{sloppypar} % 防止文字出界。
+        % 防止文字出界而自动调整的环境。
+        \begin{sloppypar} 
             \setcounter{page}{1}
             \include{sections/1intro}
             \include{sections/2relatedwork}
@@ -38,7 +40,7 @@
             \include{sections/4experiment}
             \include{sections/5discussion}
             \include{sections/6conclusion}
-            % 参考文献
+            %%% 参考文献
             \newpage
             \nocite{*}
             \addcontentsline{toc}{section}{参考文献}
@@ -47,9 +49,8 @@
                 heading=bibliography,
                 title={\centerline{\sanhao\hei{参考文献}}\vspace{-1em}},
             ]
-            \xiaosi % 重新更改字体大小。
-            % 致谢和附录
-            \include{sections/acknowledge}
+            %%% 致谢和附录
+            \xiaosi{\include{sections/acknowledge}}
         \end{sloppypar}
     \end{CJK*}
 \end{document}
