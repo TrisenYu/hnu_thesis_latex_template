@@ -285,14 +285,32 @@
     doi     = {10.13328/j.cnki.jos.006762},
     file    = {F:\Zotero\Data-storage\storage\SU86PK9Z\6762.pdf}
 }
-@misc{skanehiraWrittingWasmRuntime,
-    title  = {Writting a Wasm {{Runtime}} in {{Rust}}},
-    year = {2023},
-    author = {{skanehira}},
-    howpublished = {\url{https://github.com/skanehira/writing-a-wasm-runtime-in-rust/}},
-    langid = {english}
+@inproceedings{romanoEmpiricalStudyBugs2021,
+    title     = {An {{Empirical Study}} of {{Bugs}} in {{WebAssembly Compilers}}},
+    booktitle = {2021 36th {{IEEE}}/{{ACM International Conference}} on {{Automated Software Engineering}} ({{ASE}})},
+    author    = {Romano, Alan and Liu, Xinyue and Kwon, Yonghwi and Wang, Weihang},
+    year      = {2021},
+    month     = nov,
+    pages     = {42--54},
+    publisher = {IEEE},
+    address   = {Melbourne, Australia},
+    doi       = {10.1109/ASE51524.2021.9678776},
+    urldate   = {2024-12-11},
+    abstract  = {WebAssembly is the newest programming language for the Web. It defines a portable bytecode format for use as a compilation target for programs developed in high-level languages such as C, C++, and Rust. As a result, WebAssembly binaries are generally created by WebAssembly compilers rather than being written manually. To port native code to the Web, WebAssembly compilers need to address the differences between the source and target languages and dissimilarities in their execution environments. A deep understanding of the bugs in WebAssembly compilers can help compiler developers determine where to focus development and testing efforts. In this paper, we conduct two empirical studies to understand the characteristics of the bugs found in WebAssembly compilers. First, we perform a qualitative analysis of bugs in Emscripten, the most widelyused WebAssembly compiler. We investigate 146 bug reports in Emscripten related to the unique challenges WebAssembly compilers encounter compared with traditional compilers. Second, we provide a quantitative analysis of 1,054 bugs in three opensource WebAssembly compilers, AssemblyScript, Emscripten, and Rustc/Wasm-Bindgen. We analyze these bugs along three dimensions: lifecycle, impact, and sizes of bug-inducing inputs and bug fixes. These studies deepen our understanding of WebAssembly compiler bugs. We hope that the findings of our study will shed light on opportunities to design practical tools for testing and debugging WebAssembly compilers.},
+    copyright = {https://ieeexplore.ieee.org/Xplorehelp/downloads/license-information/IEEE.html},
+    isbn      = {978-1-6654-0337-5},
+    langid    = {english},
+    keywords  = {wasm},
+    file      = {F:\Zotero\Data-storage\storage\GUNCQFFI\Romano 等 - 2021 - An Empirical Study of Bugs in WebAssembly Compilers.pdf}
 }
 
+@misc{skanehiraWrittingWasmRuntime,
+    title        = {Writting a Wasm {{Runtime}} in {{Rust}}},
+    year         = {2023},
+    author       = {{skanehira}},
+    howpublished = {\url{https://github.com/skanehira/writing-a-wasm-runtime-in-rust/}},
+    langid       = {english}
+}
 @inproceedings{sunFindingCorrectnessBugs2024,
     title     = {Finding {{Correctness Bugs}} in {{eBPF Verifier}} with {{Structured}} and {{Sanitized Program}}},
     booktitle = {Proceedings of the {{Nineteenth European Conference}} on {{Computer Systems}}},
@@ -314,6 +332,24 @@
     url          = {https://www.tcpdump.org/},
     year         = {2024}
 }
+@misc{titzerFastInplaceInterpreter2022,
+    title         = {A Fast In-Place Interpreter for {{WebAssembly}}},
+    author        = {Titzer, Ben L.},
+    year          = {2022},
+    month         = may,
+    number        = {arXiv:2205.01183},
+    eprint        = {2205.01183},
+    primaryclass  = {cs},
+    publisher     = {arXiv},
+    doi           = {10.48550/arXiv.2205.01183},
+    urldate       = {2024-12-11},
+    abstract      = {WebAssembly (Wasm) is a compact, well-specified bytecode format that offers a portable compilation target with near-native execution speed. The bytecode format was specifically designed to be fast to parse, validate, and compile, positioning itself as a portable alternative to native code. It was pointedly not designed to be interpreted directly. Instead, design considerations at the time focused on competing with native code, utilizing optimizing compilers as the primary execution tier. Yet, in JIT scenarios, compilation time and memory consumption critically impact application startup, leading many Wasm engines to later deploy baseline (single-pass) compilers. Though faster, baseline compilers still take time and waste code space for infrequently executed code. A typical interpreter being infeasible, some engines resort to compiling Wasm not to machine code, but to a more compact, but easy to interpret format. This still takes time and wastes memory. Instead, we introduce in this article a fast in-place interpreter for WebAssembly, where no rewrite and no separate format is necessary. Our evaluation shows that in-place interpretation of Wasm code is space-efficient and fast, achieving performance on-par with interpreting a custom-designed internal format. This fills a hole in the execution tier space for Wasm, allowing for even faster startup and lower memory footprint than previous engine configurations.},
+    archiveprefix = {arXiv},
+    langid        = {english},
+    keywords      = {fast,interpreter,wasm},
+    file          = {F:\Zotero\Data-storage\storage\D2V4T5ZU\Titzer - 2022 - A fast in-place interpreter for WebAssembly.pdf}
+}
+
 @misc{waseemIssuesTheirCauses2024,
     title         = {Issues and {{Their Causes}} in {{WebAssembly Applications}}: {{An Empirical Study}}},
     shorttitle    = {Issues and {{Their Causes}} in {{WebAssembly Applications}}},
@@ -331,6 +367,7 @@
     keywords      = {Computer Science - Software Engineering},
     file          = {F:\Zotero\Data-storage\storage\LKJ5IZJN\Waseem 等 - 2024 - Issues and Their Causes in WebAssembly Applications An Empirical Study.pdf}
 }
+
 @misc{WasmbpfStreamliningEBPF2024,
     title         = {Wasm-Bpf: {{Streamlining eBPF Deployment}} in {{Cloud Environments}} with {{WebAssembly}}},
     shorttitle    = {Wasm-Bpf},
@@ -348,14 +385,12 @@
     keywords      = {Computer Science - Operating Systems},
     file          = {F:\Zotero\Data-storage\storage\3XCTYKPM\Zheng 等 - 2024 - Wasm-bpf Streamlining eBPF Deployment in Cloud Environments with WebAssembly.pdf}
 }
-
 @misc{wasmCommunityGroup,
     author       = {{WebAssembly Community Group}},
     howpublished = {\url{https://webassembly.github.io/spec/core/intro/introduction.html}},
     title        = {Introduction of WebAssembly},
     year         = {2024}
 }
-
 @article{WebAssemblySummaryOnSecurity,
     title   = {{WebAssembly安全研究综述}},
     journal = {{计算机研究与发展}},
@@ -366,6 +401,21 @@
     doi     = {https://doi.org/10.7544/issn1000-1239.202330049},
     url     = {https://crad.ict.ac.cn/cn/article/doi/10.7544/issn1000-1239.202330049},
     author  = {庄骏杰 and 胡霜 and 华保健 and 汪炀 and 潘志中}
+}
+@inproceedings{yanUnderstandingPerformanceWebassembly2021,
+    title     = {Understanding the Performance of Webassembly Applications},
+    booktitle = {Proceedings of the 21st {{ACM Internet Measurement Conference}}},
+    author    = {Yan, Yutian and Tu, Tengfei and Zhao, Lijian and Zhou, Yuchen and Wang, Weihang},
+    year      = {2021},
+    month     = nov,
+    pages     = {533--549},
+    publisher = {ACM},
+    address   = {Virtual Event},
+    doi       = {10.1145/3487552.3487827},
+    urldate   = {2024-12-12},
+    isbn      = {978-1-4503-9129-0},
+    langid    = {english},
+    file      = {F:\Zotero\Data-storage\storage\69FWTM9N\Yan 等 - 2021 - Understanding the performance of webassembly applications.pdf}
 }
 @inproceedings{YIHeCrossContainer,
     author    = {Yi He and Roland Guo and Yunlong Xing and Xijia Che and Kun Sun and Zhuotao Liu and Ke Xu and Qi Li},
@@ -378,6 +428,24 @@
     url       = {https://www.usenix.org/conference/usenixsecurity23/presentation/he},
     publisher = {USENIX Association},
     month     = aug
+}
+@misc{zhangResearchWebAssemblyRuntimes2024,
+    title         = {Research on {{WebAssembly Runtimes}}: {{A Survey}}},
+    shorttitle    = {Research on {{WebAssembly Runtimes}}},
+    author        = {Zhang, Yixuan and Liu, Mugeng and Wang, Haoyu and Ma, Yun and Huang, Gang and Liu, Xuanzhe},
+    year          = {2024},
+    month         = oct,
+    number        = {arXiv:2404.12621},
+    eprint        = {2404.12621},
+    primaryclass  = {cs},
+    publisher     = {arXiv},
+    doi           = {10.48550/arXiv.2404.12621},
+    urldate       = {2024-12-11},
+    abstract      = {YIXUAN ZHANG, Peking University, China MUGENG LIU, Peking University, China HAOYU WANG, Huazhong University of Science and Technology, China YUN MA, Peking University, China GANG HUANG, Peking University, China XUANZHE LIU, Peking University, China WebAssembly (abbreviated as Wasm) was initially introduced for the Web but quickly extended its reach into various domains beyond the Web. To create Wasm applications, developers can compile high-level programming languages into Wasm binaries or manually convert equivalent textual formats into Wasm binaries. Regardless of whether it is utilized within or outside the Web, the execution of Wasm binaries is supported by the Wasm runtime. Such a runtime provides a secure, memory-efficient, and sandboxed execution environment designed explicitly for Wasm applications. This paper provides a comprehensive survey of research on WebAssembly runtimes. It covers 98 articles on WebAssembly runtimes and characterizes existing studies from two different angles, including the "internal" research of Wasm runtimes(Wasm runtime design, testing, and analysis) and the "external" research(applying Wasm runtimes to various domains). This paper also proposes future research directions about WebAssembly runtimes. CCS Concepts: {$\bullet$} General and reference {$\rightarrow$} Surveys and overviews.},
+    archiveprefix = {arXiv},
+    langid        = {english},
+    keywords      = {runtime,wasm},
+    file          = {F:\Zotero\Data-storage\storage\UH93TJ8R\Zhang 等 - 2024 - Research on WebAssembly Runtimes A Survey.pdf}
 }
 @mastersthesis{ZhangZiJunLinuxXiTonge,
     title   = {{{Linux系统eBPF攻击建模及防护技术研究}}},
