@@ -178,26 +178,31 @@
 %%% 定义特有字段以及特殊的变量和命令
 \makeatletter
     %%% 封面配置
-    % 论文类型
-    \def\thesistype#1{\def\@thesistype{#1}}\def\@thesistype{}
+    % 校徽上的本科毕业论文（设计）
+    \def\LieOnBadge#1{\def\@LieOnBadge{#1}}\def\@LieOnBadge{}
     % 封面页标题栏的第一行
     \def\titleOnTheFirstLine#1{\def\@titleOnTheFirstLine{#1}}\def\@titleOnTheFirstLine{}
     % 封面页标题栏的第二行
     \def\titleOnTheSecondLine#1{\def\@titleOnTheSecondLine{#1}}\def\@titleOnTheSecondLine{}
     % 中文标题，用于摘要页
+    % 封面页标题栏的第一行
+    \def\titleOnTheFirstLine#1{\def\@titleOnTheFirstLine{\xiaoer\hei{#1}}}\def\@titleOnTheFirstLine{}
+    % 封面页标题栏的第二行
+    \def\titleOnTheSecondLine#1{\def\@titleOnTheSecondLine{\xiaoer\hei{#1}}}\def\@titleOnTheSecondLine{}
+    % 中文标题，用于摘要页
     \def\title#1{\def\@title{#1}}\def\@title{}
     % 英文标题，用于英文摘要页
     \def\etitle#1{\def\@etitle{#1}}\def\@etitle{}
     % 文章作者
-    \def\author#1{\def\@author{#1}}\def\@author{}
+    \def\author#1{\def\@author{\centerline{\xiaosi\song{#1}}}}\def\@author{} 
     % 学号
-    \def\studentid#1{\def\@studentid{#1}}\def\@studentid{}
+    \def\studentid#1{\def\@studentid{\centerline{\xiaosi\song{#1}}}}\def\@studentid{}
     % 专业
-    \def\subject#1{\def\@subject{#1}}\def\@subject{}
+    \def\subject#1{\def\@subject{\centerline{\xiaosi\song{#1}}}}\def\@subject{}
     % 院系
-    \def\faculty#1{\def\@faculty{#1}}\def\@faculty{}
+    \def\faculty#1{\def\@faculty{\centerline{\xiaosi\song{#1}}}}\def\@faculty{}
     % 指导老师
-    \def\teacher#1{\def\@teacher{#1}}\def\@teacher{}
+    \def\teacher#1{\def\@teacher{\centerline{\xiaosi\song{#1}}}}\def\@teacher{}
     % 文章日期
     \def\date#1{\def\@date{#1}}\def\@date{}
     %%% 页眉配置
@@ -219,8 +224,7 @@
     
     \newcommand{\makeheaders} {
         \setlength{\tabcolsep}{0em} % 做之前紧凑
-        % 封面
-        %% 目前检出有点问题
+        %% 封面
         \begin{titlepage}
             \centering
             % 湖南大学 毛主席题字
@@ -232,19 +236,19 @@
             \vspace{-1em}
             \begin{overpic}{figures/HSVGPDF}
                 \put(4,75){\yihao \textbf{\texttt{HUNAN UNIVERSITY}}}
-                \put(-35,40){\song\chuhao{\@thesistype}}
+                \put(-35,40){\song\chuhao{\@LieOnBadge}}
             \end{overpic}\par
             \begin{table}[H]
                 \centering
                 \begin{tabular}{rrc}
                     % multicolumn 必须是第一条指令，前面只能是字体而不掺杂任何的命令。
-                    \multicolumn{2}{r}{\xiaoer\hei{论文(设计)题目:}}\rule{0pt}{1.05cm} & \underline{\parbox[c]{6cm}{\xiaoer\hei{\@titleOnTheFirstLine}}} \\
-                    &\multicolumn{1}{r}{}\rule{0pt}{1.05cm}      & \underline{\parbox[c]{6cm}{\xiaoer\hei{\@titleOnTheSecondLine}}} \\
-                    \rule{0pt}{1.05cm}&\xiaosi\hei{学~生~姓~名 :} & \underline{\parbox[c]{6cm}{\centerline{\xiaosi\song{\@author}}}} \\
-                    \rule{0pt}{1.05cm}&\xiaosi\hei{学~生~学~号 :} & \underline{\parbox[c]{6cm}{\centerline{\xiaosi\song{\@studentid}}}} \\
-                    \rule{0pt}{1.05cm}&\xiaosi\hei{专~业~班~级 :} & \underline{\parbox[c]{6cm}{\centerline{\xiaosi\song{\@subject}}}} \\
-                    \rule{0pt}{1.05cm}&\xiaosi\hei{学~院~名~称 :} & \underline{\parbox[c]{6cm}{\centerline{\xiaosi\song{\@faculty}}}} \\
-                    \rule{0pt}{1.05cm}&\xiaosi\hei{指~导~老~师 :} & \underline{\parbox[c]{6cm}{\centerline{\xiaosi\song{\@teacher}}}}\\
+                    \multicolumn{2}{r}{\xiaoer\hei{论文(设计)题目:}}\rule{0pt}{1.05cm} & \underline{\parbox[c]{6cm}{\@titleOnTheFirstLine}} \\
+                    &\multicolumn{1}{r}{}\rule{0pt}{1.05cm}      & \underline{\parbox[c]{6cm}{\@titleOnTheSecondLine}} \\
+                    \rule{0pt}{1.05cm}&\xiaosi\hei{学~生~姓~名 :} & \underline{\parbox[c]{6cm}{\@author}} \\
+                    \rule{0pt}{1.05cm}&\xiaosi\hei{学~生~学~号 :} & \underline{\parbox[c]{6cm}{\@studentid}} \\
+                    \rule{0pt}{1.05cm}&\xiaosi\hei{专~业~班~级 :} & \underline{\parbox[c]{6cm}{\@subject}} \\
+                    \rule{0pt}{1.05cm}&\xiaosi\hei{学~院~名~称 :} & \underline{\parbox[c]{6cm}{\@faculty}} \\
+                    \rule{0pt}{1.05cm}&\xiaosi\hei{指~导~老~师 :} & \underline{\parbox[c]{6cm}{\@teacher}} \\
                 \end{tabular}
             \end{table}\par
             \vspace{2em}
@@ -252,7 +256,7 @@
         \end{titlepage}
         \clearpage
     
-        %% 从此往后页眉的格式基本固定。
+        %% 从此往后页眉的格式固定。
         \def\headrule { 
             \if @fancyplain
                 \let\headrulewidth\plainheadrulewidth
@@ -267,8 +271,8 @@
         \chead{\song\xiaowu{\@heading}} % 页眉上的字体大小
         \cfoot{\song\wuhao{\thepage}}   % 页码大小
 
-        %% 插入目录之中
-        % 授权书
+        %%% 插入目录之中
+        %% 授权书
         \addcontentsline{toc}{section}{毕业论文（设计）原创性声明和毕业论文（设计）版权使用授权书} { 
             \centerline{\hei\xiaoer{湖\hspace{0.5em}南\hspace{0.5em}大\hspace{0.5em}学}}\par
             \begin{center} \hei\xiaoer{毕业论文（设计）原创性声明} \end{center}\par
@@ -299,7 +303,7 @@
         }
         \clearpage
 
-        % 中文摘要  
+        %% 中文摘要  
         \addcontentsline{toc}{section}{摘~~要} {
             \begin{center}
                 \hei\xiaoer{\@title}
@@ -316,7 +320,7 @@
         }
         \clearpage
         
-        % 英文摘要
+        %% 英文摘要
         \addcontentsline{toc}{section}{Abstract} {
             \begin{center}
                 \xiaoer{\textbf{\@etitle}}
@@ -333,7 +337,7 @@
             {\xiaosi\textbf{Key Words:} \@ekeywords}
         }
         \newpage
-        % 图表以及目录
+        %% 图表以及目录
         \setlength{\tabcolsep}{0.5em} % 做完上述部分后，表格默认每个格子 0.5em 宽
     }
 
