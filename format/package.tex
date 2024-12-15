@@ -31,14 +31,17 @@
 ] {mathalpha}           % mathcal 正确显示
 \usepackage{
     amsmath, 
+    eucal,
     amsthm, 
     amssymb, 
     amsbsy,
     % txfonts,          % 课本里头用的公式字体类型
     % mathptmx,         % 和 txfonts 是一家的。读者应按需使用。
-    % mathrsfs          % 书法字体包，有额外警报
-    amsfonts,
+    % mathrsfs,          % 书法字体包，有额外警报
+    % mathptmx,
+    times
 }                       % 数学宏包
+\usepackage[utf8]{inputenc}
 \usepackage{bm}
 \usepackage[
     below               
@@ -70,7 +73,6 @@
 \usepackage[
     titles              % 保证目录换行
 ] {tocloft}
-\usepackage{times}
 \usepackage[
     backend=biber,      % 这个处理后端才能显示文献类型符如 [OL]
     style=gb7714-2015, 
@@ -105,3 +107,4 @@
     version=4
 ] {mhchem}              % 化学式宏包
 \usepackage{listings}   % 代码高亮宏包
+\usepackage[T1]{fontenc}
