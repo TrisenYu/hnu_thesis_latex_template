@@ -1,5 +1,6 @@
 %%%% contact via <kisfg@hotmail.com, haikureimu@hnu.edu.cn>
 %%% 页边距定义
+% 上边距：30mm；下边距：25mm；左边距：30mm；右边距：20mm；行间距为1.5倍行距。
 % 上边距 3cm
 % 下边距 2.5cm
 % 左边距 3cm
@@ -23,9 +24,18 @@
 \newcommand{\fs}{\fangsong}     % 仿宋体 tt
 \newcommand{\kai}{\kaishu}      % 楷体 it
 \newcommand{\li}{\lishu}        % 隶书
-% 声明一个字体系列
-% 使用新定义的字体系列
-\renewcommand{\%}{\boldmath{\textsf{\char`\%}}}
+% 修改百分号的字体样式
+% 仙之人兮列如麻 
+%   https://tex.stackexchange.com/a/272044
+%   https://tex.stackexchange.com/a/272043
+% \let\svpct\%
+% \def\overlayclr{white}
+% \renewcommand{\%}{\scalerel*{\stackon[0pt]{\stackon[0pt]{\normalsize\svpct}{\smash{%
+%   \textcolor{\overlayclr}{\rotatebox{56.8}{\rule[-4.55pt]{2.5pt}{1.5pt}}}}}}%
+%   {\smash{\textcolor{\overlayclr}{%
+%   \rotatebox{27}{\kern-.84pt\rule[-2.5pt]{1.5pt}{2.5pt}}}}}}{\svpct}}
+\let\origpercent\%
+\renewcommand{\%} {{\fontfamily{jkp}\selectfont{\origpercent}}}
 
 %%%% 字号换算规范
 %%%% 中文常用字号来代替国际用点数/磅/英寸/pt。
