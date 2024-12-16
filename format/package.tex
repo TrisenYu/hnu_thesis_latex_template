@@ -31,7 +31,6 @@
 ] {mathalpha}           % mathcal 正确显示
 \usepackage{
     amsmath, 
-    eucal,
     amsthm, 
     amssymb, 
     amsbsy,
@@ -39,6 +38,7 @@
     % mathptmx,         % 和 txfonts 是一家的。读者应按需使用。
     % mathrsfs,          % 书法字体包，有额外警报
     % mathptmx,
+    amsfonts,
     times
 }                       % 数学宏包
 \usepackage[utf8]{inputenc}
@@ -108,3 +108,7 @@
 ] {mhchem}              % 化学式宏包
 \usepackage{listings}   % 代码高亮宏包
 \usepackage[T1]{fontenc}
+\usepackage[
+    figure, 
+    table
+] {totalcount}          % 统计图表是否存在。src: tex.stackexchange.com/a/297657 
