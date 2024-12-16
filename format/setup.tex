@@ -133,10 +133,11 @@
 % https://tex.stackexchange.com/a/192450
 \DeclareCaptionFont{chineseBoldSongti}{\bfseries\songti\wuhao}
 \DeclareCaptionFont{chineseWuHaoSongti}{\songti\wuhao}
-\DeclareCaptionFont{chinesexiaowuSongti}{\songti\xiaowu}
 \DeclareCaptionFont{chineseBoldHeiti}{\bfseries\heiti\wuhao}
 \DeclareCaptionFont{chineseWuhao}{\wuhao}
 \DeclareCaptionLabelFormat{figLabel}{#1~#2\hspace{0.5em}}
+\DeclareCaptionLabelFormat{tabLabel}{#1~#2~}
+% TOFIX: captionsetup 只能在导言区用也是神了
 \captionsetup[figure]{
     name={\textbf{\song\wuhao{图}}},
     labelsep=space, % 去掉冒号
@@ -151,7 +152,6 @@
     labelfont={chineseWuHaoSongti},
     textfont={chineseWuHaoSongti}
 }
-\DeclareCaptionLabelFormat{tabLabel}{#1~#2~}
 \captionsetup[table]{
     name={\textbf{\hei\wuhao{表}}},
     labelsep=space, % 去掉冒号
@@ -161,6 +161,10 @@
     textfont={chineseBoldHeiti}, 
     skip=0.5em,       
 }
+\renewcommand{\numberline}[1]{图~#1~~}
+\renewcommand{\numberline}[1]{表~#1~~}
+
+
 %% 正文前罗马字体编号
 \newcommand{\frontmatter}{
     \pagenumbering{Roman}
@@ -169,6 +173,7 @@
     \clearpage{\cleardoublepage}
     \pagenumbering{arabic}
 }
+
 
 %%% 配置主目录中显示的节。
 % 节

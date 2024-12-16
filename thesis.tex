@@ -21,15 +21,20 @@
         \newpage
         %%%% TODO: 写成如果存在，则渲染。否则不渲染的判断形式。
         %%% 插图索引 可选项
-        % \renewcommand{\numberline}[1]{图~#1~~}
-        % \addcontentsline{toc}{section}{插图索引}
-        % \listoffigures
-        % \clearpage
+        % 如果图片存在，则渲染
+        \iftotalfigures {
+            \addcontentsline{toc}{section}{插图索引}
+            \listoffigures
+            \clearpage
+        }\fi
         %%% 附表索引 可选项
-        % \renewcommand{\numberline}[1]{表~#1~~}
-        % \addcontentsline{toc}{section}{附表索引}
-        % \listoftables
-        % \clearpage
+        % 如果表格存在，则渲染
+        \iftotalfigures {
+            \addcontentsline{toc}{section}{附表索引}
+            \listoftables
+            \clearpage
+        }\fi
+        
         %%% 正文
         \mainmatter
         % 防止文字出界而自动调整的环境。
