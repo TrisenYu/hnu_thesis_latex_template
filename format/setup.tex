@@ -24,7 +24,8 @@
 \newcommand{\fs}{\fangsong}     % 仿宋体 tt
 \newcommand{\kai}{\kaishu}      % 楷体 it
 \newcommand{\li}{\lishu}        % 隶书
-% 修改百分号的字体样式
+
+%%% 修改百分号的字体样式
 % 仙之人兮列如麻 
 %   https://tex.stackexchange.com/a/272044
 %   https://tex.stackexchange.com/a/272043
@@ -36,6 +37,10 @@
 %   \rotatebox{27}{\kern-.84pt\rule[-2.5pt]{1.5pt}{2.5pt}}}}}}{\svpct}}
 \let\origpercent\%
 \renewcommand{\%} {{\fontfamily{jkp}\selectfont{\origpercent}}}
+\newcommand{\perthousand}{{\fontfamily{jkp}\selectfont{‰}}} % 定义为千分号
+% TODO \newcommand{\pertenthousand}{{\fontfamily{jkp}\selectfont{‱}}}
+% 不过，什么领域的数据会用万分号呢 ？\rotatebox{-15}{/} 
+
 
 %%%% 字号换算规范
 %%%% 中文常用字号来代替国际用点数/磅/英寸/pt。
@@ -47,7 +52,7 @@
 \newcommand{\xiaoer}{\fontsize{18pt}{18pt}\selectfont}      % 小二, 单倍行距
 \newcommand{\sanhao}{\fontsize{16pt}{16pt}\selectfont}      % 三号, 1.倍行距
 \newcommand{\xiaosan}{\fontsize{15pt}{15pt}\selectfont}     % 小三, 1.倍行距
-\newcommand{\sihao}{\fontsize{14pt}{14pt}\selectfont}       % 四号, 1.0倍行距
+\newcommand{\sihao}{\fontsize{14pt}{14pt}\selectfont}       % 四号, 1.倍行距
 \newcommand{\xiaosi}{\fontsize{12pt}{12pt}\selectfont}      % 小四, 1.倍行距
 \newcommand{\wuhao}{\fontsize{10pt}{10pt}\selectfont}       % 五号, 单倍行距
 \newcommand{\xiaowu}{\fontsize{8pt}{8pt}\selectfont}        % 小五, 单倍行距
@@ -82,11 +87,9 @@
 \renewcommand{\theequation}{\arabic{equation}} % bold equation numbers
 %% 目录项中的基本配件。
 \renewcommand{\cftdot}{$...$}   % 点的样式。
-\renewcommand{\cftdotsep}{1.5}  % TODO: 这里的单位是什么？
-
+\renewcommand{\cftdotsep}{1.5}
 % 调整索引与文献名称之间的水平间距
 \renewcommand{\biblabelsep}{6pt}
-
 % section 从 1 开始计数
 \renewcommand{\thesection}{\arabic{section}}
 % section 格式配置
@@ -96,14 +99,12 @@
     {} % 标题格式 (设置标题的整体格式，如字体尺寸、粗细、与上一个标题的垂直距离等，可空置)
     {\titlerule*[10pt]{\cftdot}\xiaosi\contentspage} 
     % 指引线与页码 (设置标题与页码之间的指引线样式以及页码的格式，该参数如果空置，标题将无指引线和页码)
-
 % subsection 格式配置
 \titlecontents{subsection}[2em]
     {\xiaosi\song\vspace{0.5em}}
     {\thecontentslabel\hspace{0.5em}}
     {}
     {\titlerule*[10pt]{\cftdot}\xiaosi\contentspage}
-
 % subsubsection 格式配置
 \titlecontents{subsubsection}[4em]
     {\xiaosi\song\vspace{0.5em}}
@@ -120,13 +121,11 @@
     {\xiaosi\song\vspace{0.5em}} %
     {图\hspace{0.5em}\textnormal{\thecontentslabel}\hspace{0.5em}}{} %
     {\titlerule*[10pt]{\cftdot}\xiaosi\contentspage}
-
 % table index 的格式配置
 \titlecontents{table}[0em]
     {\xiaosi\song\vspace{0.5em}} %
     {表\hspace{0.5em}\textnormal{\thecontentslabel}\hspace{0.5em}}{} %
     {\titlerule*[10pt]{\cftdot}\xiaosi\contentspage}
-
 %% 设置插图目录条目的字体格式
 % 直接重定义字体即可。
 % https://tex.stackexchange.com/a/372825
@@ -165,15 +164,14 @@
 \renewcommand{\numberline}[1]{表~#1~~}
 
 
-%% 正文前罗马字体编号
-\newcommand{\frontmatter}{
+%%% 正文前页码配大写罗马字体编号
+\newcommand{\frontmatter} {
     \pagenumbering{Roman}
 } 
-\newcommand{\mainmatter} {%
+\newcommand{\mainmatter} {
     \clearpage{\cleardoublepage}
     \pagenumbering{arabic}
 }
-
 
 %%% 配置主目录中显示的节。
 % 节
@@ -188,8 +186,14 @@
 
 \renewcommand{\headrulewidth}{0pt}
 
-
-
+%%%　配置注脚
+\renewcommand{\thefootnote}{\arabic{footnote}}
+\makeatletter
+    % https://tex.stackexchange.com/a/587493
+    \renewcommand\@makefntext[1]{%
+    \setlength\parindent{1em}%
+    \noindent\mbox{\@thefnmark.~}{#1}} % TODO: thefnmark 的格式.
+\makeatother
 
 %%% 制作前几页
 %%% 定义特有字段以及特殊的变量和命令
@@ -215,7 +219,7 @@
     % 学号
     \def\studentid#1{\def\@studentid{\centerline{\xiaosi\song{#1}}}}\def\@studentid{}
     % 专业
-    \def\subject#1{\def\@subject{\centerline{\xiaosi\song{#1}}}}\def\@subject{}
+    \def\major#1{\def\@major{\centerline{\xiaosi\song{#1}}}}\def\@major{}
     % 院系
     \def\faculty#1{\def\@faculty{\centerline{\xiaosi\song{#1}}}}\def\@faculty{}
     % 指导老师
@@ -263,7 +267,7 @@
                     &\multicolumn{1}{r}{}\rule{0pt}{1.05cm}      & \underline{\parbox[c]{6cm}{\@titleOnTheSecondLine}} \\
                     \rule{0pt}{1.05cm}&\xiaosi\hei{学~生~姓~名 :} & \underline{\parbox[c]{6cm}{\@author}} \\
                     \rule{0pt}{1.05cm}&\xiaosi\hei{学~生~学~号 :} & \underline{\parbox[c]{6cm}{\@studentid}} \\
-                    \rule{0pt}{1.05cm}&\xiaosi\hei{专~业~班~级 :} & \underline{\parbox[c]{6cm}{\@subject}} \\
+                    \rule{0pt}{1.05cm}&\xiaosi\hei{专~业~班~级 :} & \underline{\parbox[c]{6cm}{\@major}} \\
                     \rule{0pt}{1.05cm}&\xiaosi\hei{学~院~名~称 :} & \underline{\parbox[c]{6cm}{\@faculty}} \\
                     \rule{0pt}{1.05cm}&\xiaosi\hei{指~导~老~师 :} & \underline{\parbox[c]{6cm}{\@teacher}} \\
                 \end{tabular}

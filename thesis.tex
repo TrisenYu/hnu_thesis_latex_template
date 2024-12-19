@@ -19,7 +19,6 @@
         %%% 目录
         \tableofcontents
         \newpage
-        %%%% TODO: 写成如果存在，则渲染。否则不渲染的判断形式。
         %%% 插图索引 可选项
         % 如果图片存在，则渲染
         \iftotalfigures {
@@ -29,7 +28,7 @@
         }\fi
         %%% 附表索引 可选项
         % 如果表格存在，则渲染
-        \iftotalfigures {
+        \iftotaltables {
             \addcontentsline{toc}{section}{附表索引}
             \listoftables
             \clearpage
@@ -37,8 +36,7 @@
         
         %%% 正文
         \mainmatter
-        % 防止文字出界而自动调整的环境。
-        \begin{sloppypar} 
+        \begin{sloppypar} % 防止文字出界而自动调整的环境。
             \setcounter{page}{1}
             \include{sections/1intro}
             \include{sections/2relatedwork}
@@ -50,11 +48,12 @@
             \newpage
             \nocite{*}
             \addcontentsline{toc}{section}{参考文献}
-            \wuhao
-            \printbibliography[
-                heading=bibliography,
-                title={\centerline{\sanhao\hei{参考文献}}\vspace{-1em}},
-            ]
+            \wuhao{
+                \printbibliography[
+                    heading=bibliography,
+                    title={\centerline{\sanhao\hei{参考文献}}\vspace{-1em}},
+                ]
+            }
             %%% 致谢和附录
             \xiaosi{\include{sections/acknowledge}}
         \end{sloppypar}
