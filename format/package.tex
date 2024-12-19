@@ -4,13 +4,14 @@
 \usepackage{caption}
 \usepackage[
     figuresright
-] {rotating}            % 用于旋转某些东西，如长表格。
+] {rotating}                % 用于旋转某些东西，如长表格。
 \usepackage[
     includeheadfoot,
     driver=dvipdfmx
-] {geometry}            % 调节页边距。
+] {geometry}                % 调节页边距。
 \usepackage{tikz-cd}
 \usepackage{tikz}
+%% 这里可以直接设的好像
 % 左边距 3cm
 % 右边距 2cm
 % left=3cm,
@@ -19,43 +20,43 @@
     left=3cm,
     right=2cm
 }
-\usepackage{enumerate}  % 罗列编号用的宏包
-\usepackage{titlesec}   % 控制标题的宏包
-\usepackage{titletoc}   % 控制目录的宏包
-\usepackage{fancyhdr}   % fancyhdr宏包 支持页眉和页脚的相关定义
-\usepackage[UTF8]{ctex} % 支持中文显示
-\usepackage{xcolor}      % 支持彩色
+\usepackage{enumerate}      % 罗列编号用的宏包
+\usepackage{titlesec}       % 控制标题的宏包
+\usepackage{titletoc}       % 控制目录的宏包
+\usepackage{fancyhdr}       % fancyhdr宏包 支持页眉和页脚的相关定义
+\usepackage[UTF8]{ctex}     % 支持中文显示
+\usepackage{xcolor}         % 支持彩色
 \usepackage[
     scr=boondox,
     cal=esstix
-] {mathalpha}           % mathcal 正确显示
+] {mathalpha}               % mathcal 正确显示
 \usepackage{
     amsmath, 
     amsthm, 
     amssymb, 
     amsbsy,
-    % txfonts,          % 课本里头用的公式字体类型
-    % mathptmx,         % 和 txfonts 是一家的。读者应按需使用。
+    % txfonts,              % 课本里头用的公式字体类型
+    % mathptmx,             % 和 txfonts 是一家的。读者应按需使用。
     % mathrsfs,          % 书法字体包，有额外警报
     % mathptmx,
     amsfonts,
     times
-}                       % 数学宏包
+}                           % 数学宏包
 \usepackage[utf8]{inputenc}
 \usepackage{bm}
 \usepackage[
     below               
 ] {placeins}                
-\usepackage{flafter}    % 使得所有浮动体不能被放置在其浮动环境之前，以免浮动体在引述它的文本之前出现.
-\usepackage{multirow}   % 使用Multirow宏包，使得表格可以合并多个row格
-\usepackage{booktabs}   % 表格，横的粗线；\specialrule{1pt}{0pt}{0pt}
-\usepackage{longtable}  % 支持跨页的表格。
-\usepackage{tabularx}   % 自动设置表格的列宽
+\usepackage{flafter}        % 使得所有浮动体不能被放置在其浮动环境之前，以免浮动体在引述它的文本之前出现.
+\usepackage{multirow}       % 使用Multirow宏包，使得表格可以合并多个row格
+\usepackage{booktabs}       % 表格，横的粗线；\specialrule{1pt}{0pt}{0pt}
+\usepackage{longtable}      % 支持跨页的表格。
+\usepackage{tabularx}       % 自动设置表格的列宽
 \usepackage{setspace}
-\usepackage{float}      % 浮动体控制
-\usepackage{balance}    % 自动调整超出margin的文字
-\usepackage{enumitem}   % 使用enumitem宏包,改变列表项的格式
-\usepackage{calc}       % 长度可以用+ - * / 进行计算
+\usepackage{float}          % 浮动体控制
+\usepackage{balance}        % 自动调整超出margin的文字
+\usepackage{enumitem}       % 使用enumitem宏包,改变列表项的格式
+\usepackage{calc}           % 长度可以用+ - * / 进行计算
 
 % \usepackage[
 %     amsmath, 
@@ -63,27 +64,28 @@
 %     hyperref
 % ] {ntheorem}            
 % 定理类环境宏包，其中 amsmath 选项用来兼容 AMS LaTeX 的宏包
-\usepackage{indentfirst}% 首行缩进宏包
-\usepackage{CJKutf8}    % 用在UTF8编码环境下，它可以自动调用CJK，同时针对UTF8编码作了设置
+\usepackage{indentfirst}    % 首行缩进宏包
+\usepackage{CJKutf8}        % 用在UTF8编码环境下，它可以自动调用CJK，同时针对UTF8编码作了设置
 \usepackage{CJK}
-\usepackage{fancyhdr}   % 页眉页脚
+\usepackage{fancyhdr}       % 页眉页脚
 \usepackage{lastpage}
 \usepackage{layout}
 \usepackage{overpic}
 \usepackage[
-    titles              % 保证目录换行
+    titles                  % 保证目录换行
 ] {tocloft}
 \usepackage[
-    backend=biber,      % 这个处理后端才能显示文献类型符如 [OL]
+    backend=biber,          % 这个处理后端才能显示文献类型符如 [OL]
     style=gb7714-2015, 
-    gbnamefmt=lowercase,% 外国人名小写 
+    % 12 页：mirrors.sjtug.sjtu.edu.cn/ctan/macros/latex/contrib/biblatex-contrib/biblatex-gb7714-2015/biblatex-gb7714-2015.pdf
+    gbnamefmt=lowercase,    % 外国人名小写
+    gbnamefmt=givenahead,   % 名前姓后
     gbpub=false,
-    gbalign=gb7714-2015,% 良好的左对齐
-    gbnoauthor=true,    % 佚名作者用
-    gbtype=true,        % 显式说明使用文献类型
+    gbalign=gb7714-2015,    % 良好的左对齐
+    gbnoauthor=true,        % 佚名作者用
+    gbtype=true,            % 显式说明使用文献类型
     gbpunctin=false
 ] {biblatex}
-
 \usepackage[
     dvipdfmx,
     unicode,
@@ -100,15 +102,15 @@
     urlcolor=black,
     breaklinks=true
 ] {hyperref}
-\usepackage{ifthen}     % 条件编译可能会用得到
+\usepackage{ifthen}         % 条件编译可能会用得到
 \usepackage{threeparttable} % 编制复杂表格
-\usepackage{tabularray} % 这个没有的话，只能用 tabular 画表而已了
+\usepackage{tabularray}     % 这个没有的话，只能用 tabular 画表而已了
 \usepackage[
     version=4
-] {mhchem}              % 化学式宏包
-\usepackage{listings}   % 代码高亮宏包
+] {mhchem}                  % 化学式宏包
+\usepackage{listings}       % 代码高亮宏包
 \usepackage[T1]{fontenc}
 \usepackage[
     figure, 
     table
-] {totalcount}          % 统计图表是否存在。src: tex.stackexchange.com/a/297657 
+] {totalcount}              % 统计图表是否存在。src: tex.stackexchange.com/a/297657 
