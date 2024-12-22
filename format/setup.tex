@@ -187,13 +187,21 @@
 \renewcommand{\headrulewidth}{0pt}
 
 %%%　配置注脚
-\renewcommand{\thefootnote}{\arabic{footnote}}
-\makeatletter
-    % https://tex.stackexchange.com/a/587493
-    \renewcommand\@makefntext[1]{%
-    \setlength\parindent{1em}%
-    \noindent\mbox{\@thefnmark.~}{#1}} % TODO: thefnmark 的格式.
-\makeatother
+% \newcommand{\cir}[1]{\tikz[baseline]{%
+%     \node[anchor=base, draw, circle, inner sep=0, minimum width=1em]{#1};}
+% }
+% \renewcommand{\thefootnote}{\arabic{footnote}}
+%% https://tex.stackexchange.com/questions/639370/how-to-enumerate-footnotes-with-circled-numbers/639377#639377
+\newcommand\circled[2][.30]{%
+    \scalerel*{\tikz{\useasboundingbox (-#1,-#1) rectangle (#1,#1);\node{#2};\draw circle[radius=#1];}}{X}
+}
+\deffootnotemark{\textsuperscript{\smash{\circled{\xiaowu{\thefootnotemark}}}}}
+% \makeatletter
+%     % https://tex.stackexchange.com/a/587493
+%     \renewcommand\@makefntext[1]{%
+%     \setlength\parindent{1em}%    
+%     \noindent\mbox{\circled{\@thefnmark}\hspace{1em}}{#1}} % TODO: thefnmark 的格式.
+% \makeatother
 
 %%% 制作前几页
 %%% 定义特有字段以及特殊的变量和命令

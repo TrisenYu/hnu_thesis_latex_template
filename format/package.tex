@@ -9,8 +9,23 @@
     includeheadfoot,
     driver=dvipdfmx
 ] {geometry}                % 调节页边距。
-\usepackage{tikz-cd}
+\usepackage{tikz-cd}        % 交换图和 tikzpicture 手动绘图的需求。
 \usepackage{tikz}
+\usetikzlibrary{%
+    decorations.pathmorphing,
+    decorations.markings,
+    shapes, 
+    calc,
+    arrows, 
+    chains, 
+    math,
+    automata,
+    intersections, 
+    positioning, 
+    bending,
+    arrows.meta
+}
+
 %% 这里可以直接设的好像
 % 左边距 3cm
 % 右边距 2cm
@@ -114,3 +129,7 @@
     figure, 
     table
 ] {totalcount}              % 统计图表是否存在。src: tex.stackexchange.com/a/297657 
+\usepackage{ 
+    scrextend, 
+    scalerel
+}
