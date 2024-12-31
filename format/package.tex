@@ -11,7 +11,7 @@
 ] {geometry}                % 调节页边距。
 \usepackage{tikz-cd}        % 交换图和 tikzpicture 手动绘图的需求。
 \usepackage{tikz}
-\usetikzlibrary{%
+\usetikzlibrary {
     decorations.pathmorphing,
     decorations.markings,
     shapes, 
@@ -26,7 +26,7 @@
     arrows.meta
 }
 
-%% 这里可以直接设的好像
+%% 这里好像可以直接设的
 % 左边距 3cm
 % 右边距 2cm
 % left=3cm,
@@ -50,10 +50,8 @@
     amsthm, 
     amssymb, 
     amsbsy,
-    % txfonts,              % 课本里头用的公式字体类型
+    txfonts,                % 课本里头用的公式字体类型
     % mathptmx,             % 和 txfonts 是一家的。读者应按需使用。
-    % mathrsfs,          % 书法字体包，有额外警报
-    % mathptmx,
     amsfonts,
     times
 }                           % 数学宏包
@@ -92,6 +90,14 @@
 \usepackage[
     backend=biber,          % 这个处理后端才能显示文献类型符如 [OL]
     style=gb7714-2015, 
+    maxcitenames=3,         % 最多输出三个。
+    mincitenames=1,
+    maxbibnames=1,
+    minbibnames=1,          % 某些时候，参考文献种最多只有 1 个作者。
+    uniquelist=false,
+    uniquename=false,
+    doi=false,              % doi 有时可能也不要了。
+    url=false,              % 某些时候要用这个少打印参考文献内的链接
     % 12 页：mirrors.sjtug.sjtu.edu.cn/ctan/macros/latex/contrib/biblatex-contrib/biblatex-gb7714-2015/biblatex-gb7714-2015.pdf
     gbnamefmt=lowercase,    % 外国人名小写
     gbnamefmt=givenahead,   % 名前姓后
@@ -119,7 +125,6 @@
 ] {hyperref}
 \usepackage{ifthen}         % 条件编译可能会用得到
 \usepackage{threeparttable} % 编制复杂表格
-\usepackage{tabularray}     % 这个没有的话，只能用 tabular 画表而已了
 \usepackage[
     version=4
 ] {mhchem}                  % 化学式宏包
@@ -131,5 +136,7 @@
 ] {totalcount}              % 统计图表是否存在。src: tex.stackexchange.com/a/297657 
 \usepackage{ 
     scrextend, 
-    scalerel
+    scalerel,
+    makecell
 }
+\usepackage{microtype}      % 不要拿掉，控制连字的关闭。

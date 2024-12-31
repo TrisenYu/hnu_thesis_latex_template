@@ -58,7 +58,8 @@
 \newcommand{\xiaowu}{\fontsize{8pt}{8pt}\selectfont}        % 小五, 单倍行距
 \CJKtilde
 
-\setitemize{leftmargin=3em,itemsep=0em,partopsep=0em,parsep=0em,topsep=-0em}
+% TODO: 枚举列表项的设置
+\setitemize{leftmargin=3em,itemsep=0em,partopsep=0em,parsep=0em,topsep=0em}
 \setenumerate{leftmargin=3em,itemsep=0em,partopsep=0em,parsep=0em,topsep=0em}
 \makeatletter
     \renewcommand\normalsize{
@@ -162,7 +163,34 @@
 }
 \renewcommand{\numberline}[1]{图~#1~~}
 \renewcommand{\numberline}[1]{表~#1~~}
+%% https://ctan.math.illinois.edu/macros/latex/contrib/biblatex-contrib/biblatex-gb7714-2015/biblatex-gb7714-2015.pdf
+% 通过本地化字符串设置文中引用包括作者在内的文献的等、和
+\DefineBibliographyStrings{english}{
+    andincite = {\protect\unspace},
+    andincitecn = {\protect\unspace},
+    andothersincite = {et al\adddot}, % adddot才能避开标点追踪
+    andothersincitecn = {等人}
+}
+% 通过标点设置等前的标点，比如：
+% \DeclareDelimFormat[textcite]{andothersdelim}{} % \space
+\DeclareDelimFormat[textcite,authornumcite,citet]{multinamedelim}
+{\iffieldequalstr{userf}{chinese}{，}{\addcomma}} 
+\DeclareDelimFormat[textcite,authornumcite,citet]{finalnamedelim}
+{\iffieldequalstr{userf}{chinese}{，}{\addcomma}} 
+\DeclareDelimFormat[textcite,authornumcite,citet]{andothersdelim}
+{\iffieldequalstr{userf}{chinese}{，}{\addcomma}}
+% \renewrobustcmd{\mkbibleftborder}{\hspace{-0.1em}[}%
+% \renewrobustcmd{\mkbibrightborder}{]}%
 
+%最后一个姓名与等之间的符号(间隔符)
+% \DeclareDelimFormat[cite,parencite,pagescite]{andothersdelim}{，}%
+% \DeclareDelimFormat[textcite]{andothersdelim}{，}%
+% 除此之外，有时还需要设置finalnamedelim等来调整姓名间的标点。
+% multinamedelim是各姓名之间的标点
+% finalnamedelim是最后一个姓名前的取代multinamedelim的标点
+
+%% 关闭连字
+\DisableLigatures{encoding = *, family = *}
 
 %%% 正文前页码配大写罗马字体编号
 \newcommand{\frontmatter} {
@@ -191,18 +219,13 @@
 %     \node[anchor=base, draw, circle, inner sep=0, minimum width=1em]{#1};}
 % }
 % \renewcommand{\thefootnote}{\arabic{footnote}}
-%% https://tex.stackexchange.com/questions/639370/how-to-enumerate-footnotes-with-circled-numbers/639377#639377
+%% tex.stackexchange.com/questions/639370/how-to-enumerate-footnotes-with-circled-numbers/639377#639377
 \newcommand\circled[2][.30]{%
     \scalerel*{\tikz{\useasboundingbox (-#1,-#1) rectangle (#1,#1);\node{#2};\draw circle[radius=#1];}}{X}
 }
-\deffootnotemark{\textsuperscript{\smash{\circled{\xiaowu{\thefootnotemark}}}}}
-% \makeatletter
-%     % https://tex.stackexchange.com/a/587493
-%     \renewcommand\@makefntext[1]{%
-%     \setlength\parindent{1em}%    
-%     \noindent\mbox{\circled{\@thefnmark}\hspace{1em}}{#1}} % TODO: thefnmark 的格式.
-% \makeatother
+\deffootnotemark{\textsuperscript{\smash{\circled{\sihao{\thefootnotemark}}}}}
 
+\newcommand{\tableCellAdjust}[2]{\begin{tabular}{c}#1 \\ #2\end{tabular}}
 %%% 制作前几页
 %%% 定义特有字段以及特殊的变量和命令
 \makeatletter
@@ -251,7 +274,7 @@
     % 必须存在此句。
     \newlength{\@title@width}
     
-    \newcommand{\makeheaders} {
+    \newcommand{\makethesisheaders} {
         \setlength{\tabcolsep}{0em} % 做之前紧凑
         %% 封面
         \begin{titlepage}
@@ -370,13 +393,59 @@
         \setlength{\tabcolsep}{0.5em} % 做完上述部分后，表格默认每个格子 0.5em 宽
     }
 
+    %%% (deprecated) 渲染开题报告前两页格式
+    \newcommand{\makeproposalheader}{
+        \begin{titlepage}
+            \centering
+            \begin{figure*}[htp]
+                \centering
+                \includegraphics[width=0.5\textwidth]{figures/hnu}
+            \end{figure*}
+            \vspace{1em}\centerline{\heiti\fontsize{33pt}{33pt}\textbf{毕业论文(设计)开题报告}}\par
+            \vspace{2em}\centerline{\heiti\xiaoyi\heiti{（全日制本科生）}}\par
+            \begin{table}[H]
+                \centering
+                \begin{tabular}{cl}
+                    % multicolumn 必须是第一条指令，前面只能是字体而不掺杂任何的命令。\@faculty
+                    \rule{0pt}{1.48cm}\textbf{\xiaosan\hei{课~~题~~名~~称}} &\underline{\parbox[l]{7.57cm}{\xiaosan\heiti{\@title}}} \\
+                    \rule{0pt}{1.48cm}\textbf{\xiaosan\hei{课~~题~~类~~别}} &\underline{\parbox[l]{7.57cm}{\xiaosi\heiti{~~设计~□~~~论文~□}}} \\
+                    \rule{0pt}{1.48cm}\tableCellAdjust{\textbf{\xiaosan\hei{论文\hspace*{-0.5em}（设计）}}}{\textbf{\xiaosan\hei{题~~~\qquad~~~目}}} &\underline{\parbox[l]{7.57cm}{\xiaosan\hei{\@title}}} \\
+                    \rule{0pt}{1.48cm}\tableCellAdjust{\textbf{\xiaosan\hei{学~~生~~所~~在}}}{\textbf{\xiaosan\hei{专~业、班~级}}} &\underline{\parbox[l]{7.57cm}{\xiaosan\heiti{\@major}}} \\
+                    \rule{0pt}{1.48cm}\textbf{\xiaosan\hei{学~~~\qquad~~~生}} &\underline{\parbox[l]{7.57cm}{\xiaosan\heiti{\@author}}} \\
+                    \rule{0pt}{1.48cm}\textbf{\xiaosan\hei{学~~~\qquad~~~号}} &\underline{\parbox[l]{7.57cm}{\xiaosan\heiti{\@studentid}}} \\
+                    \rule{0pt}{1.48cm}\textbf{\xiaosan\hei{指~~导~~老~~师}} &\underline{\parbox[l]{7.57cm}{\xiaosan\heiti{\@teacher}}} \\
+                \end{tabular}
+            \end{table}
+        \end{titlepage}
+        \newpage
+        \centerline{\textbf{\xiaoyi\hei{开题报告填写要求}}}\par\vspace{2em}
+        \begin{spacing}{3}
+            \vspace{6pt}\sihao\heiti{
+            一、开题报告是毕业论文（设计）答辩委员会对学生答辩资格审查的内容之一。
+            此报告应在指导教师指导下，由学生在毕业论文（设计）工作前期完成，经指导教师签署意见及所在专业审查后生效。
+        }\vspace{6pt}
+        
+        \vspace{6pt}\sihao\heiti{
+            二、开题报告在教学信息化服务平台填写后导出打印，打印时必须是双面打印，可以按需加页。
+            开题报告填写完成后应及时交给指导教师签署意见。
+        }\vspace{6pt}
+        
+        \vspace{6pt}\sihao\heiti{
+            三、开题报告内有关“学院”、“专业”等名称的填写，应写中文全称；学生的“学号”必须填写完整。
+        }\vspace{6pt}
+        
+        \vspace{6pt}\sihao\heiti{  
+            四、学生毕业后开题报告随同毕业论文（设计）一同归档。
+        }\vspace{6pt}
+        \end{spacing}
+        \newpage
+    }
     \fancyhf{} % 清空所有fancy样式，方便使页眉左部和右部置空
     \pagestyle{fancy}
     \fancypagestyle{plain}{
         \fancyhead[C]{\song\xiaowu \@heading}
         \fancyfoot[C]{\song\xiaowu \thepage}
     }
-    
 \makeatother
 
 \setlength{\bibsep}{0em} % 参考文献项目间距

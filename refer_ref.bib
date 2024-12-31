@@ -17,6 +17,22 @@
     numpages   = {36},
     keywords   = {packet processing, network functions, Computer networking}
 }
+@inproceedings{10.1145/3674213.3674219,
+    title     = {Dynamic Fixed-Point Values in {{eBPF}}: A Case for Fully in-Kernel Anomaly Detection},
+    booktitle = {Proceedings of the Asian Internet Engineering Conference 2024},
+    author    = {Osaki, Atsuya and Poisson, Manuel and Makino, Seiki and Shiiba, Ryusei and Fukuda, Kensuke and Okoshi, Tadashi and Nakazawa, Jin},
+    year      = {2024},
+    series    = {Aintec '24},
+    pages     = {46--54},
+    publisher = {Association for Computing Machinery},
+    address   = {New York, NY, USA},
+    doi       = {10.1145/3674213.3674219},
+    urldate   = {2024-12-15},
+    abstract  = {eBPF and XDP are promising technologies that are capable of accelerating packet processing inside the Linux kernel. Despite these benefits, eBPF is constrained by a number of rigorous restrictions that are imposed to protect the kernel. One such restriction is the lack of support for floating-point values, which was introduced to achieve faster execution and avoid non-deterministic behavior. However, this has become a significant obstacle to expanding the functionality of eBPF programs with advanced algorithms. In this paper, we propose dynamic fixed-point as a solution to overcome this challenge within the restrictions of eBPF. Dynamic fixed-point values are an expansion from traditional fixed-point values, with the bit allocation adjusted dynamically. Benefit of dynamic fixed-point is that the accuracy of calculations are improved, which is one of the critical shortcomings of fixed-point. To demonstrate the effectiveness of our approach, we have designed and implemented a prototype of an entropy-based traffic anomaly detection framework and have reported on its throughput and the detection accuracy. Our prototype, which employs dynamic fixed-point, has achieved an 18\% improvement in throughput while also matching the detection accuracy of a similar system that employs floating-point values in user space.},
+    isbn      = {979-8-4007-0985-2},
+    keywords  = {Anomaly Detection,DDoS,Dynamic Fixed-point,eBPF,XDP},
+    file      = {F:\Zotero\Data-storage\storage\A2F4B8W5\2024 - Proceedings of the Asian Internet Engineering Conference 2024.pdf}
+}
 @inproceedings{258973,
     author    = {Marco Spaziani Brunella and Giacomo Belocchi and Marco Bonola and Salvatore Pontarelli and Giuseppe Siracusano and Giuseppe Bianchi and Aniello Cammarano and Alessandro Palumbo and Luca Petrucci and Roberto Bifulco},
     title     = {{hXDP}: Efficient Software Packet Processing on {FPGA} {NICs}},
@@ -28,17 +44,18 @@
     publisher = {USENIX Association},
     month     = nov
 }
-@inproceedings{280870,
-    author    = {Yuhong Zhong and Haoyu Li and Yu Jian Wu and Ioannis Zarkadas and Jeffrey Tao and Evan Mesterhazy and Michael Makris and Junfeng Yang and Amy Tai and Ryan Stutsman and Asaf Cidon},
-    title     = {{XRP}: {In-Kernel} Storage Functions with {eBPF}},
-    booktitle = {16th USENIX Symposium on Operating Systems Design and Implementation (OSDI 22)},
-    year      = {2022},
-    isbn      = {978-1-939133-28-1},
-    address   = {Carlsbad, CA},
-    pages     = {375--393},
-    url       = {https://www.usenix.org/conference/osdi22/presentation/zhong},
+@inproceedings{286467,
+    title     = {Electrode: {{Accelerating}} Distributed Protocols with {{eBPF}}},
+    booktitle = {20th {{USENIX}} Symposium on Networked Systems Design and Implementation ({{NSDI}} 23)},
+    author    = {Zhou, Yang and Wang, Zezhou and Dharanipragada, Sowmya and Yu, Minlan},
+    year      = {2023},
+    month     = apr,
+    pages     = {1391--1407},
     publisher = {USENIX Association},
-    month     = jul
+    address   = {Boston, MA},
+    isbn      = {978-1-939133-33-5},
+    langid    = {american},
+    file      = {F:\Zotero\Data-storage\storage\JVBI9CF8\Zhou和Dharanipragada - Electrode Accelerating Distributed Protocols with eBPF.pdf}
 }
 @inproceedings{9110434,
     author    = {Cassagnes, Cyril and Trestioreanu, Lucian and Joly, Clement and State, Radu},
@@ -51,17 +68,37 @@
     keywords  = {Connectors;Protocols;Linux;Production;Containers;Software;Performance analysis;Performance;Cloud computing;Interledger;eBPF;Profiling;Tracing},
     doi       = {10.1109/NOMS47738.2020.9110434}
 }
-@inproceedings{9156135,
-    author    = {Wen, Elliott and Weber, Gerald},
-    booktitle = {2020 IEEE International Conference on Pervasive Computing and Communications Workshops (PerCom Workshops)},
-    title     = {Wasmachine: Bring IoT up to Speed with A WebAssembly OS},
-    year      = {2020},
-    volume    = {},
-    number    = {},
-    pages     = {1-4},
-    keywords  = {Kernel;Runtime;Hardware;Security;Edge computing;Switches;Servers},
-    doi       = {10.1109/PerComWorkshops48775.2020.9156135}
+@inproceedings{AcceleratingMemcachedUsingSafeinKernCache,
+    title     = {{{BMC}}: {{Accelerating}} Memcached Using Safe in-Kernel Caching and Pre-Stack Processing},
+    booktitle = {18th {{USENIX}} Symposium on Networked Systems Design and Implementation ({{NSDI}} 21)},
+    author    = {{Yoann Ghigoff} and {Julien Sopena} and {Kahina Lazri} and {Antoine Blin} and {Gilles Muller}},
+    year      = {2021},
+    month     = apr,
+    pages     = {487--501},
+    publisher = {USENIX Association},
+    isbn      = {978-1-939133-21-2},
+    file      = {F:\Zotero\Data-storage\storage\7SPIHGD2\Ghigoff和Muller - BMC Accelerating Memcached using Safe In-kernel Caching and Pre-stack Processing.pdf}
 }
+
+@inproceedings{bensonNetEditOrchestrationPlatform2024,
+    title      = {{{NetEdit}}: {{An Orchestration Platform}} for {{eBPF Network Functions}} at {{Scale}}},
+    shorttitle = {{{NetEdit}}},
+    booktitle  = {Proceedings of the {{ACM SIGCOMM}} 2024 {{Conference}}},
+    author     = {Benson, Theophilus A. and Kannan, Prashanth and Gupta, Prankur and Madhavan, Balasubramanian and Arora, Kumar Saurabh and Meng, Jie and Lau, Martin and Dhamija, Abhishek and Krishnamurthy, Rajiv and Sundaresan, Srikanth and Spring, Neil and Zhang, Ying},
+    year       = {2024},
+    month      = aug,
+    pages      = {721--734},
+    publisher  = {ACM},
+    address    = {Sydney NSW Australia},
+    doi        = {10.1145/3651890.3672227},
+    urldate    = {2024-12-01},
+    abstract   = {Managing the performance of thousands of services across millions of servers demands a networking stack that can dynamically adjust protocol settings to match diverse priorities and network characteristics. Moreover, given the constantly evolving nature of services and their requirements, the set of configurable protocols must remain adaptable. However, current host networking stacks lack the necessary flexibility and adaptability. Although eBPF shows promise in this regard, it lacks essential primitives for efficient development and safe deployment of multiple co-existing services. This paper presents our experience developing NetEdit, a system that orchestrates the composition, deployment, and life-cycle management of eBPF programs across a large fleet of servers at Meta. Our design offers a unified abstraction for various kernel hookpoints, decouples policies from programs using a rich configuration language, supports explicit object management for reliable deployment and provides extensive testing methods. NetEdit has been deployed in our production network for five years and now supports thirteen Network Function applications. We have observed that NetEdit-enabled functions improve average service performance by 3X and network performance by 4.6X, showcasing its significant real-world impact.},
+    isbn       = {979-8-4007-0614-1},
+    langid     = {english},
+    keywords   = {ebpf},
+    file       = {F:\Zotero\Data-storage\storage\R398KGYD\Benson 等 - 2024 - NetEdit An Orchestration Platform for eBPF Network Functions at Scale.pdf}
+}
+
 @inproceedings{bhansaliFirstLookCode2022,
     title     = {A {{First Look}} at {{Code Obfuscation}} for {{WebAssembly}}},
     booktitle = {Proceedings of the 15th {{ACM Conference}} on {{Security}} and {{Privacy}} in {{Wireless}} and {{Mobile Networks}}},
@@ -78,13 +115,58 @@
     file      = {F:\Zotero\Data-storage\storage\MY6P4Q5Z\Bhansali 等 - 2022 - A First Look at Code Obfuscation for WebAssembly.pdf}
 }
 
+@misc{caoWASMixerBinaryObfuscation2023,
+    title         = {{{WASMixer}}: {{Binary Obfuscation}} for {{WebAssembly}}},
+    shorttitle    = {{{WASMixer}}},
+    author        = {Cao, Shangtong and He, Ningyu and Guo, Yao and Wang, Haoyu},
+    year          = {2023},
+    month         = aug,
+    number        = {arXiv:2308.03123},
+    eprint        = {2308.03123},
+    publisher     = {arXiv},
+    doi           = {10.48550/arXiv.2308.03123},
+    urldate       = {2024-12-11},
+    abstract      = {WebAssembly (Wasm) is an emerging binary format that draws great attention from our community. However, Wasm binaries are weakly protected, as they can be read, edited, and manipulated by adversaries using either the officially provided readable text format (i.e., wat) or some advanced binary analysis tools. Reverse engineering of Wasm binaries is often used for nefarious intentions, e.g., identifying and exploiting both classic vulnerabilities and Wasm specific vulnerabilities exposed in the binaries. However, no Wasm-specific obfuscator is available in our community to secure the Wasm binaries. To fill the gap, in this paper, we present WASMixer, the first general-purpose Wasm binary obfuscator, enforcing data-level (string literals and function names) and code-level (control flow and instructions) obfuscation for Wasm binaries. We propose a series of key techniques to overcome challenges during Wasm binary rewriting, including an on-demand decryption method to minimize the impact brought by decrypting the data in memory area, and code splitting/reconstructing algorithms to handle structured control flow in Wasm. Extensive experiments demonstrate the correctness, effectiveness and efficiency of WASMixer. Our research has shed light on the promising direction of Wasm binary research, including Wasm code protection, Wasm binary diversification, and the attack-defense arm race of Wasm binaries.},
+    archiveprefix = {arXiv},
+    langid        = {english},
+    keywords      = {obfuscation,wasm},
+    file          = {F:\Zotero\Data-storage\storage\QIKVA3HY\Cao 等 - 2023 - WASMixer Binary Obfuscation for WebAssembly.pdf}
+}
 @inproceedings{Daniel2019DiscoveringVI,
     title  = {Discovering Vulnerabilities in {{WebAssembly}} with Code Property Graphs},
     author = {Daniel, Pedro and Lopes, Rogeiro and Santos, Nuno and Santos, Jos{\textasciiacute}e Fragoso},
     year   = {2019},
     file   = {F:\Zotero\Data-storage\storage\9AH4UIBZ\Lopes - Discovering Vulnerabilities in WebAssembly with Code Property Graphs.pdf}
 }
+@inproceedings{eBPFANDwasmComparing,
+    author    = {Dejaeghere, Jules and Gbadamosi, Bolaji and Pulls, Tobias and Rochet, Florentin},
+    title     = {Comparing Security in eBPF and WebAssembly},
+    year      = {2023},
+    isbn      = {9798400702938},
+    publisher = {Association for Computing Machinery},
+    address   = {New York, NY, USA},
+    url       = {https://doi.org/10.1145/3609021.3609306},
+    doi       = {10.1145/3609021.3609306},
+    booktitle = {Proceedings of the 1st Workshop on EBPF and Kernel Extensions},
+    pages     = {35–41},
+    numpages  = {7},
+    keywords  = {eBPF, webassembly, security comparison, threat model, memory safety, control flow integrity, API access, side-channels},
+    location  = {New York, NY, USA},
+    series    = {eBPF '23}
+}
 
+@misc{FrontEndCompilerCheerp,
+    author       = {{Leaning Technologies}},
+    howpublished = {\url{https://leaningtech.com/cheerp/}},
+    title        = {{An Enterprise-Grade C++ Compiler For The Web}},
+    year         = {2024}
+}
+@misc{FrontEndCompileremscripten,
+    author       = {{Emscripten Contributors}},
+    howpublished = {\url{https://emscripten.org/}},
+    title        = {emscripten},
+    year         = {2015}
+}
 @phdthesis{FuzzOnEBPF,
     type    = {{硕士论文}},
     title   = {{基于模糊测试的eBPF漏洞挖掘技术研究}},
@@ -97,22 +179,49 @@
     file    = {F:\Zotero\Data-storage\storage\6Y5KHP89\基于模糊测试的eBPF漏洞挖掘技术研究_李有霖.pdf}
 }
 
-@inproceedings{haas_bringing_2017,
-    location   = {Barcelona Spain},
-    title      = {Bringing the web up to speed with {WebAssembly}},
-    isbn       = {978-1-4503-4988-8},
-    url        = {https://dl.acm.org/doi/10.1145/3062341.3062363},
-    doi        = {10.1145/3062341.3062363},
-    eventtitle = {{PLDI} '17: {ACM} {SIGPLAN} Conference on Programming Language Design and Implementation},
-    pages      = {185--200},
-    booktitle  = {Proceedings of the 38th {ACM} {SIGPLAN} Conference on Programming Language Design and Implementation},
-    publisher  = {{ACM}},
-    author     = {Haas, Andreas and Rossberg, Andreas and Schuff, Derek L. and Titzer, Ben L. and Holman, Michael and Gohman, Dan and Wagner, Luke and Zakai, Alon and Bastien, Jf},
-    urldate    = {2024-11-28},
-    date       = {2017-06-14},
-    langid     = {english},
-    file       = {PDF:F\:\\Zotero\\Data-storage\\storage\\BE53QJLM\\Haas 等 - 2017 - Bringing the web up to speed with WebAssembly.pdf:application/pdf}
+@misc{gbadamosiEBPFRuntimeLinux2024,
+    title         = {The {{eBPF Runtime}} in the {{Linux Kernel}}},
+    author        = {Gbadamosi, Bolaji and Leonardi, Luigi and Pulls, Tobias and {H{\o}iland-J{\o}rgensen}, Toke and {Ferlin-Reiter}, Simone and Sorce, Simo and Brunstr{\"o}m, Anna},
+    year          = {2024},
+    month         = oct,
+    number        = {arXiv:2410.00026},
+    eprint        = {2410.00026},
+    publisher     = {arXiv},
+    doi           = {10.48550/arXiv.2410.00026},
+    urldate       = {2024-12-24},
+    abstract      = {Extended Berkeley Packet Filter (eBPF) is a runtime that enables users to load programs into the operating system (OS) kernel, like Linux or Windows, and execute them safely and efficiently at designated kernel hooks. Each program passes through a verifier that reasons about the safety guarantees for execution. Hosting a safe virtual machine runtime within the kernel makes it dynamically programmable. Unlike the popular approach of bypassing or completely replacing the kernel, eBPF gives users the flexibility to modify the kernel on the fly, rapidly experiment and iterate, and deploy solutions to achieve their workload-specific needs, while working in concert with the kernel.},
+    archiveprefix = {arXiv},
+    langid        = {english},
+    keywords      = {Computer Science - Computational Engineering Finance and Science,Computer Science - Operating Systems},
+    file          = {F:\Zotero\Data-storage\storage\Y5UTW3XB\Gbadamosi 等 - 2024 - The eBPF Runtime in the Linux Kernel.pdf}
 }
+
+@inproceedings{gershuniSimplePreciseStatic2019,
+    title     = {Simple and Precise Static Analysis of Untrusted {{Linux}} Kernel Extensions},
+    booktitle = {Proceedings of the 40th {{ACM SIGPLAN Conference}} on {{Programming Language Design}} and {{Implementation}}},
+    author    = {Gershuni, Elazar and Amit, Nadav and Gurfinkel, Arie and Narodytska, Nina and Navas, Jorge A. and Rinetzky, Noam and Ryzhyk, Leonid and Sagiv, Mooly},
+    year      = {2019},
+    month     = jun,
+    pages     = {1069--1084},
+    publisher = {ACM},
+    address   = {Phoenix AZ USA},
+    doi       = {10.1145/3314221.3314590},
+    urldate   = {2024-12-11},
+    isbn      = {978-1-4503-6712-7},
+    langid    = {english},
+    file      = {F:\Zotero\Data-storage\storage\8M42WZN7\Gershuni 等 - 2019 - Simple and precise static analysis of untrusted Linux kernel extensions.pdf}
+}
+@misc{groupWebAssemblySpecification2024,
+    type    = {Specification},
+    title   = {{{WebAssembly Specification}}},
+    author  = {{{WebAssembly Community}} and {{Rossberg Andreas}}},
+    year    = {2024},
+    month   = dec,
+    urldate = {2024-12-14},
+    langid  = {english},
+    file    = {F:\Zotero\Data-storage\storage\CGP2FU4L\Group和Rossberg - WebAssembly Specification.pdf}
+}
+
 @inproceedings{haasBringingWebSpeed2017,
     title     = {Bringing the Web up to Speed with {{WebAssembly}}},
     booktitle = {Proceedings of the 38th {{ACM SIGPLAN Conference}} on {{Programming Language Design}} and {{Implementation}}},
@@ -129,8 +238,9 @@
     langid    = {english},
     file      = {F:\Zotero\Data-storage\storage\BE53QJLM\Haas 等 - 2017 - Bringing the web up to speed with WebAssembly.pdf}
 }
+
 @inproceedings{HaoValidating,
-    author    = {Hao Sun and Zhendong Su},
+    author    = {{Hao Sun} and {Zhendong Su}},
     title     = {Validating the {eBPF} Verifier via State Embedding},
     booktitle = {18th USENIX Symposium on Operating Systems Design and Implementation (OSDI 24)},
     year      = {2024},
@@ -143,7 +253,7 @@
 }
 
 @inproceedings{hive,
-    author    = {Peihua Zhang and Chenggang Wu and Xiangyu Meng and Yinqian Zhang and Mingfan Peng and Shiyang Zhang and Bing Hu and Mengyao Xie and Yuanming Lai and Yan Kang and Zhe Wang},
+    author    = {{Peihua Zhang} and {Chenggang Wu} and {Xiangyu Meng} and {Yinqian Zhang} and {Mingfan Peng} and {Shiyang Zhang} and {Bing Hu} and {Mengyao Xie} and {Yuanming Lai} and {Yan Kang} and {Zhe Wang}},
     title     = {{HIVE}: A Hardware-assisted Isolated Execution Environment for {eBPF} on {AArch64}},
     booktitle = {33rd USENIX Security Symposium (USENIX Security 24)},
     year      = {2024},
@@ -154,6 +264,51 @@
     publisher = {USENIX Association},
     month     = aug
 }
+@incollection{infoflowctrforwasm,
+    title      = {{{SecWasm}}: {{Information Flow Control}} for {{WebAssembly}}},
+    shorttitle = {{{SecWasm}}},
+    booktitle  = {Static {{Analysis}}},
+    author     = {Bastys, Iulia and Algehed, Maximilian and Sj{\"o}sten, Alexander and Sabelfeld, Andrei},
+    editor     = {Singh, Gagandeep and Urban, Caterina},
+    year       = {2022},
+    volume     = {13790},
+    pages      = {74--103},
+    publisher  = {Springer Nature Switzerland},
+    address    = {Cham},
+    doi        = {10.1007/978-3-031-22308-2_5},
+    urldate    = {2024-12-13},
+    abstract   = {We introduce SecWasm, the first general purpose informationflow control system for WebAssembly (Wasm), thus extending the safety guarantees offered by Wasm with guarantees that applications manipulate sensitive data in a secure way. SecWasm is a hybrid system enforcing termination-insensitive noninterference which overcomes the challenges posed by the uncommon characteristics for machine languages of Wasm in an elegant and thorough way.},
+    isbn       = {978-3-031-22307-5},
+    langid     = {english},
+    file       = {F:\Zotero\Data-storage\storage\3Y6FFPM7\Bastys 等 - 2022 - SecWasm Information Flow Control for WebAssembly.pdf}
+}
+@inproceedings{interpreterhijeck,
+    author    = {Liu, Qirui and Shen, Wenbo and Zhou, Jinmeng and Zhang, Zhuoruo and Hu, Jiayi and Ni, Shukai and Lu, Kangjie and Chang, Rui},
+    title     = {Interp-flow Hijacking: Launching Non-control Data Attack via Hijacking eBPF Interpretation Flow},
+    year      = {2024},
+    isbn      = {978-3-031-70895-4},
+    publisher = {Springer-Verlag},
+    address   = {Berlin, Heidelberg},
+    url       = {https://doi.org/10.1007/978-3-031-70896-1_10},
+    doi       = {10.1007/978-3-031-70896-1_10},
+    booktitle = {Computer Security – ESORICS 2024: 29th European Symposium on Research in Computer Security, Bydgoszcz, Poland, September 16–20, 2024, Proceedings, Part III},
+    pages     = {194–214},
+    numpages  = {21},
+    address   = {Cham},
+    keywords  = {eBPF, Bug exploitation, Linux kernel, Bypassing CFI},
+    location  = {Bydgoszcz, Poland}
+}
+
+@misc{isovalentEBPFDocs2024,
+    title        = {{{eBPF Docs}}},
+    author       = {{isovalent}},
+    howpublished = {https://docs.ebpf.io/},
+    url          = {https://github.com/isovalent/ebpf-docs},
+    year         = {2024},
+    urldate      = {2024-12-25},
+    langid       = {english}
+}
+
 @inproceedings{JangdaNotsoFast,
     title     = {Not so Fast: {{Analyzing}} the Performance of {{WebAssembly}} vs. Native Code},
     booktitle = {2019 {{USENIX}} Annual Technical Conference ({{USENIX ATC}} 19)},
@@ -179,6 +334,21 @@
     publisher = {USENIX Association},
     month     = aug
 }
+@inproceedings{jiaKernelExtensionVerification2023,
+    title     = {Kernel Extension Verification Is Untenable},
+    booktitle = {Proceedings of the 19th {{Workshop}} on {{Hot Topics}} in {{Operating Systems}}},
+    author    = {Jia, Jinghao and Sahu, Raj and Oswald, Adam and Williams, Dan and Le, Michael V. and Xu, Tianyin},
+    year      = {2023},
+    month     = jun,
+    pages     = {150--157},
+    publisher = {ACM},
+    address   = {Providence RI USA},
+    doi       = {10.1145/3593856.3595892},
+    urldate   = {2024-12-23},
+    isbn      = {979-8-4007-0195-5},
+    langid    = {english},
+    file      = {F:\Zotero\Data-storage\storage\SE8QYZ6V\Jia 等 - 2023 - Kernel extension verification is untenable.pdf}
+}
 @inproceedings{johnsonWaVeVerifiablySecure2023,
     title      = {{{WaVe}}: A Verifiably Secure {{WebAssembly}} Sandboxing Runtime},
     shorttitle = {{{WaVe}}},
@@ -197,6 +367,35 @@
     keywords   = {runtime,wasm},
     file       = {F:\Zotero\Data-storage\storage\8PQ4G9YS\Johnson 等 - 2023 - WaVe a verifiably secure WebAssembly sandboxing runtime.pdf}
 }
+@inproceedings{kernelStorage,
+    author    = {{Yuhong Zhong} and {Haoyu Li} and {YuJian Wu}  and {Ioannis Zarkadas} and {Jeffrey Tao} and {Evan Mesterhazy} and {Michael Makris} and {Junfeng Yang} and {Amy Tai} and {Ryan Stutsman} and {Asaf Cidon}},
+    title     = {{XRP}: {In-Kernel} Storage Functions with {eBPF}},
+    booktitle = {16th USENIX Symposium on Operating Systems Design and Implementation (OSDI 22)},
+    year      = {2022},
+    isbn      = {978-1-939133-28-1},
+    address   = {Carlsbad, CA},
+    pages     = {375--393},
+    url       = {https://www.usenix.org/conference/osdi22/presentation/zhong},
+    publisher = {USENIX Association},
+    month     = jul
+}
+@inproceedings{kuoVerifiedProgramsCan2022,
+    title      = {Verified Programs Can Party: Optimizing Kernel Extensions via Post-Verification Merging},
+    shorttitle = {Verified Programs Can Party},
+    booktitle  = {Proceedings of the {{Seventeenth European Conference}} on {{Computer Systems}}},
+    author     = {Kuo, Hsuan-Chi and Chen, Kai-Hsun and Lu, Yicheng and Williams, Dan and Mohan, Sibin and Xu, Tianyin},
+    year       = {2022},
+    month      = mar,
+    pages      = {283--299},
+    publisher  = {ACM},
+    address    = {Rennes France},
+    doi        = {10.1145/3492321.3519562},
+    urldate    = {2024-12-24},
+    abstract   = {Operating system (OS) extensions are more popular than ever. For example, Linux BPF is marketed as a ``superpower'' that allows user programs to be downloaded into the kernel, verified to be safe and executed at kernel hook points. So, BPF extensions have high performance and are often placed at performance-critical paths for tracing and filtering. However, although BPF extension programs execute in a shared kernel environment and are already individually verified, they are often executed independently in chains. We observe that the chain pattern has large performance overhead, due to indirect jumps penalized by security mitigations (e.g., Spectre), loops, and memory accesses. In this paper, we argue for a separation of concerns. We propose to decouple the execution of BPF extensions from their verification requirements---BPF extension programs can be collectively optimized, after each BPF extension program is individually verified and loaded into the shared kernel.},
+    isbn       = {978-1-4503-9162-7},
+    langid     = {english},
+    file       = {F:\Zotero\Data-storage\storage\EAECW999\Kuo 等 - 2022 - Verified programs can party optimizing kernel extensions via post-verification merging.pdf}
+}
 
 @inproceedings{lehmannEverythingOldNew,
     author    = {Daniel Lehmann and Johannes Kinder and Michael Pradel},
@@ -209,7 +408,6 @@
     publisher = {USENIX Association},
     month     = aug
 }
-
 @inproceedings{lehmannWasabiFrameworkDynamically2019,
     title      = {Wasabi: {{A Framework}} for {{Dynamically Analyzing WebAssembly}}},
     shorttitle = {Wasabi},
@@ -226,6 +424,81 @@
     langid     = {english},
     file       = {F:\Zotero\Data-storage\storage\CR5SISRJ\Lehmann和Pradel - 2019 - Wasabi A Framework for Dynamically Analyzing WebAssembly.pdf}
 }
+@misc{limSafeBPFHardwareassistedDefenseindepth2024,
+    title         = {{{SafeBPF}}: {{Hardware-assisted Defense-in-depth}} for {{eBPF Kernel Extensions}}},
+    shorttitle    = {{{SafeBPF}}},
+    author        = {Lim, Soo Yee and Prasad, Tanya and Han, Xueyuan and Pasquier, Thomas},
+    year          = {2024},
+    month         = sep,
+    number        = {arXiv:2409.07508},
+    eprint        = {2409.07508},
+    publisher     = {arXiv},
+    doi           = {10.48550/arXiv.2409.07508},
+    urldate       = {2024-11-29},
+    archiveprefix = {arXiv},
+    langid        = {english},
+    keywords      = {ebpf,hardware},
+    file          = {F:\Zotero\Data-storage\storage\UV8FZXRL\Lim 等 - 2024 - SafeBPF Hardware-assisted Defense-in-depth for eBPF Kernel Extensions.pdf}
+}
+@inproceedings{limUnleashingUnprivilegedEBPF2023,
+    title     = {Unleashing {{Unprivileged eBPF Potential}} with {{Dynamic Sandboxing}}},
+    booktitle = {Proceedings of the 1st {{Workshop}} on {{eBPF}} and {{Kernel Extensions}}},
+    author    = {Lim, Soo Yee and Han, Xueyuan and Pasquier, Thomas},
+    year      = {2023},
+    month     = sep,
+    pages     = {42--48},
+    publisher = {ACM},
+    address   = {New York NY USA},
+    doi       = {10.1145/3609021.3609301},
+    urldate   = {2024-12-03},
+    isbn      = {979-8-4007-0293-8},
+    langid    = {english},
+    keywords  = {ebpf,sandbox},
+    file      = {F:\Zotero\Data-storage\storage\ED46Q5WU\Lim 等 - 2023 - Unleashing Unprivileged eBPF Potential with Dynamic Sandboxing.pdf}
+}
+@mastersthesis{LinuxEbpfProtection,
+    title   = {{{Linux系统eBPF攻击建模及防护技术研究}}},
+    author  = {{张子君}},
+    year    = {2024},
+    address = {浙江杭州},
+    school  = {浙江大学}
+}
+
+@inproceedings{maoMerlinMultitierOptimization2024,
+    title      = {Merlin: {{Multi-tier Optimization}} of {{eBPF Code}} for {{Performance}} and {{Compactness}}},
+    shorttitle = {Merlin},
+    booktitle  = {Proceedings of the 29th {{ACM International Conference}} on {{Architectural Support}} for {{Programming Languages}} and {{Operating Systems}}, {{Volume}} 3},
+    author     = {{Mao Jinsong} and {Ding Hailun} and {Zhai Juan} and {Ma Shiqing}},
+    year       = {2024},
+    month      = apr,
+    pages      = {639--653},
+    publisher  = {ACM},
+    address    = {La Jolla CA USA},
+    doi        = {10.1145/3620666.3651387},
+    urldate    = {2024-12-14},
+    isbn       = {979-8-4007-0386-7},
+    langid     = {english},
+    file       = {F:\Zotero\Data-storage\storage\DW7YIA2S\Mao 等 - 2024 - Merlin Multi-tier Optimization of eBPF Code for Performance and Compactness.pdf}
+}
+
+
+@inproceedings{mohamedUnderstandingSecurityLinux2023,
+    title     = {Understanding the {{Security}} of {{Linux eBPF Subsystem}}},
+    booktitle = {Proceedings of the 14th {{ACM SIGOPS Asia-Pacific Workshop}} on {{Systems}}},
+    author    = {Mohamed, Mohamed Husain Noor and Wang, Xiaoguang and Ravindran, Binoy},
+    year      = {2023},
+    month     = aug,
+    pages     = {87--92},
+    publisher = {ACM},
+    address   = {Seoul Republic of Korea},
+    doi       = {10.1145/3609510.3609822},
+    urldate   = {2024-12-03},
+    abstract  = {Linux eBPF allows a userspace application to execute code inside the Linux kernel without modifying the kernel code or inserting a kernel module. An in-kernel eBPF verifier preverifies any untrusted eBPF bytecode before running it in kernel context. Currently, users trust the verifier to block malicious bytecode from being executed.},
+    isbn      = {979-8-4007-0305-8},
+    langid    = {english},
+    keywords  = {ebpf},
+    file      = {F:\Zotero\Data-storage\storage\2NG8WN86\Mohamed 等 - 2023 - Understanding the Security of Linux eBPF Subsystem.pdf}
+}
 @misc{narayanSwivelHardeningWebAssembly,
     title      = {Swivel: {{Hardening WebAssembly}} against {{Spectre}}},
     shorttitle = {Swivel},
@@ -238,6 +511,35 @@
     langid     = {american},
     keywords   = {Cryptography and Security (cs.CR),D.4.6,FOS: Computer and information sciences},
     file       = {F:\Zotero\Data-storage\storage\GUBNSYX4\Narayan 等 - 2021 - Swivel Hardening WebAssembly against Spectre.pdf}
+}
+
+% wasm 标准
+@article{PKSeBPFIsolation,
+    title   = {{基于PKS硬件特性的eBPF内存隔离机制}},
+    author  = {李浩 and 古金宇 and 夏虞斌 and 臧斌宇 and 陈海波},
+    year    = {2023},
+    journal = {{软件学报}},
+    volume  = {34},
+    number  = {12},
+    pages   = {5921--5939},
+    issn    = {1000-9825},
+    doi     = {10.13328/j.cnki.jos.006762},
+    file    = {F:\Zotero\Data-storage\storage\SU86PK9Z\6762.pdf}
+}
+@inproceedings{ProofofJITeBPFvmForIoT,
+    title     = {End-to-End Mechanized Proof of a {{JIT-accelerated eBPF}} Virtual Machine for {{IoT}}},
+    booktitle = {Computer Aided Verification},
+    author    = {Yuan, Shenghao and Besson, Fr{\'e}d{\'e}ric and Talpin, Jean-Pierre},
+    editor    = {Gurfinkel, Arie and Ganesh, Vijay},
+    year      = {2024},
+    pages     = {325--347},
+    publisher = {Springer Nature Switzerland},
+    address   = {Cham},
+    doi       = {10.1007/978-3-031-65627-9_16},
+    abstract  = {Modern operating systems have adopted Berkeley Packet Filters (BPF) as a mechanism to extend kernel functionalities dynamically, e.g., Linux's eBPF or RIOT's rBPF. The just-in-time (JIT) compilation of eBPF introduced in Linux eBPF for performance has however led to numerous critical issues. Instead, RIOT's rBPF uses a slower but memory-isolating interpreter (a virtual machine) which implements a defensive semantics of BPF; and therefore trades performance for security. To increase performance without sacrificing security, this paper presents a fully verified JIT implementation for RIOT's rBPF, consisting of: i/ an end-to-end refinement workflow to both proving the JIT correct from an abstract specification and by deriving a verified concrete C implementation; ii/ a symbolic CompCert interpreter for executing jited binary code; iii/ a verified JIT compiler for rBPF; iv/ a verified hybrid rBPF virtual machine. Our core contribution is, to the best of our knowledge, the first and fully verified rBPF JIT compiler with correctness guarantees from high-level specification to low-level implementation. Benchmarks on microcontrollers hosting the RIOT operating system demonstrate significant performance improvements over the existing implementations of rBPF, even in worst-case application scenarios.},
+    isbn      = {978-3-031-65627-9},
+    langid    = {english},
+    file      = {F:\Zotero\Data-storage\storage\JUP2ZS28\Yuan 等 - 2024 - End-to-end mechanized proof of a JIT-accelerated eBPF virtual machine for IoT.pdf}
 }
 @article{rayOverviewWebAssemblyIoT2023,
     title      = {An {{Overview}} of {{WebAssembly}} for {{IoT}}: {{Background}}, {{Tools}}, {{State-of-the-Art}}, {{Challenges}}, and {{Future Directions}}},
@@ -252,11 +554,11 @@
     issn       = {1999-5903},
     doi        = {10.3390/fi15080275},
     urldate    = {2024-12-05},
-    abstract   = {This paper explores the relationship between two emerging technologies, WebAssembly (Wasm) and the Internet of Things (IoT). It examines the complementary roles of these technologies and their impact on modern web applications. First, it delves into the capabilities of Wasm as a high-performance binary format that allows developers to leverage low-level languages for computationally intensive tasks. Second, it seeks to explain why integration of IoT and Wasm is important. Third, it discusses the strengths and limitations of various tools and tool chains that are crucial for Wasm development and implementation, with a special focus on IoT. Fourth, it presents the state-ofthe-art with regard to advances that combine both technologies. Fifth, it discusses key challenges and provides future directions. Lastly, it provides an in-depth elaboration of the future aspects of Wasm, with a strong focus on IoT, concluding that IoT and Wasm can provide developers with a versatile toolkit that enables them to balance productivity and performance in both web and non-web development scenarios. The collaborative use of these technologies opens up new possibilities for pushing the boundaries of web application development in terms of interactivity, security, portability, scalability, and efficient computational capabilities. As web and non-web embeddings continue to evolve, the integration of IoT and Wasm will play a crucial role in shaping the future of innovative application development. The key findings of this extensive review work suggest that existing tool sets can be easily conglomerated together to form a new era in WebAssembly--IoT infrastructure for low-power, energy-efficient, and secure edge--IoT ecosystems with near-native execution speed. Furthermore, the expansion of edge--IoT ecosystems can be augmented with prospective cloud-side deployments. However, there remains a strong need to more cohesively advance the amalgamation of Wasm and IoT technologies in the near future.},
     copyright  = {https://creativecommons.org/licenses/by/4.0/},
     langid     = {english},
     file       = {F:\Zotero\Data-storage\storage\DRC3DGQ9\Ray - 2023 - An Overview of WebAssembly for IoT Background, Tools, State-of-the-Art, Challenges, and Future Dire.pdf}
 }
+
 @book{riceLearningEBPFProgramming2023,
     title      = {Learning {{eBPF}}: Programming the {{Linux Kernel}} for Enhanced Observability, Networking, and Security},
     shorttitle = {Learning {{eBPF}}},
@@ -265,25 +567,12 @@
     edition    = {First edition},
     publisher  = {O'Reilly Media},
     address    = {Sebastopol, CA},
-    abstract   = {What is eBPF? With this revolutionary technology, you can write custom code that dynamically changes the way the kernel behaves. It's an extraordinary platform for building a whole new generation of security, observability, and networking tools. This practical book is ideal for developers, system administrators, operators, and students who are curious about eBPF and want to know how it works. Author Liz Rice, chief open source officer with cloud native networking and security specialists Isovalent, also provides a foundation for those who want to explore writing eBPF programs themselves},
     isbn       = {978-1-0981-3512-6},
     langid     = {english},
     lccn       = {005.3},
     keywords   = {Application software,Computer security,Development Automation,Linux,Open source software},
     annotation = {OCLC: on1353981026},
     file       = {F:\Zotero\Data-storage\storage\J9AXN9I3\Rice - 2023 - Learning eBPF programming the Linux Kernel for enhanced observability, networking, and security.pdf}
-}
-@article{RJXB202312023,
-    title   = {{{基于PKS硬件特性的eBPF内存隔离机制}}},
-    author  = {{李浩} and {古金宇} and {夏虞斌} and {臧斌宇} and {陈海波}},
-    year    = {2023},
-    journal = {{软件学报}},
-    volume  = {34},
-    number  = {12},
-    pages   = {5921--5939},
-    issn    = {1000-9825},
-    doi     = {10.13328/j.cnki.jos.006762},
-    file    = {F:\Zotero\Data-storage\storage\SU86PK9Z\6762.pdf}
 }
 @inproceedings{romanoEmpiricalStudyBugs2021,
     title     = {An {{Empirical Study}} of {{Bugs}} in {{WebAssembly Compilers}}},
@@ -296,7 +585,6 @@
     address   = {Melbourne, Australia},
     doi       = {10.1109/ASE51524.2021.9678776},
     urldate   = {2024-12-11},
-    abstract  = {WebAssembly is the newest programming language for the Web. It defines a portable bytecode format for use as a compilation target for programs developed in high-level languages such as C, C++, and Rust. As a result, WebAssembly binaries are generally created by WebAssembly compilers rather than being written manually. To port native code to the Web, WebAssembly compilers need to address the differences between the source and target languages and dissimilarities in their execution environments. A deep understanding of the bugs in WebAssembly compilers can help compiler developers determine where to focus development and testing efforts. In this paper, we conduct two empirical studies to understand the characteristics of the bugs found in WebAssembly compilers. First, we perform a qualitative analysis of bugs in Emscripten, the most widelyused WebAssembly compiler. We investigate 146 bug reports in Emscripten related to the unique challenges WebAssembly compilers encounter compared with traditional compilers. Second, we provide a quantitative analysis of 1,054 bugs in three opensource WebAssembly compilers, AssemblyScript, Emscripten, and Rustc/Wasm-Bindgen. We analyze these bugs along three dimensions: lifecycle, impact, and sizes of bug-inducing inputs and bug fixes. These studies deepen our understanding of WebAssembly compiler bugs. We hope that the findings of our study will shed light on opportunities to design practical tools for testing and debugging WebAssembly compilers.},
     copyright = {https://ieeexplore.ieee.org/Xplorehelp/downloads/license-information/IEEE.html},
     isbn      = {978-1-6654-0337-5},
     langid    = {english},
@@ -304,13 +592,32 @@
     file      = {F:\Zotero\Data-storage\storage\GUNCQFFI\Romano 等 - 2021 - An Empirical Study of Bugs in WebAssembly Compilers.pdf}
 }
 
-@misc{skanehiraWrittingWasmRuntime,
-    title        = {Writting a Wasm {{Runtime}} in {{Rust}}},
-    year         = {2023},
-    author       = {{skanehira}},
-    howpublished = {\url{https://github.com/skanehira/writing-a-wasm-runtime-in-rust/}},
-    langid       = {english}
+@inproceedings{sahuEnablingBPFRuntime2023,
+    title     = {Enabling {{BPF Runtime}} Policies for Better {{BPF}} Management},
+    booktitle = {Proceedings of the 1st {{Workshop}} on {{eBPF}} and {{Kernel Extensions}}},
+    author    = {Sahu, Raj and Williams, Dan},
+    year      = {2023},
+    month     = sep,
+    pages     = {49--55},
+    publisher = {ACM},
+    address   = {New York NY USA},
+    doi       = {10.1145/3609021.3609297},
+    urldate   = {2024-12-25},
+    abstract  = {As eBPF increasingly and rapidly gains popularity for observability, performance, troubleshooting, and security in production environments, a problem is emerging around how to manage the multitude of BPF programs installed into the kernel. Operators of distributed systems are already beginning to use BPF-orchestration frameworks with which they can set load and access policies for who can load BPF programs and access their resultant data. However, other than a guarantee of eventual termination, operators currently have little to no visibility into the runtime characteristics of BPF programs and thus cannot set policies that ensure their systems still meet crucial performance targets when instrumented with BPF programs. In this paper, we propose that having a runtime estimate will enable better policies that will govern the allowed latency in critical paths. Our key insight is to leverage the existing architecture within the verifier to statically track the runtime cost of all possible branches. Along with dynamically determined runtime estimates for helper functions and knowledge of loop-based helpers' effects on control flow, we generate an accurate---although broad---range estimate for making runtime policy decisions. We further discuss some of the limitations of this approach, particularly in the case of broad estimate ranges as well as complementary tools for BPF runtime management.},
+    isbn      = {979-8-4007-0293-8},
+    langid    = {english},
+    file      = {F:\Zotero\Data-storage\storage\LRVJNHV7\Sahu和Williams - 2023 - Enabling BPF Runtime policies for better BPF management.pdf}
 }
+@misc{skanehiraWrittingWasmRuntime2024,
+    title    = {Writting a Wasm {{Runtime}} in {{Rust}}},
+    author   = {{skanehira}},
+    year     = {2024},
+    month    = aug,
+    langid   = {english},
+    url      = {https://github.com/skanehira/writing-a-wasm-runtime-in-rust/},
+    keywords = {front end compiler,runtime,wasm}
+}
+
 @inproceedings{sunFindingCorrectnessBugs2024,
     title     = {Finding {{Correctness Bugs}} in {{eBPF Verifier}} with {{Structured}} and {{Sanitized Program}}},
     booktitle = {Proceedings of the {{Nineteenth European Conference}} on {{Computer Systems}}},
@@ -339,7 +646,6 @@
     month         = may,
     number        = {arXiv:2205.01183},
     eprint        = {2205.01183},
-    primaryclass  = {cs},
     publisher     = {arXiv},
     doi           = {10.48550/arXiv.2205.01183},
     urldate       = {2024-12-11},
@@ -349,7 +655,23 @@
     keywords      = {fast,interpreter,wasm},
     file          = {F:\Zotero\Data-storage\storage\D2V4T5ZU\Titzer - 2022 - A fast in-place interpreter for WebAssembly.pdf}
 }
-
+@article{vieiraFastPacketProcessing2021,
+    title      = {Fast {{Packet Processing}} with {{eBPF}} and {{XDP}}: {{Concepts}}, {{Code}}, {{Challenges}}, and {{Applications}}},
+    shorttitle = {Fast {{Packet Processing}} with {{eBPF}} and {{XDP}}},
+    author     = {{Marcos A. M. Vieira} and {Matheus S. Castanho} and {Racyus D. G. Pac{\'i}fico} and {Elerson R. S. Santos} and {Eduardo P. M. C{\^a}mara J{\'u}nior} and {Luiz F. M. Vieira}},
+    year       = {2021},
+    month      = jan,
+    journal    = {ACM Computing Surveys},
+    volume     = {53},
+    number     = {1},
+    pages      = {1--36},
+    issn       = {0360-0300, 1557-7341},
+    doi        = {10.1145/3371038},
+    urldate    = {2024-12-24},
+    abstract   = {Extended Berkeley Packet Filter (eBPF) is an instruction set and an execution environment inside the Linux kernel. It enables modification, interaction, and kernel programmability at runtime. eBPF can be used to program the eXpress Data Path (XDP), a kernel network layer that processes packets closer to the NIC for fast packet processing. Developers can write programs in C or P4 languages and then compile to eBPF instructions, which can be processed by the kernel or by programmable devices (e.g., SmartNICs). Since its introduction in 2014, eBPF has been rapidly adopted by major companies such as Facebook, Cloudflare, and Netronome. Use cases include network monitoring, network traffic manipulation, load balancing, and system profiling. This work aims to present eBPF to an inexpert audience, covering the main theoretical and fundamental aspects of eBPF and XDP, as well as introducing the reader to simple examples to give insight into the general operation and use of both technologies.},
+    langid     = {english},
+    file       = {F:\Zotero\Data-storage\storage\NU2YSIY9\Vieira 等 - 2021 - Fast Packet Processing with eBPF and XDP Concepts, Code, Challenges, and Applications.pdf}
+}
 @misc{waseemIssuesTheirCauses2024,
     title         = {Issues and {{Their Causes}} in {{WebAssembly Applications}}: {{An Empirical Study}}},
     shorttitle    = {Issues and {{Their Causes}} in {{WebAssembly Applications}}},
@@ -358,7 +680,6 @@
     month         = apr,
     number        = {arXiv:2311.00646},
     eprint        = {2311.00646},
-    primaryclass  = {cs},
     publisher     = {arXiv},
     doi           = {10.48550/arXiv.2311.00646},
     urldate       = {2024-11-28},
@@ -367,22 +688,20 @@
     keywords      = {Computer Science - Software Engineering},
     file          = {F:\Zotero\Data-storage\storage\LKJ5IZJN\Waseem 等 - 2024 - Issues and Their Causes in WebAssembly Applications An Empirical Study.pdf}
 }
-
 @misc{WasmbpfStreamliningEBPF2024,
     title         = {Wasm-Bpf: {{Streamlining eBPF Deployment}} in {{Cloud Environments}} with {{WebAssembly}}},
     shorttitle    = {Wasm-Bpf},
-    author        = {Zheng, Yusheng and Yu, Tong and Yang, Yiwei and Quinn, Andrew},
+    author        = {{Yusheng Zheng} and {Tong Yu} and {Yiwei Yang} and {Andrew Quinn}},
     year          = {2024},
     month         = aug,
     number        = {arXiv:2408.04856},
     eprint        = {2408.04856},
-    primaryclass  = {cs},
     publisher     = {arXiv},
     doi           = {10.48550/arXiv.2408.04856},
     urldate       = {2024-11-28},
     archiveprefix = {arXiv},
     langid        = {english},
-    keywords      = {Computer Science - Operating Systems},
+    keywords      = {ebpf,wasm},
     file          = {F:\Zotero\Data-storage\storage\3XCTYKPM\Zheng 等 - 2024 - Wasm-bpf Streamlining eBPF Deployment in Cloud Environments with WebAssembly.pdf}
 }
 @misc{wasmCommunityGroup,
@@ -390,6 +709,62 @@
     howpublished = {\url{https://webassembly.github.io/spec/core/intro/introduction.html}},
     title        = {Introduction of WebAssembly},
     year         = {2024}
+}
+@book{wasmcoretech,
+    title     = {{WebAssembly原理与核心技术}},
+    author    = {{张秀宏}},
+    year      = {2020},
+    publisher = {机械工业出版社},
+    address   = {北京},
+    urldate   = {2024-12-12},
+    isbn      = {978-7-111-66554-0},
+    langid    = {chinese}
+}
+@inproceedings{WASMDYPA,
+    title      = {{{WASMDYPA}}: {{Effectively Detecting WebAssembly Bugs}} via {{Dynamic Program Analysis}}},
+    shorttitle = {{{WASMDYPA}}},
+    booktitle  = {2024 {{IEEE International Conference}} on {{Software Analysis}}, {{Evolution}} and {{Reengineering}} ({{SANER}})},
+    author     = {{Wenlong Zheng} and {Baojian Hua}},
+    year       = {2024},
+    month      = mar,
+    pages      = {296--307},
+    publisher  = {IEEE},
+    address    = {Rovaniemi, Finland},
+    doi        = {10.1109/SANER60148.2024.00037},
+    urldate    = {2024-12-28},
+    abstract   = {Safe binary execution is often a crucial requirement in today's security critical computing infrastructures. WebAssembly is an emerging language designed for safe binary execution that has been deployed in many security critical domains, such as blockchain, edge computing, and clouds. However, WebAssembly's security guarantee is not a cure-all, and recent studies have revealed a large spectrum of security issues such as integer overflows and memory vulnerabilities, leading to serious security hazards to WebAssembly applications.},
+    copyright  = {https://doi.org/10.15223/policy-029},
+    isbn       = {979-8-3503-3066-3},
+    langid     = {english},
+    file       = {F:\Zotero\Data-storage\storage\55H9NTBQ\Zheng和Hua - 2024 - WASMDYPA Effectively Detecting WebAssembly Bugs via Dynamic Program Analysis.pdf}
+}
+@article{wasmIntelSGX,
+    title     = {A {{Comprehensive Trusted Runtime}} for {{WebAssembly With Intel SGX}}},
+    author    = {M{\'e}n{\'e}trey, J{\"a}mes and Pasin, Marcelo and Felber, Pascal and Schiavoni, Valerio and Mazzeo, Giovanni and Hollum, Arne and Vaydia, Darshan},
+    year      = {2024},
+    month     = jul,
+    journal   = {IEEE Transactions on Dependable and Secure Computing},
+    volume    = {21},
+    number    = {4},
+    pages     = {3562--3579},
+    issn      = {1545-5971, 1941-0018, 2160-9209},
+    doi       = {10.1109/TDSC.2023.3334516},
+    urldate   = {2024-12-13},
+    abstract  = {In real-world scenarios, trusted execution environments (TEEs) frequently host applications that lack the trust of the infrastructure provider, as well as data owners who have specifically outsourced their data for remote processing. We present TWINE, a trusted runtime for running WebAssembly-compiled applications within TEEs, establishing a two-way sandbox. TWINE leverages memory safety guarantees of WebAssembly (Wasm) and abstracts the complexity of TEEs, empowering the execution of legacy and languageagnostic applications. It extends the standard WebAssembly system interface (WASI), providing controlled OS services, focusing on I/O. Additionally, through built-in TEE mechanisms, TWINE delivers attestation capabilities to ensure the integrity of the runtime and the OS services supplied to the application. We evaluate its performance using general-purpose benchmarks and real-world applications, showing it compares on par with state-of-the-art solutions. A case study involving fintech company Credora reveals that TWINE can be deployed in production with reasonable performance trade-offs, ranging from a 0.7{\texttimes} slowdown to a 1.17{\texttimes} speedup compared to native run time. Finally, we identify performance improvement through library optimisation, showcasing one such adjustment that leads up to 4.1{\texttimes} speedup. TWINE is open-source and has been upstreamed into the original Wasm runtime, WAMR.},
+    copyright = {https://ieeexplore.ieee.org/Xplorehelp/downloads/license-information/IEEE.html},
+    langid    = {english},
+    file      = {F:\Zotero\Data-storage\storage\Y9RN8XXD\Ménétrey 等 - 2024 - A Comprehensive Trusted Runtime for WebAssembly With Intel SGX.pdf}
+}
+@misc{webassemblycommunitygroupWebAssemblySpecification2024,
+    type     = {Specification},
+    title    = {WebAssembly Specification},
+    author   = {{WebAssembly Community Group} and Rossberg, Andreas},
+    year     = {2024},
+    month    = dec,
+    urldate  = {2024-12-14},
+    langid   = {english},
+    keywords = {wasm},
+    file     = {F:\Zotero\Data-storage\storage\CGP2FU4L\Group和Rossberg - WebAssembly Specification.pdf}
 }
 @article{WebAssemblySummaryOnSecurity,
     title   = {{WebAssembly安全研究综述}},
@@ -405,7 +780,7 @@
 @inproceedings{yanUnderstandingPerformanceWebassembly2021,
     title     = {Understanding the Performance of Webassembly Applications},
     booktitle = {Proceedings of the 21st {{ACM Internet Measurement Conference}}},
-    author    = {Yan, Yutian and Tu, Tengfei and Zhao, Lijian and Zhou, Yuchen and Wang, Weihang},
+    author    = {{Yutian Yan} and {Tengfei Tu} and {Lijian Zhao} and {Yuchen Zhou} and {Weihang Wang}},
     year      = {2021},
     month     = nov,
     pages     = {533--549},
@@ -418,7 +793,7 @@
     file      = {F:\Zotero\Data-storage\storage\69FWTM9N\Yan 等 - 2021 - Understanding the performance of webassembly applications.pdf}
 }
 @inproceedings{YIHeCrossContainer,
-    author    = {Yi He and Roland Guo and Yunlong Xing and Xijia Che and Kun Sun and Zhuotao Liu and Ke Xu and Qi Li},
+    author    = {{Yi He} and {Roland Guo} and {Yunlong Xing} and {Xijia Che} and {Kun Sun} and {Zhuotao Liu} and {Ke Xu} and {Qi Li}},
     title     = {Cross Container Attacks: The Bewildered {eBPF} on Clouds},
     booktitle = {32nd USENIX Security Symposium (USENIX Security 23)},
     year      = {2023},
@@ -429,15 +804,30 @@
     publisher = {USENIX Association},
     month     = aug
 }
+@article{zhangCharacterizingDetectingWebAssembly2024,
+    title    = {Characterizing and {{Detecting WebAssembly Runtime Bugs}}},
+    author   = {{Yixuan Zhang} and {Shangtong Cao} and {Haoyu Wang} and {Zhenpeng Chen} and {Xiapu Luo} and {Dongliang Mu} and {Yun Ma} and {Gang Huang} and {Xuanzhe Liu}},
+    year     = {2024},
+    month    = feb,
+    journal  = {ACM Transactions on Software Engineering and Methodology},
+    volume   = {33},
+    number   = {2},
+    pages    = {1--29},
+    issn     = {1049-331X, 1557-7392},
+    doi      = {10.1145/3624743},
+    urldate  = {2024-12-11},
+    langid   = {english},
+    keywords = {bug,runtime,wasm},
+    file     = {F:\Zotero\Data-storage\storage\LTNPNC2B\Zhang 等 - 2024 - Characterizing and Detecting WebAssembly Runtime Bugs.pdf}
+}
 @misc{zhangResearchWebAssemblyRuntimes2024,
     title         = {Research on {{WebAssembly Runtimes}}: {{A Survey}}},
     shorttitle    = {Research on {{WebAssembly Runtimes}}},
-    author        = {Zhang, Yixuan and Liu, Mugeng and Wang, Haoyu and Ma, Yun and Huang, Gang and Liu, Xuanzhe},
+    author        = {{Yixuan Zhang} and {Mugeng Liu} and {Haoyu Wang} and {Yun Ma} and {Gang Huang} and {Xuanzhe Liu}},
     year          = {2024},
     month         = oct,
     number        = {arXiv:2404.12621},
     eprint        = {2404.12621},
-    primaryclass  = {cs},
     publisher     = {arXiv},
     doi           = {10.48550/arXiv.2404.12621},
     urldate       = {2024-12-11},
@@ -447,27 +837,21 @@
     keywords      = {runtime,wasm},
     file          = {F:\Zotero\Data-storage\storage\UH93TJ8R\Zhang 等 - 2024 - Research on WebAssembly Runtimes A Survey.pdf}
 }
-@mastersthesis{ZhangZiJunLinuxXiTonge,
-    title   = {{{Linux系统eBPF攻击建模及防护技术研究}}},
-    author  = {{张子君}},
-    year    = {2024},
-    address = {浙江杭州},
-    school  = {浙江大学}
-}
 @misc{zhengBpftimeUserspaceEBPF2023,
     title         = {Bpftime: Userspace {{eBPF Runtime}} for {{Uprobe}}, {{Syscall}} and {{Kernel-User Interactions}}},
     shorttitle    = {Bpftime},
-    author        = {Zheng, Yusheng and Yu, Tong and Yang, Yiwei and Hu, Yanpeng and Lai, Xiaozheng and Quinn, Andrew},
+    author        = {{Yusheng Zheng} and {Tong Yu} and {Yiwei Yang} and {Yanpeng Hu} and {Xiaozheng Lai} and {Andrew Quinn}},
     year          = {2023},
     month         = dec,
     number        = {arXiv:2311.07923},
     eprint        = {2311.07923},
-    primaryclass  = {cs},
     publisher     = {arXiv},
     doi           = {10.48550/arXiv.2311.07923},
     urldate       = {2024-12-01},
+    abstract      = {In kernel-centric operations, the uprobe component of eBPF frequently encounters performance bottlenecks, largely attributed to the overheads borne by context switches. Transitioning eBPF operations to user space bypasses these hindrances, thereby optimizing performance. This also enhances configurability and obviates the necessity for root access or privileges for kernel eBPF, subsequently minimizing the kernel attack surface. This paper introduces bpftime, a novel user-space eBPF runtime, which leverages binary rewriting to implement uprobe and syscall hook capabilities. Through bpftime, userspace uprobes achieve a 10x speed enhancement compared to their kernel counterparts without requiring dual context switches. Additionally, this runtime facilitates the programmatic hooking of syscalls within a process, both safely and efficiently. Bpftime can be seamlessly attached to any running process, eliminating the need for either a restart or manual recompilation. Our implementation also extends to interprocess eBPF Maps within shared memory, catering to summary aggregation or control plane communication requirements. Compatibility with existing eBPF toolchains such as clang and libbpf is maintained, not only simplifying the development of user-space eBPF without necessitating any modifications but also supporting CO-RE through BTF. Through bpftime, we not only enhance uprobe performance but also extend the versatility and user-friendliness of eBPF runtime in user space, paving the way for more efficient and secure kernel operations.},
     archiveprefix = {arXiv},
     langid        = {english},
-    keywords      = {Computer Science - Operating Systems},
+    keywords      = {ebpf,runtime},
     file          = {F:\Zotero\Data-storage\storage\B7TAESAB\Zheng 等 - 2023 - bpftime userspace eBPF Runtime for Uprobe, Syscall and Kernel-User Interactions.pdf}
 }
+
