@@ -1,0 +1,168 @@
+%%%% contact via <kisfg@hotmail.com, haikureimu@hnu.edu.cn>
+
+
+%%%%%%%%%%%%%%%% ****喜报：textcite, parencite 还有带页码引用的形式不太被认可**** %%%%%%%%%%%%%%%%%%
+
+
+\documentclass[12pt,a4paper,dvipdfmx]{article}
+
+\input{format/package}
+\input{format/setup}
+\input{format/cover_ref}
+\graphicspath{{figures/}}
+
+\addbibresource[location=local]{refer.bib}
+
+\begin{document}
+	%% 字体错误。
+	% \makeproposalheader
+	\begin{sloppypar} % 防止文字出界而自动调整的环境。
+	%%% {UTF8}{hei}可谓是超级难看了
+	%% 权当提供一个转换到 word 的中介得了
+	\begin{CJK*}{UTF8}{song}
+	无论是extended Berkeley Packet Filter（eBPF，扩展的伯克利包过滤器）还是Web Assembly（wasm，网络汇编语言），两者在IoT
+	\cite{zhangResearchWebAssemblyRuntimes2024}和Web\cite{9110434, TCPdump, 10.1145/3371038}等领域得到了大量的应用。
+	eBPF 和 wasm 两者作为新兴的轻量级代码沙盒技术，在实现上各有其相似和独特之处。
+
+	相似之处在于，eBPF 允许用户编写C或rust代码，通过编译工具链编译为bpf字节码，
+	经由bpf系统调用加载到内核态验证，由 Just-In-Time（JIT，即时）编译器编译为最终的机器码等待特定事件触发执行\cite{FuzzOnEBPF}；
+	执行时借由 eBPF 辅助函数来实现复杂逻辑\cite{riceLearningEBPFProgramming2023}。
+	wasm 也支持如C，C++，rust，go，lua等多种高级编程语言，通过编译工具链将高级编程语言编写的代码编译为wasm字节码，经wasm运行时
+	加载到用户态沙箱环境，由wasm解释器解释执行或JIT编译器、Ahead-of-Time（AoT，预先）编译器编译执行\cite[6]{zhangResearchWebAssemblyRuntimes2024}。
+	执行时通过Web assembly System Interface（wasi，wasm系统调用接口）来与沙箱外的操作系统交互
+	\cite{zhangResearchWebAssemblyRuntimes2024, zhangCharacterizingDetectingWebAssembly2024}。
+
+	独特之处在于，eBPF程序运行于内核态，且以寄存器虚拟机的形式执行指令。其异常捕获视系统所用的硬件指令集而定。
+	而wasm运行于用户态，采用栈式虚拟机来执行指令以trap的方式来捕捉系统异常以告知操作系统终止沙盒内的程序\cite{groupWebAssemblySpecification2024}。
+
+	若是通过研究两者的特点以及在部署应用时普遍出现的问题，着重于综合比较研究两者在软件层面上已有的安全机制，
+	较全面地整理前人所作的研究和优化策略，对于后续完善两者乃至在两者基础上构建一套更为安全可靠的沙盒机制，无论是对业界还是学术界，
+	都会起到一定有益的帮助并提供科学、客观、有效的材料支撑。而这也正是本研究关切的所在。
+
+	\section{eBPF现状}
+	对于eBPF程序的执行过程，首先需要用户在相应的eBPF框架，如BCC Python等框架下编写，
+	经过如LLVM/clang的编译工具链编译为eBPF字节码\cite{riceLearningEBPFProgramming2023}。
+	生成后的eBPF字节码再通过bpf()加载到内核态\cite{riceLearningEBPFProgramming2023}，
+	并创建eBPF映射表来维护同一eBPF程序的执行状态和 eBPF 程序之间的状态分享\cite[2]{bensonNetEditOrchestrationPlatform2024}。
+	未经过运行的eBPF字节码会由eBPF静态验证器来实施检查\cite{zhengBpftimeUserspaceEBPF2023, HaoValidating}。
+	检查内容包括穷举所有可能的执行情况，eBPF程序的内存访问情况，程序能否结束，循环次数，无效指令等
+	\cite{286467, riceLearningEBPFProgramming2023}。
+	验证程序不会对内核造成影响后，最后经由JIT编译器编译为对应ISA可执行的机器码\cite{FuzzOnEBPF}，
+	并被加载到内核环境下的虚拟机中等待特定事件触发执行\cite{maoMerlinMultitierOptimization2024}。
+	此外，eBPF还可以依靠Linux提供的Kprobe技术将程序插入到几乎任何内核函数所在的位置\cite{riceLearningEBPFProgramming2023}。
+
+	eBPF的这种灵活性被用于加速特定的任务\cite{HaoValidating}，如网络包过滤\cite{10.1145/3371038,TCPdump}、
+	网络流量监控\cite{9110434}、文件数据存储\cite{kernelStorage}和FPGA接收网络数据流\cite{258973}等。
+	因为eBPF运行于内核态上，eBPF也成为了潜在的攻击介质\cite{LinuxEbpfProtection}。
+	相应地就需要确保eBPF所加载执行的代码以及自身的处理逻辑不会破坏内核和其它程序的正常执行。
+	eBPF以性能和执行策略上的妥协来换取这一安全需求的实现。比如eBPF不支持浮点运算\cite{10.1145/3674213.3674219}，
+	也不允许死循环的存在\cite{riceLearningEBPFProgramming2023}，在执行用户态代码之前，还会调用自身的验证器检查代码是否符合规范。
+	
+	即使有上述通过降低性能或缩减功能的等妥协来换取保证安全性的约束，\textcite[62]{FuzzOnEBPF}和
+	\textcite{mohamedUnderstandingSecurityLinux2023}表明，eBPF仍有三个主要的攻击面：验证器、辅助函数和JIT编译器。
+	特别地，\textcite{mohamedUnderstandingSecurityLinux2023}汇总整理了截至2023年8月为止的eBPF的漏洞报告列表；
+	指出在比重上，eBPF验证器占比最大，为44.4\%；eBPF内核辅助函数占16.7\%；eBPF分析字节码和转译执行的核心部分占11.1\%；
+	eBPF即时编译器占5.6\%；其它（如以eBPF这一技术作为基础的其它应用，cilium）则占22.2\%。
+	而截至2024年8月，eBPF验证器就已经对eBPF整体贡献了超过半数的CVE\cite{hive}。
+	%eBPF验证器还会检查软件使用的许可证是否与GPL许可证兼容
+	%\cites[116]{riceLearningEBPFProgramming2023}[6]{vieiraFastPacketProcessing2021}。
+	%只有兼容的才能调用某些eBPF函数（如bpf\_probe\_read\_kernel），否则拒绝执行。
+
+	\subsection{eBPF验证器存在的问题}
+	就eBPF验证器而言，其实现逻辑规定eBPF程序的调用栈最大深度为512\cite[30]{riceLearningEBPFProgramming2023}，
+	且在加载前会检查eBPF字节码是否包含潜在的不安全操作和不可接受的性能开销\cite{PKSeBPFIsolation}。
+	据\textcite{limSafeBPFHardwareassistedDefenseindepth2024}和\textcite[6]{vieiraFastPacketProcessing2021}指出，
+	eBPF验证器对eBPF字节码有两步静态检查。第一步用深度优先搜索检查eBPF程序是否能构成directed acyclic graph(DAG, 有向无环图)，
+	即是否没有包含不可到达的指令、无法跳出的循环以及非法跳转。包含则不通过此步骤的校验。
+	第二步则按照第一步生成的有向无环图通过生成状态自动机来穷举和存储程序所有可能的路径状态，
+	并要求经JIT编译后的指令数对于非特权程序最多不能超过4096条，特权程序不能超过100万条。
+	
+	\textcite[2]{limUnleashingUnprivilegedEBPF2023}还指出，
+	自2019年3月Linux5.0发布一直到2023年4月发布Linux6.3为止，
+	整个过程中eBPF验证器的代码行数从7306行增长到了17904行，以缓解自身设计和规范上的漏洞；
+	但持续增加的代码规模以及逻辑复杂性，难以通过形式化验证整个验证器而消除验证器中存在的任何缺陷。
+	此外，eBPF的验证器缺乏对循环的支持\cite{gershuniSimplePreciseStatic2019}，存在假阳性误报
+	\cite{hive,gershuniSimplePreciseStatic2019}以及\textcite[2,5,6]{PKSeBPFIsolation}指出的假阴性，
+	即验证器自身的漏洞被利用于恶意程序的绕过的问题。这些约束以及存在的问题限制了大型复杂程序在eBPF下的开发，
+	使得开发人员不得不从验证器的角度开发\cite{PKSeBPFIsolation}或重构\cite{HaoValidating}代码，
+	将构成程序的整体代码拆解为许多小片零散的函数\cite{AcceleratingMemcachedUsingSafeinKernCache}，
+	进而导致可编程性和执行性能的下降\cite{kuoVerifiedProgramsCan2022}，加重了开发者的负担。
+
+	其次，由于验证器造成 eBPF 在编程上的困难，又因为内核中存在着一些已编译过的、可为 eBPF
+	程序提供常用的功能的C函数能作为 eBPF 的辅助函数以节省开发者的精力和时间\cite{FuzzOnEBPF}，
+	并方便eBPF程序和系统及其执行上下文之间交互\cite{gbadamosiEBPFRuntimeLinux2024}。
+	辅助函数以白名单的形式提供给 eBPF 程序调用，不同类型的eBPF程序被允许调用不同的辅助函数集合
+	\cite{isovalentEBPFDocs2024, FuzzOnEBPF}。
+	\subsection{eBPF辅助函数存在的问题}
+	\textcite{jiaKernelExtensionVerification2023}指出，随着辅助函数的数量和代码复杂度的日益增加，潜在隐患和缺陷也随之被引入；
+	截至2022年，已有249个的辅助函数，其逻辑复杂程度不一；有52.2\%的辅助函数可以调用超过30个内核函数，34.2\%的辅助函数可以调用超过500个内核函数。
+	文献中衡量函数复杂度的标准是通过构建所有辅助函数的调用图，统计最终的调用节点数来判断。结果显示调用节点数在1到
+	10\textsuperscript{3} 以上均有分布。
+	\textcite[3]{sahuEnablingBPFRuntime2023}指出，eBPF验证器无法进入这些辅助函数并使用给定参数分析；
+	又由于eBPF程序经常使用这些内部可能执行复杂操作的辅助函数，它们对程序性能和安全性的影响同样不容忽视。另外据
+	\textcite[4]{jiaKernelExtensionVerification2023}声称，不安全的eBPF辅助函数带来的问题仍没有被重视。
+	\subsection{eBPF即时编译器存在的问题}
+	eBPF即时编译器解释执行eBPF字节码。因eBPF即时编译器假设了自身将要执行的字节流均通过了验证器验证，
+	于是在转译时没有做额外的安全检查\cite{gershuniSimplePreciseStatic2019}或者对内存漏洞的插桩验证\cite[5]{sunFindingCorrectnessBugs2024}。
+	\textcite{interpreterhijeck}的研究表明，eBPF字节码在转译过程缺少注入和劫持的防护，其解释器在执行时不会检测所执行的程序，
+	其解释流可以被文中提出的“Tailcall Trampoline(尾调用蹦床)”攻击所劫持而用于执行任意的字节码，绕过现有内核代码完整性保护机制；
+	%% 以下注释仅仅为开题报告用，而应当出现在最终论文的正文内容中。
+	出现这一问题的原因在于 eBPF 没有将 bpf\_prog 数组限制在内核态而是通过让用户调用 sys\_bpf(...) 而分配在用户态的堆上、
+	解释器没有验证将要尾调用的函数是否遭受过篡改。\textcite[2]{ProofofJITeBPFvmForIoT}也提出，
+	eBPF即时解释器或eBPF虚拟机的实现不当会引起例如内核态下任意代码执行的安全漏洞，从而破坏Linux内核完整性。
+
+	由上述依据，有关 eBPF 中三个主要攻击面和潜在攻击面的防护机制的整理以及可供创新之处，有待本研究后续整理深化。
+
+	\section{WebAssembly}
+	wasm是一种为增强Web浏览器性能和拓展性\cite{haasBringingWebSpeed2017}而面向C，C++，rust和Go等高级编程语言设计的新型
+	紧凑的\cite{yanUnderstandingPerformanceWebassembly2021,titzerFastInplaceInterpreter2022,Daniel2019DiscoveringVI}
+	中间编译表示规范\cite{wasmCommunityGroup,lehmannWasabiFrameworkDynamically2019,lehmannEverythingOldNew,
+	bhansaliFirstLookCode2022,waseemIssuesTheirCauses2024}（或称字节码）。
+	wasm字节码通过如Emscripten\cite{FrontEndCompileremscripten}，cheerp\cite{FrontEndCompilerCheerp}
+	和rustc等wasm前端编译器来生成\cite{romanoEmpiricalStudyBugs2021}，
+	因wasm字节码格式紧凑，空间占用小，其也被用于加速处理计算密集型任务\cite{caoWASMixerBinaryObfuscation2023}、部署于边缘计算和物联网领域
+	\cite{rayOverviewWebAssemblyIoT2023}。因这种字节码并不能直接交由处理器译码执行，
+	还需经过解释器或JIT或AoT等后端编译器转译为与当前运行环境下CPU指令集一致的机器码\cite[6]{zhangResearchWebAssemblyRuntimes2024}，wasm有
+	跨OS和处理器架构的可移植性和可扩展性\cite{lehmannEverythingOldNew,waseemIssuesTheirCauses2024,
+		lehmannWasabiFrameworkDynamically2019,JayProvablySafe,zhangResearchWebAssemblyRuntimes2024,rayOverviewWebAssemblyIoT2023}。
+
+	wasm首先经过前端编译器编译为wasm形成中间的字节码表示，
+	再交由wasm运行时执行\cite{zhangResearchWebAssemblyRuntimes2024}。
+	wasm运行时会根据wasm的二进制表示来划分到不同的内存节并解析成对应的指令\cite{skanehiraWrittingWasmRuntime2024}并指令严格按照规定的数量和类型，
+	从栈上执行操作数\cite{wasmcoretech}；其次，wasm设计之初即考虑安全\cite{wasmCommunityGroup}，采用了只提供四种基本数据类型(32/64位，整型/浮点型)
+	的静态强类型系统\cite{wasmCommunityGroup,groupWebAssemblySpecification2024,WASMDYPA,haasBringingWebSpeed2017}、
+	严格\cite{wasmIntelSGX}且结构化\cite{infoflowctrforwasm,lehmannEverythingOldNew}的控制流完整性验证
+	并彻底废除了任意跳转指令\cite{wasmcoretech}。
+	
+	而\textcite{WebAssemblySummaryOnSecurity}通过筛选调研了从2017年至2024年以来的44篇文献，
+	还是明确地在高级语言支持、编译工具链、二进制表示和语言虚拟机这4个层面上归纳出了共计14种类型的安全漏洞，为后续研究提供切入的方向。
+
+	% wasm的内存模型定义了wasm程序的线性内存布局和内存对象。分配给wasm的内存页大小总是64K的倍数\cite{Daniel2019DiscoveringVI}。
+	% \textcite{lehmannEverythingOldNew}指出在wasm中，线性内存既不可执行，也不可跳转，然而却不允许内存被标记为只读，所有线性内存上的数据均可写；
+	% 操作系统在执行程序时还会运用 ASLR 来随机编排栈、堆区、代码段的地址空间，但 wasm 只有线性内存并且内存编排方式一定。
+	% 为了防止wasm程序越界访存，runtime需要对访存行为做边界检查。除此通过沙盒环境来隔离程序的安全机制以外，wasm还通过自身的内存布局来约束程序的访存操作。
+	% %wasm在内存上的布局如图所示。%\ref和beginfiguretodo
+	% 这一线性内存并不存储全局变量或者局部变量，全局变量保存在一张固定大小的、名为全局索引空间(Globalindexspace)的表上
+	% \cite{rayOverviewWebAssemblyIoT2023,webassemblycommunitygroupWebAssemblySpecification2024,Daniel2019DiscoveringVI}；
+	% 局部变量存储于一个受到保护的调用栈上，调用栈保存有函数的返回地址。wasm 的控制流完整性，包括直接函数调用检查、
+	% 函数返回检查以及间接函数调用检查三个方面\cite{WebAssemblySummaryOnSecurity,Daniel2019DiscoveringVI}。
+    % wasm 的函数并不能执行任意地址跳转。函数地址被记录在一张表上，调用函数需要通过提供表上的索引用于检索到对应的函数地址才能完成跳转
+	% \cite{skanehiraWrittingWasmRuntime2024,haasBringingWebSpeed2017}。间接函数跳转则是在函数需要在执行时动态确定
+	% （如C++的多态或函数指针赋值后调用的形式）才会被转译出来\cite{Daniel2019DiscoveringVI}。
+
+	% \textcite{narayanSwivelHardeningWebAssembly}指出 Spectre 推测执行攻击能绕过 wasm 的内存隔离机制。
+
+
+	%%%参考文献
+	\newpage
+	\nocite{*}
+	\addcontentsline{toc}{section}{参考文献}
+	\wuhao{
+		\printbibliography[
+			heading=bibliography,
+			title={\centerline{\sanhao\hei{参考文献}}\vspace{-1em}},
+		]
+	}
+	\end{CJK*}
+	\end{sloppypar}
+\end{document}

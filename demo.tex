@@ -7,7 +7,7 @@
 
 \input{format/package}
 \input{format/setup}
-\input{format/cover}
+\input{format/cover_ref}
 \graphicspath{{figures/}}
 
 \addbibresource[location=local]{refer.bib}
@@ -37,12 +37,12 @@
         \mainmatter
         \begin{sloppypar} % 防止文字出界而自动调整的环境。
             \setcounter{page}{1}
-            \include{sections/1intro}
-            \include{sections/2relatedwork}
-            \include{sections/3ourwork}
-            \include{sections/4experiment}
-            \include{sections/5discussion}
-            \include{sections/6conclusion}
+            \include{sections/1intro_ref}
+            \include{sections/2relatedwork_ref}
+            \include{sections/3ourwork_ref}
+            \include{sections/4experiment_ref}
+            \include{sections/5discussion_ref}
+            \include{sections/6conclusion_ref}
             %%% 参考文献
             \newpage\nocite{*}
             \addcontentsline{toc}{section}{参考文献}
@@ -53,7 +53,7 @@
                 ]
             }
             %%% 致谢和附录
-            \xiaosi{\include{sections/acknowledge}}
+            \xiaosi{\include{sections/acknowledge_ref}}
         \end{sloppypar}
     \end{CJK*}
 \end{document}
