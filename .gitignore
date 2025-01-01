@@ -16,7 +16,6 @@
 .dist
 *.fdb_latexmk
 *.fls
-trials/
 
 1intro.tex
 2relatedwork.tex

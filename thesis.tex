@@ -1,9 +1,9 @@
 
 %%%% contact via <kisfg@hotmail.com, haikureimu@hnu.edu.cn>
 % tikzcd 和 dvipdfmx 冲突的处理方法：https://fohte.hateblo.jp/entry/2017/02/03/130829
-% 在documentclass处提供dvipdfmx的选项。
+% 如果要用 latex 编译，则必须要为documentclass提供dvipdfmx的选项。
 % 必须要包含，否则无法插入 png。
-\documentclass[12pt, a4paper, dvipdfmx]{article}
+\documentclass[12pt, a4paper]{article}
 
 \input{format/package}
 \input{format/setup}
@@ -37,6 +37,7 @@
         \mainmatter
         \begin{sloppypar} % 防止文字出界而自动调整的环境。
             \setcounter{page}{1}
+            % 很奇怪，主文件又不受影响。
             \include{sections/1intro}
             \include{sections/2relatedwork}
             \include{sections/3ourwork}
