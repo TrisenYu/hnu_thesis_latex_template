@@ -3,13 +3,12 @@
 % tikzcd 和 dvipdfmx 冲突的处理方法：https://fohte.hateblo.jp/entry/2017/02/03/130829
 % 在documentclass处提供dvipdfmx的选项。
 % 必须要包含，否则无法插入 png。
-\documentclass[12pt, a4paper, dvipdfmx]{article}
+\documentclass[12pt, a4paper]{article}
 
 \input{format/package}
 \input{format/setup}
 \input{format/cover_ref}
 \graphicspath{{figures/}}
-
 \addbibresource[location=local]{refer.bib}
 \begin{document}
     \begin{CJK*}{UTF8}{song}
@@ -37,12 +36,13 @@
         \mainmatter
         \begin{sloppypar} % 防止文字出界而自动调整的环境。
             \setcounter{page}{1}
-            \include{sections/1intro_ref}
-            \include{sections/2relatedwork_ref}
-            \include{sections/3ourwork_ref}
-            \include{sections/4experiment_ref}
-            \include{sections/5discussion_ref}
-            \include{sections/6conclusion_ref}
+            %% TOFIX: output-directory 和 include 冲突，尚未找到解决方案。
+            \input{sections/1intro_ref}
+            \input{sections/2relatedwork_ref}
+            \input{sections/3ourwork_ref}
+            \input{sections/4experiment_ref}
+            \input{sections/5discussion_ref}
+            \input{sections/6conclusion_ref}
             %%% 参考文献
             \newpage\nocite{*}
             \addcontentsline{toc}{section}{参考文献}
@@ -53,7 +53,7 @@
                 ]
             }
             %%% 致谢和附录
-            \xiaosi{\include{sections/acknowledge_ref}}
+            \xiaosi{\input{sections/acknowledge_ref}}
         \end{sloppypar}
     \end{CJK*}
 \end{document}

@@ -1,31 +1,41 @@
-mainfile:=thesis
-proposalfile:=proposal
-demofile:=demo
+MAIN:=thesis
+PRO:=proposal
+DEMO:=demo
+SECT:=sections
 
-COMPILER:=latex
+# 终于成功换用 pdflatex 了。
+COMPILER:=pdflatex
 LD_FLAG:=-src -interaction=nonstopmode -shell-escape -file-line-error
+AUX_FOLDER:=--aux-directory=
+OUT_FOLDER:=--output-directory=
 CITATION_GEN:=biber
-DVI2PDF:=dvipdfmx
+# DVI2PDF:=dvipdfmx
 
 define tex2pdf
-	-$(COMPILER) $(LD_FLAG) $(1).tex
-	-$(CITATION_GEN) "$(1)"
-	-$(COMPILER) $(LD_FLAG) $(1).tex
-	-$(DVI2PDF) "$(1)"
+	-$(COMPILER) $(AUX_FOLDER)$(2) $(OUT_FOLDER)$(2) $(LD_FLAG) $(1).tex
+	-$(CITATION_GEN) "$(2)/$(1)"
+	-$(COMPILER) $(AUX_FOLDER)$(2) $(OUT_FOLDER)$(2) $(LD_FLAG) $(1).tex
+	-$(COMPILER) $(AUX_FOLDER)$(2) $(OUT_FOLDER)$(2) $(LD_FLAG) $(1).tex
 endef
 
-# 首次编译索引表，则需要 make 两遍。
+define switch_and_clean_aux
+	latexmk -C -cd $(1)
+endef
 
 all: 
-	$(call tex2pdf,$(mainfile))
+	$(call tex2pdf,$(MAIN),.)
 
+# TODO: 不是 thesis.tex 的那两个清不干净
 clean:
-	latexmk -c
+	-latexmk -C
+	-$(call switch_and_clean_aux,./$(DEMO)/)
+	-$(call switch_and_clean_aux,./$(PRO)/)
+	-$(call switch_and_clean_aux,./$(SECT)/)
 
 pro:
-	$(call tex2pdf,$(proposalfile))
+	$(call tex2pdf,$(PRO),./$(PRO))
 
 demo:
-	$(call tex2pdf,$(demofile))
+	$(call tex2pdf,$(DEMO),./$(DEMO))
 
-.PHONY: clean clean report demo
+.PHONY: all clean pro demo
