@@ -3,13 +3,17 @@ PRO:=proposal
 DEMO:=demo
 SECT:=sections
 
-# 终于成功换用 pdflatex 了。
 COMPILER:=pdflatex
 LD_FLAG:=-src -interaction=nonstopmode -shell-escape -file-line-error
 AUX_FOLDER:=--aux-directory=
 OUT_FOLDER:=--output-directory=
 CITATION_GEN:=biber
 # DVI2PDF:=dvipdfmx
+
+RM:=rm
+ifeq ($(OS),Windows_NT)
+	RM=del
+endif
 
 define tex2pdf
 	-$(COMPILER) $(AUX_FOLDER)$(2) $(OUT_FOLDER)$(2) $(LD_FLAG) $(1).tex
@@ -18,24 +22,48 @@ define tex2pdf
 	-$(COMPILER) $(AUX_FOLDER)$(2) $(OUT_FOLDER)$(2) $(LD_FLAG) $(1).tex
 endef
 
-define switch_and_clean_aux
+define aux_cleaner
 	latexmk -C -cd $(1)
 endef
 
+define sh_remove
+	-cd $(1) &&\
+    $(RM) $(1).aux $(1).bbl $(1).bcf\
+          $(1).blg $(1).lof $(1).lot\
+          $(1).out $(1).run.xml\
+          $(1).toc $(1).log &&\
+    cd ..
+endef
+
+# 注意到谁在前面谁先执行。
+
+phony:=all
 all: 
 	$(call tex2pdf,$(MAIN),.)
 
-# TODO: 不是 thesis.tex 的那两个清不干净
-clean:
-	-latexmk -C
-	-$(call switch_and_clean_aux,./$(DEMO)/)
-	-$(call switch_and_clean_aux,./$(PRO)/)
-	-$(call switch_and_clean_aux,./$(SECT)/)
-
+phony += pro
 pro:
 	$(call tex2pdf,$(PRO),./$(PRO))
 
+phony += demo
 demo:
 	$(call tex2pdf,$(DEMO),./$(DEMO))
 
-.PHONY: all clean pro demo
+phony += clean
+clean:
+	-latexmk -C
+	-$(call aux_cleaner,./$(SECT)/)
+	@$(call sh_remove,$(PRO))
+	@$(call sh_remove,$(DEMO))
+
+phony += help
+help:
+	@$(info clean: clean aux-file)
+	@$(info all: generate thesis.pdf)
+	@$(info pro: generate proposal.pdf)
+	@$(info demo: generate demo.pdf)
+	@$(info help: description of latent commands)
+
+
+.PHONY: $(phony)
+.ignore: clean

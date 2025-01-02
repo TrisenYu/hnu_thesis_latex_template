@@ -197,7 +197,7 @@
     \pagenumbering{Roman}
 } 
 \newcommand{\mainmatter} {
-    \clearpage{\cleardoublepage}
+    \clearpage
     \pagenumbering{arabic}
 }
 
@@ -255,8 +255,6 @@
     \def\faculty#1{\def\@faculty{\centerline{\xiaosi\song{#1}}}}\def\@faculty{}
     % 指导老师
     \def\teacher#1{\def\@teacher{\centerline{\xiaosi\song{#1}}}}\def\@teacher{}
-    % 文章日期
-    \def\date#1{\def\@date{#1}}\def\@date{}
     %%% 页眉配置
     % 页眉说明
     \def\heading#1{\def\@heading{#1}}\def\@heading{}
@@ -270,7 +268,21 @@
     \def\ckeywords#1{\def\@ckeywords{#1}}\def\@ckeywords{}
     % 英文关键词
     \def\ekeywords#1{\def\@ekeywords{#1}}\def\@ekeywords{}
-
+    \def\setHeaderAndFoot{
+        \def\headrule{ 
+            \if @fancyplain
+                \let\headrulewidth\plainheadrulewidth
+            \fi
+            \hrule\@height 1.0pt \@width\headwidth\vskip1pt % 上面线为1pt粗
+            \hrule\@height 0.5pt \@width\headwidth          % 下面0.5pt粗
+            \vskip-2\headrulewidth\vskip-1pt                % 两条线的距离1pt
+            \vspace{7mm}                                    % 双线与下面正文之间的垂直间距
+        }
+        \pagestyle{fancy}
+        \fancyhf{} % 清空所有fancy样式，方便使页眉左部和右部置空
+        \chead{\song\xiaowu{\@heading}}
+        \cfoot{\song\wuhao{\thepage}}
+    }\def\@setHeaderAndFoot
     % 必须存在此句。
     \newlength{\@title@width}
     
@@ -309,19 +321,7 @@
         \clearpage
     
         %% 从此往后页眉的格式固定。
-        \def\headrule { 
-            \if @fancyplain
-                \let\headrulewidth\plainheadrulewidth
-            \fi
-            \hrule\@height 1.0pt \@width\headwidth\vskip1pt % 上面线为1pt粗
-            \hrule\@height 0.5pt \@width\headwidth          % 下面0.5pt粗
-            \vskip-2\headrulewidth\vskip-1pt                % 两条线的距离1pt
-            \vspace{7mm}                                    % 双线与下面正文之间的垂直间距
-        }
-        \pagestyle{fancy}
-        \fancyhf{}                      % 清空所有fancy样式，方便使页眉左部和右部置空
-        \chead{\song\xiaowu{\@heading}} % 页眉上的字体大小
-        \cfoot{\song\wuhao{\thepage}}   % 页码大小
+        \setHeaderAndFoot
 
         %%% 插入目录之中
         %% 授权书
@@ -388,7 +388,7 @@
             \newline\noindent
             {\xiaosi\textbf{Key Words:} \@ekeywords}
         }
-        \newpage
+        \clearpage
         %% 图表以及目录
         \setlength{\tabcolsep}{0.5em} % 做完上述部分后，表格默认每个格子 0.5em 宽
     }
@@ -440,12 +440,7 @@
         \end{spacing}
         \newpage
     }
-    \fancyhf{} % 清空所有fancy样式，方便使页眉左部和右部置空
-    \pagestyle{fancy}
-    \fancypagestyle{plain}{
-        \fancyhead[C]{\song\xiaowu \@heading}
-        \fancyfoot[C]{\song\xiaowu \thepage}
-    }
+    \setHeaderAndFoot
 \makeatother
 
 \setlength{\bibsep}{0em} % 参考文献项目间距
