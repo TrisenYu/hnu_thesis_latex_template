@@ -66,4 +66,4 @@ help:
 
 
 .PHONY: $(phony)
-.ignore: clean
+.IGNORE: clean
