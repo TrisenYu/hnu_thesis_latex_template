@@ -4,12 +4,12 @@
 \usepackage{caption}
 \usepackage[
     figuresright
-] {rotating}                % 用于旋转某些东西，如长表格。
+] {rotating}                % 用于旋转某些东西，如长表格
 \usepackage[
     includeheadfoot,
     % driver=dvipdfmx
-] {geometry}                % 调节页边距。
-\usepackage{tikz-cd}        % 交换图和 tikzpicture 手动绘图的需求。
+] {geometry}                % 调节页边距
+\usepackage{tikz-cd}        % 交换图和 tikzpicture 手动绘图的需求
 \usepackage{tikz}
 \usetikzlibrary {
     decorations.pathmorphing,
@@ -71,12 +71,11 @@
 \usepackage{enumitem}       % 使用enumitem宏包,改变列表项的格式
 \usepackage{calc}           % 长度可以用+ - * / 进行计算
 
-% \usepackage[
-%     amsmath, 
-%     thmmarks, 
-%     hyperref
-% ] {ntheorem}            
-% 定理类环境宏包，其中 amsmath 选项用来兼容 AMS LaTeX 的宏包
+\usepackage[
+    amsmath, 
+    thmmarks, 
+    hyperref
+] {ntheorem}                % 定理类环境宏包，其中 amsmath 选项用来兼容 AMS LaTeX 的宏包
 \usepackage{indentfirst}    % 首行缩进宏包
 \usepackage{CJKutf8}        % 用在UTF8编码环境下，它可以自动调用CJK，同时针对UTF8编码作了设置
 \usepackage{CJK}
@@ -93,7 +92,7 @@
     maxcitenames=3,         % 最多输出三个。
     mincitenames=1,
     maxbibnames=1,
-    minbibnames=1,          % 某些时候，参考文献种最多只有 1 个作者。
+    minbibnames=1,          % 某些时候，参考文献种最多只有 1 个作者
     uniquelist=false,
     uniquename=false,
     doi=false,              % doi 有时可能也不要了。
@@ -123,6 +122,7 @@
     urlcolor=black,
     breaklinks=true
 ] {hyperref}
+\usepackage{url}
 \usepackage{ifthen}         % 条件编译可能会用得到
 \usepackage{threeparttable} % 编制复杂表格
 \usepackage[
@@ -139,9 +139,14 @@
     scalerel,
     makecell
 }
-\usepackage{microtype}      % 不要拿掉，控制连字的关闭。
+\usepackage{microtype}      % 不要拿掉，控制连字的关闭
 \usepackage{tabularray}
 \usepackage{moreverb}
 \usepackage{keyval}
 \usepackage{latexsym}
 % \usepackage{gnuplottex}
+%% https://stackoverflow.com/a/3527521
+\usepackage[
+    bottom                  % 固定脚注于页面底部
+]{footmisc}
+\usepackage{pgfplots}       % 数据分析绘制图表
