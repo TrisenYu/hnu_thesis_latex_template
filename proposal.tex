@@ -17,7 +17,7 @@
 	\begin{sloppypar} % 防止文字出界而自动调整的环境。
 	%%% {UTF8}{hei}可谓是超级难看了
 	%% 权当提供一个转换到 word 的中介得了
-	\begin{CJK*}{UTF8}{song}
+	% \begin{CJK*}{UTF8}{song}
 	无论是extended Berkeley Packet Filter（eBPF，扩展的伯克利包过滤器）还是Web Assembly（wasm，网络汇编语言），两者在IoT
 	\cite{zhangResearchWebAssemblyRuntimes2024}和Web\cite{9110434, TCPdump, 10.1145/3371038}等领域得到了大量的应用。
 	eBPF 和 wasm 两者作为新兴的轻量级代码沙盒技术，在实现上各有其相似和独特之处。
@@ -144,7 +144,7 @@
 	% \cite{rayOverviewWebAssemblyIoT2023,webassemblycommunitygroupWebAssemblySpecification2024,Daniel2019DiscoveringVI}；
 	% 局部变量存储于一个受到保护的调用栈上，调用栈保存有函数的返回地址。wasm 的控制流完整性，包括直接函数调用检查、
 	% 函数返回检查以及间接函数调用检查三个方面\cite{WebAssemblySummaryOnSecurity,Daniel2019DiscoveringVI}。
-    % wasm 的函数并不能执行任意地址跳转。函数地址被记录在一张表上，调用函数需要通过提供表上的索引用于检索到对应的函数地址才能完成跳转
+	% wasm 的函数并不能执行任意地址跳转。函数地址被记录在一张表上，调用函数需要通过提供表上的索引用于检索到对应的函数地址才能完成跳转
 	% \cite{skanehiraWrittingWasmRuntime2024,haasBringingWebSpeed2017}。间接函数跳转则是在函数需要在执行时动态确定
 	% （如C++的多态或函数指针赋值后调用的形式）才会被转译出来\cite{Daniel2019DiscoveringVI}。
 
@@ -161,6 +161,6 @@
 			title={\centerline{\sanhao\hei{参考文献}}\vspace{-1em}},
 		]
 	}
-	\end{CJK*}
+	% \end{CJK*}
 	\end{sloppypar}
 \end{document}

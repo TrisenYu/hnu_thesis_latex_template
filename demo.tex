@@ -11,52 +11,51 @@
 \graphicspath{{figures/}}
 \addbibresource[location=local]{refer.bib}
 \begin{document}
-    \begin{CJK*}{UTF8}{song}
-        \frontmatter
-        %%% 前几页必要内容
-        \makethesisheaders
-        %%% 目录
-        \tableofcontents
-        \newpage
-        %%% 插图索引 可选项
-        % 如果图片存在，则渲染
-        \iftotalfigures {
-            \addcontentsline{toc}{section}{插图索引}
-            \listoffigures
-            \clearpage
-        }\fi
-        %%% 附表索引 可选项
-        % 如果表格存在，则渲染
-        \iftotaltables {
-            \addcontentsline{toc}{section}{附表索引}
-            \listoftables
-            \clearpage
-        }\fi
-        %%% 正文
-        \mainmatter
-        \begin{sloppypar} % 防止文字出界而自动调整的环境。
-            \setcounter{page}{1}
-            %% TOFIX: output-directory 和 include 冲突，尚未找到解决方案。
-            \input{sections/1intro_ref}
-            \input{sections/2relatedwork_ref}
-            \input{sections/3ourwork_ref}
-            \input{sections/4experiment_ref}
-            \input{sections/5discussion_ref}
-            \input{sections/6conclusion_ref}
+	%% linux 下不可用 CJK
+    \frontmatter
+    %%% 前几页必要内容
+    \makethesisheaders
+    %%% 目录
+    \tableofcontents
+    \newpage
+    %%% 插图索引 可选项
+    % 如果图片存在，则渲染
+    \iftotalfigures {
+        \addcontentsline{toc}{section}{插图索引}
+        \listoffigures
+        \clearpage
+    }\fi
+    %%% 附表索引 可选项
+    % 如果表格存在，则渲染
+    \iftotaltables {
+        \addcontentsline{toc}{section}{附表索引}
+        \listoftables
+        \clearpage
+    }\fi
+    %%% 正文
+    \mainmatter
+    \begin{sloppypar} % 防止文字出界而自动调整的环境。
+        \setcounter{page}{1}
+        %% TOFIX: output-directory 和 include 冲突，尚未找到解决方案。
+        \input{sections/1intro_ref}
+        \input{sections/2relatedwork_ref}
+        \input{sections/3ourwork_ref}
+        \input{sections/4experiment_ref}
+        \input{sections/5discussion_ref}
+        \input{sections/6conclusion_ref}
 
-            %%% 参考文献
-            \newpage\nocite{*}
-            \addcontentsline{toc}{section}{参考文献}
-            \wuhao{
-                \printbibliography[
-                    heading=bibliography,
-                    title={\centerline{\sanhao\hei{参考文献}}\vspace{-1em}},
-                ]
-            }
-            %%% 致谢和附录
-            \clearpage
-            \xiaosi{\input{sections/acknowledge_ref}}
-            \xiaosi{\input{sections/appendix_ref}}
-        \end{sloppypar}
-    \end{CJK*}
+        %%% 参考文献
+        \newpage\nocite{*}
+        \addcontentsline{toc}{section}{参考文献}
+        \wuhao{
+            \printbibliography[
+                heading=bibliography,
+                title={\centerline{\sanhao\hei{参考文献}}\vspace{-1em}},
+            ]
+        }
+        %%% 致谢和附录
+        \clearpage
+        \xiaosi{\input{sections/acknowledge_ref}}
+        \xiaosi{\input{sections/appendix_ref}}
+    \end{sloppypar}
 \end{document}

@@ -3,12 +3,14 @@ PRO:=proposal
 DEMO:=demo
 SECT:=sections
 
-COMPILER:=pdflatex
-LD_FLAG:=-src -interaction=nonstopmode -shell-escape -file-line-error
-AUX_FOLDER:=--aux-directory=
+# 全平台改用 xelatex 应该能用。至少Windows和Linux都测了。
+COMPILER:=xelatex
+LD_FLAG:=-src -interaction=batchmode -shell-escape -file-line-error
 OUT_FOLDER:=--output-directory=
+# 非 -draftmode 而是 --no-pdf, -draftmode 是 pdflatex 的做法。
+# https://tex.stackexchange.com/a/219815
+DRAFT_MODE:=--no-pdf
 CITATION_GEN:=biber
-# DVI2PDF:=dvipdfmx
 
 RM:=rm
 ifeq ($(OS),Windows_NT)
@@ -16,10 +18,10 @@ ifeq ($(OS),Windows_NT)
 endif
 
 define tex2pdf
-	-$(COMPILER) $(AUX_FOLDER)$(2) $(OUT_FOLDER)$(2) $(LD_FLAG) $(1).tex
+	-$(COMPILER) $(OUT_FOLDER)$(2) $(LD_FLAG) $(DRAFT_MODE) $(1).tex
 	-$(CITATION_GEN) "$(2)/$(1)"
-	-$(COMPILER) $(AUX_FOLDER)$(2) $(OUT_FOLDER)$(2) $(LD_FLAG) $(1).tex
-	-$(COMPILER) $(AUX_FOLDER)$(2) $(OUT_FOLDER)$(2) $(LD_FLAG) $(1).tex
+	-$(COMPILER) $(OUT_FOLDER)$(2) $(LD_FLAG) $(DRAFT_MODE) $(1).tex
+	-$(COMPILER) $(OUT_FOLDER)$(2) $(LD_FLAG) $(1).tex
 endef
 
 define aux_cleaner
@@ -31,7 +33,7 @@ define sh_remove
     $(RM) $(1).aux $(1).bbl $(1).bcf\
           $(1).blg $(1).lof $(1).lot\
           $(1).out $(1).run.xml\
-          $(1).toc $(1).log &&\
+          $(1).toc $(1).log $(1).thm &&\
     cd ..
 endef
 
@@ -47,6 +49,7 @@ pro:
 
 phony += demo
 demo:
+	echo $(OS)
 	$(call tex2pdf,$(DEMO),./$(DEMO))
 
 phony += clean
@@ -64,6 +67,10 @@ help:
 	@$(info demo: generate demo.pdf)
 	@$(info help: description of latent commands)
 
+phony += comptest
+comptest:
+	echo $(OS)
+	$(call tex2pdf,$(DEMO),./os-test)
 
 .PHONY: $(phony)
 .IGNORE: clean
