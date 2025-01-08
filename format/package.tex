@@ -26,14 +26,17 @@
     arrows.meta
 }
 
-%% 这里好像可以直接设的
-% 左边距 3cm
-% 右边距 2cm
-% left=3cm,
-% right=2cm,
+%%% 页边距定义
+% 上边距：30mm；下边距：25mm；左边距：30mm；右边距：20mm；行间距为1.5倍行距。
+% 上边距 3cm
+% 下边距 2.5cm
+% 页眉到上边缘的距离 1.5cm
+% 页脚到下边缘的距离 1.75cm，但是实际看有点远，改用1.8
 \geometry{
     left=3cm,
-    right=2cm
+    right=2cm,
+    top=1.5cm,
+    bottom=1.8cm
 }
 \usepackage{enumerate}      % 罗列编号用的宏包
 \usepackage{titlesec}       % 控制标题的宏包
@@ -71,14 +74,14 @@
 \usepackage{enumitem}       % 使用enumitem宏包,改变列表项的格式
 \usepackage{calc}           % 长度可以用+ - * / 进行计算
 
-\usepackage[
-    amsmath, 
-    thmmarks, 
-    hyperref
-] {ntheorem}                % 定理类环境宏包，其中 amsmath 选项用来兼容 AMS LaTeX 的宏包
+% \usepackage[
+%     amsmath, 
+%     thmmarks, 
+%     hyperref
+% ] {ntheorem}                % 定理类环境宏包，其中 amsmath 选项用来兼容 AMS LaTeX 的宏包
 \usepackage{indentfirst}    % 首行缩进宏包
-\usepackage{CJKutf8}        % 用在UTF8编码环境下，它可以自动调用CJK，同时针对UTF8编码作了设置
-\usepackage{CJK}
+%% linux 下 xeLatex 不可以用 CJK 和 CJKutf8。
+%% 取消掉了好像也对windows没什么影响。
 \usepackage{fancyhdr}       % 页眉页脚
 \usepackage{lastpage}
 \usepackage{layout}
@@ -92,7 +95,7 @@
     maxcitenames=3,         % 最多输出三个。
     mincitenames=1,
     maxbibnames=1,
-    minbibnames=1,          % 某些时候，参考文献种最多只有 1 个作者
+    minbibnames=1,          % 某些时候，参考文献中最多只有 1 个作者
     uniquelist=false,
     uniquename=false,
     doi=false,              % doi 有时可能也不要了。
@@ -149,4 +152,8 @@
 \usepackage[
     bottom                  % 固定脚注于页面底部
 ]{footmisc}
-\usepackage{pgfplots}       % 数据分析绘制图表
+\usepackage{
+    pgfplots,
+    % pgfplotstable           % 数据分析绘制图表
+    siunitx                 % 国际单位制
+}

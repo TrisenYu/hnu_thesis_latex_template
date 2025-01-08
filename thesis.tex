@@ -12,50 +12,51 @@
 
 \addbibresource[location=local]{refer.bib}
 \begin{document}
-    \begin{CJK*}{UTF8}{song}
-        \frontmatter
-        %%% 前几页必要内容
-        \makethesisheaders
-        %%% 目录
-        \tableofcontents
-        \newpage
-        %%% 插图索引 可选项
-        % 如果图片存在，则渲染
-        \iftotalfigures {
-            \addcontentsline{toc}{section}{插图索引}
-            \listoffigures
-            \clearpage
-        }\fi
-        %%% 附表索引 可选项
-        % 如果表格存在，则渲染
-        \iftotaltables {
-            \addcontentsline{toc}{section}{附表索引}
-            \listoftables
-            \clearpage
-        }\fi
-        %%% 正文
-        \mainmatter
-        \begin{sloppypar} % 防止文字出界而自动调整的环境。
-            \setcounter{page}{1}
-            % 很奇怪，主文件又不受影响。
-            \include{sections/1intro}
-            \include{sections/2relatedwork}
-            \include{sections/3ourwork}
-            \include{sections/4experiment}
-            \include{sections/5discussion}
-            \include{sections/6conclusion}
-            %%% 参考文献
-            \newpage\nocite{*}
-            \addcontentsline{toc}{section}{参考文献}
-            \wuhao{
-                \printbibliography[
-                    heading=bibliography,
-                    title={\centerline{\sanhao\hei{参考文献}}\vspace{-1em}},
-                ]
-            }
-            %%% 致谢和附录
-            \xiaosi{\include{sections/acknowledge}}
-            \xiaosi{\include{sections/appendix}}
-        \end{sloppypar}
-    \end{CJK*}
+    %%% 前几页必要内容
+    \makethesisheaders
+    %%% 目录
+    \tableofcontents
+    \newpage
+    %%% 插图索引 可选项
+    % 如果图片存在，则渲染
+    \iftotalfigures {
+        \addcontentsline{toc}{section}{插图索引}
+        \listoffigures
+        \clearpage
+    }\fi
+    %%% 附表索引 可选项
+    % 如果表格存在，则渲染
+    \iftotaltables {
+        \addcontentsline{toc}{section}{附表索引}
+        \listoftables
+        \clearpage
+    }\fi
+    %%% 正文
+    %% 不像封面到目录页，这里要手动加 mainmatter
+    \mainmatter
+    \begin{sloppypar} % 防止文字出界而自动调整的环境。
+        \setcounter{page}{1}
+        % 很奇怪，主文件又不受影响。
+        \include{sections/1intro}
+        \include{sections/2relatedwork}
+        \include{sections/3ourwork}
+        \include{sections/4experiment}
+        \include{sections/5discussion}
+        \include{sections/6conclusion}
+        %%% 参考文献
+        \newpage\nocite{*}
+        \addcontentsline{toc}{section}{参考文献}
+        \wuhao{
+            \printbibliography[
+                heading=bibliography,
+                title={\centerline{\sanhao\hei{参考文献}}\vspace{-1em}},
+            ]
+        }
+        %%% 致谢和附录
+        %% todo: 按需渲染改为一定的逻辑判断。
+        \xiaosi{
+            \include{sections/acknowledge}
+            \input{sections/appendix}
+        }
+    \end{sloppypar}
 \end{document}
