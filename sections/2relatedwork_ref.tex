@@ -1,120 +1,246 @@
 \section{相关工作}
 \label{section:relatedWork}
-\subsection{eBPF}
-    eBPF 是一项基于事件驱动的 Linux 内核拓展技术，支持动态地将用户编写的代码通过 eBPF 虚拟机加载到内核态上执行，
-    而无需修改内核代码、插入内核模块或重启系统
-    \cite{sunFindingCorrectnessBugs2024, YIHeCrossContainer, riceLearningEBPFProgramming2023, }。
-    这一直接运行于内核态而无需通过切换用户态和内核态之间的能力，既减少了数据复制次数
-    又扩展了内核的功能\cite{YIHeCrossContainer, LinuxEbpfProtection}；
-    eBPF 的这种灵活性被用于加速特定的任务\cite{HaoValidating}，
-    如网络包过滤\cite{10.1145/3371038, TCPdump}、网络流量监控\cite{9110434}以及
-    文件数据存储\cite{kernelStorage}和 FPGA 接收网络数据流\cite{258973}等。
+	\subsection{高级编程语言}
+		% https://github.com/openjdk/jdk/blob/master/src/hotspot/share/compiler/compileTask.cpp
+		\subsubsection{Java字节码解释器}
+		Java虚拟机(JVM)转译和执行由Scala，Java，Groovy和Kotlin等高级编程语言编译得到的Java字节码。
+		且当前的JVM系统由不同的组织和公司所开发，如Oracle开发的HotSpot\cite{OracleHotspot}，
+		阿里巴巴开发的DragonWell\cite{DragonWell}和IBM开发的OpenJ9\cite{IBMOpenJ9}。
 
-    \subsubsection{eBPF 运行流程}
-        eBPF 的运行流程如图 所示。
-        用户首先需要通过相应的 eBPF 框架来编写程序，经过如LLVM/clang的编译工具链
-        编译为 eBPF 字节码\cite{riceLearningEBPFProgramming2023}。
-        eBPF 字节码再通过 bpf() 加载到内核态\cite{riceLearningEBPFProgramming2023}，
-        并创建 eBPF 表来维护同一 eBPF 程序的执行状态和 eBPF 程序之间的状态分享
-        \cite[2]{bensonNetEditOrchestrationPlatform2024}。
-        未经过运行的 eBPF 字节码会由 eBPF 静态验证器来实施检查
-        \cite{zhengBpftimeUserspaceEBPF2023, HaoValidating}。
-        检查内容包括穷举所有可能的执行情况，eBPF 程序的内存访问情况，程序能否结束，循环次数，无效指令等
-        \cite{286467, riceLearningEBPFProgramming2023}。
-        验证程序不会对内核造成影响后，最后经由 JIT 编译器编译为可执行的机器码\cite{FuzzOnEBPF}，
-        并被加载到内核环境下的虚拟机中等待特定事件触发执行\cite{maoMerlinMultitierOptimization2024}。
-        此外，eBPF 还可以依靠 Linux 提供的 Kprobe 技术将程序插入到几乎任何内核函数所在的位置
-        \cite{riceLearningEBPFProgramming2023}。
-    
-    \subsubsection{eBPF 字节码指令集}        
-        eBPF 程序在运行时只能操控 11 个 64 位寄存器，为 R0 至 R10，其功能分别是：
-        \begin{itemize}
-            \item[(1)] R0：保存函数返回值和eBPF程序退出值；
-            \item[(2)] R1$\sim$R5：保存函数调用参数。如参数少于五个不会使用所有寄存器，超出五个则会以压栈的形式传参；
-            \item[(3)] R6$\sim$R9：保存调用函数的上下文；
-            \item[(4)] R10： 只读的栈帧寄存器，用于访问栈。
-        \end{itemize}
-        % eBPF结构体
-        同时，eBPF 程序能在一个固定大小的栈上执行四种基本运算：访存、算术、分支判断和调用\cite{gershuniSimplePreciseStatic2019}。
+		因JVM功能性复杂且规模巨大\cite{sonoyamaPerformanceStudyKotlin2021}，所以潜在的缺陷不可避免\cite{jiaDetectingJVMJIT2023}。
+		Jia,et al.\cite{jiaDetectingJVMJIT2023}观察到HotSpot公开的缺陷报告在每年的总数上虽然下降，但其即时编译器部分出现的缺陷却显著增加，
+		有的甚至可以引起JVM的崩溃\cite{JVMcrashReport}。
 
+		Chaliasos,et al.\cite{chaliasosWelltypedProgramsCan2021}通过按照表 \ref{jvmBugTracker} 所示的缺陷追踪网站，
+		从中收集并整理出 4153 个已被修复且由测试用例确保不会再重现的缺陷；其工作还随机挑选了320个缺陷，结合开发者讨论以及缺陷报告，
+		总结形成了五类的缺陷以及其根因，结果如图 \ref{JVMbugsRootCause} 所示。
 
-    \subsubsection{eBPF 存在的问题}
-        Mohamed Mohamed Husain 等人撰写的文献\parencite{mohamedUnderstandingSecurityLinux2023}
-        汇总整理了截至 2023 年 8 月为止的 eBPF 的漏洞报告列表。
-        在比重上，eBPF-Helper(eBPF内核帮助函数) 贡献了 16.7\% 的CVE；
-        eBPF即时编译器贡献了 5.6\%；eBPF核心贡献了 11.1\%；
-        eBPF验证器则占比最大，为 44.4\%，其它则占 22.2\%。
-        
-        因内核稳定性需要，eBPF 规范不支持浮点运算\cite{10.1145/3674213.3674219}，也不允许死循环的存在
-        \cite{riceLearningEBPFProgramming2023}；还会使用 eBPF 验证器检查 eBPF 程序中是否包含潜在的不安全操作和
-        不可接受的性能开销\cite{PKSeBPFIsolation}。
-        而 eBPF 的验证器的处理逻辑，截至 2024 年，就产生了 eBPF 本身超过半数的 CVE\cite{hive}。
-        而且，当前的 eBPF 在验证 eBPF 程序上有所局限。eBPF 的调用栈最大深度只允许为 512
-        \cite[30]{riceLearningEBPFProgramming2023}，且经 JIT
-        编译后的指令数对于非特权程序最多不能超过 4096 条，特权程序不能超过 100 万条
-        \cite{limSafeBPFHardwareassistedDefenseindepth2024}；
-        eBPF 的验证器存在假阳性误报\cite{hive, gershuniSimplePreciseStatic2019}以及李浩和古金宇等人在文献
-        \parencite[2,5,6]{PKSeBPFIsolation}指出的假阴性（即验证器自身的漏洞被利用于恶意程序的绕过）问题。
+		\begin{table}[H]
+			\centering
+			\caption{JVM类型缺陷的收集结果\parencite{chaliasosWelltypedProgramsCan2021}}
+			\resizebox{\linewidth}{40pt}{
+				\begin{tabular}{cccccccc}
+					\specialrule{1pt}{1pt}{1pt}
+					语言 &缺陷追踪网站 &链接 &问题总数 &最早记录时间 &最近记录时间 &缺陷收集 &后-筛选量(post-filtering)\\
+					\hline
+					Java   &Jira  &\url{https://bugs.openjdk.java.net/rest/api/latest/search} 	&10872 	&2004-02-11 &2021-03-26 &1252 &873  \\
+					Scala2 &GitHub  &\url{https://api.github.com/repos/scala/bug} 				&12315 	&2003-05-22 &2021-03-11 &1180 &1067  \\
+					Scala3 &GitHub  &\url{https://api.github.com/repos/lampepfl/dotty} 			&4286 	&2014-02-01 &2021-03-21 &429  &366 \\
+					Kotlin &YouTrack  &\url{https://youtrack.jetbrains.com/api/issues} 			&40998 	&2011-10-28 &2021-04-09 &2189 &1601 \\
+					Groovy &Jira  &\url{https://issues.apache.org/jira/rest/api/2/search} 		&9710 	&2003-09-25 &2021-04-09 &300  &246 \\
+					\specialrule{1pt}{1pt}{1pt}
+				\end{tabular}
+			}
+			\label{jvmBugTracker}
+		\end{table}
+		\begin{figure}[H]
+			\centering
+			\caption{JVM各症状的错误原因分布\parencite{chaliasosWelltypedProgramsCan2021}}
+			\label{JVMbugsRootCause}
+			\pgfplotstableread{
+					index	         aa ee  cc dd    bb
+				类型相关错误       90 4  10  4     21
+				语义分析有误       22 2  30  3     20
+				解析异常          42 1  13  7     14
+				错误控制与报告不当  0  0  0   7     15
+				AST转换不当       5  1  0   0     9
+			}\jvmBugData
+			\begin{tikzpicture}
+				\begin{axis}
+					[
+						xbar,
+						xbar stacked,
+						ytick=data,
+						bar width=0.5cm,
+						ytick style={draw=none},
+						width=0.5\linewidth,
+						xmin=0,
+						bar shift=0pt,
+						axis y line*= none, axis x line*= none,
+						yticklabels from table={\jvmBugData}{index},
+						legend pos=outer north east,
+						legend style={column sep=8pt,},
+						point meta=x,
+					]
+					\addlegendimage{empty legend}\addlegendentry{\xiaowu\bf{JVM症状}}
+					\addplot+ table [x=aa, meta=index, y expr=\coordindex] {\jvmBugData};\addlegendentry{\xiaowu{非预期编译时错误}}
+					\addplot+ table [x=ee, meta=index, y expr=\coordindex] {\jvmBugData};\addlegendentry{\xiaowu{内部编译错误}}
+					\addplot+ table [x=cc, meta=index, y expr=\coordindex] {\jvmBugData};\addlegendentry{\xiaowu{非预期运行时的表现}}
+					\addplot+ table [x=dd, meta=index, y expr=\coordindex] {\jvmBugData};\addlegendentry{\xiaowu{误报}}
+					\addplot+[
+						nodes near coords,
+						every node near coord/.append style={
+							xshift=24pt,
+							black,
+						},
+					] table [x=bb, meta=index, y expr=\coordindex] {\jvmBugData};\addlegendentry{\xiaowu{编译性能问题}}
+				\end{axis}
+			\end{tikzpicture}
+		\end{figure}
 
-        另外，对于字节码解释编译阶段，申文博等人的研究\parencite{interpreterhijeck}
-        表明 eBPF 字节码缺少注入与劫持防护，其解释器在执行时不会检测所执行的程序，其解释流可以劫持并用于
-        执行任意的字节码，可被利用绕过现有的内核代码完整性保护机制，实现内核任意代码注入攻击。
+		其中，AST转换不当是指编译器没有产生和原始输入程序在逻辑上保持一致的转换程序，占JVM缺陷的4.69\%，会引发非预期的编译时错误和内部编译错误。
+		错误控制与报告不当是指JVM解释器正确辨识出程序错误，但错误处理和报告机制没有产生预期的响应结果。错误控制与报告不当占JVM缺陷的6.88\%，
+		此类缺陷都与崩溃和错误报告有关。
+		
+		解析异常则是既不能解析一个标识符（即变量名、方法名或类名），也不能正确地检索到先前解析过的标识名。解析异常也占24.06\%，由两项原因所致：
+		\begin{itemize}
+			\item [(1)] 解析算法执行错误，如\href{https://bugs.openjdk.java.net/browse/JDK-7042566}{JDK-7042566}是在相同函数名下选择参数更多的一个来执行，
+						从而引发错误；
+			\item [(2)] 编译器错误查询；
+			\item [(3)] 作用域状态错误。
+		\end{itemize}
+		
+		语义分析有误则指的是解释器对特定程序代码生成了错误的分析结果，占JVM缺陷的24.06\%，由两方面原因所致：
+		\begin{itemize}
+			\item [(1)] 没有验证检查语义，如问题\href{https://github.com/scala/bug/issues/5878}{Scala2-5878}；
+			\item [(2)] 不正确的分析机制，如问题\href{https://github.com/scala/scala3/pull/4487}{Scala3-4487}。 
+		\end{itemize}
 
+		最后的类型相关错误指的是在前端编译器中运用类型系统内定义的规则以及类型中定义的操作应用于输入的源文件之中，但因实现不当而导致的错误。
+		这一部分的实现不当是造成非预期编译时错误的主要原因，且以40.31\%(129/320)的比例使之成为JVM最常见的缺陷。且细分类型相关错误则仍有三组：
+		\begin{itemize}
+			\item [(1)] 不正确的类型推断和类型变量代替，如缺陷报告所报告的\href{https://youtrack.jetbrains.com/issue/KT-10711}{KT-10711}；
+			\item [(2)] 不正确的类型（强制或非强制）转换，如缺陷报告所报告的\href{https://youtrack.jetbrains.com/issue/KT-9630}{KT-9630}；
+			\item [(3)] 不正确的类型比较和边界计算，如缺陷报告所报告的\href{https://bugs.openjdk.org/browse/JDK-8284879}{JDK-8039214}。
+		\end{itemize}
 
-        这些事实，使得开发者不得不从验证器的角度开发\cite{PKSeBPFIsolation}或重构\cite{HaoValidating}代码，
-        加重了开发者的负担。
+		\subsubsection{JavaScript字节码解释器}
+		JavaScript(JS)是被广泛使用的编程语言之一，其迅速的发展由超过200万个可重用的npm软件库生态所支撑\cite{bhuiyanSecBenchjsExecutableSecurity2023}。
+		JS常作为客户端一侧的web应用使用，驱动了当今世界上超过90\%的web页面\cite{Staicu2018SYNODEUA}。
+		这种广泛的应用使得保证JS的安全性至关重要\cite{eomFuzzingJavaScriptInterpreters2024}。
 
-\subsection{Web Assembly 概况}
-    wasm 是一种为增强Web浏览器性能和拓展性而面向 C，C++，rust 和 Go 等高级编程语言设计的
-    紧凑的\cite{yanUnderstandingPerformanceWebassembly2021,titzerFastInplaceInterpreter2022, Daniel2019DiscoveringVI}
-    中间编译表示规范\cite{wasmCommunityGroup, lehmannWasabiFrameworkDynamically2019, lehmannEverythingOldNew, 
-    bhansaliFirstLookCode2022, waseemIssuesTheirCauses2024}（或称字节码）。
-    wasm 字节码通过如 Emscripten 和 rustc 等 wasm 前端编译器来生成\cite{romanoEmpiricalStudyBugs2021}，
-    wasm 字节码格式紧凑，空间占用小，也因此用于加速处理计算密集型任务，在边缘计算和物联网领域得到了应用
-    \cite{zhangResearchWebAssemblyRuntimes2024}。
-    因这种字节码并不能直接交由处理器译码执行，还需经过解释器或 JIT 或 AoT（Ahead of Time）等后端编译器转译为
-    与当前运行环境下CPU指令集一致的机器码\cite[6]{zhangResearchWebAssemblyRuntimes2024}，wasm 有
-    跨 OS 和处理器架构的可移植性和可扩展性\cite{lehmannEverythingOldNew, waseemIssuesTheirCauses2024, 
-        lehmannWasabiFrameworkDynamically2019, JayProvablySafe,  zhangResearchWebAssemblyRuntimes2024,
-        WebAssemblySummaryOnSecurity, rayOverviewWebAssemblyIoT2023}。
+		JS通过自身的执行引擎解释执行且主流浏览器提供商均实现并管理着其编写的js引擎。Google浏览器使用V8引擎\cite{v8Engine}，
+		Mozilla的火狐浏览器使用SpiderMonkey引擎\cite{MozillaSpiderMonkey}，苹果公司的Safari浏览器使用WebKit\cite{WebKit}中的JS引擎，
+		微软公司开发的Edge使用ChakraCore引擎\cite{ChakraCore}。这些引擎是浏览器的核心\cite{limSOKAnalysisWeb2021}，依次将JS源码转变为字节码和机器码。
 
-    \subsubsection{Web Assembly 内存模型}
-        wasm 的内存模型定义了 wasm 程序的线性内存布局和内存对象。分配给 wasm 的内存页大小总是 64K 的倍数\cite{Daniel2019DiscoveringVI}。
-        为了防止 wasm 程序越界访存，runtime需要对访存行为做边界检查。
-        除此通过沙盒环境来隔离程序的安全机制以外，wasm 还通过自身的内存布局来约束程序的访存操作。
-        这一线性内存并不存储全局变量或者局部变量，全局变量保存在一张固定大小的、
-        名为全局索引空间(Global index space)的表上\cite{rayOverviewWebAssemblyIoT2023, 
-            webassemblycommunitygroupWebAssemblySpecification2024, Daniel2019DiscoveringVI}；
-        局部变量存储于一个受到保护的调用栈上，调用栈保存有函数的返回地址。
-        而在wasm中，线性内存既不可执行，也不可跳转，然而却不允许内存被标记为只读，所有线性内存上的数据均可写
-        \cite{lehmannEverythingOldNew}。
-        操作系统在执行程序时还会运用 ASLR 来随机编排栈、堆区、代码段的地址空间，但 wasm 只有线性内存并且内存编排方式一定
-        \cite{lehmannEverythingOldNew}。
+		而Ziyuan Wang et al.\cite{JSEngineBugs}汇总分析了V8，SpiderMonkey和Chakra三个主流JS引擎截至2022年
+		已有的19019篇缺陷(bugs)报告，16437次修正和805个测试用例以及随机挑选的540个缺陷的根因，发现：
+		\begin{itemize}
+			\item[(1)] Compiler和DOM是存在缺陷最多的部件，结果如表 \ref{JSBuggySrc} 和表 \ref{JSBuggyComponents} 所示；
+			\item[(2)] 小型测试用例足以触发多数漏洞，如V8中70.79\%的触发漏洞测试用例代码行数小于10行；
+			\item[(3)] JS引擎漏洞修复通常不复杂，多数仅需修改少量代码行和文件。如V8中76.86\%的漏洞修复涉及代码行数少于100行；
+			\item[(4)] 对于修复缺陷的时间，V8中有80.33\%的缺陷在半年内修复；SpiderMonkey引擎中有91.9\%的缺陷是在半年内修复，且有4.33\%是需要超过一年的时间才能修复；
+			\item[(5)] 规范语义缺陷是最常见的根因。除此之外，执行缺陷、特性以及函数调用缺陷均比其它类型的缺陷多。与V8和Chakra相比，SpiderMonkey有更多构建错误和更少内存错误。
+		\end{itemize}
 
-        但由于栈上不存在类似于金丝雀的栈溢出检查标记，wasm 有栈溢出风险。
+		研究为确保后续研究的可复现性，还将其成果分别以BSD，MPL，MIT许可证颁布公开于Github上
+		\footnote{\url{https://github.com/njuptw/Empirical-Study-V8}.}
+		\footnote{\url{https://github.com/njuptw/Empirical-Study-SpiderMonkey}.}
+		\footnote{\url{https://github.com/njuptw/Empirical-Study-Chakra}.}。
 
-    \subsubsection{Web Assembly 数据类型}
-        wasm 借鉴了安全语言设计，采用静态强类型系统，只提供四种基本数据类型
-        \cite{wasmCommunityGroup,lehmannEverythingOldNew, groupWebAssemblySpecification2024}，
-        分别为 32 位整数、32 位浮点数、64 位整数和 64 位浮点数。
-        高级语言中的复杂类型，都在编译阶段被编译为这四类基本数据类型。
-    \subsubsection{Web Assembly 运行环境}
-        wasm 字节码以模块为单位，被限制于沙盒环境中加载和运行
-        \cite{johnsonWaVeVerifiablySecure2023,WasmbpfStreamliningEBPF2024,haasBringingWebSpeed2017}。
-        wasm 的运行时可分为 4 个组件
-        \cite{zhangResearchWebAssemblyRuntimes2024, zhangCharacterizingDetectingWebAssembly2024}：
-        \begin{itemize}
-            \item[(1)]  wasm 解释器；
-            \item[(2)]  wasm 后端编译器；
-            \item[(3)]  wasm 运行时环境；
-            \item[(4)]  wasi。
-        \end{itemize}
-        而也有部分 wasm 解释器，如 wasmer\footnote[1]{\url{https://github.com/wasmerio/wasmer}.} 和
-        wasmtime\footnote[2]{\url{https://github.com/bytecodealliance/wasmtime}.}，
-        实现了后端编译器对wasm字节码的转译\cite{zhangResearchWebAssemblyRuntimes2024}。
+		另外，基于JavaScript的Node.js在服务器端和桌面端也得到大量的应用\cite{nodejsAbuse}。
+		因缺乏浏览器的安全沙箱机制，eval和exec注入API可能会引发严重的危害\cite{holtskogSecurityNodejsTheory2023}，
+		同时因开发者对分析工具接受度低且修复意愿不足，模块间还存在责任推诿问题\cite{Staicu2018SYNODEUA}。
 
-        wasm 运行时环境
-        这确保了其运行时安全，并让其成功地于浏览器之外为非网页程序提供沙盒环境
-        \cite{narayanSwivelHardeningWebAssembly, WebAssemblySummaryOnSecurity}。
-    \subsubsection{Web Assembly 存在的问题}
-        截至 2022 年，贺宁宇等人在文献\parencite{caoWASMixerBinaryObfuscation2023}指出某些 Photoshop、工业 CAD 和 3D 游戏借助 wasm 而运行在浏览器上。
+		\begin{table}[H]
+			\centering
+			\caption{2022年JS引擎缺陷在源码文件中的分布\parencite{JSEngineBugs}}
+			\wuhao\songti{
+				\begin{tabular*}{\textwidth}{@{}@{\extracolsep{\fill}}llllll@{}}
+					\specialrule{1pt}{1pt}{1pt}
+					\multicolumn{2}{c}{V8} &\multicolumn{2}{c}{SpiderMonkey} &\multicolumn{2}{c}{Chakra}\\
+					\hline
+					源文件 &缺陷数量 &源码 &缺陷数量 &源码 &缺陷数量\\
+					\hline
+					src/compiler  		&10525 		&js 			&3209 		&lib/Runtime/Library 			&4629 \\
+					src/wasm  			&5070  		&dom 			&3082 		&lib/Runtime/Language 			&1984 \\
+					src/builtins  		&4726  		&browser 		&2129 		&lib/Runtime/Base 				&1170 \\
+					src/heap  			&3630  		&toolkit 		&1956 		&lib/Common/Memory 				&1004 \\
+					src/objects  		&3087  		&third\_party 	&1933 		&lib/Runtime/ByteCode 			&1001 \\
+					src/runtime  		&2571  		&gfx 			&1807 		&lib/Runtime/Types 				&883 \\
+					src/parsing  		&2147  		&devtools 		&1136 		&lib/wabt/src 					&676 \\
+					src/interpreter 	&1779  		&taskcluster 	&1022 		&lib/Runtime/Debug 				&582 \\
+					src/crankshaft  	&1178  		&layout 		&1013 		&lib/WasmReader 				&514 \\
+					src/ast  			&1141  		&intl 			&962  		&lib/Jsrt 						&482 \\
+					src/full-codegen	&1089  		&netwerk 		&926  		&lib/Backend/arm64 				&264 \\
+					src/debug  			&1073  		&modules 		&910  		&lib/Common/DataStructures 		&242 \\
+					src/js  			&1049  		&js/src/jit 	&898  		&lib/common 					&240 \\
+					src/ic  			&1034  		&mobile 		&730  		&lib/Common/Core 				&238 \\
+					src/snapshot  		&1029  		&security 		&699  		&lib/Runtime/PlatformAgnostic 	&219 \\
+					src/objects.cc 		&951   		&widget 		&540  		&lib/Backend/Lower.cpp 			&211 \\
+					src/regexp  		&911   		&dom/media 		&534  		&lib/Backend/amd64 				&187 \\
+					src/arm64  			&872   		&dom/base 		&468  		&lib/Parser/Parse.cpp 			&184 \\
+					src/ia32  			&839   		&dom/ipc 		&367  		&lib/Backend/arm 				&170 \\
+					src/arm  			&811   		&docshell 		&364  		&lib/Common/ConfigFlagsList.h 	&168\\
+					\specialrule{1pt}{1pt}{1pt}
+				\end{tabular*}
+			}
+			\label{JSBuggySrc}
+		\end{table}	
+
+		% Lim,et al.\cite{limSOKAnalysisWeb2021}则是
+		% Provide a detailed comparison of modern browser architectures in terms of sandboxing schemes; 
+		% Present a 10-year longitudinal study on browser bugs;
+		% Categorize browser vulnerabilities with detailed analysis;
+		% Study state-of-the-art generic mitigations on browsers;
+		% Perform a detailed study on a real-world full-chain exploit
+
+		另外，S. Park et al.\cite{parkEmpiricalStudyPrioritizing2019}围绕JS引擎的漏洞问题，实现了CRScope用于分类安全与非安全的缺陷，
+		并评估了Exploitable和AddressSanitizer等工具和模型的性能。其工作所用的训练数据集从Google、Mozilla、Microsoft的Edge与IE浏览器以及GitHub库中收集。
+		内容上包含165个触发安全缺陷的JS Poc以及174个触发非安全缺陷的PoC。同时，S. Park et al.还编译了与PoC对应的JS引擎，
+		构成727个二进制文件以及766个实例，用于训练模型判断崩溃问题是否由安全缺陷所引发。
+		其数据集公开\footnote{\url{https://github.com/WSP-LAB/CRScope}.}以支撑后续研究。
+		
+		其训练模型和测试模型的方式采用了四折时间序列交叉验证方式\cite{kFoldCrossVerification}，
+		将所有安全和非安全漏洞按其在目标二进制文件中的提交日期排序，而后按升序排列崩溃实例并均分成5个桶，以保证每个桶中的崩溃实例数量大致相同(约153个)。
+		评估实验结果显示，S. Park et al.所实现的CRScope则在Chakra、V8 和SpiderMonkey的崩溃实例上以0.85、0.89和0.93的准确度，
+		优于Exniffer的0.51和AddressSanitizer的0.63。
+		
+		\begin{table}[H]
+			\centering
+			\caption{2022年JS引擎中各组件缺陷分布情况\parencite{JSEngineBugs}}
+			\specialrule{1pt}{1pt}{1pt}
+			\wuhao{
+				\begin{subtable}[t]{\textwidth}
+					\caption{Google开发的V8}
+					\begin{tabular*}{\textwidth}{@{}@{\extracolsep{\fill}}llll@{}}
+						\hline
+						\multicolumn{2}{c}{未修复缺陷（5191）} & \multicolumn{2}{c}{已修复缺陷（2827）} \\
+						\hline
+						组件名 & 数量 &组件名称 &数量\\
+						\hline
+						编译器 & 932 & 编译器 & 565 \\
+						WebAssembly & 855 & JS语法 & 553 \\
+						JS语法 & 831 & Webassembly & 518 \\
+						运行时 & 648 & 运行时 & 317 \\
+						基础架构 & 446 & 垃圾回收 & 232 \\
+						垃圾回收 & 435 & 人类语言国际化 & 227 \\
+						人类语言国际化 & 338 & 基础架构 & 182 \\
+						API & 253 & API & 111 \\
+						构建文件 & 170 & 正则匹配 & 82 \\
+						正则匹配 & 166 & 解释器 & 65\\
+					\end{tabular*}
+					\hline
+				\end{subtable}
+				\begin{subtable}[t]{\textwidth}
+					\caption{Mozilla开发的SpiderMonkey}
+					\begin{tabular*}{\textwidth}{@{}@{\extracolsep{\fill}}llll@{}}
+						\hline
+						\multicolumn{2}{c}{未修复缺陷（4499）} & \multicolumn{2}{c}{已修复缺陷（3502）} \\
+						\hline
+						组件名 & 数量 &组件名称 &数量\\
+						\hline
+						DOM &519 &DOM &428  \\
+						常规 &397 &常规 &330  \\
+						JavaScript &294 &JavaScript &252  \\
+						图形 &251 &图形 &211  \\
+						自动化发布 &152 &自动化发布 &143  \\
+						页面布局 &149 &Web平台测试 &138  \\
+						Web平台测试 &144 &页面布局 &127  \\
+						网络 &142 &网络 &101  \\
+						音视频 1&14 &WebRTC &88  \\
+						WebRTC &107 &音视频 &79 \\
+					\end{tabular*}
+					\specialrule{1pt}{1pt}{1pt}
+				\end{subtable}
+			}
+			\label{JSBuggyComponents}
+		\end{table}
+
+		\subsubsection{Lua字节码解释器}
+		Lua是一个基于栈虚拟机的解释型语言，支持动态类型\cite{ierusalimschyLua54Reference2020}。
+		Lua被设计为嵌入式语言，主要用于扩展应用程序，而非独立开发程序。它高度依赖宿主程序提供的API，
+		标准库函数的加载也需由宿主程序显式完成\cite{SecurityLuaSandbox2022}。
+		Lua官方在其官网有单独开设一个页面用于记录其解释器存在的缺陷\footnote{\url{https://www.lua.org/bugs.html}.}。
+		同时还提供了各个版本的手册\footnote{\url{https://www.lua.org/manual/}.}以方便编程人员查阅和学习。
+		Lua高度依赖宿主程序提供的API，甚至标准库函数的加载也需由宿主程序显式完成\cite{ierusalimschyProgrammingLua532016}。
