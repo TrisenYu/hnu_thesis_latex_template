@@ -376,54 +376,6 @@
         %% 图表以及目录
         \setlength{\tabcolsep}{0.5em} % 做完上述部分后，表格默认每个格子 0.5em 宽
     }
-
-    %%% (deprecated) 渲染开题报告前两页格式
-    \newcommand{\makeproposalheader}{
-        \begin{titlepage}
-            \centering
-            \begin{figure*}[htp]
-                \centering
-                \includegraphics[width=0.5\textwidth]{figures/hnu}
-            \end{figure*}
-            \vspace{1em}\centerline{\heiti\fontsize{33pt}{33pt}\textbf{毕业论文(设计)开题报告}}\par
-            \vspace{2em}\centerline{\heiti\xiaoyi\heiti{（全日制本科生）}}\par
-            \begin{table}[H]
-                \centering
-                \begin{tabular}{cl}
-                    % multicolumn 必须是第一条指令，前面只能是字体而不掺杂任何的命令。\@faculty
-                    \rule{0pt}{1.48cm}\textbf{\xiaosan\hei{课~~题~~名~~称}} &\underline{\parbox[l]{7.57cm}{\xiaosan\heiti{\@title}}} \\
-                    \rule{0pt}{1.48cm}\textbf{\xiaosan\hei{课~~题~~类~~别}} &\underline{\parbox[l]{7.57cm}{\xiaosi\heiti{~~设计~□~~~论文~□}}} \\
-                    \rule{0pt}{1.48cm}\tableCellAdjust{\textbf{\xiaosan\hei{论文\hspace*{-0.5em}（设计）}}}{\textbf{\xiaosan\hei{题~~~\qquad~~~目}}} &\underline{\parbox[l]{7.57cm}{\xiaosan\hei{\@title}}} \\
-                    \rule{0pt}{1.48cm}\tableCellAdjust{\textbf{\xiaosan\hei{学~~生~~所~~在}}}{\textbf{\xiaosan\hei{专~业、班~级}}} &\underline{\parbox[l]{7.57cm}{\xiaosan\heiti{\@major}}} \\
-                    \rule{0pt}{1.48cm}\textbf{\xiaosan\hei{学~~~\qquad~~~生}} &\underline{\parbox[l]{7.57cm}{\xiaosan\heiti{\@author}}} \\
-                    \rule{0pt}{1.48cm}\textbf{\xiaosan\hei{学~~~\qquad~~~号}} &\underline{\parbox[l]{7.57cm}{\xiaosan\heiti{\@studentid}}} \\
-                    \rule{0pt}{1.48cm}\textbf{\xiaosan\hei{指~~导~~老~~师}} &\underline{\parbox[l]{7.57cm}{\xiaosan\heiti{\@teacher}}} \\
-                \end{tabular}
-            \end{table}
-        \end{titlepage}
-        \newpage
-        \centerline{\textbf{\xiaoyi\hei{开题报告填写要求}}}\par\vspace{2em}
-        \begin{spacing}{3}
-            \vspace{6pt}\sihao\heiti{
-            一、开题报告是毕业论文（设计）答辩委员会对学生答辩资格审查的内容之一。
-            此报告应在指导教师指导下，由学生在毕业论文（设计）工作前期完成，经指导教师签署意见及所在专业审查后生效。
-        }\vspace{6pt}
-        
-        \vspace{6pt}\sihao\heiti{
-            二、开题报告在教学信息化服务平台填写后导出打印，打印时必须是双面打印，可以按需加页。
-            开题报告填写完成后应及时交给指导教师签署意见。
-        }\vspace{6pt}
-        
-        \vspace{6pt}\sihao\heiti{
-            三、开题报告内有关“学院”、“专业”等名称的填写，应写中文全称；学生的“学号”必须填写完整。
-        }\vspace{6pt}
-        
-        \vspace{6pt}\sihao\heiti{  
-            四、学生毕业后开题报告随同毕业论文（设计）一同归档。
-        }\vspace{6pt}
-        \end{spacing}
-        \newpage
-    }
     \setHeaderAndFoot % ? 暂时不知道如何描述这里的功能。
 \makeatother
 %%% 附录命令配置

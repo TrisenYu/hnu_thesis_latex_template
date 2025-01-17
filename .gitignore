@@ -16,6 +16,7 @@
 .dist
 *.fdb_latexmk
 *.fls
+*.txt
 
 1intro.tex
 2relatedwork.tex
@@ -27,8 +28,6 @@ cover.tex
 acknowledge.tex
 appendix.tex
 thesis-blx.bib
-revision.txt
-draft.txt
 refer.bib
 thesis.tar
 
