@@ -1,17 +1,21 @@
 %%%% contact via <kisfg@hotmail.com, haikureimu@hnu.edu.cn>
 \setlength{\headheight}{13pt} % 页眉可以放得大一点
 
+
 %%% 控制行距
 \renewcommand{\baselinestretch}{1.5}
 \setlength{\parindent}{2em}
 
+
 %%% 定义字体
-\xeCJKsetcharclass{"25A0}{"25A2}{1} % 方框
+% pdflatex 下不可用。
+% \xeCJKsetcharclass{"25A0}{"25A2}{1} % 方框
 \newcommand{\song}{\songti}     % 宋体 rm
 \newcommand{\hei}{\heiti}       % 黑体 bf 
 \newcommand{\fs}{\fangsong}     % 仿宋体 tt
 \newcommand{\kai}{\kaishu}      % 楷体 it
 \newcommand{\li}{\lishu}        % 隶书
+
 
 %%% 修改百分号的字体样式
 % 仙之人兮列如麻 
@@ -46,9 +50,10 @@
 \newcommand{\xiaowu}{\fontsize{8pt}{8pt}\selectfont}        % 小五, 单倍行距
 \CJKtilde
 
+
 % TODO: 枚举列表项的设置
-\setitemize{leftmargin=3em,itemsep=0em,partopsep=0em,parsep=0em,topsep=0em}
-\setenumerate{leftmargin=3em,itemsep=0em,partopsep=0em,parsep=0em,topsep=0em}
+\setitemize{leftmargin=3.5em,itemsep=0em,partopsep=0em,parsep=0em,topsep=0em}
+\setenumerate{leftmargin=3.5em,itemsep=0em,partopsep=0em,parsep=0em,topsep=0em}
 \makeatletter
     \renewcommand\normalsize{
         \@setfontsize\normalsize{12pt}{12pt}
@@ -62,10 +67,12 @@
     \renewcommand{\CJKglue}{\hskip 0.5pt plus \baselineskip}
 \makeatother
 
+
 %% 这个块不要动，否则会引起 hyperref 的跳转错误。
 \def\functor{\relax}
 \let\functor\addcontentsline
 \gdef\addcontentsline{\phantomsection\functor} % 这样就能修改addcontentsline的功能，使其额外插入。
+
 
 %%% 配置目录
 \renewcommand*{\contentsname}{\hspace{11em}目\hspace{4em}录\hspace{12em}}
@@ -81,7 +88,8 @@
 \renewcommand{\biblabelsep}{6pt}
 % section 从 1 开始计数
 \renewcommand{\thesection}{\arabic{section}}
-% section 格式配置
+
+% TODO: section 格式配置需要调。
 \titlecontents{section}[0em]    % 标题级别 标题位置 (左间距，理解为缩进)
     {\xiaosi\hei\vspace{0.5em}} % 标题样式
     {\textbf{\thecontentslabel}\hspace{0.5em}} 
@@ -118,6 +126,7 @@
 \numberwithin{equation}{section} % 公式按章节编号
 \numberwithin{figure}{section} % 图按章节编号
 \numberwithin{table}{section} % 表也按照章节编号
+
 
 %% 设置插图目录条目的字体格式
 % 直接重定义字体即可。
@@ -161,7 +170,7 @@
     andincite = {\protect\unspace},
     andincitecn = {\protect\unspace},
     andothersincite = {et al\adddot}, % adddot才能避开标点追踪
-    andothersincitecn = {等人}
+    andothersincitecn = {等人},
 }
 % 通过标点设置等前的标点，比如：
 % \DeclareDelimFormat[textcite]{andothersdelim}{} % \space
@@ -183,16 +192,16 @@
 
 %% 关闭连字
 \DisableLigatures{encoding = *, family = *}
-
 %%% 正文前页码配大写罗马字体编号
-\newcommand{\frontmatter} {
-    \pagenumbering{Roman}
-} 
+\newcounter{customCounter}
 \newcommand{\mainmatter} {
+    % \clearpage
     \clearpage
+    \cfoot{\song\wuhao{\thepage}} % ? 暂时不知道如何描述这里的功能。
     \pagenumbering{arabic}
 }
-
+\makeglossaries
+% \renewcommand{\glossaryTX}{arabic}
 %%% 配置主目录中显示的节。
 % 节
 \titleformat{\section}{\sanhao\hei}{\thesection}{1em}{}
@@ -204,15 +213,42 @@
 \titleformat{\subsubsection}{\xiaosi\hei}{\thesubsubsection}{0.5em}{}
 \titlespacing{\subsubsection}{0pt}{6pt}{6pt}
 
+\newcounter{paraCounter}
+\setcounter{paraCounter}{1}
+
+% 层次用到哪一层次视需要而定
+% TODO: 节后无需“条”时可直接列“款”、“项”。“节”、“条”的段前、段后各设为0.5行
+\titleformat{\paragraph}[display]{\xiaosi\hei}{\theparagraph}{2em}{\arabic{paraCounter}. }[]
+\titlespacing{\paragraph}{0pt}{6pt}{6pt}
+
+\newcommand{\subsubsubsection}[2]{
+    \ifthenelse{\equal{#1}{}}{
+        % 不要求就累加
+        \addtocounter{paraCounter}{1}
+    } % else
+    { % 否则清为 1
+        \setcounter{paraCounter}{1}
+    }
+    \paragraph{#2}
+}
+% 条款定义
+% \newcommand{\subsubsubsection}[1]{\paragraph{#1}.\\}
+%% 不需要出现在目录中。
+% \setcounter{secnumdepth}{4} % how many sectioning levels to assign numbers to
+% \setcounter{tocdepth}{4} % how many sectioning levels to show in ToC
+
 \renewcommand{\headrulewidth}{0pt}
 
 %%%　配置注脚
 %% tex.stackexchange.com/questions/639370/how-to-enumerate-footnotes-with-circled-numbers/639377#639377
-\newcommand\circled[2][.30]{\scalerel*{\tikz{\useasboundingbox (-#1,-#1) rectangle (#1,#1);\node{#2};\draw circle[radius=#1];}}{X}}
-\deffootnotemark{\textsuperscript{\smash{\circled{\sihao{\thefootnotemark}}}}}
-
+% \node{#2}; \draw circle[radius=#1];
+\newcommand\circled[2][.30]{\scalerel*{\tikz{\useasboundingbox (-#1,-#1) rectangle (#1,#1);\node{#2};}}{X}}
+\deffootnotemark{\textsuperscript{\smash{\circled{\erhao{\thefootnotemark}}}}}
+% \addtolength{\footnotesep}{-1em} 竖直方向的间距
 
 \newcommand{\tableCellAdjust}[2]{\begin{tabular}{c}#1 \\ #2\end{tabular}}
+% https://tex.stackexchange.com/a/266686
+
 %%% 制作前几页
 %%% 定义特有字段以及特殊的变量和命令
 \makeatletter
@@ -250,29 +286,15 @@
     \def\ckeywords#1{\def\@ckeywords{#1}}\def\@ckeywords{}
     % 英文关键词
     \def\ekeywords#1{\def\@ekeywords{#1}}\def\@ekeywords{}
-    \def\setHeaderAndFoot{
-        \def\headrule{ 
-            \if @fancyplain
-                \let\headrulewidth\plainheadrulewidth
-            \fi
-            \hrule\@height 1.0pt \@width\headwidth\vskip1pt % 上面线为1pt粗
-            \hrule\@height 0.5pt \@width\headwidth          % 下面0.5pt粗
-            \vskip-2\headrulewidth\vskip-1pt                % 两条线的距离1pt
-            \vspace{7mm}                                    % 双线与下面正文之间的垂直间距
-        }
-        \pagestyle{fancy}
-        \fancyhf{} % 清空所有fancy样式，方便使页眉左部和右部置空
-        \chead{\song\xiaowu{\@heading}}
-        \cfoot{\song\wuhao{\thepage}}
-    }\def\@setHeaderAndFoot
     
     % 必须存在此句。
     \newlength{\@title@width}
-    
+
     \newcommand{\makethesisheaders} {
         \setlength{\tabcolsep}{0em} % 做之前紧凑
         %% 封面
         \begin{titlepage}
+            \setcounter{page}{0} % 必不可缺。解决了 page.I 和 page.1 重复的错误
             \centering
             % 湖南大学 毛主席题字
             \begin{figure*}[htp]
@@ -282,7 +304,8 @@
             % 高清校徽
             \vspace{-1em}
             \begin{overpic}{figures/HSVGPDF}
-                \put(-16,75){\yihao\textbf{\texttt{HUNAN UNIVERSITY}}}
+                % xelatex 和 pdflatex 在下面的数值上有差异。
+                \put(0,75){\yihao\textbf{\texttt{HUNAN UNIVERSITY}}}
                 \put(-35,40){\song\chuhao{\@LieOnBadge}}
             \end{overpic}\par
             \begin{table}[H]
@@ -300,15 +323,28 @@
             \end{table}\par
             \vspace{2em}
             \centering{\sihao\hei{\the\year{} 年 \the\month{} 月 \quad 日}}
+            \pagestyle{empty}
         \end{titlepage}
         \clearpage
         %% 从此往后页眉的格式固定。
-        \setHeaderAndFoot
-        \frontmatter
+        \def\headrule{ 
+            \if @fancyplain
+                \let\headrulewidth\plainheadrulewidth
+            \fi
+            \hrule\@height 1.0pt \@width\headwidth\vskip1pt % 上面线为1pt粗
+            \hrule\@height 0.5pt \@width\headwidth          % 下面0.5pt粗
+            \vskip-2\headrulewidth\vskip-1pt                % 两条线的距离1pt
+            \vspace{7mm}                                    % 双线与下面正文之间的垂直间距
+        }
+        \pagestyle{fancy}
+        \fancyhf{} % 清空所有fancy样式，方便使页眉左部和右部置空
+        \chead{\song\xiaowu{\@heading}}
+        \cfoot{\song\wuhao{\thepage}}
+        \pagenumbering{Roman}
         %%% 插入目录之中
         %% 授权书
         \addcontentsline{toc}{section}{毕业论文（设计）原创性声明和毕业论文（设计）版权使用授权书} { 
-            　\par
+            \par
             \hei\xiaoer{\vspace*{-0.4em}\hspace*{8em}湖\hspace{0.5em}南\hspace*{0.5em}大\hspace{0.5em}学\vspace*{.6em}}\par
             \hei\xiaoer{\vspace*{.8em}\hspace*{4em}毕业论文（设计）原创性声明\vspace{1em}}\par
             \song\defaultfont{
@@ -329,12 +365,15 @@
             }\par
             % https://tex.stackexchange.com/a/675454
             \song\defaultfont{{本论文（设计）属于}}\par
-            \vspace{-0.25em}\hspace{7.5em}1、保　密\symbol{"25A1}，在\underline{\hspace{4em}}年解密后适用于本授权书。\par
-            \vspace{-0.25em}\hspace{7.5em}2、不保密\symbol{"25A1}。\par
+            % \symbol{"25A1} 为 xelatex 下可用！
+            % 但 pdflatex 不可用
+            % $\Box$ 很难看
+            \vspace{-0.25em}\hspace{7.5em}1、保　密□，在\underline{\hspace{4em}}年解密后适用于本授权书。\par
+            \vspace{-0.25em}\hspace{7.5em}2、不保密□。\par
             \vspace{-0.25em}\hspace{7.5em}(请在以上相应方框内打``$\surd$'')\par
             \vspace{1em}
             \song\xiaosi{学生签名：\hspace{10.5em}日期： \the\year{} 年 \hspace{.5em} 月 \hspace{.5em} 日}
-            \par\vspace{0.25em}
+            \par\vspace{0.5em}
             \song\xiaosi{导师签名：\hspace{10.5em}日期： \the\year{} 年 \hspace{.5em} 月 \hspace{.5em} 日}
         }
         \clearpage
@@ -373,11 +412,28 @@
             {\xiaosi\textbf{Key Words:} \@ekeywords}
         }
         \clearpage
+        %%% 目录
+        \tableofcontents
+        \clearpage        
         %% 图表以及目录
         \setlength{\tabcolsep}{0.5em} % 做完上述部分后，表格默认每个格子 0.5em 宽
+
     }
-    \setHeaderAndFoot % ? 暂时不知道如何描述这里的功能。
+    
+    \def\headrule{ 
+        \if @fancyplain
+            \let\headrulewidth\plainheadrulewidth
+        \fi
+        \hrule\@height 1.0pt \@width\headwidth\vskip1pt % 上面线为1pt粗
+        \hrule\@height 0.5pt \@width\headwidth          % 下面0.5pt粗
+        \vskip-2\headrulewidth\vskip-1pt                % 两条线的距离1pt
+        \vspace{7mm}                                    % 双线与下面正文之间的垂直间距
+    }
+    \pagestyle{fancy}
+    \fancyhf{} % 清空所有fancy样式，方便使页眉左部和右部置空
+    \chead{\song\xiaowu{\@heading}}
 \makeatother
+
 %%% 附录命令配置
 \newcommand{\setAppendixHere}[1] {
     \addcontentsline{toc}{section}{\song\xiaosi{附录 #1}} % 不得不为，如果有就必须要用 \songti 覆盖掉原有的配置 
@@ -389,3 +445,4 @@
     \renewcommand{\thefigure}{#1.\arabic{figure}}
     \renewcommand{\theequation}{#1.\arabic{equation}}
 }
+

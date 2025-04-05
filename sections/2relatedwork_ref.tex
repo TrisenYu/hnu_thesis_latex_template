@@ -35,15 +35,13 @@
 		\end{table}
 		\begin{figure}[H]
 			\centering
-			\caption{JVM各症状的错误原因分布\parencite{chaliasosWelltypedProgramsCan2021}}
-			\label{JVMbugsRootCause}
 			\pgfplotstableread{
 					index	         aa ee  cc dd    bb
-				类型相关错误       90 4  10  4     21
-				语义分析有误       22 2  30  3     20
-				解析异常          42 1  13  7     14
-				错误控制与报告不当  0  0  0   7     15
-				AST转换不当       5  1  0   0     9
+				类型相关错误           90 4  10  4     21
+				语义分析有误           22 2  30  3     20
+				解析异常              42 1  13  7     14
+				错误控制与报告不当      0  0  0   7     15
+				AST转换不当            5  1  0   0     9
 			}\jvmBugData
 			\begin{tikzpicture}
 				\begin{axis}
@@ -76,6 +74,8 @@
 					] table [x=bb, meta=index, y expr=\coordindex] {\jvmBugData};\addlegendentry{\xiaowu{编译性能问题}}
 				\end{axis}
 			\end{tikzpicture}
+			\caption{JVM各症状的错误原因分布\parencite{chaliasosWelltypedProgramsCan2021}}
+			\label{JVMbugsRootCause}
 		\end{figure}
 
 		其中，AST转换不当是指编译器没有产生和原始输入程序在逻辑上保持一致的转换程序，占JVM缺陷的4.69\%，会引发非预期的编译时错误和内部编译错误。
@@ -167,13 +167,6 @@
 			}
 			\label{JSBuggySrc}
 		\end{table}	
-
-		% Lim,et al.\cite{limSOKAnalysisWeb2021}则是
-		% Provide a detailed comparison of modern browser architectures in terms of sandboxing schemes; 
-		% Present a 10-year longitudinal study on browser bugs;
-		% Categorize browser vulnerabilities with detailed analysis;
-		% Study state-of-the-art generic mitigations on browsers;
-		% Perform a detailed study on a real-world full-chain exploit
 
 		另外，S. Park et al.\cite{parkEmpiricalStudyPrioritizing2019}围绕JS引擎的漏洞问题，实现了CRScope用于分类安全与非安全的缺陷，
 		并评估了Exploitable和AddressSanitizer等工具和模型的性能。其工作所用的训练数据集从Google、Mozilla、Microsoft的Edge与IE浏览器以及GitHub库中收集。

@@ -14,16 +14,17 @@
 \usetikzlibrary {
     decorations.pathmorphing,
     decorations.markings,
-    shapes, 
+    shapes,
+    shadows,
     calc,
     arrows, 
+    fit,
     chains, 
     math,
     automata,
     intersections, 
     positioning, 
     bending,
-    arrows.meta
 }
 
 %% 这里好像可以直接设的
@@ -75,7 +76,6 @@
 \usepackage{balance}        % 自动调整超出margin的文字
 \usepackage{enumitem}       % 使用enumitem宏包,改变列表项的格式
 \usepackage{calc}           % 长度可以用+ - * / 进行计算
-
 % \usepackage[
 %     amsmath, 
 %     thmmarks, 
@@ -97,8 +97,7 @@
     style=gb7714-2015, 
     maxcitenames=3,         % 最多输出三个。
     mincitenames=1,
-    maxbibnames=1,
-    minbibnames=1,          % 某些时候，参考文献种最多只有 1 个作者。
+    maxbibnames=3,
     uniquelist=false,
     uniquename=false,
     doi=false,              % doi 有时可能也不要了。
@@ -112,22 +111,6 @@
     gbtype=true,            % 显式说明使用文献类型
     gbpunctin=false,        % 去双斜杠
 ] {biblatex}
-\usepackage[
-    % dvipdfmx,
-    unicode,
-    pdfstartview=FitH,
-    bookmarks,
-    bookmarksnumbered=true,
-    bookmarksopen=true,
-    colorlinks=true,
-    pdfborder={0 0 1},
-    % 全部放黑。
-    citecolor=black,
-    linkcolor=black,
-    anchorcolor=black,
-    urlcolor=black,
-    breaklinks=true
-] {hyperref}
 % \usepackage{url}
 \usepackage{ifthen}         % 条件编译可能会用得到
 \usepackage{threeparttable} % 编制复杂表格
@@ -148,9 +131,103 @@
 \usepackage{microtype}      % 不要拿掉，控制连字的关闭。
 \usepackage{tabularray}
 \usepackage[
-    bottom                  % 固定脚注
-]{footmisc}
+    bottom,                 % 固定脚注
+    flushmargin,            % 靠左。
+    hang
+] {footmisc}
+
 \usepackage{
     pgfplots,
     pgfplotstable           % 数据分析绘制图表
-}       
+}
+\pgfplotsset{compat=1.18}
+
+\usepackage{array}
+\usepackage{adjustbox}
+\usepackage{svg}            % 矢量包需要自己配inkscape环境！
+% https://blog.csdn.net/ya6543/article/details/113075774
+% \usepackage{nomencl}        % 术语表
+% 设置 tikz 插图的字体大小。
+\tikzset{
+    every picture/.style={font issue=\footnotesize},
+    font issue/.style={execute at begin picture={#1\selectfont}}
+}
+
+% 最后再加载这几个。
+\usepackage[
+    pdftex,
+    unicode,
+    plainpages=false,
+    pdfpagelabels,
+    % pdfstartview=FitH,
+    bookmarks,
+    bookmarksnumbered=true,
+    bookmarksopen=true,
+    colorlinks=true,
+    pdfborder={0 0 1},
+    % 全部放黑。
+    citecolor=black,
+    linkcolor=black,
+    anchorcolor=black,
+    urlcolor=black,
+    breaklinks=true
+] {hyperref}
+
+\usepackage[
+    style=super, 
+    numberline,
+    xindy,
+    section,
+    esclocations,
+    % counter=part
+] {glossaries}
+% https://tex.stackexchange.com/a/97179
+\usepackage[
+    automake,
+    acronym,
+    postdot
+] {glossaries-extra}
+
+
+\setlength{\glsdescwidth}{0.8\hsize}
+% 符号表
+\newglossarystyle{CustomSymbolTableStyle}{
+    %设置说明列宽度：
+    \setlength{\glsdescwidth}{0.6\linewidth}
+    %设置页码列宽度：
+    \setlength{\glspagelistwidth}{0.1\linewidth}
+    \renewenvironment{theglossary} {
+        \begin{longtable}[c]{@{}cp{\glsdescwidth}m{\glspagelistwidth}<{\centering}@{}}
+            % 这里填的就都是缩略项。
+            \caption{本文所用缩略术语汇总}
+            \label{customGlossaries}\\
+    } {
+        \specialrule{1pt}{0pt}{0pt}
+        \end{longtable}
+    }
+  
+    %设置没有表头, 以及内容
+    \renewcommand*{\glossaryheader}{
+        \specialrule{1pt}{0pt}{0pt}
+        缩略名 &\multicolumn{1}{c}{全称及中文译名} &所在页码 \\
+        \hline
+        \endhead
+    }
+    % 设置分组间没有表头：
+    \renewcommand*{\glsgroupheading}[1]{}%
+    % 主条目第一列名称，第二列说明，第三列页码：
+    \renewcommand{\glossentry}[2]{
+        \glsentryitem{##1}
+        \glstarget{##1} {\glossentryname{##1}} &\glossentrydesc{##1} & ##2\\
+    }
+    % 子条目第一列空置，第二列说明，第三列页码：
+    \renewcommand*{\subglossentry}[3]{
+        &\glssubentryitem{##2}\glstarget{##2}{\strut}\glossentrydesc{##2} &##3\\
+    }%
+    % 定义分组间空白:
+    \renewcommand*{\glsgroupskip} {
+        \ifglsnogroupskip
+        \else & &\\
+        \fi
+    }
+}

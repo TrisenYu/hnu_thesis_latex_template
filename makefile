@@ -4,23 +4,33 @@ DEMO:=demo
 SECT:=sections
 
 # 全平台改用 xelatex 应该能用。至少Windows和Linux都测了。
-COMPILER:=xelatex
-LD_FLAG:=-src -interaction=batchmode -shell-escape -file-line-error
+COMPILER:=pdflatex
+LD_FLAG:=-src -shell-escape -file-line-error
 OUT_FOLDER:=--output-directory=
 # 非 -draftmode 而是 --no-pdf, -draftmode 是 pdflatex 的做法。
 # https://tex.stackexchange.com/a/219815
-DRAFT_MODE:=--no-pdf
+DRAFT_MODE=
+ifeq ($(COMPILER), xelatex)
+	DRAFT_MODE:=--no-pdf
+else
+	DRAFT_MODE:=
+endif
+LD_FLAG+=-interaction=batchmode
 CITATION_GEN:=biber
 
 RM:=rm
 ifeq ($(OS),Windows_NT)
 	RM=del
 endif
-
+# TODO: makeglossaries 不一定总是需要的.
 define tex2pdf
 	-$(COMPILER) $(OUT_FOLDER)$(2) $(LD_FLAG) $(DRAFT_MODE) $(1).tex
+	-$(COMPILER) $(OUT_FOLDER)$(2) $(LD_FLAG) $(DRAFT_MODE) $(1).tex
+	-makeglossaries $(1)
 	-$(CITATION_GEN) "$(2)/$(1)"
 	-$(COMPILER) $(OUT_FOLDER)$(2) $(LD_FLAG) $(DRAFT_MODE) $(1).tex
+	-$(COMPILER) $(OUT_FOLDER)$(2) $(LD_FLAG) $(DRAFT_MODE) $(1).tex
+	-makeglossaries $(1)
 	-$(COMPILER) $(OUT_FOLDER)$(2) $(LD_FLAG) $(1).tex
 endef
 

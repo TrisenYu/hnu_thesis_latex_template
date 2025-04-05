@@ -12,12 +12,26 @@
 *.tmp
 *.xdv
 *.blg
+*.xdv
 ~$*
 .dist
 *.fdb_latexmk
 *.fls
 *.txt
+*.glo
+*.glg
+*.nls
+*.nlo
+*.gls
+*.ilg
+*.xdy
+*.ist
 
+
+cover.tex
+acknowledge.tex
+
+thesis-blx.bib
 1intro.tex
 2relatedwork.tex
 3ourwork.tex
@@ -26,10 +40,14 @@
 6conclusion.tex
 cover.tex
 acknowledge.tex
+glossaries.tex
 appendix.tex
 thesis-blx.bib
 refer.bib
 thesis.tar
 
-thesis.pdf
-criterions\本科论文模板.docx
+thesis*.pdf
+figures/*
+!figures/hnu.*
+!figures/HSVGPDF.*
+svg-inkscape/*
