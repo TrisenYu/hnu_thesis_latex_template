@@ -3,7 +3,6 @@ PRO:=proposal
 DEMO:=demo
 SECT:=sections
 
-# 全平台改用 xelatex 应该能用。至少Windows和Linux都测了。
 COMPILER:=pdflatex
 LD_FLAG:=-src -shell-escape -file-line-error
 OUT_FOLDER:=--output-directory=
@@ -15,6 +14,8 @@ ifeq ($(COMPILER), xelatex)
 else
 	DRAFT_MODE:=
 endif
+# TODO!!!
+# 要不换成更方便的python生成工具？
 LD_FLAG+=-interaction=batchmode
 CITATION_GEN:=biber
 
@@ -25,12 +26,11 @@ endif
 # TODO: makeglossaries 不一定总是需要的.
 define tex2pdf
 	-$(COMPILER) $(OUT_FOLDER)$(2) $(LD_FLAG) $(DRAFT_MODE) $(1).tex
-	-$(COMPILER) $(OUT_FOLDER)$(2) $(LD_FLAG) $(DRAFT_MODE) $(1).tex
 	-makeglossaries $(1)
 	-$(CITATION_GEN) "$(2)/$(1)"
 	-$(COMPILER) $(OUT_FOLDER)$(2) $(LD_FLAG) $(DRAFT_MODE) $(1).tex
-	-$(COMPILER) $(OUT_FOLDER)$(2) $(LD_FLAG) $(DRAFT_MODE) $(1).tex
 	-makeglossaries $(1)
+	-$(COMPILER) $(OUT_FOLDER)$(2) $(LD_FLAG) $(DRAFT_MODE) $(1).tex
 	-$(COMPILER) $(OUT_FOLDER)$(2) $(LD_FLAG) $(1).tex
 endef
 
@@ -48,7 +48,9 @@ define sh_remove
 endef
 
 # 注意到谁在前面谁先执行。
-
+## TODO: 直接扫描文件夹内容辅助预检
+# phony:=evaluation
+# evaluation:
 phony:=all
 all: 
 	$(call tex2pdf,$(MAIN),.)

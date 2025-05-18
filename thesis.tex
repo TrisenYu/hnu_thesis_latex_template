@@ -1,9 +1,10 @@
 
 %%%% contact via <kisfg@hotmail.com, haikureimu@hnu.edu.cn>
+% TODO: 改用程序自动化生成。
 % tikzcd 和 dvipdfmx 冲突的处理方法：https://fohte.hateblo.jp/entry/2017/02/03/130829
 % 如果要用 latex 编译，则必须要为documentclass提供dvipdfmx的选项。
 % 必须要包含，否则无法插入 png。
-\documentclass[12pt, a4paper]{article}
+\documentclass[12pt]{article} % [12pt, a4paper]
 
 \input{format/package}
 \input{format/setup}
@@ -12,42 +13,45 @@
 
 \addbibresource[location=local]{refer.bib}
 \begin{document}
-    
-    %%% 前几页必要内容
-    % 不加等被缩略表页码定位错误锤
-    % destination with the same identifier (name{page.1}) has been already used, duplicate ignored
+    % TODO: 按需加入此句
     \input{format/glossaries}
+    %%% 前几页必要内容
     \makethesisheaders
     %%% 插图索引 可选项
     % 如果图片存在，则渲染
     \iftotalfigures {
         \addcontentsline{toc}{section}{插图索引}
+        \begin{spacing}{1.5}
         \listoffigures
+        \end{spacing}
         \clearpage
     }\fi
     %%% 附表索引 可选项
     % 如果表格存在，则渲染
     \iftotaltables {
         \addcontentsline{toc}{section}{附表索引}
+        \begin{spacing}{1.5}
         \listoftables
+        \end{spacing}
         \clearpage
     }\fi
     %%% 正文
     %% 不像封面到目录页，这里要手动加 mainmatter
-    % \hypersetup{pageanchor=true}
-    % 恢复内部计数。
     \mainmatter
     % \glsresetentrycounter
     \begin{sloppypar} % 防止文字出界而自动调整的环境。
         % 很奇怪，主文件又不受影响。
         \include{sections/1intro}
         \include{sections/2relatedwork}
+        \include{sections/2-5ourwork}
         \include{sections/3ourwork}
+        % TODO: 改用其它编程语言生成得了。
+        \include{exp-data/data}
         \include{sections/4experiment}
         \include{sections/5discussion}
-        \include{sections/6conclusion}
+        % \include{sections/6conclusion}
         %%% 参考文献
-        \newpage\nocite{*}
+        \newpage
         \addcontentsline{toc}{section}{参考文献}
         \wuhao{
             \printbibliography[
@@ -59,7 +63,7 @@
         %% todo: 按需渲染改为一定的逻辑判断。
         \xiaosi{
             \include{sections/acknowledge}
-            \input{sections/appendix}
+            \include{sections/appendix}
         }
     \end{sloppypar}
 \end{document}

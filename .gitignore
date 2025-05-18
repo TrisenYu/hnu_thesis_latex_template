@@ -34,6 +34,7 @@ acknowledge.tex
 thesis-blx.bib
 1intro.tex
 2relatedwork.tex
+2-5*
 3ourwork.tex
 4experiment.tex
 5discussion.tex
@@ -48,6 +49,9 @@ thesis.tar
 
 thesis*.pdf
 figures/*
+exp-data/data.*
 !figures/hnu.*
 !figures/HSVGPDF.*
+!figures/HSVGPDF-transparent.png
 svg-inkscape/*
+resp.md

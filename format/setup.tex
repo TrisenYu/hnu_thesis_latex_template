@@ -1,12 +1,7 @@
 %%%% contact via <kisfg@hotmail.com, haikureimu@hnu.edu.cn>
 \setlength{\headheight}{13pt} % 页眉可以放得大一点
-
-
 %%% 控制行距
-\renewcommand{\baselinestretch}{1.5}
 \setlength{\parindent}{2em}
-
-
 %%% 定义字体
 % pdflatex 下不可用。
 % \xeCJKsetcharclass{"25A0}{"25A2}{1} % 方框
@@ -45,28 +40,29 @@
 \newcommand{\sanhao}{\fontsize{16pt}{16pt}\selectfont}      % 三号, 1.倍行距
 \newcommand{\xiaosan}{\fontsize{15pt}{15pt}\selectfont}     % 小三, 1.倍行距
 \newcommand{\sihao}{\fontsize{14pt}{14pt}\selectfont}       % 四号, 1.倍行距
-\newcommand{\xiaosi}{\fontsize{12pt}{12pt}\selectfont}      % 小四, 1.倍行距
+\newcommand{\xiaosi}{\fontsize{12pt}{14.4pt}\selectfont}      % 小四, 1.倍行距
 \newcommand{\wuhao}{\fontsize{10pt}{10pt}\selectfont}       % 五号, 单倍行距
-\newcommand{\xiaowu}{\fontsize{8pt}{8pt}\selectfont}        % 小五, 单倍行距
+\newcommand{\xiaowu}{\fontsize{9pt}{9pt}\selectfont}        % 小五, 单倍行距
 \CJKtilde
-
 
 % TODO: 枚举列表项的设置
 \setitemize{leftmargin=3.5em,itemsep=0em,partopsep=0em,parsep=0em,topsep=0em}
 \setenumerate{leftmargin=3.5em,itemsep=0em,partopsep=0em,parsep=0em,topsep=0em}
+\setstretch{1.625}
+% \renewcommand{\baselinestretch}{1.5} % \Normalsize\selectfont
+
 \makeatletter
-    \renewcommand\normalsize{
-        \@setfontsize\normalsize{12pt}{12pt}
+    \newcommand\Normalsize{%  % 1.5 * 1.3 / 1.2
+        \@setfontsize\Normalsize{12pt}{12pt}
         \setlength\abovedisplayskip{4pt}
         \setlength\abovedisplayshortskip{4pt}
-        \setlength\belowdisplayskip{\abovedisplayskip}
-        \setlength\belowdisplayshortskip{\abovedisplayshortskip}
-        \let\@listi\@listI}
-    \def\defaultfont{\renewcommand{\baselinestretch}{2}\normalsize\selectfont}
-    \setlength{\baselineskip}{20pt}
-    \renewcommand{\CJKglue}{\hskip 0.5pt plus \baselineskip}
+        \setlength\belowdisplayskip{4pt}
+        \setlength\belowdisplayshortskip{4pt}
+        \let\@listi\@listI
+    }
+    % TMD 我是真一点也不想用这个
+    \def\Defaultfont{\renewcommand{\baselinestretch}{2}\Normalsize\selectfont}
 \makeatother
-
 
 %% 这个块不要动，否则会引起 hyperref 的跳转错误。
 \def\functor{\relax}
@@ -77,7 +73,7 @@
 %%% 配置目录
 \renewcommand*{\contentsname}{\hspace{11em}目\hspace{4em}录\hspace{12em}}
 \setcounter{secnumdepth}{3}     % 编号深度 3
-\setcounter{tocdepth}{3}        % 目录项深度为 3
+\setcounter{tocdepth}{2}        % 目录项深度为 2，篇幅多了老师给的建议是只到 1.2 这样的子章节。
 \renewcommand{\thefigure}{\arabic{figure}}
 \renewcommand{\thetable}{\arabic{table}}
 \renewcommand{\theequation}{\arabic{equation}} % bold equation numbers
@@ -162,8 +158,8 @@
     textfont={chineseBoldHeiti}, 
     skip=0.5em,       
 }
-\renewcommand{\numberline}[1]{图~#1~~}
-\renewcommand{\numberline}[1]{表~#1~~}
+% \renewcommand{\numberline}[1]{图~#1~~}
+% \renewcommand{\numberline}[1]{表~#1~~}
 %% https://ctan.math.illinois.edu/macros/latex/contrib/biblatex-contrib/biblatex-gb7714-2015/biblatex-gb7714-2015.pdf
 % 通过本地化字符串设置文中引用包括作者在内的文献的等、和
 \DefineBibliographyStrings{english}{
@@ -189,6 +185,9 @@
 % 除此之外，有时还需要设置finalnamedelim等来调整姓名间的标点。
 % multinamedelim是各姓名之间的标点
 % finalnamedelim是最后一个姓名前的取代multinamedelim的标点
+% \setlength{\footskip}{40pt}
+% windows画图中，120 pt = 460 minix-pixel
+%                  x   =  120
 
 %% 关闭连字
 \DisableLigatures{encoding = *, family = *}
@@ -197,54 +196,57 @@
 \newcommand{\mainmatter} {
     % \clearpage
     \clearpage
-    \cfoot{\song\wuhao{\thepage}} % ? 暂时不知道如何描述这里的功能。
+    % \topmargin -11mm
+    % \headsep 12mm
+    % \footskip 6.5mm
+    \cfoot{\song\wuhao{\thepage}}
     \pagenumbering{arabic}
 }
 \makeglossaries
 % \renewcommand{\glossaryTX}{arabic}
 %%% 配置主目录中显示的节。
 % 节
-\titleformat{\section}{\sanhao\hei}{\thesection}{1em}{}
-\titlespacing{\section}{0pt}{0pt}{12pt}
+\titleformat{\section}{\sanhao\hei}{\thesection}{16pt}{}
+\titlespacing{\section}{0pt}{7pt}{7pt}
 % 子节
-\titleformat{\subsection}{\xiaosi\hei}{\thesubsection}{0.5em}{}
-\titlespacing{\subsection}{0pt}{6pt}{6pt}
+\titleformat{\subsection}{\xiaosi\hei}{\thesubsection}{12pt}{}
+\titlespacing{\subsection}{0pt}{7pt}{7pt}
 % 孙子节
-\titleformat{\subsubsection}{\xiaosi\hei}{\thesubsubsection}{0.5em}{}
-\titlespacing{\subsubsection}{0pt}{6pt}{6pt}
+\titleformat{\subsubsection}{\xiaosi\hei}{\thesubsubsection}{12pt}{}
+\titlespacing{\subsubsection}{0pt}{7pt}{7pt}
 
 \newcounter{paraCounter}
 \setcounter{paraCounter}{1}
 
 % 层次用到哪一层次视需要而定
 % TODO: 节后无需“条”时可直接列“款”、“项”。“节”、“条”的段前、段后各设为0.5行
-\titleformat{\paragraph}[display]{\xiaosi\hei}{\theparagraph}{2em}{\arabic{paraCounter}. }[]
-\titlespacing{\paragraph}{0pt}{6pt}{6pt}
+\titleformat{\paragraph}{\xiaosi\hei}{\theparagraph}{12pt}{} % {\arabic{paraCounter}. }[]
+\titlespacing{\paragraph}{0pt}{7pt}{5pt}
 
-\newcommand{\subsubsubsection}[2]{
-    \ifthenelse{\equal{#1}{}}{
-        % 不要求就累加
-        \addtocounter{paraCounter}{1}
-    } % else
-    { % 否则清为 1
-        \setcounter{paraCounter}{1}
-    }
-    \paragraph{#2}
+
+% 问了老师，加粗就行。
+% 后面又改成标号(1)(2)...的形式，需要注意这个必须要和下文以及上文隔开一行。
+% 不然会引起格式错误。
+% 实例：```
+% 正文...
+% 
+% \subsubsubsection{(1) 我的世界}
+% 
+% 正文...
+% ''' 
+\newcommand{\subsubsubsection}[1]{
+    {\vspace{3pt}\hspace{-2em}\xiaosi\hei{#1}\vspace{3pt}}
 }
-% 条款定义
-% \newcommand{\subsubsubsection}[1]{\paragraph{#1}.\\}
-%% 不需要出现在目录中。
-% \setcounter{secnumdepth}{4} % how many sectioning levels to assign numbers to
-% \setcounter{tocdepth}{4} % how many sectioning levels to show in ToC
 
 \renewcommand{\headrulewidth}{0pt}
 
 %%%　配置注脚
 %% tex.stackexchange.com/questions/639370/how-to-enumerate-footnotes-with-circled-numbers/639377#639377
 % \node{#2}; \draw circle[radius=#1];
-\newcommand\circled[2][.30]{\scalerel*{\tikz{\useasboundingbox (-#1,-#1) rectangle (#1,#1);\node{#2};}}{X}}
-\deffootnotemark{\textsuperscript{\smash{\circled{\erhao{\thefootnotemark}}}}}
-% \addtolength{\footnotesep}{-1em} 竖直方向的间距
+% \newcommand\circled[1]{\scalerel*{\tikz{\useasboundingbox (0.001,-0.3) rectangle (0,0);\node {\wuhao{#1}};}}{X}}
+% \deffootnotemark{\textsuperscript{\hbox{\circled{\thefootnotemark}}}}
+% \addtolength{\footnotesep}{-1em} %竖直方向的间距
+% \addtolength{\skip\footins}{1.5em}
 
 \newcommand{\tableCellAdjust}[2]{\begin{tabular}{c}#1 \\ #2\end{tabular}}
 % https://tex.stackexchange.com/a/266686
@@ -294,7 +296,7 @@
         \setlength{\tabcolsep}{0em} % 做之前紧凑
         %% 封面
         \begin{titlepage}
-            \setcounter{page}{0} % 必不可缺。解决了 page.I 和 page.1 重复的错误
+            \setcounter{page}{0}    % 必不可缺。解决了 page.I 和 page.1 重复的错误
             \centering
             % 湖南大学 毛主席题字
             \begin{figure*}[htp]
@@ -303,10 +305,10 @@
             \end{figure*}
             % 高清校徽
             \vspace{-1em}
-            \begin{overpic}{figures/HSVGPDF}
+            \begin{overpic}[abs, unit=1mm, scale=.3,]{figures/HSVGPDF-transparent}
                 % xelatex 和 pdflatex 在下面的数值上有差异。
-                \put(0,75){\yihao\textbf{\texttt{HUNAN UNIVERSITY}}}
-                \put(-35,40){\song\chuhao{\@LieOnBadge}}
+                \put(0,63){\yihao\textbf{\texttt{HUNAN UNIVERSITY}}}
+                \put(-33,35){\song\chuhao{\@LieOnBadge}}
             \end{overpic}\par
             \begin{table}[H]
                 \centering
@@ -314,11 +316,11 @@
                     % multicolumn 必须是第一条指令，前面只能是字体而不掺杂任何的命令。
                     \multicolumn{2}{r}{\xiaoer\hei\textbf{论文(设计)题目:}}\rule{0pt}{1.05cm} & \underline{\parbox[c]{6cm}{\@titleOnTheFirstLine}} \\
                     &\multicolumn{1}{r}{}\rule{0pt}{1.05cm}      & \underline{\parbox[c]{6cm}{\@titleOnTheSecondLine}} \\
-                    \rule{0pt}{1.05cm}&\xiaosi\hei{学~生~姓~名 :} & \underline{\parbox[c]{6cm}{\@author}} \\
-                    \rule{0pt}{1.05cm}&\xiaosi\hei{学~生~学~号 :} & \underline{\parbox[c]{6cm}{\@studentid}} \\
-                    \rule{0pt}{1.05cm}&\xiaosi\hei{专~业~班~级 :} & \underline{\parbox[c]{6cm}{\@major}} \\
-                    \rule{0pt}{1.05cm}&\xiaosi\hei{学~院~名~称 :} & \underline{\parbox[c]{6cm}{\@faculty}} \\
-                    \rule{0pt}{1.05cm}&\xiaosi\hei{指~导~老~师 :} & \underline{\parbox[c]{6cm}{\@teacher}} \\
+                    \rule{0pt}{1.07cm}&\xiaosi\hei{学~生~姓~名 :} & \underline{\parbox[c]{6cm}{\@author}} \\
+                    \rule{0pt}{1.07cm}&\xiaosi\hei{学~生~学~号 :} & \underline{\parbox[c]{6cm}{\@studentid}} \\
+                    \rule{0pt}{1.07cm}&\xiaosi\hei{专~业~班~级 :} & \underline{\parbox[c]{6cm}{\@major}} \\
+                    \rule{0pt}{1.07cm}&\xiaosi\hei{学~院~名~称 :} & \underline{\parbox[c]{6cm}{\@faculty}} \\
+                    \rule{0pt}{1.07cm}&\xiaosi\hei{指~导~老~师 :} & \underline{\parbox[c]{6cm}{\@teacher}} \\
                 \end{tabular}
             \end{table}\par
             \vspace{2em}
@@ -331,50 +333,58 @@
             \if @fancyplain
                 \let\headrulewidth\plainheadrulewidth
             \fi
-            \hrule\@height 1.0pt \@width\headwidth\vskip1pt % 上面线为1pt粗
-            \hrule\@height 0.5pt \@width\headwidth          % 下面0.5pt粗
+            \hrule\@height 1.2pt \@width\headwidth          % 上面线为1pt粗
+            \vskip 0.6pt
+            \hrule\@height 1pt \@width\headwidth          
             \vskip-2\headrulewidth\vskip-1pt                % 两条线的距离1pt
-            \vspace{7mm}                                    % 双线与下面正文之间的垂直间距
+            \vspace{8mm}                                    % 双线与下面正文之间的垂直间距
         }
         \pagestyle{fancy}
         \fancyhf{} % 清空所有fancy样式，方便使页眉左部和右部置空
-        \chead{\song\xiaowu{\@heading}}
+        % \topmargin -11mm
+        % \headsep 12mm
+        % \footskip 6.5mm
+        \chead{\song\xiaowu{\quad\@heading}}
         \cfoot{\song\wuhao{\thepage}}
         \pagenumbering{Roman}
         %%% 插入目录之中
         %% 授权书
         \addcontentsline{toc}{section}{毕业论文（设计）原创性声明和毕业论文（设计）版权使用授权书} { 
-            \par
-            \hei\xiaoer{\vspace*{-0.4em}\hspace*{8em}湖\hspace{0.5em}南\hspace*{0.5em}大\hspace{0.5em}学\vspace*{.6em}}\par
-            \hei\xiaoer{\vspace*{.8em}\hspace*{4em}毕业论文（设计）原创性声明\vspace{1em}}\par
-            \song\defaultfont{
+            \hei\xiaoer{
+                \vspace{0.5em}\hspace*{8em}湖\hspace{0.5em}南\hspace*{0.5em}大\hspace{0.5em}学\vspace*{.6em}
+                \par\vspace*{20.45pt}\hspace*{4em}毕业论文（设计）原创性声明\par\vspace{20.45pt}
+            }
+            \song\Defaultfont{
                 本人郑重声明：所呈交的论文（设计）是本人在导师的指导下独立进行研究所取得的研究成果。
                 除了文中特别加以标注引用的内容外，本论文（设计）不包含任何其他个人或集体已经发表或撰写的成果作品。
                 对本文的研究做出重要贡献的个人和集体，均已在文中以明确方式标明。
                 本人完全意识到本声明的法律后果由本人承担。
-            }\par\vspace{10pt}
-            \song\xiaosi{学生签名：\hspace{10.5em}日期： \the\year{} 年 \hspace{.5em} 月 \hspace{.5em} 日}
-            \vspace{0.5cm}
+                \par\vspace{20.45pt}
+                学生签名：\hspace{10.5em}日期： \the\year{} 年 \hspace{.5em} 月 \hspace{.5em} 日
+                \par\vspace{40.9pt}
+            }
             \begin{center}\hei\xiaoer{毕业论文（设计）版权使用授权书}\end{center}
-            \par\vspace{10pt}
-            \song\defaultfont{
+            \par\vspace{12pt}
+            \song\Defaultfont{
                 本毕业论文（设计）作者完全了解学校有关保留、使用论文（设计）的规定，
                 同意学校保留并向国家有关部门或机构送交论文（设计）的复印件和电子版，
                 允许论文（设计）被查阅和借阅。本人授权湖南大学可以将本论文（设计）的全部或部分内容编入有关数据库进行检索，
                 可以采用影印、缩印或扫描等复制手段保存和汇编本论文（设计）。
-            }\par
+                \par
+                本论文（设计）属于
+                \par
+                \vspace{-0.25em}\hspace{7.5em}1、保　密□，在\underline{\hspace{4em}}年解密后适用于本授权书。\par
+                \vspace{-0.25em}\hspace{7.5em}2、不保密□。\par
+                \vspace{-0.25em}\hspace{7.5em}(请在以上相应方框内打``$\surd$'')\par
+                \vspace{1em}
+                学生签名：\hspace{10.5em}日期： \the\year{} 年 \hspace{.5em} 月 \hspace{.5em} 日
+                \par\vspace{0.5em}
+                导师签名：\hspace{10.5em}日期： \the\year{} 年 \hspace{.5em} 月 \hspace{.5em} 日
+            }
             % https://tex.stackexchange.com/a/675454
-            \song\defaultfont{{本论文（设计）属于}}\par
             % \symbol{"25A1} 为 xelatex 下可用！
             % 但 pdflatex 不可用
             % $\Box$ 很难看
-            \vspace{-0.25em}\hspace{7.5em}1、保　密□，在\underline{\hspace{4em}}年解密后适用于本授权书。\par
-            \vspace{-0.25em}\hspace{7.5em}2、不保密□。\par
-            \vspace{-0.25em}\hspace{7.5em}(请在以上相应方框内打``$\surd$'')\par
-            \vspace{1em}
-            \song\xiaosi{学生签名：\hspace{10.5em}日期： \the\year{} 年 \hspace{.5em} 月 \hspace{.5em} 日}
-            \par\vspace{0.5em}
-            \song\xiaosi{导师签名：\hspace{10.5em}日期： \the\year{} 年 \hspace{.5em} 月 \hspace{.5em} 日}
         }
         \clearpage
 
@@ -383,12 +393,13 @@
             \begin{center}
                 \hei\xiaoer{\@title}
             \end{center}
-            \vspace{-10pt}
+            \vspace{-10pt}\vspace{12pt}
             \begin{center}
                 \hei\xiaoer\ 摘\qquad 要
-            \end{center}\par
-            \song\defaultfont\@cabstract
-            \vspace{\baselineskip}
+            \end{center}\vspace{12pt}
+
+            \song\Defaultfont{\@cabstract}
+            \vspace{20pt}
             \hangafter=1\hangindent=52.3pt
             \newline\noindent
             {\hei\sihao{关键词：} \hei\xiaosi\@ckeywords}
@@ -399,14 +410,14 @@
         \addcontentsline{toc}{section}{Abstract} {
             \begin{center}
                 \xiaoer{\textbf{\@etitle}}
-            \end{center}\par
-            \vspace{-12pt}
+            \end{center}
+            \par\vspace{12pt}
             \begin{center}
                 \xiaoer\textbf{Abstract}
-            \end{center}\par
-            \vspace{-6pt}
-            \defaultfont{\@eabstract}
-            \vspace{\baselineskip}
+            \end{center}
+            \par\vspace{12pt}
+            \song\Defaultfont{\@eabstract}
+            \vspace{20pt}
             \hangafter=1\hangindent=60pt
             \newline\noindent
             {\xiaosi\textbf{Key Words:} \@ekeywords}
@@ -431,7 +442,7 @@
     }
     \pagestyle{fancy}
     \fancyhf{} % 清空所有fancy样式，方便使页眉左部和右部置空
-    \chead{\song\xiaowu{\@heading}}
+    \chead{\song\xiaowu{\quad\@heading}}
 \makeatother
 
 %%% 附录命令配置

@@ -5,15 +5,18 @@
 \usepackage[
     figuresright
 ] {rotating}                % 用于旋转某些东西，如长表格。
-\usepackage[
-    includeheadfoot,
-    % driver=dvipdfmx
-] {geometry}                % 调节页边距。
+\usepackage{geometry}
+% includeheadfoot,
+% driver=dvipdfmx
+% 调节页边距。
 \usepackage{tikz-cd}        % 交换图和 tikzpicture 手动绘图的需求。
+\usepackage{pgf-pie}
 \usepackage{tikz}
-\usetikzlibrary {
+\usetikzlibrary{
     decorations.pathmorphing,
     decorations.markings,
+    decorations.text,
+    datavisualization,
     shapes,
     shadows,
     calc,
@@ -32,13 +35,26 @@
 % 上边距 3cm
 % 下边距 2.5cm
 % 页眉到上边缘的距离 1.5cm
-% 页脚到下边缘的距离 1.75cm，实际看感觉有点差，改用1.8
+% 页脚到下边缘的距离 1.75cm
 \geometry{
-    left=3cm,
-    right=2cm,
-    top=1.5cm,
-    bottom=1.8cm,
+    % includeheadfoot,
+    a4paper,
+    % paperwidth=21cm,
+    % paperheight=29.7cm,
+    % height = textheight,
+    left=30mm,
+    right=20mm,
+    top=30mm,
+    bottom=25mm,
+    footskip=7.5mm,
+    headsep=10mm
+    % 1.5cm + 9pt
+    % 1.8177cm - 21pt
+    % 1.79942
+    % 2.37128
 }
+% \setlength{\headsep}{1.5cm+1in}
+% \setlength{\footskip}{0.75cm+1in}
 \usepackage{enumerate}      % 罗列编号用的宏包
 \usepackage{titlesec}       % 控制标题的宏包
 \usepackage{titletoc}       % 控制目录的宏包
@@ -70,7 +86,7 @@
 \usepackage{longtable}      % 支持跨页的表格。
 \usepackage{diagbox}        % 斜线
 \usepackage{tabularx}       % 自动设置表格的列宽
-\usepackage{setspace}
+\usepackage{setspace}       % space 环境
 \usepackage{booktabs}
 \usepackage{float}          % 浮动体控制
 \usepackage{balance}        % 自动调整超出margin的文字
@@ -100,11 +116,11 @@
     maxbibnames=3,
     uniquelist=false,
     uniquename=false,
-    doi=false,              % doi 有时可能也不要了。
+    doi=false,              % doi 不要了，文献一多就难调。
     url=false,              % 某些时候要用这个少打印参考文献内的链接
     % 12 页：mirrors.sjtug.sjtu.edu.cn/ctan/macros/latex/contrib/biblatex-contrib/biblatex-gb7714-2015/biblatex-gb7714-2015.pdf
     gbnamefmt=lowercase,    % 外国人名小写
-    gbnamefmt=givenahead,   % 名前姓后
+    gbnamefmt=fullname,     % 名前姓后，全名
     gbpub=false,
     gbalign=gb7714-2015,    % 良好的左对齐
     gbnoauthor=true,        % 佚名作者用
@@ -140,7 +156,6 @@
     pgfplots,
     pgfplotstable           % 数据分析绘制图表
 }
-\pgfplotsset{compat=1.18}
 
 \usepackage{array}
 \usepackage{adjustbox}
@@ -175,6 +190,7 @@
 
 \usepackage[
     style=super, 
+    nogroupskip, % 组间不设置间隔。
     numberline,
     xindy,
     section,
@@ -199,8 +215,6 @@
     \renewenvironment{theglossary} {
         \begin{longtable}[c]{@{}cp{\glsdescwidth}m{\glspagelistwidth}<{\centering}@{}}
             % 这里填的就都是缩略项。
-            \caption{本文所用缩略术语汇总}
-            \label{customGlossaries}\\
     } {
         \specialrule{1pt}{0pt}{0pt}
         \end{longtable}
@@ -208,8 +222,14 @@
   
     %设置没有表头, 以及内容
     \renewcommand*{\glossaryheader}{
+        \caption{本文所用缩略术语汇总}
+        \label{customGlossaries}\\
         \specialrule{1pt}{0pt}{0pt}
-        缩略名 &\multicolumn{1}{c}{全称及中文译名} &所在页码 \\
+        缩略名 &\multicolumn{1}{c}{全称及中文译名} &首次出现页码 \\
+        \hline
+        \endfirsthead
+        \specialrule{1pt}{0pt}{0pt}
+        缩略名 &\multicolumn{1}{c}{全称及中文译名} &首次出现页码 \\
         \hline
         \endhead
     }
@@ -218,11 +238,11 @@
     % 主条目第一列名称，第二列说明，第三列页码：
     \renewcommand{\glossentry}[2]{
         \glsentryitem{##1}
-        \glstarget{##1} {\glossentryname{##1}} &\glossentrydesc{##1} & ##2\\
+        \glstarget{##1} {\glossentryname{##1}} &\glossentrydesc{##1}. & ##2\\
     }
     % 子条目第一列空置，第二列说明，第三列页码：
     \renewcommand*{\subglossentry}[3]{
-        &\glssubentryitem{##2}\glstarget{##2}{\strut}\glossentrydesc{##2} &##3\\
+        &\glssubentryitem{##2}\glstarget{##2}{\strut}\glossentrydesc{##2}. &##3\\
     }%
     % 定义分组间空白:
     \renewcommand*{\glsgroupskip} {
@@ -231,3 +251,13 @@
         \fi
     }
 }
+\lstdefinestyle{DOS}
+{
+    backgroundcolor=\color{white},
+    basicstyle=\normalsize\color{black}\rmfamily,
+    columns=fullflexible,
+}
+\usepgfplotslibrary{groupplots}
+\pgfplotsset{width=7cm,compat=1.18}
+
+\usepackage{ipaex-type1}    % 日语字体包

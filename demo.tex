@@ -10,8 +10,8 @@
 \input{format/cover_ref}
 \graphicspath{{figures/}}
 \addbibresource[location=local]{refer_ref.bib}
+
 \begin{document}
-	%% linux 下不可用 CJK
     \frontmatter
     %%% 前几页必要内容
     \makethesisheaders
@@ -42,7 +42,8 @@
         \input{sections/6conclusion_ref}
 
         %%% 参考文献
-        \newpage\nocite{*}
+        \newpage
+        \nocite{*} % 视情况使能。如果需要没引用到的参考文献出现于文中就用这句。
         \addcontentsline{toc}{section}{参考文献}
         \wuhao{
             \printbibliography[
