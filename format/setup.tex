@@ -207,13 +207,13 @@
 %%% 配置主目录中显示的节。
 % 节
 \titleformat{\section}{\sanhao\hei}{\thesection}{16pt}{}
-\titlespacing{\section}{0pt}{7pt}{7pt}
+\titlespacing{\section}{0pt}{6pt}{6pt}
 % 子节
 \titleformat{\subsection}{\xiaosi\hei}{\thesubsection}{12pt}{}
-\titlespacing{\subsection}{0pt}{7pt}{7pt}
+\titlespacing{\subsection}{0pt}{6pt}{6pt}
 % 孙子节
 \titleformat{\subsubsection}{\xiaosi\hei}{\thesubsubsection}{12pt}{}
-\titlespacing{\subsubsection}{0pt}{7pt}{7pt}
+\titlespacing{\subsubsection}{0pt}{6pt}{6pt}
 
 \newcounter{paraCounter}
 \setcounter{paraCounter}{1}
@@ -314,17 +314,17 @@
                 \centering
                 \begin{tabular}{lrc}
                     % multicolumn 必须是第一条指令，前面只能是字体而不掺杂任何的命令。
-                    \multicolumn{2}{r}{\xiaoer\hei\textbf{论文(设计)题目:}}\rule{0pt}{1.05cm} & \underline{\parbox[c]{6cm}{\@titleOnTheFirstLine}} \\
-                    &\multicolumn{1}{r}{}\rule{0pt}{1.05cm}      & \underline{\parbox[c]{6cm}{\@titleOnTheSecondLine}} \\
-                    \rule{0pt}{1.07cm}&\xiaosi\hei{学~生~姓~名 :} & \underline{\parbox[c]{6cm}{\@author}} \\
-                    \rule{0pt}{1.07cm}&\xiaosi\hei{学~生~学~号 :} & \underline{\parbox[c]{6cm}{\@studentid}} \\
-                    \rule{0pt}{1.07cm}&\xiaosi\hei{专~业~班~级 :} & \underline{\parbox[c]{6cm}{\@major}} \\
-                    \rule{0pt}{1.07cm}&\xiaosi\hei{学~院~名~称 :} & \underline{\parbox[c]{6cm}{\@faculty}} \\
-                    \rule{0pt}{1.07cm}&\xiaosi\hei{指~导~老~师 :} & \underline{\parbox[c]{6cm}{\@teacher}} \\
+                    \multicolumn{2}{r}{\xiaoer\hei\textbf{论文(设计)题目:\phantom{m}}}\rule{0pt}{1.07cm} & \underline{\parbox[c]{6cm}{\@titleOnTheFirstLine}} \\
+                    &\multicolumn{1}{r}{}\rule{0pt}{1.07cm}      & \underline{\parbox[c]{6cm}{\@titleOnTheSecondLine}} \\
+                    \rule{0pt}{1.07cm}&\xiaosi\hei{学\phantom{m}生\phantom{m}姓\phantom{m}名\phantom{m}:\phantom{m}} & \underline{\parbox[c]{6cm}{\@author}} \\
+                    \rule{0pt}{1.07cm}&\xiaosi\hei{学\phantom{m}生\phantom{m}学\phantom{m}号\phantom{m}:\phantom{m}} & \underline{\parbox[c]{6cm}{\@studentid}} \\
+                    \rule{0pt}{1.07cm}&\xiaosi\hei{专\phantom{m}业\phantom{m}班\phantom{m}级\phantom{m}:\phantom{m}} & \underline{\parbox[c]{6cm}{\@major}} \\
+                    \rule{0pt}{1.07cm}&\xiaosi\hei{学\phantom{m}院\phantom{m}名\phantom{m}称\phantom{m}:\phantom{m}} & \underline{\parbox[c]{6cm}{\@faculty}} \\
+                    \rule{0pt}{1.07cm}&\xiaosi\hei{指\phantom{m}导\phantom{m}老\phantom{m}师\phantom{m}:\phantom{m}} & \underline{\parbox[c]{6cm}{\@teacher}} \\
                 \end{tabular}
             \end{table}\par
             \vspace{2em}
-            \centering{\sihao\hei{\the\year{} 年 \the\month{} 月 \quad 日}}
+            \centering{\sihao\hei{\the\year{} 年 \the\month{} 月 20 日}}
             \pagestyle{empty}
         \end{titlepage}
         \clearpage
@@ -333,7 +333,7 @@
             \if @fancyplain
                 \let\headrulewidth\plainheadrulewidth
             \fi
-            \hrule\@height 1.2pt \@width\headwidth          % 上面线为1pt粗
+            \hrule\@height 1.5pt \@width\headwidth          % 上面线为1pt粗
             \vskip 0.6pt
             \hrule\@height 1pt \@width\headwidth          
             \vskip-2\headrulewidth\vskip-1pt                % 两条线的距离1pt

@@ -13,6 +13,7 @@
 
 \begin{document}
     \frontmatter
+    \input{format/glossaries_ref}
     %%% 前几页必要内容
     \makethesisheaders
     %%% 插图索引 可选项
@@ -43,7 +44,7 @@
 
         %%% 参考文献
         \newpage
-        \nocite{*} % 视情况使能。如果需要没引用到的参考文献出现于文中就用这句。
+        \nocite{*} % TODO: 后续视情况使能。如果需要没引用到的参考文献出现于文中就用这句。
         \addcontentsline{toc}{section}{参考文献}
         \wuhao{
             \printbibliography[
@@ -54,6 +55,8 @@
         %%% 致谢和附录
         \clearpage
         \xiaosi{\input{sections/acknowledge_ref}}
+        % 仅作为参考
+        \input{exp-data/data-ref}
         \xiaosi{\input{sections/appendix_ref}}
     \end{sloppypar}
 \end{document}

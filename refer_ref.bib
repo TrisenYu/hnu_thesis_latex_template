@@ -108,8 +108,7 @@
     author = {{Arm Limited}},
     title  = {Arm Architecture Registers Armv8, for Armv8-A architecture profile},
     year   = {2020},
-    url    = {https://developer.arm.com/documentation/ddi0601/2024-12/AArch32-Registers},
-    volume = {4154}
+    url    = {https://developer.arm.com/documentation/ddi0601/2024-12/AArch32-Registers}
 }
 @mastersthesis{attackAndDefenseOnEbpf,
     author  = {刘骐瑞},
@@ -166,6 +165,20 @@
     numpages  = 6
 }
 
+@inproceedings{bhuiyanSecBenchjsExecutableSecurity2023,
+    title      = {{{SecBench}}.Js: {{An Executable Security Benchmark Suite}} for {{Server-Side JavaScript}}},
+    shorttitle = {{{SecBench}}.Js},
+    booktitle  = {2023 {{IEEE}}/{{ACM}} 45th {{International Conference}} on {{Software Engineering}} ({{ICSE}} '23)},
+    author     = {Bhuiyan, Masudul Hasan Masud and Parthasarathy, Adithya Srinivas and Vasilakis, Nikos and Pradel, Michael and Staicu, Cristian-Alexandru},
+    year       = {2023},
+    month      = may,
+    pages      = {1059--1070},
+    publisher  = {IEEE},
+    address    = {Melbourne, Australia},
+    doi        = {10.1109/ICSE48619.2023.00096},
+    isbn       = {978-1-6654-5701-9},
+    langid     = {english}
+}
 @inproceedings{BPFJITFormalMethod,
     title     = {Specification and Verification in the Field: Applying Formal Methods to {{BPF}} Just-in-Time Compilers in the {{Linux}} Kernel},
     booktitle = {Proceedings of the 14th {{USENIX}} Conference on Operating Systems Design and Implementation ({{OSDI}} '20)},
@@ -178,6 +191,7 @@
     numpages  = {21},
     pages     = {41-61}
 }
+
 @book{BPFPerformanceTools,
     author    = {Gregg, Brendan},
     title     = {BPF Performance Tools: Linux System and Application Observability},
@@ -214,12 +228,25 @@
     keywords      = {obfuscation,wasm},
     file          = {F:\Zotero\Data-storage\storage\QIKVA3HY\Cao 等 - 2023 - WASMixer Binary Obfuscation for WebAssembly.pdf}
 }
-
 @manual{CETspec,
     author = {{Intel Corporation}},
     title  = {Control-flow Enforcement Technology Specification},
     year   = {2019}
 }
+@article{chaliasosWelltypedProgramsCan2021,
+    title   = {Well-Typed Programs Can Go Wrong: A Study of Typing-Related Bugs in {{JVM}} Compilers},
+    author  = {Chaliasos, Stefanos and Sotiropoulos, Thodoris and Drosos, Georgios-Petros and Mitropoulos, Charalambos and Mitropoulos, Dimitris and Spinellis, Diomidis},
+    year    = {2021},
+    month   = oct,
+    journal = {Proceedings of the ACM on Programming Languages (PACMPL '21)},
+    volume  = {5},
+    number  = {OOPSLA},
+    pages   = {1--30},
+    issn    = {2475-1421},
+    doi     = {10.1145/3485500},
+    urldate = {2025-01-04}
+}
+
 @inproceedings{craunEliminatingEBPFTracing2024,
     title     = {Eliminating {{eBPF Tracing Overhead}} on {{Untraced Processes}}},
     booktitle = {Proceedings of the {{SIGCOMM Workshop}} on {{eBPF}} and {{Kernel Extensions}} (eBPF '24)},
@@ -232,19 +259,6 @@
     doi       = {10.1145/3672197.3673431},
     urldate   = {2025-04-29},
     langid    = {english}
-}
-@misc{CVE-2021-29154,
-    author = {{The MITRE Corporation}},
-    title  = {CVE-2021-29154},
-    url    = {https://www.cve.org/CVERecord?id=CVE-2021-29154},
-    year   = {2021}
-}
-
-@misc{CVE-2021-38300,
-    author = {{The MITRE Corporation}},
-    title  = {CVE-2021-38300},
-    url    = {https://www.cve.org/CVERecord?id=CVE-2021-38300},
-    year   = {2021}
 }
 @inproceedings{disselkoenPositionPaperProgressive2019,
     title      = {Position {{Paper}}: {{Progressive Memory Safety}} for {{WebAssembly}}},
@@ -283,6 +297,20 @@
     doi       = {http://doi.org/10.17487/RFC9669},
     abstract  = {eBPF (which is no longer an acronym for anything), also commonly referred to as BPF, is a technology with origins in the Linux kernel that can run untrusted programs in a privileged context such as an operating system kernel.  This document specifies the BPF instruction set architecture (ISA).}
 }
+
+@inproceedings{eomFuzzingJavaScriptInterpreters2024,
+    title     = {Fuzzing {{JavaScript Interpreters}} with {{Coverage-Guided Reinforcement Learning}} for {{LLM-Based Mutation}}},
+    booktitle = {Proceedings of the 33rd {{ACM SIGSOFT International Symposium}} on {{Software Testing}} and {{Analysis}} (ISSTA '24)},
+    author    = {Eom, Jueon and Jeong, Seyeon and Kwon, Taekyoung},
+    year      = {2024},
+    month     = sep,
+    pages     = {1656--1668},
+    publisher = {ACM},
+    address   = {Vienna, Austria},
+    doi       = {10.1145/3650212.3680389},
+    urldate   = {2024-12-31},
+    isbn      = {979-8-4007-0612-7}
+}
 @inproceedings{FineIBT,
     author    = {Gaidis, Alexander J. and Moreira, Joao and Sun, Ke and Milburn, Alyssa and Atlidakis, Vaggelis and Kemerlis, Vasileios P.},
     title     = {FineIBT: Fine-grain Control-flow Enforcement with Indirect Branch Tracking},
@@ -313,7 +341,6 @@
     keywords      = {accelerate,safe wasm,wasm},
     file          = {F:\Zotero\Data-storage\storage\F8NRFJAS\Fink 等 - 2024 - Cage Hardware-Accelerated Safe WebAssembly.pdf}
 }
-
 @misc{FrontEndCompilerCheerp,
     author       = {{Leaning Technologies}},
     howpublished = {\url{https://leaningtech.com/cheerp/}},
@@ -353,6 +380,7 @@
     keywords      = {Computer Science - Computational Engineering Finance and Science,Computer Science - Operating Systems},
     file          = {F:\Zotero\Data-storage\storage\Y5UTW3XB\Gbadamosi 等 - 2024 - The eBPF Runtime in the Linux Kernel.pdf}
 }
+
 @inproceedings{gershuniSimplePreciseStatic2019,
     title     = {Simple and Precise Static Analysis of Untrusted {{Linux}} Kernel Extensions},
     booktitle = {Proceedings of the 40th {{ACM SIGPLAN Conference}} on {{Programming Language Design}} and {{Implementation}} (PLDI '19)},
@@ -366,11 +394,16 @@
     langid    = {english},
     location  = {Phoenix, America}
 }
+
+% volume     = {13},
+% number     = {8},
 @manual{glibcManual,
     title  = {The GNU C Library (glibc) manual},
     author = {{Free Software Foundation, Inc}},
     year   = {2023}
 }
+
+% wasm 标准
 @book{groupWebAssemblySpecification2024,
     title   = {{{WebAssembly Specification}}},
     author  = {{{WebAssembly Community}} and {{Rossberg Andreas}}},
@@ -380,7 +413,6 @@
     langid  = {english},
     note    = {standard}
 }
-
 @inproceedings{haasBringingWebSpeed2017,
     title     = {Bringing the Web up to Speed with {{WebAssembly}}},
     booktitle = {Proceedings of the 38th {{ACM SIGPLAN Conference}} on {{Programming Language Design}} and {{Implementation}} (PLDI '17)},
@@ -397,8 +429,7 @@
     langid    = {english}
 }
 
-% volume     = {13},
-% number     = {8},
+    % volume     = {1},
 @article{hanESFuzzerEfficientWay2024,
     title      = {{{ESFuzzer}}: {{An Efficient Way}} to {{Fuzz WebAssembly Interpreter}}},
     shorttitle = {{{ESFuzzer}}},
@@ -416,7 +447,7 @@
     langid     = {english}
 }
 
-% wasm 标准
+% volume     = {13790},
 @inproceedings{HaoValidating,
     author    = {{Hao Sun} and {Zhendong Su}},
     title     = {Validating the {eBPF} Verifier via State Embedding},
@@ -428,6 +459,7 @@
     publisher = {USENIX Association},
     month     = jul
 }
+
 @inproceedings{hive,
     author    = {{Peihua Zhang} and {Chenggang Wu} and {Xiangyu Meng} and {Yinqian Zhang} and {Mingfan Peng} and {Shiyang Zhang} and {Bing Hu} and {Mengyao Xie} and {Yuanming Lai} and {Yan Kang} and {Zhe Wang}},
     title     = {{HIVE}: A Hardware-assisted Isolated Execution Environment for {eBPF} on {AArch64}},
@@ -439,8 +471,6 @@
     publisher = {USENIX Association},
     month     = aug
 }
-
-    % volume     = {1},
 @article{hungBRFFuzzingEBPF2024,
     title   = {{{BRF}}: {{Fuzzing}} the {{eBPF Runtime}}},
     author  = {Hung, Hsin-Wei and Amiri Sani, Ardalan},
@@ -456,7 +486,22 @@
     langid  = {english}
 }
 
-% volume     = {13790},
+@manual{ierusalimschyLua54Reference2020,
+    title  = {Lua 5.4 {{Reference Manual}}},
+    author = {Ierusalimschy, Roberto and {Luiz Henrique de Figueiredo} and Celes, Waldemar },
+    year   = {2020},
+    url    = {https://www.lua.org/manual/5.4/}
+}
+@book{ierusalimschyProgrammingLua532016,
+    title      = {{Programming in Lua: 5.3 edition}},
+    shorttitle = {{Programming in Lua}},
+    author     = {Ierusalimschy, Roberto},
+    year       = {2016},
+    month      = apr,
+    publisher  = {Roberto Ierusalimschy},
+    isbn       = {978-85-903798-6-7},
+    langid     = {brazilian}
+}
 @incollection{infoflowctrforwasm,
     title      = {{{SecWasm}}: {{Information Flow Control}} for {{WebAssembly}}},
     shorttitle = {{{SecWasm}}},
@@ -472,7 +517,6 @@
     langid     = {english},
     location   = {Auckland, New Zealand}
 }
-
 @manual{IntelSGXmanual,
     author = {{Intel Corporation}},
     title  = {Intel Software Guard Extensions (Intel SGX) SDK for Linux OS},
@@ -492,7 +536,6 @@
     address   = {Cham},
     keywords  = {eBPF, Bug exploitation, Linux kernel, Bypassing CFI}
 }
-
 @misc{isovalentEBPFDocs2024,
     title        = {{{eBPF Docs}}},
     author       = {{isovalent}},
@@ -523,6 +566,17 @@
     publisher = {USENIX Association},
     month     = aug
 }
+@inproceedings{jiaDetectingJVMJIT2023,
+    title     = {Detecting {{JVM JIT Compiler Bugs}} via {{Exploring Two-Dimensional Input Spaces}}},
+    booktitle = {2023 {{IEEE}}/{{ACM}} 45th {{International Conference}} on {{Software Engineering}} ({{ICSE}} '23)},
+    author    = {Jia, Haoxiang and Wen, Ming and Xie, Zifan and Guo, Xiaochen and Wu, Rongxin and Sun, Maolin and Chen, Kang and Jin, Hai},
+    year      = {2023},
+    pages     = {43--55},
+    publisher = {IEEE},
+    address   = {Melbourne, Australia},
+    isbn      = {978-1-6654-5701-9},
+    langid    = {english}
+}
 @inproceedings{jiaKernelExtensionVerification2023,
     title     = {Kernel Extension Verification Is Untenable},
     booktitle = {Proceedings of the 19th {{Workshop}} on {{Hot Topics}} in {{Operating Systems}} (HOTOS '23)},
@@ -536,6 +590,7 @@
     urldate   = {2024-12-23},
     langid    = {english}
 }
+
 @mastersthesis{jiangResearchSecurityFeatures2023,
     title   = {高级语言程序编译到 WebAssembly 的  安全特性研究},
     author  = {江佩东},
@@ -560,6 +615,19 @@
     langid     = {english},
     keywords   = {runtime,wasm}
 }
+@article{JSEngineBugs,
+    title   = {An Empirical Study on Bugs in {{JavaScript}} Engines},
+    author  = {Wang, Ziyuan and Bu, Dexin and Wang, Nannan and Yu, Sijie and Gou, Shanyi and Sun, Aiyue},
+    year    = {2023},
+    month   = mar,
+    journal = {Information and Software Technology},
+    volume  = {155},
+    number  = {C},
+    pages   = {1--16},
+    issn    = {09505849},
+    doi     = {10.1016/j.infsof.2022.107105},
+    urldate = {2025-01-03}
+}
 @inproceedings{kernelStorage,
     author    = {{Yuhong Zhong} and {Haoyu Li} and {YuJian Wu}  and {Ioannis Zarkadas} and {Jeffrey Tao} and {Evan Mesterhazy} and {Michael Makris} and {Junfeng Yang} and {Amy Tai} and {Ryan Stutsman} and {Asaf Cidon}},
     title     = {{XRP}: {In-Kernel} Storage Functions with {eBPF}},
@@ -571,12 +639,14 @@
     publisher = {USENIX Association},
     month     = jul
 }
+
 @misc{kernelv62ReleaseStatus,
     author = {{Eklektix Inc}},
     title  = {x86: Kernel IBT},
     url    = {https://lwn.net/ml/linux-kernel/20220224145138.952963315@infradead.org/},
     year   = {2023}
 }
+
 @misc{kim2024tiktagbreakingarmsmemory,
     title         = {TikTag: Breaking ARM's Memory Tagging Extension with Speculative Execution},
     author        = {Juhee Kim and Jinbum Park and Sihyeon Roh and Jaeyoung Chung and Youngjoo Lee and Taesoo Kim and Byoungyoung Lee},
@@ -647,7 +717,6 @@
     langid        = {english},
     keywords      = {wasm}
 }
-
 @mastersthesis{lehmannProgramAnalysisWebAssembly2022,
     title        = {Program Analysis of {{WebAssembly}} Binaries},
     author       = {Lehmann, Daniel},
@@ -662,7 +731,6 @@
     location     = {Stuttgart Germany},
     keywords     = {004}
 }
-
 @inproceedings{lehmannWasabiFrameworkDynamically2019,
     title      = {Wasabi: {{A Framework}} for {{Dynamically Analyzing WebAssembly}}},
     shorttitle = {Wasabi},
@@ -691,7 +759,14 @@
     keywords  = {ebpf, mte, sandboxing},
     location  = {Salt Lake City, America}
 }
-
+@misc{limSOKAnalysisWeb2021,
+    title     = {{{SOK}}: {{On}} the {{Analysis}} of {{Web Browser Security}}},
+    author    = {Lim, Jungwon and Jin, Yonghwi and Alharthi, Mansour and Zhang, Xiaokuan and Jung, Jinho and Gupta, Rajat and Li, Kuilin and Jang, Daehee and Kim, Taesoo},
+    year      = {2021},
+    month     = dec,
+    number    = {arXiv:2112.15561},
+    publisher = {arXiv}
+}
 @inproceedings{limUnleashingUnprivilegedEBPF2023,
     title     = {Unleashing {{Unprivileged eBPF Potential}} with {{Dynamic Sandboxing}}},
     booktitle = {Proceedings of the 1st {{Workshop}} on {{eBPF}} and {{Kernel Extensions}} (eBPF '23)},
@@ -719,6 +794,7 @@
     year   = {2024},
     url    = {https://docs.kernel.org/}
 }
+
 @inproceedings{llvm,
     author    = {Lattner, Chris and Adve, Vikram},
     title     = {LLVM: A Compilation Framework for Lifelong Program Analysis \& Transformation},
@@ -728,6 +804,7 @@
     pages     = {75-86},
     location  = {Palo Alto, America}
 }
+
 @mastersthesis{llvmObfuscationForAndroid,
     author  = {江秋语},
     school  = {四川大学},
@@ -806,7 +883,6 @@
     numpages  = {13},
     keywords  = {Memory Safety, Multi-Granular Tags, Tagged Memory Architecture}
 }
-
 @book{os3pieces,
     author    = {Arpaci-Dusseau, Remzi H. and Arpaci-Dusseau, Andrea C.},
     title     = {Operating Systems: Three Easy Pieces},
@@ -816,7 +892,18 @@
     address   = {North Charleston, SC, USA},
     abstract  = {OSTEP ("oh step"), or the "the comet book", represents the culmination of years of teaching intro to operating systems to both undergraduates and graduates at the University of Wisconsin-Madison Computer Sciences department for nearly 20 years. The book is organized around three concepts fundamental to OS construction: virtualization (of CPU and memory), concurrency (locks and condition variables), and persistence (disks, RAIDS, and file systems). The material, if combined with serious project work and homeworks, will lead students to a deeper understanding and appreciation of modern OSes. The authors, Remzi and Andrea Arpaci-Dusseau, are both professors of Computer Sciences at the University of Wisconsin-Madison. They have been doing research in computer systems for over 20 years, working together since their first graduate operating systems class at U.C. Berkeley in 1993. Since that time, they have published over 100 papers on the performance and reliability of many aspects of modern computer systems, with a special focus on file and storage systems. Their work has been recognized with numerous best-paper awards, and some of their innovations can be found in the Linux and BSD operating systems today.}
 }
-
+@inproceedings{parkEmpiricalStudyPrioritizing2019,
+    title     = {An {{Empirical Study}} of {{Prioritizing JavaScript Engine Crashes}} via {{Machine Learning}}},
+    booktitle = {Proceedings of the 2019 {{ACM Asia Conference}} on {{Computer}} and {{Communications Security}} (Asia CCS '19)},
+    author    = {Park, Sunnyeo and Kim, Dohyeok and Son, Sooel},
+    year      = {2019},
+    month     = jul,
+    pages     = {646--657},
+    publisher = {ACM},
+    address   = {Auckland, New Zealand},
+    doi       = {10.1145/3321705.3329840},
+    isbn      = {978-1-4503-6752-3}
+}
 @article{PKSeBPFIsolation,
     title   = {{基于PKS硬件特性的eBPF内存隔离机制}},
     author  = {{李浩} and {古金宇} and {夏虞斌} and {臧斌宇} and {陈海波}},
@@ -862,6 +949,7 @@
     urldate    = {2025-04-09},
     langid     = {english}
 }
+
 @article{rayOverviewWebAssemblyIoT2023,
     title      = {An {{Overview}} of {{WebAssembly}} for {{IoT}}: {{Background}}, {{Tools}}, {{State-of-the-Art}}, {{Challenges}}, and {{Future Directions}}},
     shorttitle = {An {{Overview}} of {{WebAssembly}} for {{IoT}}},
@@ -932,8 +1020,17 @@
     langid    = {english},
     keywords  = {orchestration, policy, eBPF}
 }
+@phdthesis{SecurityLuaSandbox2022,
+    type    = {Bachelor's Thesis},
+    title   = {Security of the {{Lua Sandbox}}},
+    author  = {{Petr Ad{\'a}mek}},
+    year    = {2022},
+    langid  = {english},
+    address = {Prague, Czech Republic},
+    school  = {Czech Technical University in Prague}
+}
 @manual{SecurityModelOfwasm,
-    author = {{WebAssembly Community Group}},
+    author = {{WebAssembly Community}},
     title  = {The Security Model of Web Assembly},
     year   = {2025},
     url    = {https://webassembly.org/docs/security/}
@@ -968,7 +1065,31 @@
     url      = {https://github.com/skanehira/writing-a-wasm-runtime-in-rust/},
     keywords = {front end compiler,runtime,wasm}
 }
-
+@inproceedings{sonoyamaPerformanceStudyKotlin2021,
+    title     = {Performance {{Study}} of {{Kotlin}} and {{Java Program Considering Bytecode Instructions}} and {{JVM JIT Compiler}}},
+    booktitle = {2021 {{Ninth International Symposium}} on {{Computing}} and {{Networking Workshops}} ({{CANDARW}} '21)},
+    author    = {Sonoyama, Atsuya and Kamiyama, Takeshi and Oguchi, Masato and Yamaguchi, Saneyasu},
+    year      = {2021},
+    month     = nov,
+    pages     = {127--133},
+    publisher = {IEEE},
+    address   = {Matsue, Japan},
+    doi       = {10.1109/CANDARW53999.2021.00028},
+    abstract  = {Java has been widely used in the information technology field such as smartphones and server-side software. Java language and its runtime environments, which is called the Java ecosystem, have been developed and improved for some decades. This has become a huge and sophisticated ecosystem. Therefore, optimizing software codes, such as bytecodes program, should be well matched for this eco-system. Recently, a new programing language, which is called Kotlin, based on JVM (Java virtual machine) was developed. Kotlin is a well-designed program language, but is newly proposed and may not be exhaustively optimized for this Java ecosystem. In this paper, we discuss the performances of programs that are written in Java and Kotlin languages based on this ecosystem implementation. We first evaluate the performances of the loop function, which is a basic function of programming languages, of these two languages, then show that the performance of Kotlin is less than that of Java in the case of subjectively typical and common description way. Also, we show that even the performance of Java is less in some cases. We seconds discuss the reason for these performance declines comparing the bytecodes that are output from compilers of these languages. We reveal a small difference in bytecode sequences causes a large performance change due to the optimizer of JIT (Just-in-time) compiler implementation. We third discuss a method for improving the performance by solving this issue. One of the easiest ways is translating a JVM bytecode file. Finally, we evaluate our performance improving method and show that the method can improve the performance by 33\% in the largest case.},
+    isbn      = {978-1-6654-2835-4},
+    langid    = {english}
+}
+@inproceedings{Staicu2018SYNODEUA,
+    title     = {{{SYNODE}}: {{Understanding}} and Automatically Preventing Injection Attacks on Node.Js},
+    booktitle = {Network and Distributed System Security Symposium (NDSS '18)},
+    author    = {Staicu, Cristian-Alexandru and Pradel, Michael and Livshits, Benjamin},
+    publisher = {The Internet Society},
+    year      = {2018},
+    pages     = {1--15},
+    address   = {San Diego, America},
+    url       = {https://api.semanticscholar.org/CorpusID:51951699},
+    doi       = {https://doi.org/10.14722/ndss.2018.23076}
+}
 @inproceedings{sunFindingCorrectnessBugs2024,
     author    = {Sun, Hao and Xu, Yiru and Liu, Jianzhong and Shen, Yuheng and Guan, Nan and Jiang, Yu},
     title     = {Finding Correctness Bugs in eBPF Verifier with Structured and Sanitized Program},
@@ -991,13 +1112,6 @@
     pages     = {1433--1450},
     publisher = {USENIX Association},
     address   = {New York, America}
-}
-@misc{TCPdump,
-    author       = {{The Tcpdump Group}},
-    howpublished = {\url{https://www.tcpdump.org/}},
-    title        = {Tcpdump, a Powerful Command-Line Packet Analyzer},
-    url          = {https://www.tcpdump.org/},
-    year         = {2024}
 }
 @article{titzerFastInplaceInterpreter2022,
     author     = {Titzer, Ben L.},
@@ -1096,19 +1210,12 @@
     location  = {Salerno, Italy}
 }
 @misc{WasmbpfStreamliningEBPF2024,
-    title         = {Wasm-Bpf: {{Streamlining eBPF Deployment}} in {{Cloud Environments}} with {{WebAssembly}}},
-    shorttitle    = {Wasm-Bpf},
-    author        = {{Yusheng Zheng} and {Tong Yu} and {Yiwei Yang} and {Andrew Quinn}},
-    year          = {2024},
-    month         = aug,
-    number        = {arXiv:2408.04856},
-    eprint        = {2408.04856},
-    publisher     = {arXiv},
-    doi           = {10.48550/arXiv.2408.04856},
-    urldate       = {2024-11-28},
-    archiveprefix = {arXiv},
-    langid        = {english},
-    keywords      = {ebpf,wasm}
+    title      = {Wasm-Bpf: {{Streamlining eBPF Deployment}} in {{Cloud Environments}} with {{WebAssembly}}},
+    shorttitle = {Wasm-Bpf},
+    author     = {{Yusheng Zheng} and {Tong Yu} and {Yiwei Yang} and {Andrew Quinn}},
+    year       = {2024},
+    month      = aug,
+    number     = {arXiv:2408.04856}
 }
 @book{wasmcoretech,
     title     = {{WebAssembly原理与核心技术}},
@@ -1268,20 +1375,12 @@
     langid     = {english}
 }
 @misc{zhengBpftimeUserspaceEBPF2023,
-    title         = {Bpftime: Userspace {{eBPF Runtime}} for {{Uprobe}}, {{Syscall}} and {{Kernel-User Interactions}}},
-    shorttitle    = {Bpftime},
-    author        = {{Yusheng Zheng} and {Tong Yu} and {Yiwei Yang} and {Yanpeng Hu} and {Xiaozheng Lai} and {Andrew Quinn}},
-    year          = {2023},
-    month         = dec,
-    number        = {arXiv:2311.07923},
-    eprint        = {2311.07923},
-    publisher     = {arXiv},
-    doi           = {10.48550/arXiv.2311.07923},
-    urldate       = {2024-12-01},
-    archiveprefix = {arXiv},
-    langid        = {english},
-    keywords      = {ebpf,runtime},
-    file          = {F:\Zotero\Data-storage\storage\B7TAESAB\Zheng 等 - 2023 - bpftime userspace eBPF Runtime for Uprobe, Syscall and Kernel-User Interactions.pdf}
+    title      = {Bpftime: Userspace {{eBPF Runtime}} for {{Uprobe}}, {{Syscall}} and {{Kernel-User Interactions}}},
+    shorttitle = {Bpftime},
+    author     = {{Yusheng Zheng} and {Tong Yu} and {Yiwei Yang} and {Yanpeng Hu} and {Xiaozheng Lai} and {Andrew Quinn}},
+    year       = {2023},
+    month      = dec,
+    number     = {arXiv:2311.07923}
 }
 @article{zhengVMMattersComparison2021,
     author     = {{Yixuan Zhang} and {Shuyu Zheng} and {Haoyu Wang} and {Lei Wu} and {Gang Huang} and {Xuanzhe Liu}},

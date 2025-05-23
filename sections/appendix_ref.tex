@@ -2,7 +2,7 @@
 \addcontentsline{toc}{section}{附录}
 \setAppendixHere{A}
     % 需要用 \eqref 才会加圆括号。
-    公式推导如 \eqref{eq1} 式所示。
+    公式如 \eqref{eq1} 式所示。所形成的交换图如图 \ref{fig1}，图 \ref{fig2}，图 \ref{fig3} 和图 \ref{performanceOfSCLL} 所示。
     \begin{equation}
         \begin{aligned}
             \int \frac{x+\sin x}{1 + \cos x} \mathrm{d} x &= \int \frac{x}{2\cos^2 \frac{x}{2}} + \tan \frac{x}{2} \mathrm{d} x \\
@@ -12,9 +12,7 @@
         \end{aligned}
         \label{eq1}
     \end{equation}
-    
-    所形成的交换图如图 \ref{fig1}，图 \ref{fig2}，图 \ref{fig3} 和图 \ref{performanceOfSCLL} 所示。
-    \begin{figure*}[htp]
+    \begin{figure*}[htb]
         \centering
         \begin{tikzcd}
             A \arrow[r, "\phi"] \arrow[d, red]
@@ -26,7 +24,7 @@
         \caption{{交换图例一}}
         \label{fig1}
     \end{figure*}
-    \begin{figure*}[htp]
+    \begin{figure*}[htb]
         \centering
         \begin{tikzcd}[column sep=tiny]
             & \pi_1(U_1) \ar[dr]\ar[drr, "j_1", bend left=20] &&[1.5em] \\
@@ -40,7 +38,7 @@
         \caption{{交换图例二}}
         \label{fig2}
     \end{figure*}
-    \begin{figure*}[htp]
+    \begin{figure*}[htb]
         \centering
         \begin{tikzcd}
             T
@@ -58,25 +56,39 @@
         \caption{{交换图例三}}
         \label{fig3}
     \end{figure*}
-    \begin{figure}[ht]
+    \begin{figure}[htb]
         \centering
+        % TimeResults
         \begin{tikzpicture}
-            \begin{axis}
-                [
-                    ymode=log,
-                    x=4cm, xtick=data,
-                    ybar=6pt, ylabel={$\ln[\operatorname{ms}]$}, ylabel style={rotate=-90, at={(0,1)},anchor=west},
-                    symbolic x coords={SCLL,Python,Java,C},
-                    nodes near coords,
-                    nodes near coords align={vertical},
-                    bar width=14pt,
-                    width=0.8*\linewidth,
-                ] 
-                \addplot coordinates {(SCLL, 8755) (Python, 1953) (Java, 79) (C, 48) } ; 
-                \addplot coordinates {(SCLL, 9829) (Python, 3406) (Java, 108.9) (C, 87) }; 
-                \addplot coordinates {(SCLL, 10054) (Python, 1897) (Java, 80) (C, 45) }; 
-                
-                \legend{{Fibonacci, n = 35}, {Primes, n = 1000000}, {Pascal triangle, n = 23}}; 
+            \begin{axis}[
+                ylabel={用时(s)},
+                xlabel={执行轮数},
+                legend columns=7,
+                legend style={at={(1.5,-0.3)},anchor=outer south},
+                % 如果有多个子图，可以用groupplot来。
+                % 具体不教，自己看手册去。
+                % title={},
+                yticklabel style={
+                    /pgf/number format/.cd, 
+                    /pgf/number format/fixed,
+                    /pgf/number format/precision=3
+                }
+            ]
+            \addplot [
+                scatter,
+                only marks,
+                point meta=explicit symbolic,
+                scatter/classes={
+                    correlation={mark=square*,blue},
+                    covariance={mark=triangle*,red},
+                    gemm={mark=o,draw=black},
+                    gemver={mark=x,draw=green},
+                    ludcmp={mark=o,draw=cyan},
+                    nussinov={mark=x,draw=blue},
+                    seidel-2d={mark=triangle*,yellow}% <-- don't add comma
+                },
+            ] table [meta=label] {\TimeResults};
+            \legend{correlation,covariance,gemm, gemver, ludcmp, nussinov, seidel-2d};
             \end{axis} 
         \end{tikzpicture} 
         \caption{性能统计图表}
@@ -85,35 +97,36 @@
     \newpage
 
 \setAppendixHere{B}
-    所用图片为图 \ref{fig4}。
-    \begin{figure}[htp!]
+    \begin{figure}[htb]
         \centering
-        \begin{subfigure}{0.3\linewidth}
-            \includegraphics[width=\linewidth]{ebpfProgramExample.png} % 在导言区导入了图片以后，这里就不要再包含后缀名
-            \caption{测试代码一}
-            \label{f3son1}
-        \end{subfigure} 
-        \begin{subfigure}{0.3\linewidth}
-            \includegraphics[width=\linewidth]{fig1Codes.png} % 在导言区导入了图片以后，这里就不要再包含后缀名
-            \caption{测试代码二}
-            \label{f3son2}
-        \end{subfigure}
+        \subcaptionbox{湖南}{\includegraphics[width=.24\linewidth]{HSVGPDF.jpg}}
+        \subcaptionbox{大学}{\includegraphics[width=.24\linewidth]{HSVGPDF-transparent.png}}
         \caption{所用代码集}
         \label{fig4}
     \end{figure}
 
-    所用表格为表 \ref{tbl1} 和表 \ref{tbl2}。
-    \begin{table*}[htp]
-        \centering
-        \caption{数学字体对照表}
-        \begin{threeparttable}
-        % resizebox 使表格适应文档的宽度。
-        \resizebox{\textwidth}{!}{  
-        \xiaowu
-        \begin{tabular}{*{18}{l}}
-            \toprule
+    所用图片为图 \ref{fig4}。所用表格为表 \ref{tbl1} 和表 \ref{tbl2}。
+
+    {\wuhao{
+        \setlength\tabcolsep{2pt}
+        \begin{longtable}{*{18}{l}}
+            \caption{数学字体对照表}
+            \label{tbl1}\\
+            \specialrule{1pt}{0pt}{0pt}
             \multicolumn{2}{c}{\texttt{mathrm}} & \multicolumn{2}{c}{\texttt{mathbf}} & \multicolumn{2}{c}{\texttt{mathit}} & \multicolumn{2}{c}{\texttt{mathsf}} & \multicolumn{2}{c}{\texttt{mathtt}} & \multicolumn{2}{c}{\texttt{mathcal}} & \multicolumn{2}{c}{\texttt{mathbb}} & \multicolumn{2}{c}{\texttt{mathfrak}} & \multicolumn{2}{c}{\texttt{mathscr}} \\ 
-            \midrule
+            \hline
+            \endfirsthead
+            \multicolumn{18}{l}{（续上页表\ref{tbl1}）}\\
+            \specialrule{1pt}{0pt}{0pt}
+            \multicolumn{2}{c}{\texttt{mathrm}} & \multicolumn{2}{c}{\texttt{mathbf}} & \multicolumn{2}{c}{\texttt{mathit}} & \multicolumn{2}{c}{\texttt{mathsf}} & \multicolumn{2}{c}{\texttt{mathtt}} & \multicolumn{2}{c}{\texttt{mathcal}} & \multicolumn{2}{c}{\texttt{mathbb}} & \multicolumn{2}{c}{\texttt{mathfrak}} & \multicolumn{2}{c}{\texttt{mathscr}} \\ 
+            \hline
+            \endhead
+            \specialrule{1pt}{0pt}{0pt}
+            \multicolumn{11}{l}{\xiaowu{注：此数据仅为示例，实际数据可能有所不同.}}\\
+            \endlastfoot
+            \specialrule{1pt}{0pt}{0pt}
+            \multicolumn{18}{r}{（表\ref{tbl1}接下页）}\\
+            \endfoot
             $\mathrm{Aa}$ & $\mathrm{Nn}$ & $\mathbf{Aa}$ & $\mathbf{Nn}$ & $\mathit{Aa}$ & $\mathit{Nn}$ & $\mathsf{Aa}$ & $\mathsf{Nn}$ & $\mathtt{Aa}$ & $\mathtt{Nn}$ & $\mathcal{Aa}$ & $\mathcal{Nn}$ & $\mathbb{A}$ & $\mathbb{N}$ & $\mathfrak{Aa}$ & $\mathfrak{Nn}$ & $\mathscr{Aa}$ & $\mathscr{Nn}$ \\
             $\mathrm{Bb}$ & $\mathrm{Oo}$ & $\mathbf{Bb}$ & $\mathbf{Oo}$ & $\mathit{Bb}$ & $\mathit{Oo}$ & $\mathsf{Bb}$ & $\mathsf{Oo}$ & $\mathtt{Bb}$ & $\mathtt{Oo}$ & $\mathcal{Bb}$ & $\mathcal{Oo}$ & $\mathbb{B}$ & $\mathbb{O}$ & $\mathfrak{Bb}$ & $\mathfrak{Oo}$ & $\mathscr{Bb}$ & $\mathscr{Oo}$ \\
             $\mathrm{Cc}$ & $\mathrm{Pp}$ & $\mathbf{Cc}$ & $\mathbf{Pp}$ & $\mathit{Cc}$ & $\mathit{Pp}$ & $\mathsf{Cc}$ & $\mathsf{Pp}$ & $\mathtt{Cc}$ & $\mathtt{Pp}$ & $\mathcal{Cc}$ & $\mathcal{Pp}$ & $\mathbb{C}$ & $\mathbb{P}$ & $\mathfrak{Cc}$ & $\mathfrak{Pp}$ & $\mathscr{Cc}$ & $\mathscr{Pp}$ \\
@@ -126,27 +139,58 @@
             $\mathrm{Jj}$ & $\mathrm{Ww}$ & $\mathbf{Jj}$ & $\mathbf{Ww}$ & $\mathit{Jj}$ & $\mathit{Ww}$ & $\mathsf{Jj}$ & $\mathsf{Ww}$ & $\mathtt{Jj}$ & $\mathtt{Ww}$ & $\mathcal{Jj}$ & $\mathcal{Ww}$ & $\mathbb{J}$ & $\mathbb{W}$ & $\mathfrak{Jj}$ & $\mathfrak{Ww}$ & $\mathscr{Jj}$ & $\mathscr{Ww}$ \\
             $\mathrm{Kk}$ & $\mathrm{Xx}$ & $\mathbf{Kk}$ & $\mathbf{Xx}$ & $\mathit{Kk}$ & $\mathit{Xx}$ & $\mathsf{Kk}$ & $\mathsf{Xx}$ & $\mathtt{Kk}$ & $\mathtt{Xx}$ & $\mathcal{Kk}$ & $\mathcal{Xx}$ & $\mathbb{K}$ & $\mathbb{X}$ & $\mathfrak{Kk}$ & $\mathfrak{Xx}$ & $\mathscr{Kk}$ & $\mathscr{Xx}$ \\
             $\mathrm{Ll}$ & $\mathrm{Yy}$ & $\mathbf{Ll}$ & $\mathbf{Yy}$ & $\mathit{Ll}$ & $\mathit{Yy}$ & $\mathsf{Ll}$ & $\mathsf{Yy}$ & $\mathtt{Ll}$ & $\mathtt{Yy}$ & $\mathcal{Ll}$ & $\mathcal{Yy}$ & $\mathbb{L}$ & $\mathbb{Y}$ & $\mathfrak{Ll}$ & $\mathfrak{Yy}$ & $\mathscr{Ll}$ & $\mathscr{Yy}$ \\
-            $\mathrm{Mm}$ & $\mathrm{Zz}$ & $\mathbf{Mm}$ & $\mathbf{Zz}$ & $\mathit{Mm}$ & $\mathit{Zz}$ & $\mathsf{Mm}$ & $\mathsf{Zz}$ & $\mathtt{Mm}$ & $\mathtt{Zz}$ & $\mathcal{Mm}$ & $\mathcal{Zz}$ & $\mathbb{M}$ & $\mathbb{Z}$ & $\mathfrak{Mm}$ & $\mathfrak{Zz}$ & $\mathscr{Mm}$ & $\mathscr{Zz}$ \\
-            \bottomrule
-        \end{tabular}
-        }
-        \begin{tablenotes}
-            \item \xiaowu\songti{注：此数据仅为示例，实际数据可能有所不同.}
-        \end{tablenotes}
-        \end{threeparttable}
-        \label{tbl1}
-    \end{table*}
-    \begin{table}[H]
-        \centering
-        \caption{各组分 $\lg(B_i)$ 值}
-        \wuhao
-        \begin{tabular}{ccccc} 
+            $\mathrm{Mm}$ & $\mathrm{Zz}$ & $\mathbf{Mm}$ & $\mathbf{Zz}$ & $\mathit{Mm}$ & $\mathit{Zz}$ & $\mathsf{Mm}$ & $\mathsf{Zz}$ & $\mathtt{Mm}$ & $\mathtt{Zz}$ & $\mathcal{Mm}$ & $\mathcal{Zz}$ & $\mathbb{M}$ & $\mathbb{Z}$ & $\mathfrak{Mm}$ & $\mathfrak{Zz}$ & $\mathscr{Mm}$ & $\mathscr{Zz}$ \\    
+        \end{longtable}
+        \setlength\tabcolsep{1.5em}
+        \begin{longtable}{c|c|c|c|c}
+            \caption{方法 — 干扰抑制结果}
+            \label{ref-longtable}\\
+            \specialrule{1pt}{0pt}{0pt}
+            干扰类型 &目标信号 &阵元数 &干扰采样值数 &SINR(dB)\\
             \hline
-            % 视需求套上斜体。
+            \endfirsthead
+            \specialrule{1pt}{0pt}{0pt}
+            \endfoot
+            \multirow{4}{*}{第一类干扰} &\multirow{2}{*}{信号1} &8 &—— &30.58\\
+            \cline{3-5}
+            &&4 &—— &21.16\\
+            \cline{2-5}
+            &\multirow{2}{*}{信号4}&8 &—— &38.28\\
+            \cline{3-5}
+            &&4 &—— &38.28\\
+            \hline
+            \multirow{3}{*}{第二类干扰} &\multirow{3}{*}{信号4} &\multirow{2}{*}{8} &30 &4.69\\
+            \cline{4-5}
+            &&&19 &4.83\\
+            \cline{3-5}
+            &&4 &30 &-0.42\\
+        \end{longtable}
+        \begin{longtable}{*{5}{c}} 
+            \caption{各组分 $\lg(B_i)$ 值}
+            \label{tbl2}\\
+            \specialrule{1pt}{0pt}{0pt}
             序号 & \multicolumn{2}{c}{T=1500K} & \multicolumn{2}{c}{T=2000K}  \\ 
             \cline{2-5}
             & 组分                   & $\lg B_i$   & 组分                  & $\lg B_i$ \\ 
             \hline
+            \endfirsthead
+
+            \multicolumn{5}{l}{（接上页表\ref{tbl2}）} \\
+            \specialrule{1pt}{0pt}{0pt}
+            序号 & \multicolumn{2}{c}{T=1500K} & \multicolumn{2}{c}{T=2000K}  \\ 
+            \cline{2-5}
+            & 组分                   & $\lg B_i$   & 组分                  & $\lg B_i$ \\ 
+            \hline
+            \endhead
+
+            \specialrule{1pt}{0pt}{0pt}
+            \multicolumn{5}{l}{\xiaowu{注：“+”表示重要成分，“*”表示冗余组分.}} \\
+            \endlastfoot
+
+            \specialrule{1pt}{0pt}{0pt}
+            \multicolumn{5}{r}{（表\ref{tbl2}接下页）} \\
+            \endfoot
+
             1  & \ce{O2}\TblrNote{+}   &   5.26      & \ce{HO2}              &  6.43    \\
             2  & \ce{HO2}              &   5.26      & \ce{O2}\TblrNote{+}   &  6.42    \\
             3  & \ce{H2O}\TblrNote{+}  &   4.76      & \ce{H2O}\TblrNote{+}  &  6.18    \\
@@ -161,9 +205,38 @@
             12 & \ce{HCO}\TblrNote{*}  &   -0.47     & \ce{HCO}\TblrNote{*}  &  0.24    \\
             13 & \ce{N}\TblrNote{+}    &   -4.85     & \ce{N}\TblrNote{+}    &  -2.81   \\
             14 & \ce{CH2O}\TblrNote{+} &   -6.91     & \ce{CH2O}\TblrNote{*} &  -6.13   \\
-            15 & \ce{NO}\TblrNote{+}   &   -16.60    & \ce{NO}\TblrNote{+}   &  -11.76  \\ 
+            15 & \ce{NO}\TblrNote{+}   &   -16.60    & \ce{NO}\TblrNote{+}   &  -11.76  \\                    
+        \end{longtable}
+        \begin{longtable}{@{}m{4em}<{\centering}|m{7em}<{\centering}|m{8em}<{\centering}|c<{\centering}|m{4em}<{\centering}@{}}
+            \caption{电子文献标识类型}
+            \label{OL-types}\\
+            \specialrule{1pt}{0pt}{0pt}
+            类型 &数据库（网上） &计算机程序（磁盘） &电子公告（网上） &光盘图书\\
             \hline
-            \multicolumn{5}{l}{\xiaowu\songti{注：“+”表示重要成分，“*”表示冗余组分.}}                      
-        \end{tabular}
-        \label{tbl2}
-    \end{table}
+            \endfirsthead
+            \specialrule{1pt}{0pt}{0pt}
+            \endfoot
+            文献标识符 &DB(DB/OL) &CP(CP/DK) &EB(EB/OL) &M/CD\\
+        \end{longtable}
+        \begin{longtable}{c|c|c|c|c|c}
+            \caption{参考文献标识类型}
+            \label{ref-types}\\
+            \specialrule{1pt}{0pt}{0pt}
+            类型 &专著 &会议录 &（单篇论文） &报纸文章 &期刊文章\\
+            \hline
+            \endfirsthead
+            \specialrule{1pt}{0pt}{0pt}
+            \endfoot
+            文献标识符 &M &C &A &N &J\\
+            \hline
+            类型 &学位论文 &报告 &标准 &专利 &其它文献\\
+            \hline
+            文献标识符 &D &R &S &P &Z\\
+        \end{longtable}
+    }}
+
+\setAppendixHere{C}
+    \vspace{-4em}
+    {
+        \wuhao{\printunsrtglossary[style=CustomSymbolTableStyle, title={}]}
+    }

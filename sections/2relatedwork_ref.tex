@@ -4,36 +4,34 @@
 		% https://github.com/openjdk/jdk/blob/master/src/hotspot/share/compiler/compileTask.cpp
 		\subsubsection{Java字节码解释器}
 		Java虚拟机(JVM)转译和执行由Scala，Java，Groovy和Kotlin等高级编程语言编译得到的Java字节码。
-		且当前的JVM系统由不同的组织和公司所开发，如Oracle开发的HotSpot\cite{OracleHotspot}，
-		阿里巴巴开发的DragonWell\cite{DragonWell}和IBM开发的OpenJ9\cite{IBMOpenJ9}。
+		且当前的JVM系统由不同的组织和公司所开发，如Oracle开发的HotSpot，
+		阿里巴巴开发的DragonWell和IBM开发的OpenJ9。
 
 		因JVM功能性复杂且规模巨大\cite{sonoyamaPerformanceStudyKotlin2021}，所以潜在的缺陷不可避免\cite{jiaDetectingJVMJIT2023}。
-		Jia,et al.\cite{jiaDetectingJVMJIT2023}观察到HotSpot公开的缺陷报告在每年的总数上虽然下降，但其即时编译器部分出现的缺陷却显著增加，
-		有的甚至可以引起JVM的崩溃\cite{JVMcrashReport}。
+		Haoxiang Jia et al.\cite{jiaDetectingJVMJIT2023}观察到HotSpot公开的缺陷报告在每年的总数上虽然下降，但其即时编译器部分出现的缺陷却显著增加，
+		有的甚至可以引起JVM的崩溃。
 
 		Chaliasos,et al.\cite{chaliasosWelltypedProgramsCan2021}通过按照表 \ref{jvmBugTracker} 所示的缺陷追踪网站，
 		从中收集并整理出 4153 个已被修复且由测试用例确保不会再重现的缺陷；其工作还随机挑选了320个缺陷，结合开发者讨论以及缺陷报告，
 		总结形成了五类的缺陷以及其根因，结果如图 \ref{JVMbugsRootCause} 所示。
 
-		\begin{table}[H]
-			\centering
-			\caption{JVM类型缺陷的收集结果\parencite{chaliasosWelltypedProgramsCan2021}}
-			\resizebox{\linewidth}{40pt}{
-				\begin{tabular}{cccccccc}
-					\specialrule{1pt}{1pt}{1pt}
-					语言 &缺陷追踪网站 &链接 &问题总数 &最早记录时间 &最近记录时间 &缺陷收集 &后-筛选量(post-filtering)\\
-					\hline
-					Java   &Jira  &\url{https://bugs.openjdk.java.net/rest/api/latest/search} 	&10872 	&2004-02-11 &2021-03-26 &1252 &873  \\
-					Scala2 &GitHub  &\url{https://api.github.com/repos/scala/bug} 				&12315 	&2003-05-22 &2021-03-11 &1180 &1067  \\
-					Scala3 &GitHub  &\url{https://api.github.com/repos/lampepfl/dotty} 			&4286 	&2014-02-01 &2021-03-21 &429  &366 \\
-					Kotlin &YouTrack  &\url{https://youtrack.jetbrains.com/api/issues} 			&40998 	&2011-10-28 &2021-04-09 &2189 &1601 \\
-					Groovy &Jira  &\url{https://issues.apache.org/jira/rest/api/2/search} 		&9710 	&2003-09-25 &2021-04-09 &300  &246 \\
-					\specialrule{1pt}{1pt}{1pt}
-				\end{tabular}
-			}
-			\label{jvmBugTracker}
-		\end{table}
-		\begin{figure}[H]
+		{\wuhao{
+			\begin{longtable}{cccccccc}
+			\caption{JVM类型缺陷的收集结果}
+			\label{jvmBugTracker}\\
+			\specialrule{1pt}{0pt}{0pt}
+			语言 &追踪网站 &问题总数 &最早记录时间 &最近记录时间 &缺陷收集 &后-筛选量(post-filtering)\\
+			\hline
+			Java   &\href{https://bugs.openjdk.java.net/rest/api/latest/search}{Jira} 	&10872 	&2004-02-11 &2021-03-26 &1252 &873  \\
+			Scala2 &\href{https://api.github.com/repos/scala/bug}{GitHub}				&12315 	&2003-05-22 &2021-03-11 &1180 &1067  \\
+			Scala3 &\href{https://api.github.com/repos/lampepfl/dotty}{GitHub} 			&4286 	&2014-02-01 &2021-03-21 &429  &366 \\
+			Kotlin &\href{https://youtrack.jetbrains.com/api/issues}{YouTrack} 			&40998 	&2011-10-28 &2021-04-09 &2189 &1601 \\
+			Groovy &\href{https://issues.apache.org/jira/rest/api/2/search}{Jira} 		&9710 	&2003-09-25 &2021-04-09 &300  &246 \\
+			\specialrule{1pt}{0pt}{0pt}
+			\end{longtable}
+		}}
+
+		\begin{figure}[htb]
 			\centering
 			\pgfplotstableread{
 					index	         aa ee  cc dd    bb
@@ -74,7 +72,7 @@
 					] table [x=bb, meta=index, y expr=\coordindex] {\jvmBugData};\addlegendentry{\xiaowu{编译性能问题}}
 				\end{axis}
 			\end{tikzpicture}
-			\caption{JVM各症状的错误原因分布\parencite{chaliasosWelltypedProgramsCan2021}}
+			\caption{JVM各症状的错误原因分布}
 			\label{JVMbugsRootCause}
 		\end{figure}
 
@@ -109,64 +107,56 @@
 		JS常作为客户端一侧的web应用使用，驱动了当今世界上超过90\%的web页面\cite{Staicu2018SYNODEUA}。
 		这种广泛的应用使得保证JS的安全性至关重要\cite{eomFuzzingJavaScriptInterpreters2024}。
 
-		JS通过自身的执行引擎解释执行且主流浏览器提供商均实现并管理着其编写的js引擎。Google浏览器使用V8引擎\cite{v8Engine}，
-		Mozilla的火狐浏览器使用SpiderMonkey引擎\cite{MozillaSpiderMonkey}，苹果公司的Safari浏览器使用WebKit\cite{WebKit}中的JS引擎，
-		微软公司开发的Edge使用ChakraCore引擎\cite{ChakraCore}。这些引擎是浏览器的核心\cite{limSOKAnalysisWeb2021}，依次将JS源码转变为字节码和机器码。
+		JS通过自身的执行引擎解释执行且主流浏览器提供商均实现并管理着其编写的js引擎。Google浏览器使用V8引擎，
+		Mozilla的火狐浏览器使用SpiderMonkey引擎，苹果公司的Safari浏览器使用WebKit中的JS引擎，
+		微软公司开发的Edge使用ChakraCore引擎。这些引擎是浏览器的核心\cite{limSOKAnalysisWeb2021}，依次将JS源码转变为字节码和机器码。
 
 		而Ziyuan Wang et al.\cite{JSEngineBugs}汇总分析了V8，SpiderMonkey和Chakra三个主流JS引擎截至2022年
 		已有的19019篇缺陷(bugs)报告，16437次修正和805个测试用例以及随机挑选的540个缺陷的根因，发现：
 		\begin{itemize}
-			\item[(1)] Compiler和DOM是存在缺陷最多的部件，结果如表 \ref{JSBuggySrc} 和表 \ref{JSBuggyComponents} 所示；
+			\item[(1)] Compiler和DOM是存在缺陷最多的部件，结果如表 \ref{JSBuggySrc} 和表 \ref{V8BuggyComponents} 和表 \ref{MozillaBuggyComponents} 所示；
 			\item[(2)] 小型测试用例足以触发多数漏洞，如V8中70.79\%的触发漏洞测试用例代码行数小于10行；
 			\item[(3)] JS引擎漏洞修复通常不复杂，多数仅需修改少量代码行和文件。如V8中76.86\%的漏洞修复涉及代码行数少于100行；
 			\item[(4)] 对于修复缺陷的时间，V8中有80.33\%的缺陷在半年内修复；SpiderMonkey引擎中有91.9\%的缺陷是在半年内修复，且有4.33\%是需要超过一年的时间才能修复；
 			\item[(5)] 规范语义缺陷是最常见的根因。除此之外，执行缺陷、特性以及函数调用缺陷均比其它类型的缺陷多。与V8和Chakra相比，SpiderMonkey有更多构建错误和更少内存错误。
 		\end{itemize}
 
-		研究为确保后续研究的可复现性，还将其成果分别以BSD，MPL，MIT许可证颁布公开于Github上
-		\footnote{\url{https://github.com/njuptw/Empirical-Study-V8}.}
-		\footnote{\url{https://github.com/njuptw/Empirical-Study-SpiderMonkey}.}
-		\footnote{\url{https://github.com/njuptw/Empirical-Study-Chakra}.}。
+		研究为确保后续研究的可复现性，还将其成果分别以BSD，MPL，MIT许可证颁布公开于Github上\footnote{\url{https://github.com/njuptw/Empirical-Study-V8}.}${}^{,}$\footnote{\url{https://github.com/njuptw/Empirical-Study-Chakra}.}${}^{,}$\footnote{\url{https://github.com/njuptw/Empirical-Study-SpiderMonkey}}。
 
-		另外，基于JavaScript的Node.js在服务器端和桌面端也得到大量的应用\cite{nodejsAbuse}。
-		因缺乏浏览器的安全沙箱机制，eval和exec注入API可能会引发严重的危害\cite{holtskogSecurityNodejsTheory2023}，
-		同时因开发者对分析工具接受度低且修复意愿不足，模块间还存在责任推诿问题\cite{Staicu2018SYNODEUA}。
-
-		\begin{table}[H]
-			\centering
-			\caption{2022年JS引擎缺陷在源码文件中的分布\parencite{JSEngineBugs}}
-			\wuhao\songti{
-				\begin{tabular*}{\textwidth}{@{}@{\extracolsep{\fill}}llllll@{}}
-					\specialrule{1pt}{1pt}{1pt}
-					\multicolumn{2}{c}{V8} &\multicolumn{2}{c}{SpiderMonkey} &\multicolumn{2}{c}{Chakra}\\
-					\hline
-					源文件 &缺陷数量 &源码 &缺陷数量 &源码 &缺陷数量\\
-					\hline
-					src/compiler  		&10525 		&js 			&3209 		&lib/Runtime/Library 			&4629 \\
-					src/wasm  			&5070  		&dom 			&3082 		&lib/Runtime/Language 			&1984 \\
-					src/builtins  		&4726  		&browser 		&2129 		&lib/Runtime/Base 				&1170 \\
-					src/heap  			&3630  		&toolkit 		&1956 		&lib/Common/Memory 				&1004 \\
-					src/objects  		&3087  		&third\_party 	&1933 		&lib/Runtime/ByteCode 			&1001 \\
-					src/runtime  		&2571  		&gfx 			&1807 		&lib/Runtime/Types 				&883 \\
-					src/parsing  		&2147  		&devtools 		&1136 		&lib/wabt/src 					&676 \\
-					src/interpreter 	&1779  		&taskcluster 	&1022 		&lib/Runtime/Debug 				&582 \\
-					src/crankshaft  	&1178  		&layout 		&1013 		&lib/WasmReader 				&514 \\
-					src/ast  			&1141  		&intl 			&962  		&lib/Jsrt 						&482 \\
-					src/full-codegen	&1089  		&netwerk 		&926  		&lib/Backend/arm64 				&264 \\
-					src/debug  			&1073  		&modules 		&910  		&lib/Common/DataStructures 		&242 \\
-					src/js  			&1049  		&js/src/jit 	&898  		&lib/common 					&240 \\
-					src/ic  			&1034  		&mobile 		&730  		&lib/Common/Core 				&238 \\
-					src/snapshot  		&1029  		&security 		&699  		&lib/Runtime/PlatformAgnostic 	&219 \\
-					src/objects.cc 		&951   		&widget 		&540  		&lib/Backend/Lower.cpp 			&211 \\
-					src/regexp  		&911   		&dom/media 		&534  		&lib/Backend/amd64 				&187 \\
-					src/arm64  			&872   		&dom/base 		&468  		&lib/Parser/Parse.cpp 			&184 \\
-					src/ia32  			&839   		&dom/ipc 		&367  		&lib/Backend/arm 				&170 \\
-					src/arm  			&811   		&docshell 		&364  		&lib/Common/ConfigFlagsList.h 	&168\\
-					\specialrule{1pt}{1pt}{1pt}
-				\end{tabular*}
-			}
-			\label{JSBuggySrc}
-		\end{table}	
+		{\wuhao{
+			\begin{longtable}{@{}@{\extracolsep{\fill}}llllll@{}}
+			\caption{2022年JS引擎缺陷在源码文件中的分布}
+			\label{JSBuggySrc}\\
+			\specialrule{1pt}{1pt}{1pt}
+			\multicolumn{2}{c}{V8} &\multicolumn{2}{c}{SpiderMonkey} &\multicolumn{2}{c}{Chakra}\\
+			\hline
+			源文件 &缺陷数量 &源码 &缺陷数量 &源码 &缺陷数量\\
+			\hline
+			\endfirsthead
+			\specialrule{1pt}{1pt}{1pt}	
+			\endlastfoot
+			src/compiler  		&10525 		&js 			&3209 		&lib/Runtime/Library 			&4629 \\
+			src/wasm  			&5070  		&dom 			&3082 		&lib/Runtime/Language 			&1984 \\
+			src/builtins  		&4726  		&browser 		&2129 		&lib/Runtime/Base 				&1170 \\
+			src/heap  			&3630  		&toolkit 		&1956 		&lib/Common/Memory 				&1004 \\
+			src/objects  		&3087  		&third\_party 	&1933 		&lib/Runtime/ByteCode 			&1001 \\
+			src/runtime  		&2571  		&gfx 			&1807 		&lib/Runtime/Types 				&883 \\
+			src/parsing  		&2147  		&devtools 		&1136 		&lib/wabt/src 					&676 \\
+			src/interpreter 	&1779  		&taskcluster 	&1022 		&lib/Runtime/Debug 				&582 \\
+			src/crankshaft  	&1178  		&layout 		&1013 		&lib/WasmReader 				&514 \\
+			src/ast  			&1141  		&intl 			&962  		&lib/Jsrt 						&482 \\
+			src/full-codegen	&1089  		&netwerk 		&926  		&lib/Backend/arm64 				&264 \\
+			src/debug  			&1073  		&modules 		&910  		&lib/Common/DataStructures 		&242 \\
+			src/js  			&1049  		&js/src/jit 	&898  		&lib/common 					&240 \\
+			src/ic  			&1034  		&mobile 		&730  		&lib/Common/Core 				&238 \\
+			src/snapshot  		&1029  		&security 		&699  		&lib/Runtime/PlatformAgnostic 	&219 \\
+			src/objects.cc 		&951   		&widget 		&540  		&lib/Backend/Lower.cpp 			&211 \\
+			src/regexp  		&911   		&dom/media 		&534  		&lib/Backend/amd64 				&187 \\
+			src/arm64  			&872   		&dom/base 		&468  		&lib/Parser/Parse.cpp 			&184 \\
+			src/ia32  			&839   		&dom/ipc 		&367  		&lib/Backend/arm 				&170 \\
+			src/arm  			&811   		&docshell 		&364  		&lib/Common/ConfigFlagsList.h 	&168\\
+			\end{longtable}
+		}}
 
 		另外，S. Park et al.\cite{parkEmpiricalStudyPrioritizing2019}围绕JS引擎的漏洞问题，实现了CRScope用于分类安全与非安全的缺陷，
 		并评估了Exploitable和AddressSanitizer等工具和模型的性能。其工作所用的训练数据集从Google、Mozilla、Microsoft的Edge与IE浏览器以及GitHub库中收集。
@@ -174,61 +164,53 @@
 		构成727个二进制文件以及766个实例，用于训练模型判断崩溃问题是否由安全缺陷所引发。
 		其数据集公开\footnote{\url{https://github.com/WSP-LAB/CRScope}.}以支撑后续研究。
 		
-		其训练模型和测试模型的方式采用了四折时间序列交叉验证方式\cite{kFoldCrossVerification}，
+		其训练模型和测试模型的方式采用了四折时间序列交叉验证方式，
 		将所有安全和非安全漏洞按其在目标二进制文件中的提交日期排序，而后按升序排列崩溃实例并均分成5个桶，以保证每个桶中的崩溃实例数量大致相同(约153个)。
 		评估实验结果显示，S. Park et al.所实现的CRScope则在Chakra、V8 和SpiderMonkey的崩溃实例上以0.85、0.89和0.93的准确度，
 		优于Exniffer的0.51和AddressSanitizer的0.63。
 		
-		\begin{table}[H]
-			\centering
-			\caption{2022年JS引擎中各组件缺陷分布情况\parencite{JSEngineBugs}}
-			\specialrule{1pt}{1pt}{1pt}
-			\wuhao{
-				\begin{subtable}[t]{\textwidth}
-					\caption{Google开发的V8}
-					\begin{tabular*}{\textwidth}{@{}@{\extracolsep{\fill}}llll@{}}
-						\hline
-						\multicolumn{2}{c}{未修复缺陷（5191）} & \multicolumn{2}{c}{已修复缺陷（2827）} \\
-						\hline
-						组件名 & 数量 &组件名称 &数量\\
-						\hline
-						编译器 & 932 & 编译器 & 565 \\
-						WebAssembly & 855 & JS语法 & 553 \\
-						JS语法 & 831 & Webassembly & 518 \\
-						运行时 & 648 & 运行时 & 317 \\
-						基础架构 & 446 & 垃圾回收 & 232 \\
-						垃圾回收 & 435 & 人类语言国际化 & 227 \\
-						人类语言国际化 & 338 & 基础架构 & 182 \\
-						API & 253 & API & 111 \\
-						构建文件 & 170 & 正则匹配 & 82 \\
-						正则匹配 & 166 & 解释器 & 65\\
-					\end{tabular*}
-					\hline
-				\end{subtable}
-				\begin{subtable}[t]{\textwidth}
-					\caption{Mozilla开发的SpiderMonkey}
-					\begin{tabular*}{\textwidth}{@{}@{\extracolsep{\fill}}llll@{}}
-						\hline
-						\multicolumn{2}{c}{未修复缺陷（4499）} & \multicolumn{2}{c}{已修复缺陷（3502）} \\
-						\hline
-						组件名 & 数量 &组件名称 &数量\\
-						\hline
-						DOM &519 &DOM &428  \\
-						常规 &397 &常规 &330  \\
-						JavaScript &294 &JavaScript &252  \\
-						图形 &251 &图形 &211  \\
-						自动化发布 &152 &自动化发布 &143  \\
-						页面布局 &149 &Web平台测试 &138  \\
-						Web平台测试 &144 &页面布局 &127  \\
-						网络 &142 &网络 &101  \\
-						音视频 1&14 &WebRTC &88  \\
-						WebRTC &107 &音视频 &79 \\
-					\end{tabular*}
-					\specialrule{1pt}{1pt}{1pt}
-				\end{subtable}
-			}
-			\label{JSBuggyComponents}
-		\end{table}
+		{\wuhao{
+		\begin{longtable}{@{}@{\extracolsep{\fill}}llll@{}}
+			\caption{Google开发的V8}
+			\label{V8BuggyComponents}\\
+			\specialrule{1pt}{0pt}{0pt}
+			\multicolumn{2}{c}{未修复缺陷（5191）} & \multicolumn{2}{c}{已修复缺陷（2827）} \\
+			\hline
+			组件名 & 数量 &组件名称 &数量\\
+			\hline
+			编译器 & 932 & 编译器 & 565 \\
+			WebAssembly & 855 & JS语法 & 553 \\
+			JS语法 & 831 & Webassembly & 518 \\
+			运行时 & 648 & 运行时 & 317 \\
+			基础架构 & 446 & 垃圾回收 & 232 \\
+			垃圾回收 & 435 & 人类语言国际化 & 227 \\
+			人类语言国际化 & 338 & 基础架构 & 182 \\
+			API & 253 & API & 111 \\
+			构建文件 & 170 & 正则匹配 & 82 \\
+			正则匹配 & 166 & 解释器 & 65\\
+			\specialrule{1pt}{0pt}{0pt}
+		\end{longtable}
+		\begin{longtable}{@{}@{\extracolsep{\fill}}llll@{}}
+			\caption{Mozilla开发的SpiderMonkey}
+			\label{MozillaBuggyComponents}\\
+			\specialrule{1pt}{0pt}{0pt}
+			\multicolumn{2}{c}{未修复缺陷（4499）} & \multicolumn{2}{c}{已修复缺陷（3502）} \\
+			\hline
+			组件名 & 数量 &组件名称 &数量\\
+			\hline
+			DOM &519 &DOM &428  \\
+			常规 &397 &常规 &330  \\
+			JavaScript &294 &JavaScript &252  \\
+			图形 &251 &图形 &211  \\
+			自动化发布 &152 &自动化发布 &143  \\
+			页面布局 &149 &Web平台测试 &138  \\
+			Web平台测试 &144 &页面布局 &127  \\
+			网络 &142 &网络 &101  \\
+			音视频 1&14 &WebRTC &88  \\
+			WebRTC &107 &音视频 &79 \\
+			\specialrule{1pt}{0pt}{0pt}
+		\end{longtable}
+		}}
 
 		\subsubsection{Lua字节码解释器}
 		Lua是一个基于栈虚拟机的解释型语言，支持动态类型\cite{ierusalimschyLua54Reference2020}。
